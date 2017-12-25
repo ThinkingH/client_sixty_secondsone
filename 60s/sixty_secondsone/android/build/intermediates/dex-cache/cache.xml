@@ -1,0 +1,932 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="false"
+        jar="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/build/intermediates/exploded-aar/sixty_seconds/jpush-react-native/unspecified/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.3"
+        sha1="2c855255fbc3b66f71f23ead7003dac9a104a28c">
+        <dex dex="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/build/intermediates/pre-dexed/debug/sixty_seconds-jpush-react-native-unspecified_e39df606b78fa11377d53b90f1561059fec6baf3.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/aj/.gradle/caches/modules-2/files-2.1/io.reactivex.rxjava2/rxjava/2.1.0/2fdf84dedcaaeabb9d70cde9dbb8aad4eccb80a1/rxjava-2.1.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.3"
+        sha1="2fdf84dedcaaeabb9d70cde9dbb8aad4eccb80a1">
+        <dex dex="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/build/intermediates/pre-dexed/debug/rxjava-2.1.0_4782937aa893b6c7c243e756e07d28234630e3dd.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/aj/.gradle/caches/modules-2/files-2.1/com.google.code.findbugs/jsr305/3.0.0/5871fb60dc68d67da54a663c3fd636a10a532948/jsr305-3.0.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="5871fb60dc68d67da54a663c3fd636a10a532948">
+        <dex dex="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/build/intermediates/pre-dexed/debug/jsr305-3.0.0_23e80e58ec2c42a07c148516e222f9638ba9eb5d.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/build/intermediates/exploded-aar/com.android.support/support-fragment/24.2.0/jars/libs/internal_impl-24.2.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.3"
+        sha1="032a4b53def5e2ceedfc2e793b126c0163cfa1dd">
+        <dex dex="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/build/intermediates/pre-dexed/debug/internal_impl-24.2.0_2875b9045fe7263eaeb5572d9467c9846dcdba43.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/aj/.gradle/caches/modules-2/files-2.1/com.squareup.okio/okio/1.13.0/a9283170b7305c8d92d25aff02a6ab7e45d06cbe/okio-1.13.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.3"
+        sha1="a9283170b7305c8d92d25aff02a6ab7e45d06cbe">
+        <dex dex="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/build/intermediates/pre-dexed/debug/okio-1.13.0_db20ad89bf7491acc0be117458c764570f01a9a2.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/aj/.gradle/caches/modules-2/files-2.1/com.squareup.okhttp3/okhttp/3.6.0/69edde9fc4b01c9fd51d25b83428837478c27254/okhttp-3.6.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.3"
+        sha1="69edde9fc4b01c9fd51d25b83428837478c27254">
+        <dex dex="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/build/intermediates/pre-dexed/debug/okhttp-3.6.0_d5d8bc012ae027e271fd1486921b64648aa9ac5d.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/libs/umeng-common-1.4.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.3"
+        sha1="e060c8f68adf0e8055c1f9796094bf3254462f74">
+        <dex dex="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/build/intermediates/pre-dexed/debug/umeng-common-1.4.0_80f47d7b97136c5cc02d69c7ecdf448186bed8d7.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/build/intermediates/exploded-aar/sixty_seconds/react-native-image-crop-picker/unspecified/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="2929c34994062551cf821fdba003a99d341d80cb">
+        <dex dex="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/build/intermediates/pre-dexed/debug/sixty_seconds-react-native-image-crop-picker-unspecified_ef9ee97a67f3eaf689f52911ed6c271db5f96a66.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/build/intermediates/exploded-aar/com.android.support/support-core-ui/24.2.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="c84e216d9bf618464d6b9564d71d9a656433e7c4">
+        <dex dex="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/build/intermediates/pre-dexed/debug/com.android.support-support-core-ui-24.2.0_0710628deff8ab714ebd3aa6756ebb6960195bfe.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/build/intermediates/exploded-aar/com.facebook.fresco/imagepipeline/1.3.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="48c7f54c2515a2312d3a4481d10c43fbb807f3af">
+        <dex dex="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/build/intermediates/pre-dexed/debug/com.facebook.fresco-imagepipeline-1.3.0_9945988a02482bd6da37d74cfb7e5123150bf957.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/build/intermediates/exploded-aar/com.android.support/support-fragment/24.2.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.3"
+        sha1="d8bd2268fdcbfd52c76ade65d9900cd8def93a44">
+        <dex dex="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/build/intermediates/pre-dexed/debug/com.android.support-support-fragment-24.2.0_75e2a6672960c7731eb374565c82f08d45ecba09.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/build/intermediates/exploded-aar/sixty_seconds/jcore-react-native/unspecified/jars/libs/jcore-android-1.1.6.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="344faac01790b58672501bfd7f6d63bcef868710">
+        <dex dex="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/build/intermediates/pre-dexed/debug/jcore-android-1.1.6_004f903e876ab6da092fedd9bc67bc2ee572c474.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/build/intermediates/exploded-aar/com.android.support/support-core-utils/24.2.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="fcc945a86ebcbf527429acb8216ec7dae2c06417">
+        <dex dex="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/build/intermediates/pre-dexed/debug/com.android.support-support-core-utils-24.2.0_5fdebd95acb32512a3c751187a3bacac7f14acaf.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/build/intermediates/exploded-aar/com.facebook.fresco/imagepipeline-okhttp3/1.3.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="c03c08c9934b23c8c09c803345ec51a74119127b">
+        <dex dex="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/build/intermediates/pre-dexed/debug/com.facebook.fresco-imagepipeline-okhttp3-1.3.0_4df14261bfd76aa3beea946acae4263a91d884f2.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/build/intermediates/exploded-aar/sixty_seconds/jcore-react-native/unspecified/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.3"
+        sha1="98e7b1d6061b35a14c0306fcbd1362436201ab86">
+        <dex dex="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/build/intermediates/pre-dexed/debug/sixty_seconds-jcore-react-native-unspecified_cda98355064151f0cf7c0363af448e2ce7587441.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/build/intermediates/exploded-aar/com.android.support/support-media-compat/24.2.0/jars/libs/internal_impl-24.2.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="045be695d968dd707691cc55d23746dbf8cf569a">
+        <dex dex="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/build/intermediates/pre-dexed/debug/internal_impl-24.2.0_6e93632bba3691e393f11415c8d4b17d87986d01.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/build/intermediates/exploded-aar/com.facebook.react/react-native/0.48.3/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.3"
+        sha1="56d3e81fee5f47a7a12ab65f4620f580c9c71d1e">
+        <dex dex="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/build/intermediates/pre-dexed/debug/com.facebook.react-react-native-0.48.3_265072dec4a88a21c35b34e6dcaa7ea148bc0e9f.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/build/intermediates/exploded-aar/com.android.support/support-core-ui/24.2.0/jars/libs/internal_impl-24.2.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="6e02e34594ebe9c0501ffda8dd48497f81b82977">
+        <dex dex="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/build/intermediates/pre-dexed/debug/internal_impl-24.2.0_6e6943b88c575539bee2596973adf9fdcf5e8f84.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/build/intermediates/exploded-aar/com.android.support/support-compat/24.2.0/jars/libs/internal_impl-24.2.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="771b3cc0e597b54da25f8086ba73180c59c6bc71">
+        <dex dex="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/build/intermediates/pre-dexed/debug/internal_impl-24.2.0_599001e503640c0e1e626efef66601275dd0737f.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/build/intermediates/exploded-aar/com.facebook.fresco/imagepipeline-base/1.3.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.3"
+        sha1="72128af126ddd7d6252da9357fe560d3abcdfb0c">
+        <dex dex="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/build/intermediates/pre-dexed/debug/com.facebook.fresco-imagepipeline-base-1.3.0_b416a24bb27d1c367267658f3683a4e5b40ca268.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/aj/.gradle/caches/modules-2/files-2.1/com.facebook.fbui.textlayoutbuilder/staticlayout-proxy/1.0/f162442a19fff13995fbd51ba414d9ee05579080/staticlayout-proxy-1.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.3"
+        sha1="f162442a19fff13995fbd51ba414d9ee05579080">
+        <dex dex="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/build/intermediates/pre-dexed/debug/staticlayout-proxy-1.0_f088b6c6433fa018c97aa8dc2cb54deb26256d10.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/libs/pldroid-player-2.0.3.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="351d42028d8fba7e492819063bb8f04589526348">
+        <dex dex="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/build/intermediates/pre-dexed/debug/pldroid-player-2.0.3_58e86479ad59c32059b62cbaa8d1a789a7a12b35.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/build/intermediates/exploded-aar/com.facebook.fresco/fresco/1.3.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.3"
+        sha1="fe85b87215e405f5917d40ae4960488ac9224b74">
+        <dex dex="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/build/intermediates/pre-dexed/debug/com.facebook.fresco-fresco-1.3.0_e269e1b62c3ef1a87ea1dd57e107b216f863fc65.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/build/intermediates/exploded-aar/com.facebook.react/react-native/0.48.3/jars/libs/infer-annotations-4.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="9809e90be788acdb479b2b44e2112f3295a03068">
+        <dex dex="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/build/intermediates/pre-dexed/debug/infer-annotations-4.0_37607d13ca8a88605300d6267083288e4ecda2a7.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/aj/.gradle/caches/modules-2/files-2.1/javax.inject/javax.inject/1/6975da39a7040257bd51d21a231b76c915872d38/javax.inject-1.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="6975da39a7040257bd51d21a231b76c915872d38">
+        <dex dex="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/build/intermediates/pre-dexed/debug/javax.inject-1_0ba89308df2c7e499cbf73b90298592ba9a34557.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/libs/umeng_social_net.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.3"
+        sha1="df6ed2e34d8ed18bda56d3352d680bdd33a35f5d">
+        <dex dex="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/build/intermediates/pre-dexed/debug/umeng_social_net_5a097cf4edadb5fcc7fa8fc2c6b4bd905ba4663d.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/build/intermediates/exploded-aar/com.facebook.fresco/fresco/1.3.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="fe85b87215e405f5917d40ae4960488ac9224b74">
+        <dex dex="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/build/intermediates/pre-dexed/debug/com.facebook.fresco-fresco-1.3.0_e269e1b62c3ef1a87ea1dd57e107b216f863fc65.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/build/intermediates/exploded-aar/com.android.support/support-fragment/24.2.0/jars/libs/internal_impl-24.2.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="032a4b53def5e2ceedfc2e793b126c0163cfa1dd">
+        <dex dex="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/build/intermediates/pre-dexed/debug/internal_impl-24.2.0_2875b9045fe7263eaeb5572d9467c9846dcdba43.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/build/intermediates/exploded-aar/com.android.support/support-core-utils/24.2.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.3"
+        sha1="fcc945a86ebcbf527429acb8216ec7dae2c06417">
+        <dex dex="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/build/intermediates/pre-dexed/debug/com.android.support-support-core-utils-24.2.0_5fdebd95acb32512a3c751187a3bacac7f14acaf.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/build/intermediates/exploded-aar/com.android.support/animated-vector-drawable/24.2.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="f3ee23ef25c9a8fe3d40246d0b7097267963a612">
+        <dex dex="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/build/intermediates/pre-dexed/debug/com.android.support-animated-vector-drawable-24.2.0_58a7b9c160964826f825c6ec9c4d70fc54d675e0.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/build/intermediates/exploded-aar/com.facebook.fresco/drawee/1.3.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.3"
+        sha1="c65a2e39d54023bac3aef64a2f0cff89289c7ff6">
+        <dex dex="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/build/intermediates/pre-dexed/debug/com.facebook.fresco-drawee-1.3.0_ec0b7b37117710258edf17e42e9fee614cc72a87.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/build/intermediates/exploded-aar/sixty_seconds/jpush-react-native/unspecified/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="2c855255fbc3b66f71f23ead7003dac9a104a28c">
+        <dex dex="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/build/intermediates/pre-dexed/debug/sixty_seconds-jpush-react-native-unspecified_e39df606b78fa11377d53b90f1561059fec6baf3.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/build/intermediates/exploded-aar/com.facebook.fbui.textlayoutbuilder/textlayoutbuilder/1.0.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="f90b593491e4044903f0bbf68dc3fa2790b151b9">
+        <dex dex="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/build/intermediates/pre-dexed/debug/com.facebook.fbui.textlayoutbuilder-textlayoutbuilder-1.0.0_5964df17c526d386392c0d5fabc466ef8bfe953b.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/libs/umeng_social_shareboard.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.3"
+        sha1="950a5e72fd6c3bf2b8286bb1cfd38d547a3eeb30">
+        <dex dex="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/build/intermediates/pre-dexed/debug/umeng_social_shareboard_b40b2fc1058b71d565a02b4f36cdeabcfe0b43c1.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/build/intermediates/exploded-aar/com.facebook.fresco/imagepipeline-base/1.3.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="72128af126ddd7d6252da9357fe560d3abcdfb0c">
+        <dex dex="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/build/intermediates/pre-dexed/debug/com.facebook.fresco-imagepipeline-base-1.3.0_b416a24bb27d1c367267658f3683a4e5b40ca268.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/build/intermediates/exploded-aar/com.android.support/support-media-compat/24.2.0/jars/libs/internal_impl-24.2.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.3"
+        sha1="045be695d968dd707691cc55d23746dbf8cf569a">
+        <dex dex="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/build/intermediates/pre-dexed/debug/internal_impl-24.2.0_6e93632bba3691e393f11415c8d4b17d87986d01.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/build/intermediates/exploded-aar/com.facebook.fresco/fbcore/1.3.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="37345de2ed2772f385eaeec37a9c2ff0fea99ad7">
+        <dex dex="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/build/intermediates/pre-dexed/debug/com.facebook.fresco-fbcore-1.3.0_6041eaf77bc5ad59c2f1aa2a89f9a716f8525e8e.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/build/intermediates/exploded-aar/com.android.support/support-core-utils/24.2.0/jars/libs/internal_impl-24.2.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.3"
+        sha1="60d7b23621d31e6f42f4f76f16af467e57a20cda">
+        <dex dex="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/build/intermediates/pre-dexed/debug/internal_impl-24.2.0_ccbe36e9dac6548e0e446d68005df38063874a67.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/build/intermediates/exploded-aar/com.yalantis/ucrop/2.2.0-native/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="24497dd7ccdf848dde14335011e715dcc1110275">
+        <dex dex="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/build/intermediates/pre-dexed/debug/com.yalantis-ucrop-2.2.0-native_467939b596954b721f5ab77e66e6d0f28a072e3c.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/build/intermediates/exploded-aar/com.facebook.fresco/imagepipeline-okhttp3/1.3.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.3"
+        sha1="c03c08c9934b23c8c09c803345ec51a74119127b">
+        <dex dex="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/build/intermediates/pre-dexed/debug/com.facebook.fresco-imagepipeline-okhttp3-1.3.0_4df14261bfd76aa3beea946acae4263a91d884f2.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/libs/umeng_shareboard_widget.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.3"
+        sha1="a40bb78d5f05b7c01b3ab091324f1e5c78aa04fa">
+        <dex dex="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/build/intermediates/pre-dexed/debug/umeng_shareboard_widget_eb2835be6ec3bf4110297ab2b56572735db609bb.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/build/intermediates/exploded-aar/com.android.support/support-media-compat/24.2.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="6eb9107eb34d2fe2b020662b7fbbec991dcba846">
+        <dex dex="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/build/intermediates/pre-dexed/debug/com.android.support-support-media-compat-24.2.0_ec1e4702e5c6a9b0acbe40c6767f361a756dbc1f.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/build/intermediates/exploded-aar/com.android.support/support-compat/24.2.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.3"
+        sha1="f9b41622897665678d31d78e57a361cb0cebcb0d">
+        <dex dex="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/build/intermediates/pre-dexed/debug/com.android.support-support-compat-24.2.0_3754ca41727fb17dcb60765f4b9285045e4a7cef.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/build/intermediates/exploded-aar/sixty_seconds/react-native-fetch-blob/unspecified/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.3"
+        sha1="5aca1188aec5f45a7580589b8537e9a8a4d9a86f">
+        <dex dex="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/build/intermediates/pre-dexed/debug/sixty_seconds-react-native-fetch-blob-unspecified_5df3a41a0f4d54cc67e6f6f2fe4a5829835c5335.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/build/intermediates/exploded-aar/com.android.support/support-compat/24.2.0/jars/libs/internal_impl-24.2.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.3"
+        sha1="771b3cc0e597b54da25f8086ba73180c59c6bc71">
+        <dex dex="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/build/intermediates/pre-dexed/debug/internal_impl-24.2.0_599001e503640c0e1e626efef66601275dd0737f.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/build/intermediates/exploded-aar/com.facebook.react/react-native/0.48.3/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="56d3e81fee5f47a7a12ab65f4620f580c9c71d1e">
+        <dex dex="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/build/intermediates/pre-dexed/debug/com.facebook.react-react-native-0.48.3_265072dec4a88a21c35b34e6dcaa7ea148bc0e9f.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/libs/weiboSDKCore_3.1.4.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.3"
+        sha1="f3617ce51258bf3ec0fe2503e3c0a920040b1b53">
+        <dex dex="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/build/intermediates/pre-dexed/debug/weiboSDKCore_3.1.4_6b71633741181654a86c0b72c76765b773d7e566.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/libs/SocialSDK_WeiXin_Full.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.3"
+        sha1="5e1897f80aab3f2bac1be4fc9cc10cc5e8c62a9a">
+        <dex dex="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/build/intermediates/pre-dexed/debug/SocialSDK_WeiXin_Full_17a2394334ad2fa337bfa7b732f0fcad7d437b95.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/aj/.gradle/caches/modules-2/files-2.1/com.parse.bolts/bolts-tasks/1.4.0/d85884acf6810a3bbbecb587f239005cbc846dc4/bolts-tasks-1.4.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="d85884acf6810a3bbbecb587f239005cbc846dc4">
+        <dex dex="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/build/intermediates/pre-dexed/debug/bolts-tasks-1.4.0_5f8c4868a7479bbb0a9378ec5a5da9b0ab327fcd.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/build/intermediates/exploded-aar/com.android.support/support-media-compat/24.2.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.3"
+        sha1="6eb9107eb34d2fe2b020662b7fbbec991dcba846">
+        <dex dex="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/build/intermediates/pre-dexed/debug/com.android.support-support-media-compat-24.2.0_ec1e4702e5c6a9b0acbe40c6767f361a756dbc1f.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/build/intermediates/exploded-aar/com.android.support/animated-vector-drawable/24.2.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.3"
+        sha1="f3ee23ef25c9a8fe3d40246d0b7097267963a612">
+        <dex dex="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/build/intermediates/pre-dexed/debug/com.android.support-animated-vector-drawable-24.2.0_58a7b9c160964826f825c6ec9c4d70fc54d675e0.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/build/intermediates/exploded-aar/com.facebook.fresco/drawee/1.3.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="c65a2e39d54023bac3aef64a2f0cff89289c7ff6">
+        <dex dex="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/build/intermediates/pre-dexed/debug/com.facebook.fresco-drawee-1.3.0_ec0b7b37117710258edf17e42e9fee614cc72a87.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/libs/SocialSDK_QQ_Full.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.3"
+        sha1="375d1fd83258a51de2658a81a6029393d0b459e8">
+        <dex dex="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/build/intermediates/pre-dexed/debug/SocialSDK_QQ_Full_16de40ba846edb8e6c80650f2e91d4b4ec7b2479.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/build/intermediates/exploded-aar/com.facebook.fresco/fbcore/1.3.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.3"
+        sha1="37345de2ed2772f385eaeec37a9c2ff0fea99ad7">
+        <dex dex="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/build/intermediates/pre-dexed/debug/com.facebook.fresco-fbcore-1.3.0_6041eaf77bc5ad59c2f1aa2a89f9a716f8525e8e.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/build/intermediates/exploded-aar/com.android.support/support-compat/24.2.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="f9b41622897665678d31d78e57a361cb0cebcb0d">
+        <dex dex="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/build/intermediates/pre-dexed/debug/com.android.support-support-compat-24.2.0_3754ca41727fb17dcb60765f4b9285045e4a7cef.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/build/intermediates/exploded-aar/sixty_seconds/jpush-react-native/unspecified/jars/libs/jpush-android-3.0.7.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.3"
+        sha1="d5ee4cc53a8e54b8fea37756f36b72987525cb02">
+        <dex dex="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/build/intermediates/pre-dexed/debug/jpush-android-3.0.7_24dd15800f03c39441661c1a01b39b237e6e05b9.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/build/intermediates/exploded-aar/com.android.support/support-fragment/24.2.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="d8bd2268fdcbfd52c76ade65d9900cd8def93a44">
+        <dex dex="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/build/intermediates/pre-dexed/debug/com.android.support-support-fragment-24.2.0_75e2a6672960c7731eb374565c82f08d45ecba09.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/aj/.gradle/caches/modules-2/files-2.1/com.squareup.okhttp3/okhttp-urlconnection/3.6.0/3f9b16b774f2c36cfd86dd2053d0b3059531dacc/okhttp-urlconnection-3.6.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="3f9b16b774f2c36cfd86dd2053d0b3059531dacc">
+        <dex dex="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/build/intermediates/pre-dexed/debug/okhttp-urlconnection-3.6.0_c1af80421f94fbe231524ca808c48ba9c8cf1bd8.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/aj/.gradle/caches/modules-2/files-2.1/org.reactivestreams/reactive-streams/1.0.0/14b8c877d98005ba3941c9257cfe09f6ed0e0d74/reactive-streams-1.0.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.3"
+        sha1="14b8c877d98005ba3941c9257cfe09f6ed0e0d74">
+        <dex dex="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/build/intermediates/pre-dexed/debug/reactive-streams-1.0.0_a3cd5bb28d2edae9957e769079364a8ce24f0e7c.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/aj/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/24.2.0/support-annotations-24.2.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="6be858a75633b1f0a2d24cad740db57775cb6871">
+        <dex dex="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/build/intermediates/pre-dexed/debug/support-annotations-24.2.0_16fb1a254dc2c84bf540eccbda5c86e4f9f0c98d.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/build/intermediates/exploded-aar/com.facebook.soloader/soloader/0.1.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="8f615bca00639150c9eb6175d4b5471193f70794">
+        <dex dex="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/build/intermediates/pre-dexed/debug/com.facebook.soloader-soloader-0.1.0_088527386489900360643132fd2dc15b03840277.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/libs/SocialSDK_Sina_Full.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.3"
+        sha1="16e075d2e6ef91698dd865149caaa41f98e7f15b">
+        <dex dex="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/build/intermediates/pre-dexed/debug/SocialSDK_Sina_Full_a20c14348368e49af52b7c86e0ac7ee1bfa2217b.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/build/intermediates/exploded-aar/com.yalantis/ucrop/2.2.0-native/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.3"
+        sha1="24497dd7ccdf848dde14335011e715dcc1110275">
+        <dex dex="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/build/intermediates/pre-dexed/debug/com.yalantis-ucrop-2.2.0-native_467939b596954b721f5ab77e66e6d0f28a072e3c.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/24.2.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="c3c638be6e650b165ab9ae144857b64e82787fad">
+        <dex dex="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/build/intermediates/pre-dexed/debug/com.android.support-appcompat-v7-24.2.0_55dfa10816538957287b343c72f4087765c0860d.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/build/intermediates/exploded-aar/com.android.support/support-v4/24.2.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.3"
+        sha1="45f5eda279825ff470e3f51019d374d1ef61e000">
+        <dex dex="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/build/intermediates/pre-dexed/debug/com.android.support-support-v4-24.2.0_3415354fe5975c95207fcd8a029808e9ba93dfcf.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/build/intermediates/exploded-aar/id.zelory/compressor/2.1.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="6b1555196d65ffa1174f6f49efb2f278905f537a">
+        <dex dex="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/build/intermediates/pre-dexed/debug/id.zelory-compressor-2.1.0_d5223eae3d6cf580e2dc23d1ae3943084c77e62f.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/build/intermediates/exploded-aar/sixty_seconds/react-native-toast/unspecified/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.3"
+        sha1="a2637fce5f5c67c1fbf395f0b99b3767cb5a75f1">
+        <dex dex="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/build/intermediates/pre-dexed/debug/sixty_seconds-react-native-toast-unspecified_adcfaaf04a20d4a9a967a31f1d9d18dfa17dbb35.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/build/intermediates/exploded-aar/com.facebook.fresco/imagepipeline/1.3.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.3"
+        sha1="48c7f54c2515a2312d3a4481d10c43fbb807f3af">
+        <dex dex="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/build/intermediates/pre-dexed/debug/com.facebook.fresco-imagepipeline-1.3.0_9945988a02482bd6da37d74cfb7e5123150bf957.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/build/intermediates/exploded-aar/sixty_seconds/react-native-fetch-blob/unspecified/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="5aca1188aec5f45a7580589b8537e9a8a4d9a86f">
+        <dex dex="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/build/intermediates/pre-dexed/debug/sixty_seconds-react-native-fetch-blob-unspecified_5df3a41a0f4d54cc67e6f6f2fe4a5829835c5335.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/build/intermediates/exploded-aar/com.android.support/support-vector-drawable/24.2.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.3"
+        sha1="beac40bcc8a320a896dd15f5109cfcaea5e1e0e3">
+        <dex dex="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/build/intermediates/pre-dexed/debug/com.android.support-support-vector-drawable-24.2.0_58839541cbc976d22d7396215fb01d75a0bd1cc0.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/build/intermediates/exploded-aar/com.android.support/support-core-utils/24.2.0/jars/libs/internal_impl-24.2.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="60d7b23621d31e6f42f4f76f16af467e57a20cda">
+        <dex dex="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/build/intermediates/pre-dexed/debug/internal_impl-24.2.0_ccbe36e9dac6548e0e446d68005df38063874a67.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/aj/.gradle/caches/modules-2/files-2.1/org.reactivestreams/reactive-streams/1.0.0/14b8c877d98005ba3941c9257cfe09f6ed0e0d74/reactive-streams-1.0.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="14b8c877d98005ba3941c9257cfe09f6ed0e0d74">
+        <dex dex="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/build/intermediates/pre-dexed/debug/reactive-streams-1.0.0_a3cd5bb28d2edae9957e769079364a8ce24f0e7c.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/aj/.gradle/caches/modules-2/files-2.1/com.squareup.okio/okio/1.13.0/a9283170b7305c8d92d25aff02a6ab7e45d06cbe/okio-1.13.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="a9283170b7305c8d92d25aff02a6ab7e45d06cbe">
+        <dex dex="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/build/intermediates/pre-dexed/debug/okio-1.13.0_db20ad89bf7491acc0be117458c764570f01a9a2.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/aj/.gradle/caches/modules-2/files-2.1/javax.inject/javax.inject/1/6975da39a7040257bd51d21a231b76c915872d38/javax.inject-1.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.3"
+        sha1="6975da39a7040257bd51d21a231b76c915872d38">
+        <dex dex="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/build/intermediates/pre-dexed/debug/javax.inject-1_0ba89308df2c7e499cbf73b90298592ba9a34557.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/aj/.gradle/caches/modules-2/files-2.1/io.reactivex.rxjava2/rxjava/2.1.0/2fdf84dedcaaeabb9d70cde9dbb8aad4eccb80a1/rxjava-2.1.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="2fdf84dedcaaeabb9d70cde9dbb8aad4eccb80a1">
+        <dex dex="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/build/intermediates/pre-dexed/debug/rxjava-2.1.0_4782937aa893b6c7c243e756e07d28234630e3dd.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/libs/open_sdk_r5781.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.3"
+        sha1="cbac7d081542657d885efd7a529a9267d22ec080">
+        <dex dex="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/build/intermediates/pre-dexed/debug/open_sdk_r5781_1c920118ce79c3918afb5b38016734781907d606.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/aj/.gradle/caches/modules-2/files-2.1/com.google.code.findbugs/jsr305/3.0.0/5871fb60dc68d67da54a663c3fd636a10a532948/jsr305-3.0.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.3"
+        sha1="5871fb60dc68d67da54a663c3fd636a10a532948">
+        <dex dex="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/build/intermediates/pre-dexed/debug/jsr305-3.0.0_23e80e58ec2c42a07c148516e222f9638ba9eb5d.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/libs/umeng_social_tool.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.3"
+        sha1="1a031eec9a5c17ecd91e3b674dd17720d6d9e5e9">
+        <dex dex="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/build/intermediates/pre-dexed/debug/umeng_social_tool_cc83b496058e77d08beb1d1c1c562e73652c8ce3.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/libs/umeng_social_api.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.3"
+        sha1="df6b1f7e5fa206435ee14d409067b2612ce94016">
+        <dex dex="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/build/intermediates/pre-dexed/debug/umeng_social_api_54e0182eac923e6688c9cd4d193ab0c434eaf802.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/libs/umeng-analytics-7.4.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.3"
+        sha1="98d65513ec69e251f6ab703d5204423d5fac3174">
+        <dex dex="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/build/intermediates/pre-dexed/debug/umeng-analytics-7.4.0_f52b797b06fb4eb7b72f464a6f6b2d30adc6d785.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/aj/.gradle/caches/modules-2/files-2.1/com.parse.bolts/bolts-tasks/1.4.0/d85884acf6810a3bbbecb587f239005cbc846dc4/bolts-tasks-1.4.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.3"
+        sha1="d85884acf6810a3bbbecb587f239005cbc846dc4">
+        <dex dex="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/build/intermediates/pre-dexed/debug/bolts-tasks-1.4.0_5f8c4868a7479bbb0a9378ec5a5da9b0ab327fcd.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/aj/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/24.2.0/support-annotations-24.2.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.3"
+        sha1="6be858a75633b1f0a2d24cad740db57775cb6871">
+        <dex dex="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/build/intermediates/pre-dexed/debug/support-annotations-24.2.0_16fb1a254dc2c84bf540eccbda5c86e4f9f0c98d.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/aj/.gradle/caches/modules-2/files-2.1/com.squareup.okhttp3/okhttp-urlconnection/3.6.0/3f9b16b774f2c36cfd86dd2053d0b3059531dacc/okhttp-urlconnection-3.6.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.3"
+        sha1="3f9b16b774f2c36cfd86dd2053d0b3059531dacc">
+        <dex dex="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/build/intermediates/pre-dexed/debug/okhttp-urlconnection-3.6.0_c1af80421f94fbe231524ca808c48ba9c8cf1bd8.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/build/intermediates/exploded-aar/sixty_seconds/jcore-react-native/unspecified/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="98e7b1d6061b35a14c0306fcbd1362436201ab86">
+        <dex dex="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/build/intermediates/pre-dexed/debug/sixty_seconds-jcore-react-native-unspecified_cda98355064151f0cf7c0363af448e2ce7587441.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/aj/.gradle/caches/modules-2/files-2.1/com.sprylab.android.texturevideoview/texturevideoview/1.1.1/f3ec1a93f2588c282143b2600e92cde3e7fed336/texturevideoview-1.1.1.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.3"
+        sha1="f3ec1a93f2588c282143b2600e92cde3e7fed336">
+        <dex dex="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/build/intermediates/pre-dexed/debug/texturevideoview-1.1.1_9be3c7f332e8b5b01d8bfce31d709d8834c3df28.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/build/intermediates/exploded-aar/sixty_seconds/jpush-react-native/unspecified/jars/libs/jpush-android-3.0.7.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="d5ee4cc53a8e54b8fea37756f36b72987525cb02">
+        <dex dex="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/build/intermediates/pre-dexed/debug/jpush-android-3.0.7_24dd15800f03c39441661c1a01b39b237e6e05b9.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/build/intermediates/exploded-aar/sixty_seconds/react-native-image-crop-picker/unspecified/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.3"
+        sha1="2929c34994062551cf821fdba003a99d341d80cb">
+        <dex dex="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/build/intermediates/pre-dexed/debug/sixty_seconds-react-native-image-crop-picker-unspecified_ef9ee97a67f3eaf689f52911ed6c271db5f96a66.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/libs/utdid4all-1.1.5.3_proguard.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.3"
+        sha1="989c3bb13060da1e3154bfe00236f76453a2725f">
+        <dex dex="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/build/intermediates/pre-dexed/debug/utdid4all-1.1.5.3_proguard_664e74b2aee687e6785e51074fcb14a6553900b7.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/build/intermediates/exploded-aar/com.android.support/support-core-ui/24.2.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.3"
+        sha1="c84e216d9bf618464d6b9564d71d9a656433e7c4">
+        <dex dex="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/build/intermediates/pre-dexed/debug/com.android.support-support-core-ui-24.2.0_0710628deff8ab714ebd3aa6756ebb6960195bfe.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/build/intermediates/exploded-aar/sixty_seconds/react-native-toast/unspecified/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="a2637fce5f5c67c1fbf395f0b99b3767cb5a75f1">
+        <dex dex="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/build/intermediates/pre-dexed/debug/sixty_seconds-react-native-toast-unspecified_adcfaaf04a20d4a9a967a31f1d9d18dfa17dbb35.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/aj/.gradle/caches/modules-2/files-2.1/com.squareup.okhttp3/okhttp/3.6.0/69edde9fc4b01c9fd51d25b83428837478c27254/okhttp-3.6.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="69edde9fc4b01c9fd51d25b83428837478c27254">
+        <dex dex="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/build/intermediates/pre-dexed/debug/okhttp-3.6.0_d5d8bc012ae027e271fd1486921b64648aa9ac5d.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/build/intermediates/exploded-aar/com.android.support/support-vector-drawable/24.2.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="beac40bcc8a320a896dd15f5109cfcaea5e1e0e3">
+        <dex dex="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/build/intermediates/pre-dexed/debug/com.android.support-support-vector-drawable-24.2.0_58839541cbc976d22d7396215fb01d75a0bd1cc0.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/libs/wechat-sdk-android-with-mta-1.1.6.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.3"
+        sha1="379056fcb09a02bd0db722be359695ad88beb04d">
+        <dex dex="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/build/intermediates/pre-dexed/debug/wechat-sdk-android-with-mta-1.1.6_cf2243e4d82ed68ddf76914fec59c372b5afa56c.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/aj/.gradle/caches/modules-2/files-2.1/com.facebook.fbui.textlayoutbuilder/staticlayout-proxy/1.0/f162442a19fff13995fbd51ba414d9ee05579080/staticlayout-proxy-1.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="f162442a19fff13995fbd51ba414d9ee05579080">
+        <dex dex="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/build/intermediates/pre-dexed/debug/staticlayout-proxy-1.0_f088b6c6433fa018c97aa8dc2cb54deb26256d10.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/build/intermediates/exploded-aar/com.facebook.soloader/soloader/0.1.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.3"
+        sha1="8f615bca00639150c9eb6175d4b5471193f70794">
+        <dex dex="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/build/intermediates/pre-dexed/debug/com.facebook.soloader-soloader-0.1.0_088527386489900360643132fd2dc15b03840277.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/build/intermediates/exploded-aar/com.facebook.fbui.textlayoutbuilder/textlayoutbuilder/1.0.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.3"
+        sha1="f90b593491e4044903f0bbf68dc3fa2790b151b9">
+        <dex dex="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/build/intermediates/pre-dexed/debug/com.facebook.fbui.textlayoutbuilder-textlayoutbuilder-1.0.0_5964df17c526d386392c0d5fabc466ef8bfe953b.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/libs/pldroid-player-2.0.3.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.3"
+        sha1="351d42028d8fba7e492819063bb8f04589526348">
+        <dex dex="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/build/intermediates/pre-dexed/debug/pldroid-player-2.0.3_58e86479ad59c32059b62cbaa8d1a789a7a12b35.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/build/intermediates/exploded-aar/id.zelory/compressor/2.1.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.3"
+        sha1="6b1555196d65ffa1174f6f49efb2f278905f537a">
+        <dex dex="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/build/intermediates/pre-dexed/debug/id.zelory-compressor-2.1.0_d5223eae3d6cf580e2dc23d1ae3943084c77e62f.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/build/intermediates/exploded-aar/com.android.support/support-v4/24.2.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="45f5eda279825ff470e3f51019d374d1ef61e000">
+        <dex dex="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/build/intermediates/pre-dexed/debug/com.android.support-support-v4-24.2.0_3415354fe5975c95207fcd8a029808e9ba93dfcf.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/24.2.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.3"
+        sha1="c3c638be6e650b165ab9ae144857b64e82787fad">
+        <dex dex="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/build/intermediates/pre-dexed/debug/com.android.support-appcompat-v7-24.2.0_55dfa10816538957287b343c72f4087765c0860d.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/build/intermediates/exploded-aar/com.facebook.react/react-native/0.48.3/jars/libs/infer-annotations-4.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.3"
+        sha1="9809e90be788acdb479b2b44e2112f3295a03068">
+        <dex dex="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/build/intermediates/pre-dexed/debug/infer-annotations-4.0_37607d13ca8a88605300d6267083288e4ecda2a7.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/build/intermediates/exploded-aar/sixty_seconds/jcore-react-native/unspecified/jars/libs/jcore-android-1.1.6.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.3"
+        sha1="344faac01790b58672501bfd7f6d63bcef868710">
+        <dex dex="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/build/intermediates/pre-dexed/debug/jcore-android-1.1.6_004f903e876ab6da092fedd9bc67bc2ee572c474.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/build/intermediates/exploded-aar/com.android.support/support-core-ui/24.2.0/jars/libs/internal_impl-24.2.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.3"
+        sha1="6e02e34594ebe9c0501ffda8dd48497f81b82977">
+        <dex dex="/Users/aj/Desktop/duibaosvn/60s/sixty_seconds/android/app/build/intermediates/pre-dexed/debug/internal_impl-24.2.0_6e6943b88c575539bee2596973adf9fdcf5e8f84.jar" />
+    </item>
+
+</items>
