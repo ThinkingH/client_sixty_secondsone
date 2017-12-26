@@ -98,9 +98,9 @@ export default class Sofitel extends Component {
         return (
             <View style={{flex:1,backgroundColor:'#fafafa'}}>
                 {Platform.OS=='ios'?(null):(
-                    <Header style={{height:0}} androidStatusBarColor={Config.StatusBarColor}>
 
-                    </Header>
+                        <Header style={{height:0}} androidStatusBarColor='#c5b061'/>
+
                 )}
                 <FlatList
 
@@ -126,15 +126,15 @@ export default class Sofitel extends Component {
 class MyListItem extends React.PureComponent {
     render() {
         return (
-            <Card   style={{marginLeft:5,marginRight:5,borderRadius:4}} >
-                <CardItem style={{backgroundColor:'#ccc'}}  onPress={()=>Actions.sofitellist({id:this.props.data.jiheid,datas:this.props.data})} button={true}  cardBody>
-                    <Image source={{uri:this.props.data.showimg}} style={{height: width/16*9, width: null,flex:1,borderTopLeftRadius:4,borderTopRightRadius:4}}/>
+            <Card   style={{marginLeft:5,marginRight:5,borderRadius:10}} >
+                <CardItem style={{backgroundColor:'#ccc',borderTopLeftRadius:10,borderTopRightRadius:10}}  onPress={()=>Actions.sofitellist({id:this.props.data.jiheid,datas:this.props.data,title:this.props.data.name})} button={true}  cardBody>
+                    <Image source={{uri:this.props.data.showimg}} style={{height: width/16*9, width: null,flex:1,borderTopLeftRadius:10,borderTopRightRadius:10}}/>
                 </CardItem>
-                <CardItem button={true} onPress={()=>Actions.sofitellist({id:this.props.data.jiheid,datas:this.props.data})} >
+                <CardItem style={{borderBottomLeftRadius:10,borderBottomRightRadius:10}} button={true} onPress={()=>Actions.sofitellist({id:this.props.data.jiheid,datas:this.props.data})} >
                     <View >
-                        <Text note style={{marginTop:5}} >{this.props.data.create_date}</Text>
-                        <Text style={{marginTop:10}}>{this.props.data.name}</Text>
-                        <Text numberOfLines={2} note style={{marginTop:10}}>{this.props.data.content}</Text>
+                        <Text  style={{fontSize:10,color:'#C5B061'}} >{this.props.data.create_date}</Text>
+                        <Text style={{marginTop:5,fontSize:14,color:'#666'}}>{this.props.data.name}</Text>
+                        <Text numberOfLines={2} note style={{marginTop:5,fontSize:12}}>{this.props.data.content}</Text>
                     </View>
                 </CardItem>
             </Card>

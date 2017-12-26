@@ -449,12 +449,12 @@ class MyListHeader extends React.PureComponent {
 
     render() {
         return (
-            <View >
+            <View style={{flex:1,alignItems:'center'}}>
 
                 <PLVideoView
                     // ref={PLVideoView}
                     ref={(video)=>{this.video = video}}
-                    style={{width:width,height:width,marginBottom:3}}
+                    style={{width:width-25,height:width-25,marginBottom:10,}}
                     source={
                              {
                                  url:this.props.data.videourl,//this.props.data.videourl,

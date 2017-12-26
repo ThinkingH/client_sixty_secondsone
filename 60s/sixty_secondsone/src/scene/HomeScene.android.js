@@ -12,7 +12,7 @@ import Toast from '@remobile/react-native-toast'
 import { Container, Header, Title, Content,Thumbnail,TabHeading, Footer, FooterTab, Button, Left, Right, Body, Icon, Text ,Item, Input,Row  } from 'native-base';
 import {
     StyleSheet, Image, Dimensions, View, Alert, ScrollView, DeviceEventEmitter, TouchableOpacity,
-    TouchableNativeFeedback, Animated, StatusBar, Platform,ActivityIndicator
+    TouchableNativeFeedback, Animated, StatusBar, Platform,ActivityIndicator,ImageBackground
 } from "react-native";
 import Config from "../utils/Config";
 import ScrollableTabView, {DefaultTabBar,ScrollableTabBar} from 'react-native-scrollable-tab-view';
@@ -186,14 +186,14 @@ class HomeScene extends BaseScene {
     renderTabBar=()=>{
         return(
             <ScrollableTabBar  // tabStyle={{paddingLeft:0,paddingRight:0}}
-               // imgurl={this.state.imgurlarr} //网络图
-              //  imgurla={img}       //本地图
-              //  imageStyle={{width:25,height:25,borderRadius:8}}
+                imgurl={this.state.imgurlarr} //网络图
+                imgurla={img}       //本地图
+                imageStyle={{width:25,height:25,borderRadius:8}}
                 activeTextColor={"#c5b061"}
                 backgroundColor={"#FFFFFF"}
                 //imgurl="http://p05samtwb.bkt.clouddn.com/201711241118051750870811.jpg?imageView2/1/w/500/h/500&sign=0d16ac3603aaae8f1e8207f9090d9a7a&t=5a3282df"
-              //  textStyle={{fontSize:12,fontWeight:'normal',marginTop:10}}
-                textStyle={{fontSize:14,fontWeight:'normal'}}
+                textStyle={{fontSize:12,fontWeight:'normal',marginTop:7}}
+
                 inactiveTextColor={"#313131"}
                 underlineStyle={{backgroundColor:"#c5b061",height:2}}
             />
@@ -236,32 +236,39 @@ class HomeScene extends BaseScene {
     render(){
         return (
             <Container>
-                {Platform.OS=='ios'?(null):(
-                        <Header style={{height:0}} androidStatusBarColor={Config.StatusBarColor}>
-
-                        </Header>
-                    )}
+                <StatusBar backgroundColor="#FFDA2C"
+                           barStyle="light-content"
+                           translucent={false}
+                           hidden={false}/>
+                <Header style={{height:0}} androidStatusBarColor='#c5b061'/>
 
                 <View style={{flex:1,backgroundColor:'#fff'}} >
-                    <Row  //androidStatusBarColor='#f00'
-                        style={{height:50,backgroundColor:'#fefefe'
+                    <View  //androidStatusBarColor='#f00'
+                        style={{height:80,backgroundColor:'#fff',alignItems:'center'
                        }}>
-                        <View style={{flex:1,alignItems:'center',justifyContent:'center'}}>
-                            <Thumbnail square={true} style={{width:33,height:33}} source={require('../img/icon_mainlogo.png')} />
-                        </View>
+                        <ImageBackground   style={{position:'absolute',top:0,width:width,height:width/472*65,flexDirection:'row'}} source={require('../img/icon_homebg.png')} >
+                            <TouchableOpacity style={{position:'absolute',top:10,left:10}} activeOpacity={1}
+                                              onPress={()=>Actions.TabView()}>
+                                <Thumbnail square={true} style={{width:25,height:25}} source={require('../img/icon_videodetails_parse.png')} />
+                            </TouchableOpacity>
+                            <TouchableOpacity style={{position:'absolute',top:10,right:10}} activeOpacity={1}
+                                              onPress={()=>Actions.TabView()}>
+                                <Thumbnail square={true} style={{width:25,height:25}} source={require('../img/icon_videodetails_parse.png')} />
+                            </TouchableOpacity>
+                        </ImageBackground>
 
-                        <TouchableOpacity style={{flex:5,justifyContent:'center'}} activeOpacity={1}
+                        <TouchableOpacity style={{position:'absolute',top:width/472*65-width/1.28/595*70/3}} activeOpacity={1}
                                           onPress={()=>Actions.TabView()}>
-                            <Thumbnail square={true} style={{width:width/1.28,height:width/1.28/595*70}} source={require('../img/icon_homescence_search.png')} />
+                            <Thumbnail  style={{width:width/1.28,height:width/1.28/595*70}} source={require('../img/icon_homescence_search.png')} />
                         </TouchableOpacity>
 
-                    </Row>
+                    </View>
                     {this.state.isshowtab?(<ScrollableTabView ref={(ScrollableTabView)=>this.ScrollableTabView=ScrollableTabView}
                                                               initialPage={this.state.numpage}
                                                               onChangeTab={(obj) => {this._onChangeTab(obj)}}
                                                               scrollWithoutAnimation={true}
                             //tabBarUnderLineStyle={{backgroundColor:"#f26c4f",margin:0,height:2}}
-                                                              style={{flex:1}}
+                                                              style={{flex:1,marginTop:10,paddingLeft:10,paddingRight:10}}
                                                               renderTabBar={() =>this.renderTabBar()}>
                             <MainScene  url={"thetype=1015&searchstr="} thetype="1015"  tabLabel="最新" header={"header"}  item={"video"} />
 

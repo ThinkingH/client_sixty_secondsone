@@ -367,7 +367,7 @@ export default class ListScene extends Component {
             <View
                 //{...this._panResponder.panHandlers}
                 style={{flex:1,backgroundColor:'#fafafa'}}>
-
+                 <Header style={{height:0}} androidStatusBarColor='#c5b061'/>
                 {this._renderResult()}
                 <FlatList
                     scrollEventThrottle={1}
@@ -407,9 +407,9 @@ class SListHeader extends React.PureComponent {
             <View style={{elevation:10 ,backgroundColor:'#fff'}}  >
                 <Image source={{uri:this.props.datas.showimg}} style={{height: width/16*9, width: width}}/>
                 <View  style={{padding:15}}>
-                    <Text note>{this.props.datas.create_date}</Text>
-                    <Text style={{marginTop:10}}>{this.props.datas.name}</Text>
-                    <Text note style={{marginTop:10}}>{this.props.datas.content}</Text>
+                    <Text style={{fontSize:10,color:'#c5b061'}}>{this.props.datas.create_date}</Text>
+                    <Text style={{marginTop:10,fontSize:14,color:'#666'}}>{this.props.datas.name}</Text>
+                    <Text  note style={{marginTop:10,fontSize:14,color:'#999'}}>{this.props.datas.content}</Text>
                 </View>
                 <View style={{width:width,height:1,backgroundColor:'#ccc'}}></View>
             </View>
