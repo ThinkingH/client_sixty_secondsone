@@ -17,6 +17,8 @@ import {
 import Config from "../utils/Config";
 import ScrollableTabView, {DefaultTabBar,ScrollableTabBar} from 'react-native-scrollable-tab-view';
 import Storage  from '../utils/Storage';
+import TabBar from '../components/TabBar';
+
 const {width, height} = Dimensions.get('window');
 let imgurl=[];
 // imgurl=['http://p05samtwb.bkt.clouddn.com/20171124115559763495607.jpg?imageView2/1/w/500/h/500&sign=b152d873d60b060a6ef8eabc9a4b0b2e&t=5a33870d',
@@ -185,7 +187,7 @@ class HomeScene extends BaseScene {
     // require('../../src/img/icon_account_bg.png')
     renderTabBar=()=>{
         return(
-            <ScrollableTabBar  // tabStyle={{paddingLeft:0,paddingRight:0}}
+            <TabBar  // tabStyle={{paddingLeft:0,paddingRight:0}}
                 imgurl={this.state.imgurlarr} //网络图
                 imgurla={img}       //本地图
                 imageStyle={{width:25,height:25,borderRadius:8}}
