@@ -1,6 +1,6 @@
 import React from 'react';
 import { PropTypes } from "react";
-import { Image,StyleSheet,Text, View, ViewPropTypes,DeviceEventEmitter, TextInput, TouchableNativeFeedback ,Dimensions,Keyboard} from "react-native";
+import { Image,StyleSheet,Text, View, ViewPropTypes,DeviceEventEmitter, TextInput, TouchableNativeFeedback ,Dimensions,Keyboard, ART} from "react-native";
 import { Container, Header, Content, Button, Form, Item, Icon, List, Badge, Col, Input,
     Thumbnail ,ListItem,  Left, Body, Right, Switch ,Card, CardItem, Row, FooterTab, Footer} from 'native-base';
 import { Actions } from 'react-native-router-flux';
@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
 
   },
 });
-
+const {Surface, Shape, Path} = ART;
 export default class TabView extends React.Component {
     static navigationOptions = {
         tabBarLabel: Config.navs_txt[1],
@@ -189,6 +189,9 @@ export default class TabView extends React.Component {
     };
 
   render() {
+      const path = Path()
+          .moveTo(1,1)
+          .lineTo(300,1);
       return (
           <Container style={{backgroundColor:'#fafafa'}} >
           {this._renderHeader()}
@@ -206,6 +209,14 @@ export default class TabView extends React.Component {
                       </ListItem>
                   )}
               {this._renderHistoryList()}
+              <View style={{width:width,height:100}}>
+                  <View style={{borderWidth:1,borderColor:'black',borderStyle : 'dashed',borderRadius:1,width:50,height:50}}></View>
+                  <Surface width={300} height={10}>
+                      <Shape d={path} stroke="#C5B061" strokeWidth={5} strokeDash={[30,30]}/>
+                  </Surface>
+
+
+              </View>
           </Content>
           </Container>
     );

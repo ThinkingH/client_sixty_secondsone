@@ -324,14 +324,14 @@ export default class MainScene extends Component {
 
             // Config.tabBarHight=dy-dx;
             // console.log("该执行导航栏沉浸式了该执行导航栏沉浸式了")
-            DeviceEventEmitter.emit("zanting","隐藏header")
+            DeviceEventEmitter.emit("zanting","暂停视频")
 
 
         }else if (0<dy<width){
             // Config.tabBarHight=dx-dy;
             // //  DeviceEventEmitter.emit("changeTab","隐藏tab")
             // // alert("该执行导航栏沉浸式了")
-            DeviceEventEmitter.emit("startvideo","隐藏header")
+            DeviceEventEmitter.emit("startvideo","开始播放视频")
             //console.log("该执行tab沉浸式了该执行tab沉浸式了")
             // alert("该执行tab沉浸式了")
             //  Config.tabBarHight=-56;

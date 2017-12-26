@@ -4,7 +4,7 @@
 import React, { Component } from 'react';
 import {
     ScrollView, StyleSheet, FlatList, View, Text, Dimensions, InteractionManager, Image, TouchableOpacity, Slider,
-    Alert, DeviceEventEmitter, Platform
+    Alert, DeviceEventEmitter, Platform,StatusBar
 } from 'react-native';
 import {Actions} from "react-native-router-flux";
 import PLVideoView from "../widget/PLVideoView";
@@ -110,6 +110,8 @@ export default class VideoDetails extends Component {
             //collectdisable:false,
             isshowloop:false,
             duration:0,
+            viewopacity:'transparent',
+            navibaropacity:0,
         }
 
         NetWorkTool.checkNetworkState((isConnected)=>{
@@ -432,6 +434,17 @@ export default class VideoDetails extends Component {
     }
 
     _onScrollEnd=(e)=>{
+        if(e.nativeEvent.contentOffset.y<=width/2){
+            this.viewopacity.setNativeProps({
+                style: {backgroundColor:'rgba(197,179,97,'+e.nativeEvent.contentOffset.y/(width/2)+')'}
+            });
+        }
+
+        if(e.nativeEvent.contentOffset.y<=width/2){
+            this.navibar.setNativeProps({
+                style: {opacity:e.nativeEvent.contentOffset.y/(width/2)}
+            });
+        }
 
         if(this.state.isplay){
             let dy=e.nativeEvent.contentOffset.y;
@@ -520,9 +533,9 @@ export default class VideoDetails extends Component {
                                 maximumValue={60}
                                 minimumValue={0}
                                 value={this.state.value}
-                                minimumTrackTintColor ="#8d8d8d"
-                                maximumTrackTintColor ="#8d8d8d"
-                                thumbTintColor="#8d8d8d"
+                                minimumTrackTintColor ="#C5B361"
+                                maximumTrackTintColor ="#C5B361"
+                                thumbTintColor="#C5B361"
                                 // maximumTrackImage={require('../img/btn_backcolor.png')}
                                 //   minimumTrackImage={require('../img/top_background.png')}
                                 onSlidingComplete={(value)=>{
@@ -558,30 +571,10 @@ export default class VideoDetails extends Component {
     render() {
         return (
             <Container style={{backgroundColor:'#fff'}}>
-                {Platform.OS=='ios'?(null):(
-                        <Header style={{marginTop:Platform.OS=='ios'?20:0}}  androidStatusBarColor={Config.StatusBarColor}>
-
-                            <View style={{width:width,height:64,backgroundColor:'#fff',position:'absolute',top:0,flexDirection:'row'}}>
-
-                                <TouchableOpacity style={{flex:1,justifyContent:'center',marginLeft:20}} activeOpacity={0.9} onPress={()=>{Actions.pop()}}>
-                                    <Image style={{width:21,height:21}} source={require('../img/icon_close.png')}/>
-                                </TouchableOpacity>
-
-
-
-                                <View style={{flex:4,justifyContent:'center'}} >
-                                    <Text style={{fontSize:18,color:'#000',fontWeight:'normal',}}>{this.props.title}</Text>
-                                </View>
-
-                                <TouchableOpacity style={{flex:1,justifyContent:'center',alignItems:'flex-end',marginRight:20}} activeOpacity={0.9} onPress={()=>{this._share()}}>
-                                    <Image style={{width:19,height:19}} source={require('../img/icon_share.png')}/>
-                                </TouchableOpacity>
-
-                            </View>
-                        </Header>
-                    )}
-
-
+                <StatusBar backgroundColor="transparent"
+                           barStyle="light-content"
+                           translucent={true}
+                           hidden={false}/>
 
                 <Content onScroll={(e)=>this._onScrollEnd(e)} showsVerticalScrollIndicator={false}>
                     {this._renderVideo()}
@@ -694,8 +687,39 @@ export default class VideoDetails extends Component {
                     </FooterTab>
                 </Footer>
 
+                <View ref={(viewopacity)=>this.viewopacity=viewopacity}
+                      style={{position:'absolute',top:0,width:width,height:StatusBar.currentHeight,backgroundColor:this.state.viewopacity}}>
 
+                </View>
+                <View ref={(navibar)=>this.navibar=navibar}
+                      style={{position:'absolute',top:StatusBar.currentHeight,width:width,height:50,opacity:this.state.navibaropacity,justifyContent:'center',alignItems:'center',backgroundColor:'rgba(0,0,0,0.5)'}}>
+                       <Text style={{fontSize:16,color:'#fff'}}>断开连接回复克鲁斯的给你礼物</Text>
+                </View>
+                <Image  style={{position:'absolute',left:10,top:StatusBar.currentHeight+15,width:20,height:20}} source={require('../img/icon_videodetails_comment_n.png')} />
+                <Image  style={{position:'absolute',right:10,top:StatusBar.currentHeight+15,width:20,height:20}} source={require('../img/icon_videodetails_comment_n.png')} />
             </Container>
         );
     }
 }
+// {Platform.OS=='ios'?(null):(
+//         <Header style={{marginTop:Platform.OS=='ios'?20:0}}  androidStatusBarColor={Config.StatusBarColor}>
+//
+//             <View style={{width:width,height:64,backgroundColor:'#fff',position:'absolute',top:0,flexDirection:'row'}}>
+//
+//                 <TouchableOpacity style={{flex:1,justifyContent:'center',marginLeft:20}} activeOpacity={0.9} onPress={()=>{Actions.pop()}}>
+//                     <Image style={{width:21,height:21}} source={require('../img/icon_close.png')}/>
+//                 </TouchableOpacity>
+//
+//
+//
+//                 <View style={{flex:4,justifyContent:'center'}} >
+//                     <Text style={{fontSize:18,color:'#000',fontWeight:'normal',}}>{this.props.title}</Text>
+//                 </View>
+//
+//                 <TouchableOpacity style={{flex:1,justifyContent:'center',alignItems:'flex-end',marginRight:20}} activeOpacity={0.9} onPress={()=>{this._share()}}>
+//                     <Image style={{width:19,height:19}} source={require('../img/icon_share.png')}/>
+//                 </TouchableOpacity>
+//
+//             </View>
+//         </Header>
+//     )}
