@@ -181,7 +181,7 @@ const ScrollableTabBar = createReactClass({
                 bounces={false}
                 scrollsToTop={false}
             >
-                <View
+                <Animated.View
                     style={[styles.tabs, {width: this.state._containerWidth, }, this.props.tabsContainerStyle, ]}
                     ref={'tabContainer'}
                     onLayout={this.onTabContainerLayout}
@@ -192,7 +192,7 @@ const ScrollableTabBar = createReactClass({
                         return renderTab(name, page, isTabActive, this.props.goToPage, this.measureTab.bind(this, page));
                     })}
                     <Animated.View style={[tabUnderlineStyle, dynamicTabUnderline, this.props.underlineStyle, ]} />
-                </View>
+                </Animated.View>
             </ScrollView>
         </View>;
     },

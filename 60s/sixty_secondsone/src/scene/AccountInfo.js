@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ListView,Dimensions, Image ,TouchableNativeFeedback,TouchableOpacity,DeviceEventEmitter,Platform} from 'react-native';
+import { ListView,Dimensions, Image ,TouchableNativeFeedback,TouchableOpacity,DeviceEventEmitter,Platform,LayoutAnimation,UIManager} from 'react-native';
 import {Actions} from "react-native-router-flux";
 import { Container, Header,View, Content, Button,
     Icon,Form,Item,Label,Input, List, ListItem,
@@ -26,8 +26,11 @@ export default class AccountInfo extends Component {
             imageheader:this.props.image?{uri:this.props.image}:require('../img/noob.png'),
             isvisiable:false,
         };
+        UIManager.setLayoutAnimationEnabledExperimental(true)
     }
-
+    componentWillUpdate() {
+        LayoutAnimation.easeInEaseOut();
+    }
     componentWillReceiveProps(nextProps){
 
         if(nextProps.save==true) {
@@ -174,7 +177,7 @@ export default class AccountInfo extends Component {
                     <Form>
                         <Item floatingLabel>
                             <Label style={{fontSize:14}}>名称</Label>
-                            <Input onChangeText={(name)=>this.setState({name})}  value={this.state.name}/>
+                            <Input  maxLength={15} onChangeText={(name)=>this.setState({name})}  value={this.state.name}/>
                         </Item>
                         <Item style={{height:70,paddingTop:10}} floatingLabel  >
                             <Label style={{fontSize:14,marginTop:10}}>自我介绍（180字以内）</Label>
@@ -182,6 +185,7 @@ export default class AccountInfo extends Component {
                                     onContentSizeChange={this.onContentSizeChange.bind(this)}
                                     style={{height:Math.max(60,this.state.height)}}
                                     value={this.state.desc}
+                                    maxLength={180}
                                     onChangeText={(desc)=>this.setState({desc})}
                             />
 

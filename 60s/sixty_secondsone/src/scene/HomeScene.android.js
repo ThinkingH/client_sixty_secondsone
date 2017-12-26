@@ -58,6 +58,7 @@ class HomeScene extends BaseScene {
             imgurlarr:imgurl,
             translateValue: new Animated.ValueXY({x:0, y:0}), // 二维坐标
             isshowtab:false,
+            tabheight:0,
         }
 
     }
@@ -125,11 +126,17 @@ class HomeScene extends BaseScene {
 
 
     _changeHeaderu=()=>{
-        if(Config.tabBarHight<60){
-            this.state.translateValue.setValue({x:0, y:-Config.tabBarHight});
+        if(Config.tabBarHight<80){
+            this.setState({
+                tabheight:Config.tabBarHight
+            })
+            //this.state.translateValue.setValue({x:0, y:-Config.tabBarHight});
             // this.state.translateValue.setValue({x:0, y:-60});
         }else{
-            this.state.translateValue.setValue({x:0, y:-60});
+            this.setState({
+                tabheight:80
+            })
+           // this.state.translateValue.setValue({x:0, y:-60});
         }
 
 
@@ -187,7 +194,7 @@ class HomeScene extends BaseScene {
     // require('../../src/img/icon_account_bg.png')
     renderTabBar=()=>{
         return(
-            <TabBar  // tabStyle={{paddingLeft:0,paddingRight:0}}
+            <TabBar ref={(tabbar)=>this.tabbar=tabbar} // tabStyle={{paddingLeft:0,paddingRight:0}}
                 imgurl={this.state.imgurlarr} //网络图
                 imgurla={img}       //本地图
                 imageStyle={{width:25,height:25,borderRadius:8}}
@@ -195,7 +202,7 @@ class HomeScene extends BaseScene {
                 backgroundColor={"#FFFFFF"}
                 //imgurl="http://p05samtwb.bkt.clouddn.com/201711241118051750870811.jpg?imageView2/1/w/500/h/500&sign=0d16ac3603aaae8f1e8207f9090d9a7a&t=5a3282df"
                 textStyle={{fontSize:12,fontWeight:'normal',marginTop:7}}
-
+                //tabheight={this.state.tabheight}
                 inactiveTextColor={"#313131"}
                 underlineStyle={{backgroundColor:"#c5b061",height:2}}
             />
@@ -234,6 +241,16 @@ class HomeScene extends BaseScene {
             </View>
         )
     };
+    _onScrollEnd=(e)=>{
+
+        let  dy=e.nativeEvent.contentOffset.y;
+        if(dy>0){
+            this.setState({
+                tabheight:80-dy
+            })
+        }
+
+    }
 
     render(){
         return (
@@ -242,9 +259,10 @@ class HomeScene extends BaseScene {
                            barStyle="light-content"
                            translucent={false}
                            hidden={false}/>
+                {/*<View style={{width:width,height:StatusBar.currentHeight,backgroundColor:'#FFDA2C'}}></View>*/}
                 <Header style={{height:0}} androidStatusBarColor='#c5b061'/>
 
-                <View style={{flex:1,backgroundColor:'#fff'}} >
+                <View   style={{flex:1,backgroundColor:'#fff'}} >
                     <View  //androidStatusBarColor='#f00'
                         style={{height:80,backgroundColor:'#fff',alignItems:'center'
                        }}>
