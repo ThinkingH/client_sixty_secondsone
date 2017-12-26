@@ -43,7 +43,19 @@ export default class SofitelList extends Component {
         <View style={{flex:1,backgroundColor:'#fafafa'}}>
             <Header androidStatusBarColor={Config.StatusBarColor} style={{height:0}}>
             </Header>
+
             <ListScene url={"thetype=1015&imgwidth=500&imgheight=500&msgjihe="+this.props.id} header="sheader" sdata={this.props.datas}  thetype="1015"   item={"video"} />
+            <View style={{position:'absolute',top:0,width:width,height:50,backgroundColor:'rgba(0,0,0,0.4)',flexDirection:'row'}}>
+               <View style={{flex:1,alignItems:'center',justifyContent:'center'}}>
+                   <Image  style={{width:20,height:20}} source={require('../img/icon_close.png')} />
+               </View>
+                <View style={{flex:5,alignItems:'center',justifyContent:'center'}}>
+                   <Text style={{fontSize:16,color:'#fff'}}>{this.props.datas.name}</Text>
+                </View>
+                <View style={{flex:1,alignItems:'center',justifyContent:'center'}}>
+                    <Image  style={{width:20,height:20}} source={require('../img/icon_share.png')} />
+                </View>
+            </View>
         </View>
         );
     }

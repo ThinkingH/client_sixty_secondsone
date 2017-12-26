@@ -397,7 +397,7 @@ export default class apps extends Component {
                                     leftButtonIconStyle={{width:20,height:20}}
                                  //   backButtonImage={require('./img/icon_noviceclose.png')}
                                     component={SofitelList}
-                                    hideNavBar={false}
+                                    hideNavBar={true}
                                     panHandlers={null}
                                     duration={1}
                                 />
