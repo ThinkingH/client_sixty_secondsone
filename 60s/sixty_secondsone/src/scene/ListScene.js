@@ -367,7 +367,7 @@ export default class ListScene extends Component {
             <View
                 //{...this._panResponder.panHandlers}
                 style={{flex:1,backgroundColor:'#fafafa'}}>
-                 <Header style={{height:0}} androidStatusBarColor='#c5b061'/>
+
                 {this._renderResult()}
                 <FlatList
                     scrollEventThrottle={1}

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Image,ListView,Dimensions,InteractionManager,DeviceEventEmitter,TouchableNativeFeedback,RefreshControl,Animated } from 'react-native';
+import { Image,ListView,Dimensions,InteractionManager,DeviceEventEmitter,TouchableNativeFeedback,RefreshControl,Animated,StatusBar } from 'react-native';
 import {Actions} from "react-native-router-flux";
 import Config from '../utils/Config';
 import Request from '../utils/Fetch';
@@ -213,7 +213,11 @@ export default class Account extends Component {
     render() {
         return (
             <Container  style={{backgroundColor:'#fafafa'}}>
-                <Header androidStatusBarColor={Config.StatusBarColor} style={{backgroundColor:'#fefefe'}}>
+                <StatusBar backgroundColor="transparent"
+                           barStyle="light-content"
+                           translucent={true}
+                           hidden={false}/>
+                <Header androidStatusBarColor={'transparent'} style={{backgroundColor:'#fefefe'}}>
                     <Left>
                         <Text  numberOfLines={1} style={{marginLeft:10,fontSize:18,color:'#272727'}}>{this.state.name}</Text>
                     </Left>

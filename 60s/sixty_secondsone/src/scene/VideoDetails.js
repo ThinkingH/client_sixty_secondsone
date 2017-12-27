@@ -4,7 +4,7 @@
 import React, { Component } from 'react';
 import {
     ScrollView, StyleSheet, FlatList, View, Text, Dimensions, InteractionManager, Image, TouchableOpacity, Slider,
-    Alert, DeviceEventEmitter, Platform,StatusBar
+    Alert, DeviceEventEmitter, Platform,StatusBar,ART
 } from 'react-native';
 import {Actions} from "react-native-router-flux";
 import PLVideoView from "../widget/PLVideoView";
@@ -16,33 +16,6 @@ import { Container, Header, Content, Button,Form,Item, Icon, List,Badge,Col,
 
 import NetWorkTool from "../utils/NetWorkTool";
 import ShareUtile from '../utils/ShareUtil'
-// const data = [
-//     {"name" : "三黄鸡鸡腿", quantity: "2个",id:1},
-//     {"name" : "土豆", quantity: "2个",id:2},
-//     {"name" : "青椒", quantity: "3个",id:3},
-//     {"name" : "生抽", quantity: "1勺",id:4},
-//     {"name" : "老抽", quantity: "半勺",id:5},
-//     {"name" : "蚝油", quantity: "一勺",id:6},
-//     {"name" : "老姜", quantity: "两片",id:7},
-//     {"name" : "八角", quantity: "三颗",id:8},
-//     {"name" : "葱", quantity: "半根",id:9},
-//     {"name" : "盐", quantity: "20g",id:10},
-//     {"name" : "料酒", quantity: "一勺",id:11},
-//     {"name" : "白糖", quantity: "20g",id:12},
-// ];
-// const datas = [
-//     {"name" : "1、提前准备所有食材，鸡肉剁成块叨叨叨制作正宗黄焖鸡选用的是新鲜三黄鸡的鸡腿这样做出来的鸡肉才能鲜嫩透味但我更喜欢带骨的鸡块所以选用的半只三黄鸡", age: 21,id:1},
-//     {"name" : "2.将土豆洗净切成滚刀块叨叨叨：黄焖鸡中的配料没有固定的标准，土豆块、金针菇、香菇都可以，按照大家喜欢的口味就可以", age: 22,id:2},
-//     {"name" : "3.锅内倒水煮沸，将切好的鸡块放入沸水中焯烫然后捞出沥干水分", age: 22,id:3},
-//     {"name" : "4.将老姜切片；葱切成段；青椒切成片待用", age: 22,id:4},
-//     {"name" : "5.锅内倒油烧热后将鸡块倒入锅中翻炒煸炒出香味，然后加入料酒叨叨叨：加入料酒可以去除鸡块中的腥味和异味", age: 22,id:5},
-//     {"name" : "6.倒入老抽、生抽、蚝油翻炒均匀", age: 22,id:6},
-//     {"name" : "7.再将姜片、葱段、八角下锅", age: 22,id:7},
-//     {"name" : "8.放入准备好的土豆块和适量清水，加入适量盐和白糖调味，大火烧开转为小火焖30分钟左右至汤汁收紧", age: 22,id:8},
-//     {"name" : "9.待汤汁收紧时，下青椒块翻炒均匀即可关火", age: 22,id:9},
-//     {"name" : "10.出锅后撒上葱花即可食用叨叨叨：其实收汁时最好食用砂锅，但是考虑到家庭制作时比较麻烦，就一次性在锅中解决了这个问题，一点也不影响成菜的口感", age: 22,id:10},
-//
-// ];
 const {width, height} = Dimensions.get('window');
 const styles = StyleSheet.create({
     container: {
@@ -68,27 +41,12 @@ const styles = StyleSheet.create({
         borderRadius:17,
         justifyContent:'center',
         alignItems:'center',
-
-
     }
 });
-
-
-
-let num=null;
-class MyListItem extends React.PureComponent {
-
-    render() {
-        return (
-            <View style={{width:width/2,height:300}}>
-                <Image style={{width:width/2,height:width/2}}  source={require('../img/noob.png')} />
-                <Image style={{width:50,height:50}}  source={require('../img/noob.png')} />
-                <Text note>Doing what you like will always keep you happy . .</Text>
-                <Text note>Doing what you like will always keep you happy . .</Text>
-            </View>
-        )
-    }
-}
+const {Surface, Shape, Path} = ART;
+const path = Path()
+    .moveTo(0,1)
+    .lineTo(width-20,1);
 export default class VideoDetails extends Component {
     constructor(props) {
         super(props);
@@ -391,7 +349,7 @@ export default class VideoDetails extends Component {
                                           style={{flex:1}}
                                           onPress={()=>this._listItemPress(2)}
                         >
-                            <Image square style={{width:width/2,height:width/2}} source={{uri:item.showimg}} />
+                            <Image square style={{width:width/2,height:width/2,borderRadius:10}} source={{uri:item.showimg}} />
                             <View style={{flexDirection:'row',marginTop:10}}>
                                 <Thumbnail  style={{width:50,height:50}} source={{uri:item.touxiang}} />
                                 <View style={{marginLeft:10,marginTop:10,justifyContent:'center'}}>
@@ -408,27 +366,22 @@ export default class VideoDetails extends Component {
     }
 
     _renderViderDetails=()=>{
+
         return(
-            <View>
-                <Text numberOfLines={2} style={{margin:15,fontSize:18,color:'#212121',marginTop:20}}>{this.props.title}</Text>
-                <Row style={{marginLeft:15,alignItems:'center'}}>
+            <View style={{paddingLeft:20,paddingRight:20}}>
+                <Text numberOfLines={2} style={{fontSize:18,color:'#212121',marginTop:20}}>{this.props.title}</Text>
+                <Row style={{alignItems:'center',marginTop:10}}>
                     <Thumbnail square style={{width:14,height:14}} source={require('../img/icon_videodetails_time.png')} />
-                    <Text style={[styles.texts,{marginLeft:5}]}>制作时间：{this.state.data.maketime}</Text>
+                    <Text style={[styles.texts,{marginLeft:5,color:'#C5B361'}]}>制作时间：{this.state.data.maketime}</Text>
                 </Row>
 
-                <Body>
-                <View style={{width:width-20,backgroundColor:'#eee',height:1,marginTop:20}}>
-                </View>
+
+                <Body style={{marginBottom:20,marginTop:20}}>
+                <Text note style={[styles.texts,{lineHeight:20,color:'#000'}]}>{this.state.data.jieshao}</Text>
                 </Body>
-                <Body>
-                <Text note style={[styles.texts,{marginLeft:15,marginRight:10,lineHeight:20,marginTop:20,color:'#000'}]}>{this.state.data.jieshao}</Text>
-                </Body>
-                <View style={{width:width,height:1,backgroundColor:'#cdcdcd',marginTop:20}}>
-                </View>
-                <View style={{width:width,height:20,backgroundColor:'#fafafa'}}>
-                </View>
-                <View style={{width:width,height:1,backgroundColor:'#cdcdcd'}}>
-                </View>
+                <Surface  width={width-40} height={1}>
+                    <Shape d={path} stroke="#C5B061" strokeWidth={1} strokeDash={[3,5]}/>
+                </Surface>
             </View>
         )
     }
@@ -442,6 +395,11 @@ export default class VideoDetails extends Component {
 
         if(e.nativeEvent.contentOffset.y<=width/2){
             this.navibar.setNativeProps({
+                style: {opacity:e.nativeEvent.contentOffset.y/(width/2)}
+            });
+        }
+        if(e.nativeEvent.contentOffset.y<=width/2){
+            this.navibara.setNativeProps({
                 style: {opacity:e.nativeEvent.contentOffset.y/(width/2)}
             });
         }
@@ -520,47 +478,42 @@ export default class VideoDetails extends Component {
                         </View>
                     ):(null)}
                 <View style={{justifyContent:'center'}}>
-                    <ListItem itemDivider={true} style={{backgroundColor:'#fff'}} >
-                        <TouchableOpacity activeOpacity={1} onPress={()=>this._playStart()}>
-                            <Thumbnail square style={{width:25,height:25}} source={this.state.isplay?require('../img/icon_videodetails_play.png'):require('../img/icon_videodetails_parse.png')} />
+                    <ListItem itemDivider={true} style={{backgroundColor:'#fff',width:width,paddingLeft:20,paddingRight:20}} >
+                        <TouchableOpacity  activeOpacity={1} onPress={()=>this._playStart()}>
+                            <Thumbnail square style={{width:40,height:40}} source={this.state.isplay?require('../img/icon_videodetails_play.png'):require('../img/icon_videodetails_parse.png')} />
                         </TouchableOpacity>
-                        <View>
+                        <View style={{flex:1}} >
                             <Slider
-                                style={{width:width/1.35,marginTop:15}}
-                                //thumbImage={require('../img/slider_handler.png')}
-                                /*minimumTrackImage={require('../img/slider_left.png')}
-                                 maximumTrackImage={require('../img/slider_right.png')}*/
+                                style={{flex:1,marginTop:15}}
                                 maximumValue={60}
                                 minimumValue={0}
                                 value={this.state.value}
                                 minimumTrackTintColor ="#C5B361"
                                 maximumTrackTintColor ="#C5B361"
                                 thumbTintColor="#C5B361"
-                                // maximumTrackImage={require('../img/btn_backcolor.png')}
-                                //   minimumTrackImage={require('../img/top_background.png')}
                                 onSlidingComplete={(value)=>{
                                       let t=Math.floor(value);
                                       this.setState({
                                           value:t,
                                           isplay:true
                                       });
-                                      //let time=Math.floor(value/60*this.state.totalTime);
-                                      //这里直接把比值传过去
                                       this._onPressSeekTo(value)}}
                             />
                             <View style={{flexDirection:'row'}}>
-                                <Text style={{fontSize:12,marginLeft:10}}>{this._timeToStr(this.state.time)}</Text>
+                                <Text style={{fontSize:10,marginLeft:15}}>{this._timeToStr(this.state.time)}</Text>
                                 <View style={{flex:1}}></View>
-                                <Text style={{fontSize:12,marginRight:15}}>{this._timeToStr(this.state.totalTime)}</Text>
+                                <Text style={{fontSize:10,marginRight:15}}>{this._timeToStr(this.state.totalTime)}</Text>
                             </View>
                         </View>
 
-                        <TouchableOpacity activeOpacity={1} onPress={()=>this._mute()}>
-                            <Thumbnail square style={{width:25,height:25}} source={this.state.ismute?require('../img/icon_videodetails_mute.png'):require('../img/icon_videodetails_unmute.png')} />
+                        <TouchableOpacity  activeOpacity={1} onPress={()=>this._mute()}>
+                            <Thumbnail square style={{width:40,height:40}} source={this.state.ismute?require('../img/icon_videodetails_mute.png'):require('../img/icon_videodetails_unmute.png')} />
                         </TouchableOpacity>
                     </ListItem>
                 </View>
-                <View style={{width:width-60,height:1,backgroundColor:'#eee'}}></View>
+                <Surface  width={width-40} height={1}>
+                    <Shape d={path} stroke="#C5B061" strokeWidth={1} strokeDash={[3,5]}/>
+                </Surface>
             </View>
 
         )
@@ -569,6 +522,7 @@ export default class VideoDetails extends Component {
 
 
     render() {
+
         return (
             <Container style={{backgroundColor:'#fff'}}>
                 <StatusBar backgroundColor="transparent"
@@ -580,52 +534,89 @@ export default class VideoDetails extends Component {
                     {this._renderVideo()}
 
                     {this._renderViderDetails()}
-                    <ListItem style={{backgroundColor:'#fff',marginTop:10}} itemDivider>
-                        <Text style={[styles.textb,{color:'#000'}]}>材料<Text style={[styles.texts,{color:'#000'}]}>（两人份）</Text></Text>
-                    </ListItem>
-                    {this.state.cailiaoarr.map((item,i)=>
-                        <Item key={item.id} style={{marginLeft:15,marginRight:15,paddingBottom:10,paddingTop:10}}>
-                            <Text note style={[styles.texts,{color:'#000'}]}>{item.name}</Text>
-                            <View style={{flex:1}}>
+
+                        <Card style={{borderRadius:10,marginRight:10,marginLeft:10,width:width-20,marginTop:20}}>
+                            <View style={{backgroundColor:'#fff',marginTop:20,marginBottom:10,marginLeft:10}} >
+                                <Text style={[styles.textb,{color:'#000'}]}>材料<Text style={[styles.texts,{color:'#000'}]}>（两人份）</Text></Text>
                             </View>
-                            <Text   style={[styles.texts,{color:'#000'}]}>{item.yongliang}</Text>
-                        </Item>
-                    )}
-                    <ListItem style={{backgroundColor:'#fff',marginTop:10}} itemDivider>
+                            {this.state.cailiaoarr.map((item,i)=>
+                                <View key={item.id} style={{padding:10,paddingBottom:0,width:width-20}}>
+                                    <View style={{flexDirection:'row',width:width-40}}>
+                                        <Text  style={[styles.texts,{color:'#000'}]}>{item.name}</Text>
+                                        <View style={{flex:1}}>
+                                        </View>
+                                        <Text   style={[styles.texts,{color:'#000'}]}>{item.yongliang}</Text>
+                                    </View>
+
+                                    {i==this.state.cailiaoarr.length-1?(null):(
+                                            <Surface  width={width-40} height={1}>
+                                                <Shape d={path} stroke="#aaa" strokeWidth={1} strokeDash={[3,5]}/>
+                                            </Surface>
+                                        )}
+                                </View>
+                            )}
+                            <View style={{width:width,height:20}}></View>
+                        </Card>
+
+
+                     <View style={{marginBottom:20,marginTop:10}}>
+
+
+                    <ListItem style={{backgroundColor:'#fff'}} itemDivider>
                         <Text style={[styles.textb,{color:'#000'}]}>操作步骤</Text>
                     </ListItem>
                     {this.state.buzhouarr.map((item,i)=>
-                        <Item style={{marginLeft:15,marginRight:15,paddingBottom:15,paddingTop:15}} key={item.id}>
-                            <View style={{flex:1,flexDirection:'row'}}>
-                                <Text style={{flex:1.5,color:'#000',fontWeight:'800'}}>{item.buzhouid}.</Text>
-
-
-                                <View style={{flex:20,}}>
-                                    <Text note style={[styles.texts,{color:'#000'}]}>{item.buzhoucontent}</Text>
-                                </View>
+                    <View style={{marginLeft:20,marginRight:20,paddingTop:15,}}>
+                        <View style={{flexDirection:'row',paddingBottom:15}} key={item.id}>
+                            <Text style={{flex:1,color:'#000',fontWeight:'800'}}>{item.buzhouid}.</Text>
+                            <View style={{flex:20,}}>
+                                <Text note style={[styles.texts,{color:'#000'}]}>{item.buzhoucontent}</Text>
                             </View>
+                        </View>
+                        {i==this.state.buzhouarr.length-1?(null):(
+                                <Surface  width={width-40} height={1}>
+                                    <Shape d={path} stroke="#aaa" strokeWidth={1} strokeDash={[3,5]}/>
+                                </Surface>
+                            )}
 
 
-                        </Item>
+                    </View>
+
+
                     )}
-                    <ListItem style={{backgroundColor:'#fff',marginTop:10}} itemDivider>
-                        <Text style={[styles.textb,{color:'#000'}]}>提示</Text>
+
+
+                     </View>
+                    <View style={{marginLeft:20}}>
+                        <Surface  width={width-40} height={1}>
+                            <Shape d={path} stroke="#C5B061" strokeWidth={1} strokeDash={[3,5]}/>
+                        </Surface>
+                    </View>
+
+
+
+                    <ListItem style={{backgroundColor:'#fff',marginTop:10}} >
+                        <Text style={[styles.textb,{color:'#000'}]}>贴心提示</Text>
                     </ListItem>
-                    <Item style={{backgroundColor:'#fff',marginLeft:17,marginRight:17,paddingBottom:15}} >
+                    <View style={{backgroundColor:'#fff',marginLeft:17,marginRight:17,paddingBottom:15,marginTop:15}} >
                         <Text note style={[styles.texts,{color:'#000'}]}>{this.state.data.tishishuoming}</Text>
-                    </Item>
-                    <Button onPress={()=>this._comment()} style={{height:45,marginBottom:10,marginTop:10}} transparent={true} full iconLeft >
-                        <Image style={[styles.imagelogo]} source={require('../img/icon_videodetails_comment_s.png')} />
-                        <Text style={{color:'#c5b361',marginLeft:5}}>留言评论</Text>
-                    </Button>
-                    <View style={{width:width,height:1,backgroundColor:'#cdcdcd'}}>
                     </View>
-                    <View style={{width:width,height:10,backgroundColor:'#fafafa'}}>
-                    </View>
-                    <View style={{width:width,height:1,backgroundColor:'#cdcdcd'}}>
-                    </View>
+
+                        <Button rounded={true} block={true} onPress={()=>this._comment()} style={{height:45,marginLeft:30,width:width-60,marginBottom:10,marginTop:10,backgroundColor:'#c5b361'}}   iconLeft >
+                            <Image style={[styles.imagelogo,{marginRight:5}]} source={require('../img/icon_videodetails_comment_s.png')} />
+                            <Text style={{color:'#fff',marginLeft:5}}>欢  迎  留  言</Text>
+                        </Button>
+
+
+
+
                     {this.state.data.picpingluncount=="0"?(null):(
                             <View>
+                                <View style={{marginLeft:20,marginBottom:10,marginTop:10}}>
+                                    <Surface  width={width-40} height={1}>
+                                        <Shape d={path} stroke="#C5B061" strokeWidth={1} strokeDash={[3,5]}/>
+                                    </Surface>
+                                </View>
                                 <ListItem style={{backgroundColor:'#fff'}} itemDivider>
                                     <Text style={[styles.textb,{color:'#272727'}]}>成品展示</Text>
                                     <View style={{flex:1}}>
@@ -643,12 +634,7 @@ export default class VideoDetails extends Component {
                                     <Image style={[styles.imagelogo]} source={require('../img/icon_videodetails_contribute_s.png')} />
                                     <Text style={{color:'#c5b361',marginLeft:5}}>我要投稿</Text>
                                 </Button>
-                                <View style={{width:width,height:1,backgroundColor:'#dfdfdf'}}>
-                                </View>
-                                <View style={{width:width,height:10,backgroundColor:'#f3f3f3'}}>
-                                </View>
-                                <View style={{width:width,height:1,backgroundColor:'#dfdfdf'}}>
-                                </View>
+
                             </View>
                         )}
 
@@ -693,7 +679,12 @@ export default class VideoDetails extends Component {
                 </View>
                 <View ref={(navibar)=>this.navibar=navibar}
                       style={{position:'absolute',top:StatusBar.currentHeight,width:width,height:50,opacity:this.state.navibaropacity,justifyContent:'center',alignItems:'center',backgroundColor:'rgba(0,0,0,0.5)'}}>
-                       <Text style={{fontSize:16,color:'#fff'}}>断开连接回复克鲁斯的给你礼物</Text>
+
+                </View>
+                <View ref={(navibar)=>this.navibara=navibar}
+                      style={{position:'absolute',top:StatusBar.currentHeight,width:width,height:50,
+                      opacity:this.state.navibaropacity,justifyContent:'center',alignItems:'center',backgroundColor:'transparent'}}>
+                    <Text style={{fontSize:16,color:'#fff'}}>断开连接回复克鲁斯的给你礼物</Text>
                 </View>
                 <Image  style={{position:'absolute',left:10,top:StatusBar.currentHeight+15,width:20,height:20}} source={require('../img/icon_videodetails_comment_n.png')} />
                 <Image  style={{position:'absolute',right:10,top:StatusBar.currentHeight+15,width:20,height:20}} source={require('../img/icon_videodetails_comment_n.png')} />

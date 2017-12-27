@@ -97,11 +97,7 @@ export default class Sofitel extends Component {
     render() {
         return (
             <View style={{flex:1,backgroundColor:'#fafafa'}}>
-                {Platform.OS=='ios'?(null):(
 
-                        <Header style={{height:0}} androidStatusBarColor='#c5b061'/>
-
-                )}
                 <FlatList
 
                     ref={(FlatList)=>this.FlatList=FlatList}

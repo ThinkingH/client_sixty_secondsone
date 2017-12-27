@@ -72,6 +72,7 @@ class HomeScene extends BaseScene {
             lock:true,
         })
     }
+
     componentDidMount(){
         setTimeout(()=>{
             this.setState({
@@ -138,9 +139,8 @@ class HomeScene extends BaseScene {
             })
            // this.state.translateValue.setValue({x:0, y:-60});
         }
-
-
     }
+
     _changeHeaderd=()=>{
         if(Config.tabBarHight<60){
             this.state.translateValue.setValue({x:0, y:Config.tabBarHight-60});
@@ -158,7 +158,6 @@ class HomeScene extends BaseScene {
         }
     }
     _goT=()=>{
-
         Storage.saveWithKeyValue("timevalue",'');
         Storage.saveWithKeyValue("titlevalue",'');
         Storage.saveWithKeyValue("matervalue",'');
@@ -177,21 +176,18 @@ class HomeScene extends BaseScene {
                 {text: '清空',
                     onPress: () => {
                         this._deleteAll();
-
                     }},
                 {text: '继续',
                     onPress: () => {
-
                         Actions.contributebyuser();
                     }},
                 {text: '取消',
                     onPress: () => {
-
                     }},
             ]
         );
     };
-    // require('../../src/img/icon_account_bg.png')
+
     renderTabBar=()=>{
         return(
             <TabBar ref={(tabbar)=>this.tabbar=tabbar} // tabStyle={{paddingLeft:0,paddingRight:0}}
@@ -200,15 +196,13 @@ class HomeScene extends BaseScene {
                 imageStyle={{width:25,height:25,borderRadius:8}}
                 activeTextColor={"#c5b061"}
                 backgroundColor={"#FFFFFF"}
-                //imgurl="http://p05samtwb.bkt.clouddn.com/201711241118051750870811.jpg?imageView2/1/w/500/h/500&sign=0d16ac3603aaae8f1e8207f9090d9a7a&t=5a3282df"
                 textStyle={{fontSize:12,fontWeight:'normal',marginTop:7}}
-                //tabheight={this.state.tabheight}
                 inactiveTextColor={"#313131"}
                 underlineStyle={{backgroundColor:"#c5b061",height:2}}
             />
         )
-
     };
+
     _renderTab=()=>{
         return(
             <View style={styles.tabs} >
@@ -241,27 +235,24 @@ class HomeScene extends BaseScene {
             </View>
         )
     };
-    _onScrollEnd=(e)=>{
 
+    _onScrollEnd=(e)=>{
         let  dy=e.nativeEvent.contentOffset.y;
         if(dy>0){
             this.setState({
                 tabheight:80-dy
             })
         }
-
-    }
+    };
 
     render(){
         return (
             <Container>
-                <StatusBar backgroundColor="#FFDA2C"
+                <StatusBar backgroundColor="#c5b061"
                            barStyle="light-content"
                            translucent={false}
                            hidden={false}/>
-                {/*<View style={{width:width,height:StatusBar.currentHeight,backgroundColor:'#FFDA2C'}}></View>*/}
                 <Header style={{height:0}} androidStatusBarColor='#c5b061'/>
-
                 <View   style={{flex:1,backgroundColor:'#fff'}} >
                     <View  //androidStatusBarColor='#f00'
                         style={{height:80,backgroundColor:'#fff',alignItems:'center'
@@ -276,29 +267,23 @@ class HomeScene extends BaseScene {
                                 <Thumbnail square={true} style={{width:25,height:25}} source={require('../img/icon_videodetails_parse.png')} />
                             </TouchableOpacity>
                         </ImageBackground>
-
                         <TouchableOpacity style={{position:'absolute',top:width/472*65-width/1.28/595*70/3}} activeOpacity={1}
                                           onPress={()=>Actions.TabView()}>
                             <Thumbnail  style={{width:width/1.28,height:width/1.28/595*70}} source={require('../img/icon_homescence_search.png')} />
                         </TouchableOpacity>
-
                     </View>
                     {this.state.isshowtab?(<ScrollableTabView ref={(ScrollableTabView)=>this.ScrollableTabView=ScrollableTabView}
                                                               initialPage={this.state.numpage}
                                                               onChangeTab={(obj) => {this._onChangeTab(obj)}}
                                                               scrollWithoutAnimation={true}
-                            //tabBarUnderLineStyle={{backgroundColor:"#f26c4f",margin:0,height:2}}
                                                               style={{flex:1,marginTop:10,paddingLeft:10,paddingRight:10}}
                                                               renderTabBar={() =>this.renderTabBar()}>
                             <MainScene  url={"thetype=1015&searchstr="} thetype="1015"  tabLabel="最新" header={"header"}  item={"video"} />
-
                             <Sofitel tabLabel="特辑" />
-
                             <ListScene url={"thetype=1015&classify2=融合菜"} tabLabel="融合菜" thetype="1015" item={"video"} />
                             <ListScene url={"thetype=1015&classify2=甜品"} tabLabel="甜品" thetype="1015" item={"video"}/>
                             <ListScene url={"thetype=1015&classify2=特色菜"} tabLabel="特色菜" thetype="1015" item={"video"}/>
                             <ListScene url={"thetype=1015&classify2=饮品"}  tabLabel="饮品" thetype="1015" item={"video"}/>
-
                             <ListScene url={"thetype=1015&classify2=其他"} tabLabel="其他" thetype="1015" item={"video"}/>
                             <ListScene url={"thetype=1015&classify2=小贴士"}  tabLabel="小贴士" thetype="1015" item={"video"}/>
                              {/*<ListScene url={"thetype=1015&classify2=大家的食谱"} sign={true}  tabLabel="大家的食谱" thetype="1015" item={"video"}/>*/}
@@ -308,16 +293,9 @@ class HomeScene extends BaseScene {
                             <View style={{flex:1,alignItems:'center',justifyContent:'center',backgroundColor:'rgba(0,0,0,0.2)'}}>
                                 <ActivityIndicator size = 'small' />
                             </View>
-
                         </View>
-
                         )}
-
-
-
-
                 </View>
-
             </Container>
         );
     }
