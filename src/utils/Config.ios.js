@@ -1,7 +1,7 @@
 /**
  * Created by aj on 2016/12/18.
  */
-import {View, StyleSheet, ListView, Image,TouchableOpacity,BackAndroid,PixelRatio,Platform} from "react-native";
+import {View, StyleSheet, ListView, Image,TouchableOpacity,BackAndroid,PixelRatio,Platform,StatusBar} from "react-native";
 import MD5 from "react-native-md5";
 import JPushModule from 'jpush-react-native';
 import Request from '../utils/Fetch';
@@ -30,7 +30,7 @@ export default class Config{
      static IECEIVESOCKET=2;
      static ISCOLLECT=1;
      static ISJPUSH=true;
-
+    static STATUSBARHEIGHT=Platform.OS == 'ios' ? 20 : StatusBar.currentHeight;
      static initJpush=()=>{
 
         }

@@ -1,6 +1,6 @@
 import React from 'react';
 import { PropTypes } from "react";
-import { Image,StyleSheet,Text, View, ViewPropTypes,DeviceEventEmitter, TextInput, TouchableNativeFeedback ,Dimensions,Keyboard, ART} from "react-native";
+import { Image,StyleSheet,Text, View, ViewPropTypes,DeviceEventEmitter, TextInput, TouchableNativeFeedback ,Dimensions,Keyboard,StatusBar, ART} from "react-native";
 import { Container, Header, Content, Button, Form, Item, Icon, List, Badge, Col, Input,
     Thumbnail ,ListItem,  Left, Body, Right, Switch ,Card, CardItem, Row, FooterTab, Footer} from 'native-base';
 import { Actions } from 'react-native-router-flux';
@@ -142,14 +142,17 @@ export default class TabView extends React.Component {
 
     _renderHeader=()=>{
         return(
-            <Header androidStatusBarColor={Config.StatusBarColor} style={{backgroundColor:'#fff'}}>
+            <Header  style={{backgroundColor:'#fff'}}>
                 <Row  style={{justifyContent:'center',alignItems:'center'}}>
                 <Icon style={{marginRight:10,marginLeft:5,color:'#ccc'}}  name='search' />
                 <Input  style={{height:40,marginTop:5,}}
                       value={this.state.value}
                      placeholderTextColor="#ccc"
-
-                     placeholder='菜名、食材等搜索'
+                        //returnKeyType="search"
+                        returnKeyLabel="搜索"
+                        multiline={false}
+                        onSubmitEditing={() =>{this.saveHistory();Keyboard.dismiss();}}
+                            placeholder='菜名、食材等搜索'
                      onChangeText={(value)=>this.setState({value})}
                      maxLength={18}
                 />
@@ -194,7 +197,12 @@ export default class TabView extends React.Component {
           .lineTo(300,1);
       return (
           <Container style={{backgroundColor:'#fafafa'}} >
+
           {this._renderHeader()}
+              <StatusBar backgroundColor="transparent"
+                         barStyle="light-content"
+                         translucent={true}
+                         hidden={false}/>
           <Content showsVerticalScrollIndicator={false} keyboardShouldPersistTaps="handled" >
               <View style={{width:width,height:10,backgroundColor:'#fafafa'}}></View>
               <Row onPress={()=>Actions.assortmentsearch({title:'全部分类'})} style={{alignItems:'center',height:60,backgroundColor:'#fefefe'}}>
@@ -209,12 +217,14 @@ export default class TabView extends React.Component {
                       </ListItem>
                   )}
               {this._renderHistoryList()}
-              <View style={{width:width,height:100}}>
+              <View style={{width:width,height:200}}>
                   <View style={{borderWidth:1,borderColor:'black',borderStyle : 'dashed',borderRadius:1,width:50,height:50}}></View>
                   <Surface width={300} height={10}>
                       <Shape d={path} stroke="#C5B061" strokeWidth={5} strokeDash={[30,30]}/>
                   </Surface>
-
+               <View style={{width:100,height:80,borderRadius:15,elevation:10,backgroundColor:'#fff',margin:20,alignItems:'center',justifyContent:'center'}}>
+                   <Text>客户端施</Text>
+               </View>
 
               </View>
           </Content>

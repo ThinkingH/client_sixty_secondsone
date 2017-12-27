@@ -2,7 +2,7 @@
  * Created by Administrator on 2017/10/20.
  */
 import React, { Component } from 'react';
-import { ListView ,FlatList,View,Dimensions,Image,InteractionManager,DeviceEventEmitter} from 'react-native';
+import { ListView ,FlatList,View,Dimensions,Image,InteractionManager,DeviceEventEmitter,StatusBar} from 'react-native';
 import {Actions} from "react-native-router-flux";
 import Request from '../utils/Fetch';
 import Toast from '@remobile/react-native-toast'
@@ -41,9 +41,13 @@ export default class SofitelList extends Component {
     render() {
         return (
         <View style={{flex:1,backgroundColor:'#fafafa'}}>
+
             <Header androidStatusBarColor={Config.StatusBarColor} style={{height:0}}>
             </Header>
-
+            <StatusBar backgroundColor="transparent"
+                       barStyle="light-content"
+                       translucent={true}
+                       hidden={false}/>
             <ListScene url={"thetype=1015&imgwidth=500&imgheight=500&msgjihe="+this.props.id} header="sheader" sdata={this.props.datas}  thetype="1015"   item={"video"} />
             <View style={{position:'absolute',top:0,width:width,height:50,backgroundColor:'rgba(0,0,0,0.4)',flexDirection:'row'}}>
                <View style={{flex:1,alignItems:'center',justifyContent:'center'}}>
