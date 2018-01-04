@@ -1,7 +1,7 @@
 /**
  * Created by Administrator on 2017/12/15.
  */
-import React from 'react';
+import React ,{ Component } from 'react';
 import {Actions} from "react-native-router-flux";
 import BaseScene from "./BaseScene";
 import ListScene from "./ListScene";
@@ -29,21 +29,15 @@ let imgurl=[];
 //     'http://p05samtwb.bkt.clouddn.com/20171124115559763495607.jpg?imageView2/1/w/500/h/500&sign=b152d873d60b060a6ef8eabc9a4b0b2e&t=5a33870d',
 //     'http://p05samtwb.bkt.clouddn.com/20171124181544581752854.jpg?imageView2/1/w/500/h/500&sign=a592f3d37b9085e3e5d52bc0055195b0&t=5a33870d',
 //     'http://p05samtwb.bkt.clouddn.com/20171201105821904207488.jpg?imageView2/1/w/500/h/500&sign=d781d94624f0c53bf1dd5e2c5b3cd19c&t=5a33870d'];
-let imgurla=['http://p05samtwb.bkt.clouddn.com/20171201105821904207488.jpg?imageView2/1/w/500/h/500&sign=d781d94624f0c53bf1dd5e2c5b3cd19c&t=5a33870d',
-    'http://p05samtwb.bkt.clouddn.com/20171201105821904207488.jpg?imageView2/1/w/500/h/500&sign=d781d94624f0c53bf1dd5e2c5b3cd19c&t=5a33870d',
-    'http://p05samtwb.bkt.clouddn.com/20171124115559763495607.jpg?imageView2/1/w/500/h/500&sign=b152d873d60b060a6ef8eabc9a4b0b2e&t=5a33870d',
-    'http://p05samtwb.bkt.clouddn.com/20171124115559763495607.jpg?imageView2/1/w/500/h/500&sign=b152d873d60b060a6ef8eabc9a4b0b2e&t=5a33870d',
-    'http://p05samtwb.bkt.clouddn.com/20171124115559763495607.jpg?imageView2/1/w/500/h/500&sign=b152d873d60b060a6ef8eabc9a4b0b2e&t=5a33870d',
-    'http://p05samtwb.bkt.clouddn.com/20171124115559763495607.jpg?imageView2/1/w/500/h/500&sign=b152d873d60b060a6ef8eabc9a4b0b2e&t=5a33870d',
-    'http://p05samtwb.bkt.clouddn.com/20171124181544581752854.jpg?imageView2/1/w/500/h/500&sign=a592f3d37b9085e3e5d52bc0055195b0&t=5a33870d',
-    'http://p05samtwb.bkt.clouddn.com/20171201105821904207488.jpg?imageView2/1/w/500/h/500&sign=d781d94624f0c53bf1dd5e2c5b3cd19c&t=5a33870d'];
+let imgurla=[];
 let img=[require('../../src/img/icon_message.png'),require('../../src/img/icon_qq.png'),
     require('../../src/img/icon_videodetails_collect_s.png'),require('../../src/img/icon_videodetails_comment_s.png'),
     require('../../src/img/icon_wb.png'),require('../../src/img/icon_message.png'),
     require('../../src/img/icon_message.png'),require('../../src/img/icon_wx.png'),]
-
-
-class HomeScene extends BaseScene {
+let wordarr=[];
+let keywordarr=[];
+let aaa=['dvdf','dvdf','dvdf','dvdf','dvdf','dvdf','dvdf','dvdf'];
+class HomeScene extends Component {
     static navigationOptions = {
         // tabBarLabel: Config.navs_txt[0],
         tabBarIcon: ({focused,tintColor}) => (<Image source={focused ?Config.icons_s[0]:Config.icons[0]}/>)
@@ -59,6 +53,7 @@ class HomeScene extends BaseScene {
             translateValue: new Animated.ValueXY({x:0, y:0}), // 二维坐标
             isshowtab:false,
             tabheight:0,
+            data:[],
         }
 
     }
@@ -76,22 +71,14 @@ class HomeScene extends BaseScene {
     componentDidMount(){
         setTimeout(()=>{
             this.setState({
-                imgurlarr:imgurla
-            })
-        },1000)
-        setTimeout(()=>{
-            this.setState({
                 isshowtab:true
             })
-        },1000)
+        },500);
         this.changeHeaderd= DeviceEventEmitter.addListener("changeHeaderd",this._changeHeaderd);
-
         this.changeHeaderu= DeviceEventEmitter.addListener("changeHeaderu",this._changeHeaderu);
-        console.log(this.props.num);
-        // this._getDataa();
+         this._getDataa();
     };
     componentWillUnmount() {
-
         this.changeHeaderu.remove();
         this.changeHeaderd.remove();
     }
@@ -110,14 +97,26 @@ class HomeScene extends BaseScene {
 
 
     _getDataa=()=>{
-
-        let parpam="thetype=1017&classtype=classify1&searchstr=美食";
-        Request('1017',parpam)
+        let parpam="thetype=1040&imgwidth=100&imgheight=100";
+        Request('1040',parpam)
             .then((responseJson) => {
-                console.log('aaaaaaaaaaaaaaaaaaaaaaaaaa',responseJson.data.list)
+                console.log('aaaaaaaaaaaaaaaaaaaaaaaaaa',responseJson.data)
+                for(let i=0;i<responseJson.data.length;i++){
+                    imgurla.push(responseJson.data[i].showimg);
+                }
+                for(let i=0;i<responseJson.data.length;i++){
+                    wordarr.push(responseJson.data[i].word);
+                }
+                for(let i=0;i<responseJson.data.length;i++){
+                    keywordarr.push(responseJson.data[i].keyword);
+                }
+                console.log('aaaaaaaaaa',imgurla);
                 this.setState({
-                    data:responseJson.data.list,
-                })
+                    data:responseJson.data,
+                    imgurlarr:imgurla
+                });
+
+
 
             })
             .catch((error) => {
@@ -194,6 +193,7 @@ class HomeScene extends BaseScene {
                 imgurl={this.state.imgurlarr} //网络图
                 imgurla={img}       //本地图
                 imageStyle={{width:25,height:25,borderRadius:8}}
+                textva={aaa}
                 activeTextColor={"#c5b061"}
                 backgroundColor={"#FFFFFF"}
                 textStyle={{fontSize:12,fontWeight:'normal',marginTop:7}}
@@ -248,45 +248,62 @@ class HomeScene extends BaseScene {
     render(){
         return (
             <Container>
-                <StatusBar backgroundColor="#c5b061"
+                <StatusBar backgroundColor="transparent"
                            barStyle="light-content"
-                           translucent={false}
+                           translucent={true}
                            hidden={false}/>
-                <Header style={{height:0}} androidStatusBarColor='#c5b061'/>
+                <View style={{width:width,height:Config.STATUSBARHEIGHT,backgroundColor:Config.StatusBarColor}}>
+
+                </View>
                 <View   style={{flex:1,backgroundColor:'#fff'}} >
                     <View  //androidStatusBarColor='#f00'
                         style={{height:80,backgroundColor:'#fff',alignItems:'center'
                        }}>
                         <ImageBackground   style={{position:'absolute',top:0,width:width,height:width/472*65,flexDirection:'row'}} source={require('../img/icon_homebg.png')} >
-                            <TouchableOpacity style={{position:'absolute',top:10,left:10}} activeOpacity={1}
-                                              onPress={()=>Actions.TabView()}>
-                                <Thumbnail square={true} style={{width:25,height:25}} source={require('../img/icon_videodetails_parse.png')} />
-                            </TouchableOpacity>
+
                             <TouchableOpacity style={{position:'absolute',top:10,right:10}} activeOpacity={1}
                                               onPress={()=>Actions.TabView()}>
                                 <Thumbnail square={true} style={{width:25,height:25}} source={require('../img/icon_videodetails_parse.png')} />
                             </TouchableOpacity>
                         </ImageBackground>
-                        <TouchableOpacity style={{position:'absolute',top:width/472*65-width/1.28/595*70/3}} activeOpacity={1}
+                        <TouchableOpacity style={{position:'absolute',top:width/472*65-width/1.28/850*130/3}} activeOpacity={1}
                                           onPress={()=>Actions.TabView()}>
-                            <Thumbnail  style={{width:width/1.28,height:width/1.28/595*70}} source={require('../img/icon_homescence_search.png')} />
+                            <Image  style={{width:width/1.28,height:width/1.28/850*130}} source={require('../img/newicon_seachbar.png')} />
                         </TouchableOpacity>
                     </View>
                     {this.state.isshowtab?(<ScrollableTabView ref={(ScrollableTabView)=>this.ScrollableTabView=ScrollableTabView}
                                                               initialPage={this.state.numpage}
                                                               onChangeTab={(obj) => {this._onChangeTab(obj)}}
                                                               scrollWithoutAnimation={true}
-                                                              style={{flex:1,marginTop:10,paddingLeft:10,paddingRight:10}}
+                                                              style={{flex:1,width:width,marginTop:10,paddingLeft:12.5,paddingRight:12.5}}
                                                               renderTabBar={() =>this.renderTabBar()}>
-                            <MainScene  url={"thetype=1015&searchstr="} thetype="1015"  tabLabel="最新" header={"header"}  item={"video"} />
-                            <Sofitel tabLabel="特辑" />
-                            <ListScene url={"thetype=1015&classify2=融合菜"} tabLabel="融合菜" thetype="1015" item={"video"} />
-                            <ListScene url={"thetype=1015&classify2=甜品"} tabLabel="甜品" thetype="1015" item={"video"}/>
-                            <ListScene url={"thetype=1015&classify2=特色菜"} tabLabel="特色菜" thetype="1015" item={"video"}/>
-                            <ListScene url={"thetype=1015&classify2=饮品"}  tabLabel="饮品" thetype="1015" item={"video"}/>
-                            <ListScene url={"thetype=1015&classify2=其他"} tabLabel="其他" thetype="1015" item={"video"}/>
-                            <ListScene url={"thetype=1015&classify2=小贴士"}  tabLabel="小贴士" thetype="1015" item={"video"}/>
-                             {/*<ListScene url={"thetype=1015&classify2=大家的食谱"} sign={true}  tabLabel="大家的食谱" thetype="1015" item={"video"}/>*/}
+
+                            {this.state.data.map((item,i)=>{
+                            if(i==0){
+                                return(
+                                       <MainScene  header={"header"} key={i}  url={"thetype=1034&searchstr="+item.keyword} tabLabel={item.word}   thetype="1034" item={"video"} />
+                                )
+                            }else if(i==1){
+                                return(
+                                    <Sofitel key={i}  tabLabel={item.word}  />
+                                )
+                            }else if(i>1&&i<this.state.data.length-1){
+                                return(
+                                    <ListScene key={i}  url={"thetype=1034&classify2="+item.keyword} tabLabel={item.word}   thetype="1034" item={"video"} />
+                                )
+                            }else if(i==this.state.data.length-1){
+                                return(
+                                    <ListScene key={i} sign={true}  url={"thetype=1034&classify2="+item.keyword} tabLabel={item.word}   thetype="1034" item={"video"} />
+                                )
+                            }
+                            })}
+
+                            {/*<ListScene url={"thetype=1015&classify2=融合菜"} tabLabel="融合菜" thetype="1015" item={"video"} />*/}
+                            {/*<ListScene url={"thetype=1015&classify2=甜品"} tabLabel="甜品" thetype="1015" item={"video"}/>*/}
+                            {/*<ListScene url={"thetype=1015&classify2=特色菜"} tabLabel="特色菜" thetype="1015" item={"video"}/>*/}
+                            {/*<ListScene url={"thetype=1015&classify2=饮品"}  tabLabel="饮品" thetype="1015" item={"video"}/>*/}
+                            {/*<ListScene url={"thetype=1015&classify2=其他"} tabLabel="其他" thetype="1015" item={"video"}/>*/}
+
                         </ScrollableTabView>):(
                         <View style={{flex:1,}}>
                             {this._renderTab()}

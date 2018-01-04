@@ -3,7 +3,7 @@
  */
 import React from 'react';
 import { PropTypes, } from "react";
-import { StyleSheet, View, ViewPropTypes, TextInput, TouchableNativeFeedback ,Dimensions,DeviceEventEmitter,FlatList,TouchableOpacity} from "react-native";
+import { StyleSheet, View,Image, ViewPropTypes,StatusBar, TextInput, TouchableNativeFeedback ,Dimensions,DeviceEventEmitter,FlatList,TouchableOpacity} from "react-native";
 import { Container, Header, Content, Button, Form, Item, Icon, List, Badge, Col, Input,
     Thumbnail ,ListItem, Text, Left, Body, Right, Switch ,Card, CardItem, Row, FooterTab, Footer} from 'native-base';
 import { Actions } from 'react-native-router-flux';
@@ -32,9 +32,7 @@ export default class SearchVideo extends React.Component {
         this.state = {
             value:this.props.value?this.props.value:"",
             his:[],
-
             refreshing: false,
-
             isassort:this.props.isassort,
             parpam:null,
         };
@@ -60,8 +58,9 @@ export default class SearchVideo extends React.Component {
         }
 
          if(this.state.isassort){
+            console.log("ssssssssssssss",this.state.value)
              await  this.setState({
-                 parpam:"thetype=1015&searchstr=&classify2="+this.props.classify2+"&classify3="+this.props.classify3,
+                 parpam:"thetype=1034&classify3="+this.state.value,
                  isassort:false
              })
 
@@ -151,34 +150,17 @@ console.log(this.state.parpam)
 
     _renderHeader=()=>{
         return(
-            <Header  androidStatusBarColor={Config.StatusBarColor} style={{backgroundColor:'#fff'}}>
-                <Row  style={{justifyContent:'center',alignItems:'center'}}>
-                    <TouchableNativeFeedback
-                        onPress={()=>{Actions.pop()}}
-                        background={TouchableNativeFeedback.Ripple("#ccc", true)}>
-                        <Thumbnail square  style={{width:17,height:17,marginRight:15,marginLeft:10}} source={require('../img/icon_back.png')} />
-                    </TouchableNativeFeedback>
-
-                    <Icon style={{marginRight:10,marginLeft:5,color:'#ccc'}}  name='search' />
-                    <Input  style={{height:40,marginTop:5,}}
-                            value={this.state.value}
-                            placeholderTextColor="#ccc"
-                            placeholder='输入内容进行搜索'
-                            onChangeText={(value)=>this.setState({value})}
-                            maxLength={18}
-                    />
-                    <TouchableOpacity  activeOpacity={0.9}
-                        onPress={()=>{this._getData(_pageNo);this.saveHistory();}}
-
-                       >
-                        <View>
-                            <Text  style={{color:'#c5b361'}}>搜索</Text>
-                        </View>
-
-                    </TouchableOpacity>
-
-                </Row>
-                <View style={{position:'absolute',bottom:10,right:50,width:width/1.4,height:1,backgroundColor:'#c5b361'}}></View>
+            <Header  androidStatusBarColor={Config.StatusBarColor} style={{backgroundColor:'#fff',alignItems:'center'}}>
+                <Item  rounded style={{height:40,width:width-60,borderColor:'#C5B361'}}>
+                    <Input onChangeText={(code)=>this.setState({code})}
+                           placeholderTextColor="#999"
+                           style={{height:40,padding:0,fontSize:14,}}
+                           maxLength={6}
+                           placeholder='  请输入验证码'/>
+                </Item>
+                <TouchableOpacity activeOpacity={0.9} onPress={()=>Actions.pop()}>
+                    <Image style={{width:25,height:25,marginLeft:10}} source={require('../img/icon_tipclose.png')}/>
+                </TouchableOpacity>
             </Header>
         )
     };
@@ -187,9 +169,17 @@ console.log(this.state.parpam)
     render() {
         return (
             <Container style={{backgroundColor:'#fafafa'}} >
+                <StatusBar backgroundColor="transparent"
+                           barStyle="light-content"
+                           translucent={false}
+                           hidden={false}/>
                 {this._renderHeader()}
+                      <View style={{flex:1,paddingLeft:12.5,marginTop:15}}>
+                          <ListScene url={this.state.parpam} thetype="1034" header={'search'} item={"search"} />
+                      </View>
 
-                        <ListScene url={this.state.parpam} thetype="1015" header={'search'} item={"video"} />
+
+
 
             </Container>
         );

@@ -5,7 +5,7 @@ import React from 'react';
 import { PropTypes } from "react";
 import {
     StyleSheet, Text, View, ViewPropTypes, TextInput, TouchableNativeFeedback, Dimensions,
-    Platform
+    Platform,StatusBar
 } from "react-native";
 import { Container, Header, Content, Button,Form,Item, Icon, List,Badge,Col, Input,
     Thumbnail ,ListItem, Left,Body,Right,Switch ,Card, CardItem,Row,FooterTab,Footer} from 'native-base';
@@ -49,11 +49,10 @@ export default class AssortmentOne extends React.Component {
     render() {
         return (
             <Container style={{backgroundColor:'#eee'}} >
-                {Platform.OS=='ios'?(null):(
-                    <Header style={{height:0}} androidStatusBarColor={Config.StatusBarColor}>
-
-                    </Header>
-                )}
+                <StatusBar backgroundColor={Config.StatusBarColor}
+                           barStyle="light-content"
+                           translucent={false}
+                           hidden={false}/>
                 <Content style={{backgroundColor:'#eee'}}>
                     <List style={{backgroundColor:'#fff'}}>
                         {this.state.data.map((item,i)=>
@@ -64,7 +63,7 @@ export default class AssortmentOne extends React.Component {
                                       style={{alignItems:'center',}} >
                                 <View style={{alignItems:'flex-start',justifyContent:'center',}}>
                                     <Text style={{color:'#000',fontSize:18}} >{item.name}</Text>
-                                    <Text style={{fontSize:12,color:'#c8c8c8'}}>{item.childname}</Text>
+
                                 </View>
                                 <View style={{flex:1}}></View>
                                 <Text style={{color:'#000',fontSize:18}}>{item.count}件</Text>

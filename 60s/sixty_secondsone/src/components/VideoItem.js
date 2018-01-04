@@ -22,7 +22,7 @@ export default class VideoItem extends React.PureComponent  {
     constructor(props) {
         super(props);
         this.state={
-            iscollect:false,
+            iscollect:this.props.title.coll=='1'?true:false,
         };
     }
     _goDetails=()=>{
@@ -42,7 +42,7 @@ export default class VideoItem extends React.PureComponent  {
         }else{
             typeid="2"
         }
-        let parpam="thetype=1023&nowid="+this.props.nowid+"&typeid="+typeid;
+        let parpam="thetype=1023&nowid="+this.props.title.vid+"&typeid="+typeid;
         Request('1023',parpam)
             .then((responseJson) => {
                 this.setState({
@@ -79,8 +79,8 @@ export default class VideoItem extends React.PureComponent  {
                         }else{
                           this._goDetails();
                         }
-                        }} activeOpacity={1}   style={{marginRight:2.5,marginLeft:2.5}} >
-                    <TouchableOpacity style={{width:(width-30)/2}}
+                        }} activeOpacity={1}   style={{marginRight:2.5,marginLeft:2.5,marginTop:10}} >
+                    <TouchableOpacity style={{width:(width-30)/2-2.5}}
                         activeOpacity={0.9}
                         onPress={()=>{ DeviceEventEmitter.emit("zanting","让视频暂停");
                         if(this.props.sign){
@@ -90,16 +90,16 @@ export default class VideoItem extends React.PureComponent  {
                         }
                         }}   >
                         <View style={{backgroundColor:'#ccc',borderRadius:10}}>
-                            <Image source={{uri:this.props.title.showimg}} style={{height: (width-30)/2, width:(width-30)/2,borderRadius:10}}/>
+                            <Image source={{uri:this.props.title.showimg}} style={{height: (width-30)/2-2.5, width:(width-30)/2-2.5,borderRadius:10}}/>
                             <TouchableOpacity activeOpacity={0.9} onPress={()=>{this._collect()}} style={{position:'absolute',bottom:10,left:10,width:20,height:20}}>
-                                <Image style={{width:20,height:20}} source={this.state.iscollect?require('../img/icon_videodetails_collect_s.png'):require('../img/icon_videodetails_collect_n.png')}/>
+                                <Image style={{width:20,height:20}} source={this.state.iscollect?require('../img/newicon_listitem_collect.png'):require('../img/newicon_listitem_uncollect.png')}/>
                             </TouchableOpacity>
                         </View>
                     </TouchableOpacity>
-                    <View style={{paddingLeft:15,marginBottom:10,marginTop:5}}>
+                    <View style={{paddingLeft:15,marginBottom:5,marginTop:5}}>
                         <Text numberOfLines={1} style={{height:20, fontWeight:'100',lineHeight:20,fontSize:14,color:'#666'}} >{this.props.title.biaoti}</Text>
                         <Text numberOfLines={1} style={{height:15, letterSpacing:5,lineHeight:15,fontSize:10,color:'#aaa'}} >{this.props.title.biaoti}</Text>
-                        <TouchableOpacity style={{flexDirection:'row',alignItems:'center',height:15,}}>
+                        <TouchableOpacity activeOpacity={1} style={{flexDirection:'row',alignItems:'center',height:15,}}>
                             <Image source={{uri:this.props.title.showimg}} style={{height:10, width:10,borderRadius:5}}/>
                             <Text numberOfLines={1} style={{ letterSpacing:5,lineHeight:15,fontSize:10,marginLeft:5,color:'#C5B061'}} >{this.props.title.biaoti}</Text>
                         </TouchableOpacity>

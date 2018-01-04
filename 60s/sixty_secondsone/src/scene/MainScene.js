@@ -454,7 +454,7 @@ class MyListHeader extends React.PureComponent {
                 <PLVideoView
                     // ref={PLVideoView}
                     ref={(video)=>{this.video = video}}
-                    style={{width:width-25,height:width-25,marginBottom:10,}}
+                    style={{width:width-30,height:width-30,}}
                     source={
                              {
                                  url:this.props.data.videourl,//this.props.data.videourl,
