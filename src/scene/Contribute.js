@@ -196,16 +196,15 @@ export default  class Contribute extends Component {
     render (){
         return(
             <Container>
-                {Platform.OS=='ios'?(null):(
-                    <Header style={{height:0}} androidStatusBarColor={Config.StatusBarColor}>
-
-                    </Header>
-                )}
-                <Content keyboardShouldPersistTaps="handled" style={{backgroundColor:'#f1f1f2'}}>
+                <StatusBar backgroundColor={Config.StatusBarColor}
+                           barStyle="light-content"
+                           translucent={false}
+                           hidden={false}/>
+                <Content  keyboardShouldPersistTaps="handled" style={{backgroundColor:'#f1f1f2'}}>
                 {this._renderUpLoad()}
 
                 {this._renderTextInput()}
-                {this._renderButton()}
+
                 {this._renderModal()}
 
                     <Spinnera loadvalue="投稿中..." modalVisible={this.state.isvisiable} />
@@ -252,7 +251,7 @@ export default  class Contribute extends Component {
 
     _renderButton=()=>{
         return(
-            <Button block={true} style={{width:width/1.1,height:40,backgroundColor:this.state.btncolor,marginLeft:(width-width/1.1)/2,marginTop:20}}
+            <Button   block={true} style={{borderRadius:10,width:(width-40)/2,height:40,backgroundColor:this.state.btncolor,marginLeft:(width-(width-40)/2)/2,position:'absolute',bottom:0}}
                     textStyle={{fontSize:16}}
                     color="#fff"
                     onPress={()=>{this._upload()}}
@@ -265,7 +264,10 @@ export default  class Contribute extends Component {
 
     _renderTextInput=()=>{
         return(
-            <View ref={(ScrollView)=>this.ScrollView=ScrollView} style={{width:width,height:100,backgroundColor:'#fff'}}>
+            <View style={{height:120}}>
+            <View
+                //ref={(ScrollView)=>this.ScrollView=ScrollView}
+                  style={{marginLeft:20,width:width-40,height:100,borderRadius:10,backgroundColor:'#fff'}}>
                 <TextInput
                     // defaultValue={"例）制作步骤简单、非常好吃！想让我的朋友们也来尝尝！例）制作步骤简单、非常好吃！想让我的朋友们也来尝尝！"}
                     underlineColorAndroid='transparent'
@@ -278,6 +280,8 @@ export default  class Contribute extends Component {
                     onContentSizeChange={(event)=>this.onContentSizeChange(event)}
                 />
             </View>
+                {this._renderButton()}
+            </View>
         )
     }
 
@@ -285,16 +289,16 @@ export default  class Contribute extends Component {
         return(
             <View style={{width:width,height:height/2.5,alignItems:'center',justifyContent:'center'}}>
                 {imagedate==""?(
-                        <View style={{backgroundColor:'#fff',width:width/2,height:width/2,alignItems:'center',justifyContent:'center'}}>
+                        <View style={{backgroundColor:'#fff',width:width-40,height:(width-40)/16*9,borderRadius:10,alignItems:'center',justifyContent:'center'}}>
                             <TouchableOpacity onPress={()=>{this._showModal()}} style={{width:width/8,height:width/8}}>
-                                <Image style={{width:width/8,height:width/8/5*4}} source={require("../img/icon_contribute_camera.png")}>
+                                <Image  style={{width:width/8,height:width/8/5*4}} source={require("../img/icon_contribute_camera.png")}>
                                 </Image>
                             </TouchableOpacity>
                             <Text style={{fontSize:12,marginTop:10}}>点击上传成品图片</Text>
                         </View>
                     ):(
-                        <TouchableOpacity onPress={()=>{this._showModal()}} style={{width:width/2,height:width/2,alignItems:'center',justifyContent:'center'}}>
-                            <Image style={{width:width/2,height:width/2}} source={imagedate}>
+                        <TouchableOpacity onPress={()=>{this._showModal()}} style={{width:width-40,height:(width-40)/16*9,borderRadius:10,alignItems:'center',justifyContent:'center'}}>
+                            <Image resizeMode={'cover'} style={{width:width-40,height:(width-40)/16*9,borderRadius:10}} source={imagedate}>
                             </Image>
                         </TouchableOpacity>
                     )}

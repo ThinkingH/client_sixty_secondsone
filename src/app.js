@@ -22,10 +22,7 @@ import {
 
 import TabView from './components/TabView';
 import TabIcon from './components/TabIcon';
-
-
 import Toast from '@remobile/react-native-toast'
-
 import HomeScene from './scene/HomeScene';
 import Account from './scene/Account';
 import ListScence from './scene/ListScene';
@@ -63,6 +60,10 @@ import InputPoint from './scene/InputPoint';
 import InputMaterials from './scene/InputMaterials';
 import DeleteMater from './scene/DeleteMater';
 import InputStep from './scene/InputStep';
+import TipView from './scene/TipView';
+import TipAll from './scene/TipAll';
+import TipDetails from './scene/TipDetails';
+import SearchMain from './scene/SearchMain';
 
 const styles = StyleSheet.create({
     container: {
@@ -444,6 +445,9 @@ export default class apps extends Component {
                                     panHandlers={null}
                                     duration={1}
                                 />
+
+
+
                                 <Scene
                                     titleStyle={[styles.titleStyle]}
                                     key="assortmenttwo"
@@ -490,14 +494,14 @@ export default class apps extends Component {
                                     hideNavBar={false}
                                     key="accountinfo"
                                     leftButtonIconStyle={{width:20,height:20}}
-                                  //  backButtonImage={require('./img/icon_noviceclose.png')}
+                                    //backButtonImage={require('./img/icon_noviceclose.png')}
                                     component={AccountInfo}
                                     navigationBarStyle={[styles.navigationBarStyle]}
                                     title="修改资料"
                                     onRight={()=>{
                                       Actions.refresh({save:true});
                                      }}
-                                    rightTitle="保存" rightButtonTextStyle={{color:'#000'}}
+                                    rightTitle="保存" rightButtonTextStyle={{color:'#ffda2c'}}
                                     panHandlers={null}
                                     duration={1}
                                 />
@@ -519,11 +523,37 @@ export default class apps extends Component {
                                     leftButtonIconStyle={{width:20,height:20}}
                                     navigationBarStyle={[styles.navigationBarStyle]}
                                     component={Login2}
-                                    title="登录"
+                                   // title="登录"
+                                    hideNavBar={true}
                                     panHandlers={null}
                                     rightTitle=" "
                                     duration={1}
                                 />
+                                <Scene
+                                    titleStyle={[styles.titleStyle]}
+                                    key="tipall"
+                                    leftButtonIconStyle={{width:20,height:20}}
+                                    navigationBarStyle={[styles.navigationBarStyle]}
+                                    component={TipAll}
+                                    // title="登录"
+                                    hideNavBar={false}
+                                    panHandlers={null}
+
+                                    duration={1}
+                                />
+                                <Scene
+                                    titleStyle={[styles.titleStyle]}
+                                    key="tipdetails"
+                                    leftButtonIconStyle={{width:20,height:20}}
+                                    navigationBarStyle={[styles.navigationBarStyle]}
+                                    component={TipDetails}
+                                    // title="登录"
+                                    hideNavBar={true}
+                                    panHandlers={null}
+
+                                    duration={1}
+                                />
+
 
                                 {/*下部导航开始*/}
                                 <Scene
@@ -549,11 +579,18 @@ export default class apps extends Component {
                                         hideNavBar
                                         icon={TabIcon} />
                                     <Scene
-                                        key="TabView"
+                                        key="tipview"
                                         hideNavBar
-                                        icon_id={1}
+                                        icon_id={6}
+
+                                        component={TipView}
+                                    />
+                                    <Scene
+                                        key="searchmain"
                                         icon={TabIcon}
-                                        component={TabView}
+                                        component={SearchMain}
+                                        hideNavBar={true}
+
                                     />
                                     <Scene  key="comment"
 
@@ -577,6 +614,16 @@ export default class apps extends Component {
                                 </Scene>
                                 {/*下部导航结束*/}
 
+                                <Scene
+                                    titleStyle={[styles.titleStyle]}
+                                    key="TabView"
+                                    leftButtonIconStyle={{width:20,height:20}}
+                                    navigationBarStyle={[styles.navigationBarStyle]}
+                                    component={TabView}
+                                    hideNavBar={true}
+                                    panHandlers={null}
+                                    duration={1}
+                                />
                         <Scene
                             navigationBarStyle={[styles.navigationBarStyle]}
                             key="listscence"

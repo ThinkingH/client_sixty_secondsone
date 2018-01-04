@@ -54,7 +54,7 @@ export default class VideoDetails extends Component {
             data:[],
             datas:[],
             dataa:[],
-            iscollect:this.props.isfromcollect==true?true:false,
+            iscollect:this.props.isfromcollect?true:false,
             videourl:null,
             time:0,
             totalTime:null,
@@ -70,6 +70,7 @@ export default class VideoDetails extends Component {
             duration:0,
             viewopacity:'transparent',
             navibaropacity:0,
+            tipsarr:[],
         }
 
         NetWorkTool.checkNetworkState((isConnected)=>{
@@ -139,7 +140,6 @@ export default class VideoDetails extends Component {
 
     _share=()=>{
         this.setState({
-
             isplay:false
         });
         this.videos.pause();
@@ -158,11 +158,11 @@ export default class VideoDetails extends Component {
 
                // this.videos.start();
             });
-    }
+    };
 
     _getData=()=>{
-        let parpam="thetype=1016&imgwidth=800&imgheight=800&nowid="+this.props.nowid+"";
-        Request('1016',parpam)
+        let parpam="thetype=1035&imgwidth=800&imgheight=800&nowid="+this.props.nowid+"";
+        Request('1035',parpam)
             .then((responseJson) => {
                 this.setState({
                     data:responseJson.data,
@@ -171,6 +171,7 @@ export default class VideoDetails extends Component {
                     cailiaoarr:responseJson.data.cailiaoarr,
                     buzhouarr:responseJson.data.buzhouarr,
                     iscollect:responseJson.data.shoucangflag=="1"?true:false,
+                    tipsarr:responseJson.data.tips,
                 })
 
 
@@ -179,7 +180,7 @@ export default class VideoDetails extends Component {
 
                 Toast.show(error.toString());
             });
-    }
+    };
 
     _getCollect=(isCollect)=>{
         let typeid=null;
@@ -229,7 +230,7 @@ export default class VideoDetails extends Component {
             this.videos.pause();
             Actions.login2();
         }
-    }
+    };
 
     _mute=()=>{
         if(this.state.ismute){
@@ -391,14 +392,27 @@ export default class VideoDetails extends Component {
             this.viewopacity.setNativeProps({
                 style: {backgroundColor:'rgba(197,179,97,'+e.nativeEvent.contentOffset.y/(width/2)+')'}
             });
+        }else if(e.nativeEvent.contentOffset.y>width/2){
+            this.viewopacity.setNativeProps({
+                style: {backgroundColor:'rgba(197,179,97,'+e.nativeEvent.contentOffset.y/(width/2)+')'}
+            });
         }
 
         if(e.nativeEvent.contentOffset.y<=width/2){
             this.navibar.setNativeProps({
                 style: {opacity:e.nativeEvent.contentOffset.y/(width/2)}
             });
+        }else if(e.nativeEvent.contentOffset.y>width/2){
+            this.navibar.setNativeProps({
+                style: {opacity:e.nativeEvent.contentOffset.y/(width/2)}
+            });
         }
+
         if(e.nativeEvent.contentOffset.y<=width/2){
+            this.navibara.setNativeProps({
+                style: {opacity:e.nativeEvent.contentOffset.y/(width/2)}
+            });
+        }else if(e.nativeEvent.contentOffset.y>width/2){
             this.navibara.setNativeProps({
                 style: {opacity:e.nativeEvent.contentOffset.y/(width/2)}
             });
@@ -520,6 +534,33 @@ export default class VideoDetails extends Component {
     };
 
 
+    _renderTipVideo=()=>{
+        return (
+
+            <ScrollView contentContainerStyle={{paddingLeft:20,paddingRight:10}} showsHorizontalScrollIndicator={false} horizontal={true} >
+                {this.state.tipsarr.map((item,i)=>
+                    <View  style={{width:width/1.5,marginRight:10}}  key={i}>
+                        <TouchableOpacity activeOpacity={0.8}
+                                          style={{flex:1}}
+                                          onPress={()=>{Actions.tipdetails({nowid:item.id,vurl:item.videourl,imgurl:item.showimg,tiptype:item.class,biaoti:item.biaoti});this.videos.pause();}}
+                        >
+                            <View style={{width:width/1.5,height:width/1.5,borderRadius:10,backgroundColor:'#ccc'}}>
+                                <Image square style={{width:width/1.5,height:width/1.5,borderRadius:10}} source={{uri:item.showimg}} />
+                            </View>
+                            <View style={{marginTop:10}}>
+                                <View style={{marginLeft:10,marginTop:10,justifyContent:'center'}}>
+                                    <Text numberOfLines={1} style={{color:'#000'}}>{item.biaoti}</Text>
+                                    <Text style={{color:'#595959',fontSize:14}}>{item.videosavename}</Text>
+                                </View>
+                            </View>
+
+                        </TouchableOpacity>
+                    </View>
+                )}
+            </ScrollView>
+        )
+    }
+
 
     render() {
 
@@ -534,13 +575,14 @@ export default class VideoDetails extends Component {
                     {this._renderVideo()}
 
                     {this._renderViderDetails()}
-
+                    <Text style={{margin:20,fontSize:16,color:'#000'}}>小贴士视频</Text>
+                    {this._renderTipVideo()}
                         <Card style={{borderRadius:10,marginRight:10,marginLeft:10,width:width-20,marginTop:20}}>
                             <View style={{backgroundColor:'#fff',marginTop:20,marginBottom:10,marginLeft:10}} >
                                 <Text style={[styles.textb,{color:'#000'}]}>材料<Text style={[styles.texts,{color:'#000'}]}>（两人份）</Text></Text>
                             </View>
                             {this.state.cailiaoarr.map((item,i)=>
-                                <View key={item.id} style={{padding:10,paddingBottom:0,width:width-20}}>
+                                <View key={i} style={{padding:10,paddingBottom:0,width:width-20}}>
                                     <View style={{flexDirection:'row',width:width-40}}>
                                         <Text  style={[styles.texts,{color:'#000'}]}>{item.name}</Text>
                                         <View style={{flex:1}}>
@@ -688,6 +730,7 @@ export default class VideoDetails extends Component {
                 </View>
                 <Image  style={{position:'absolute',left:10,top:StatusBar.currentHeight+15,width:20,height:20}} source={require('../img/icon_videodetails_comment_n.png')} />
                 <Image  style={{position:'absolute',right:10,top:StatusBar.currentHeight+15,width:20,height:20}} source={require('../img/icon_videodetails_comment_n.png')} />
+
             </Container>
         );
     }

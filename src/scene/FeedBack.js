@@ -85,7 +85,7 @@ export default class FeedBack extends Component {
     render(){
         return (
             <View style={styles.container}>
-                <StatusBar backgroundColor="#000000"
+                <StatusBar backgroundColor="#C5B361"
                            barStyle="light-content"
                            translucent={false}
                            hidden={false}/>

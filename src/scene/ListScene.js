@@ -13,6 +13,10 @@ import ContributeItem from '../components/ContributeItem'
 import VideoItem from '../components/VideoItem';
 import MessageItem from '../components/MessageItem';
 import CommentItem from '../components/CommentItme';
+import TipItem from '../components/TipItem';
+import SearchItem from '../components/SearchItem';
+import CollectItem from '../components/CollectItem';
+
 const {width, height} = Dimensions.get('window');
 let _pageNo = 1;
 const _pageSize = Config.pageCount;
@@ -24,7 +28,7 @@ export default class ListScene extends Component {
     constructor(props) {
         super(props);
         this.state={
-            numcolumns:this.props.item=="video"?2:1,
+            numcolumns:this.props.item=="video"||'tip'||'search'||'collect'?2:1,
             datas:[],
             refreshing: false,
             isLoadingMore:false,
@@ -278,7 +282,32 @@ export default class ListScene extends Component {
                              title={item}
                 />
             )
-        }else{
+        }else if(this.props.item=="tip"){
+            return(
+                <TipItem key={item.id}
+
+                    // onPressItem={this._onPressItem}
+                         data={item}
+                />
+            )
+        }else if(this.props.item=="search"){
+            return(
+                <SearchItem key={item.id}
+
+                    // onPressItem={this._onPressItem}
+                         data={item}
+                />
+            )
+        }else if(this.props.item=="collect"){
+            return(
+                <CollectItem key={item.id}
+
+                    // onPressItem={this._onPressItem}
+                            data={item}
+                />
+            )
+        }
+        else{
           //  console.log("elseelseelseelseelseelse");
             return(
                 <VideoItem key={item.id}

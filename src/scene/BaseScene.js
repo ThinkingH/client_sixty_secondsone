@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Image,Dimensions,NetInfo,StyleSheet ,InteractionManager,DeviceEventEmitter} from 'react-native';
+import { Image,Dimensions,NetInfo,StyleSheet,ImageBackground ,TouchableOpacity,StatusBar,InteractionManager,DeviceEventEmitter} from 'react-native';
 import Request from '../utils/Fetch';
 import Config from '../utils/Config';
 import Toast from '@remobile/react-native-toast'
@@ -57,17 +57,36 @@ export default class BaseScene extends Component {
     render() {
         return (
             <Container style={{backgroundColor:'#fff'}}>
-                <Header androidStatusBarColor={Config.StatusBarColor} style={{backgroundColor:'#fefefe'}}>
-                    <View style={{flex:1,justifyContent:'center'}}>
-                        <Text style={{fontSize:18,marginLeft:10}}>我的收藏</Text>
-                    </View>
-                </Header>
+                <StatusBar backgroundColor="transparent"
+                           barStyle="light-content"
+                           translucent={true}
+                           hidden={false}/>
+                <View style={{width:width,height:Config.STATUSBARHEIGHT,backgroundColor:Config.StatusBarColor}}>
+
+                </View>
+                <View  //androidStatusBarColor='#f00'
+                    style={{height:44,backgroundColor:'#fff',alignItems:'center',
+                       }}>
+                    <ImageBackground   style={{position:'absolute',top:0,width:width,height:60,flexDirection:'row'}} source={require('../img/icon_homebg.png')} >
+
+                        <TouchableOpacity style={{position:'absolute',top:10,right:10}} activeOpacity={1}
+                                          onPress={()=>Actions.TabView()}>
+                            <Thumbnail square={true} style={{width:25,height:25}} source={require('../img/icon_videodetails_parse.png')} />
+                        </TouchableOpacity>
+                    </ImageBackground>
+
+                </View>
                 {Config.usertype=="1"?( this.state.collectnum==0?(
                             <View  style={{flex:1,justifyContent:'center',alignItems:'center',backgroundColor:'#fafafa'}} >
                             <Thumbnail square  style={{width:width/1.7,height:width/1.7,marginRight:25}} source={require('../img/icon_collect_show.png')} />
                             <Text style={{marginTop:20}}>您还没有收藏任何菜谱哦,快去收藏吧~</Text>
                             </View>
-                        ):(<ListScene url={"thetype=1022"} thetype="1022"  item={"video"}/>)
+                        ):(
+                            <View style={{paddingLeft:12.5,paddingRight:12.5,flex:1}}>
+                                <ListScene url={"thetype=1022"} thetype="1022"  item={"collect"}/>
+                            </View>
+
+                            )
                     ):(
                         <View style={{flex:1,justifyContent:'center',alignItems:'center',backgroundColor:'#f0f2f1'}}>
                         <Thumbnail square  style={{width:width/1.7,height:width/1.7,marginRight:25}} source={require('../img/icon_collect_show.png')} />

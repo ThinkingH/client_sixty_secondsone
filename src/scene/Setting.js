@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {
     StyleSheet, DeviceEventEmitter, View, Dimensions, Modal, TouchableOpacity, Linking,
-    Platform
+    Platform,StatusBar
 } from "react-native";
 import { Container, Header, Content, List, ListItem, Text, Left, Right,  Body } from 'native-base';
 import {Actions,ActionConst} from "react-native-router-flux";
@@ -119,11 +119,10 @@ export default class Setting extends Component {
     render() {
         return (
             <Container style={{backgroundColor:'#fff'}}>
-                {Platform.OS=='ios'?(null):(
-                    <Header style={{height:0}} androidStatusBarColor={Config.StatusBarColor}>
-
-                    </Header>
-                )}
+                <StatusBar backgroundColor="#C5B361"
+                           barStyle="light-content"
+                           translucent={false}
+                           hidden={false}/>
                 <Content>
                     <List>
                         <ListItem style={{backgroundColor:'#fff'}} itemDivider>
