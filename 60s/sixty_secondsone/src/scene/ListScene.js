@@ -151,22 +151,15 @@ export default class ListScene extends Component {
         let thetype=this.props.thetype;
         Request(thetype,parpam)
             .then((responseJson) => {
+                console.log("this.props.urlthis.props.urlthis.props.url",responseJson);
                 if(responseJson.data.pagemsg.sumpage=="1"){
                     this.setState({
                         isshowfooter:false,
                     })
                 }
-
                 let b=new Array();
 
-                if(responseJson.data.pagemsg.sumpage=='undefined'){
 
-                    return
-                }
-
-                if(this.props.item=="video"){
-
-                    if(responseJson.data.pagemsg.allcount%2==0){
 
                         if(this.state.refreshing){
                             console.log('bbbbbbbbbbbbbbbbbbbbbbbbbbbbb')
@@ -175,33 +168,6 @@ export default class ListScene extends Component {
                             console.log('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa')
                             b=this.state.datas.concat(responseJson.data.list);
                         }
-                    }else{
-                         if(responseJson.data.pagemsg.sumpage==responseJson.data.pagemsg.nowpage){
-
-                             if(this.state.refreshing){
-                                 b=responseJson.data.list.concat(aa);
-
-                             }else {
-
-                                 b=this.state.datas.concat(responseJson.data.list.concat(aa));
-                             }
-                         }else{
-
-                             if(this.state.refreshing){
-                                 b=responseJson.data.list
-                             }else{
-                                 b=this.state.datas.concat(responseJson.data.list);
-                             }
-                         }
-
-                    }
-                }else{
-                    if(this.state.refreshing){
-                        b=responseJson.data.list
-                    }else{
-                        b=this.state.datas.concat(responseJson.data.list);
-                    }
-                }
 
 
                 this.setState({

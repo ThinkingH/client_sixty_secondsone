@@ -89,7 +89,7 @@ export default class MainScene extends Component {
 
     componentDidMount() {
 
-       // this.getRefresh = DeviceEventEmitter.addListener("getRefresh",this._onRefresh);
+       // this.getMainRefresh = DeviceEventEmitter.addListener("getMainRefresh",this._onRefresh);
         InteractionManager.runAfterInteractions(() => {
             this. _onRefresh();
 
@@ -98,7 +98,7 @@ export default class MainScene extends Component {
     }
 
     componentWillUnmount() {
-        //this.getRefresh.remove();
+      //  this.getMainRefresh.remove();
     }
 
     _getMainVideo=()=>{

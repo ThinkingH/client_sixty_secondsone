@@ -11,7 +11,6 @@ const {width, height} = Dimensions.get('window');
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-
     },
     absolute: {
         position: "absolute",
@@ -41,6 +40,8 @@ export default class Account extends Component {
             iscontribute:true,
             viewopacity:'transparent',
             navibaropacity:0,
+            address:'',
+            sex:1,
         };
     }
 
@@ -100,14 +101,16 @@ export default class Account extends Component {
         this.setState({
             isRefreshing:true,
         })
-        let parpam="thetype=1005";
-        Request('1005',parpam)
+        let parpam="thetype=1038";
+        Request('1038',parpam)
             .then((responseJson) => {
                this.setState({
                    name:responseJson.data.nickname,
                    desc:responseJson.data.describes,
                    imageheader:responseJson.data.touxiang,
                    isRefreshing:false,
+                   address:responseJson.data.address,
+                   sex:responseJson.data.sex,
                })
             })
             .catch((error) => {
@@ -408,7 +411,7 @@ export default class Account extends Component {
 
                     </View>
                     <TouchableOpacity activeOpacity={0.9} style={{position:'absolute',right:0,top:Config.STATUSBARHEIGHT+50+width/10}}
-                                      onPress={() => {Actions.accountinfo({image:this.state.imageheader,namea:this.state.name,desc:this.state.desc})}} >
+                                      onPress={() => {Actions.accountinfo({image:this.state.imageheader,namea:this.state.name,desc:this.state.desc,address:this.state.address,sex:this.state.sex})}} >
                         <View style={{height:30,borderBottomLeftRadius:15,borderTopLeftRadius:15,backgroundColor:'#C5B361',flexDirection:'row',alignItems:'center',marginTop:10,right:0}}>
                             <Text style={{marginLeft:5,marginRight:5,marginLeft:10,color:'#fff',fontSize:12}}>修改个人资料</Text>
                         </View>

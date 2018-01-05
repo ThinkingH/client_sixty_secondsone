@@ -70,6 +70,7 @@ export default class TipDetails extends Component {
             biaoti:this.props.biaoti,
             time:0,
             totalTime:null,
+            isshowreplay:false,
 
         };
         if (Platform.OS === 'android') {
@@ -270,20 +271,8 @@ export default class TipDetails extends Component {
     };
 
     _replay=()=>{
-        // this.videos.setVideoPath(this.state.data.videourl,this.state.data.showimg);this.setState({
-        //     isshowloop:false,
-        //     isplay:true,
-        //     value:0
-        // });
-        //
-
-        this.videos.setVideoPath(this.state.data.videourl,this.state.data.showimg);
-        this.setState({
-            isshowloop:false,
-            isplay:true,
-            value:0
-        });
-        // this.videos.start();
+        this.videos.setVideoPath(videoarr[num].videourl,videoarr[num].showimg);
+        this._autoHide();
     };
 
     _onPressSeekTo=(value)=>{
@@ -716,13 +705,14 @@ export default class TipDetails extends Component {
             this.setState({
                 ismute:false
             });
-            this.videos.pause();
+            this.videos.unmute();
             //打开音量的操作
         }else{
             this.setState({
                 ismute:true
             });
             //执行静音的操作
+            this.videos.mute();
         }
 
     };
@@ -734,6 +724,7 @@ export default class TipDetails extends Component {
                  isplay:false
              });
              //执行暂停操作
+             this.videos.pause();
          }else{
              this.setState({
                  isplay:true
@@ -744,9 +735,8 @@ export default class TipDetails extends Component {
     };
 
     _autoHide=()=>{
-       // this.interval&&clearInterval(this.interval);
-        this.timeout&&clearTimeout(this.timeout)
-        this.timeout=setTimeout(()=>{
+        this.timeouta&&clearTimeout(this.timeouta);
+        this.timeouta=setTimeout(()=>{
            this.setState({
                isshow:false,
                movevalue:width/2,
@@ -755,24 +745,39 @@ export default class TipDetails extends Component {
     };
 
     _nextPlay=()=>{
-        this.videos.setVideoPath(videoarr[num].videourl,videoarr[num].showimg);
+            console.log('num:',num,'videoarr:',videoarr.length-1)
+        if(num==videoarr.length){
+            this.setState({
+                isshowreplay:true
+            });
+            return;
+        }
         this.setState({
-            biaoti:videoarr[num].biaoti
-        })
+            biaoti:videoarr[num].biaoti,
+            isshow:false,
+            movevalue:width/2
+        });
+        this.videos.setVideoPath(videoarr[num].videourl,videoarr[num].showimg);
         this._autoHide();
         num++;
-    }
+    };
 
     _isShowSetting=()=>{
+
         this._autoHide();
         this.setState({
             isshow:!this.state.isshow
         },()=>{
-            if(this.state.isshow){
+            if(num==videoarr.length){
+                this.setState({
+                    movevalue:width/2
+                });
+                return null;
+            }else if(this.state.isshow){
                 this.setState({
                     movevalue:0
                 })
-            }else{
+            }else if(!this.state.isshow){
                 this.setState({
                     movevalue:width/2
                 })
@@ -833,7 +838,7 @@ export default class TipDetails extends Component {
                             console.log("JS progress = "+progress+"::time::"+Math.floor(progress/1000));
                             }}
                        />
-                       {this.state.isshowloop?(
+                       {this.state.isshowreplay?(
                                <View style={{width:width,height:width,position:'absolute',alignItems:'center',justifyContent:'center'}}>
                                    <TouchableOpacity activeOpacity={1} onPress={()=> {this._replay()}}>
                                        <Thumbnail square style={{width:60,height:60}} source={require('../img/icon_videodetailsloop.png')} />

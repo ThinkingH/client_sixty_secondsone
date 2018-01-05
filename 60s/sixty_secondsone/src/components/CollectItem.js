@@ -52,6 +52,8 @@ export default class CollectItem extends React.PureComponent  {
                 this.setState({
                     iscollect:isCollect,
                 });
+                DeviceEventEmitter.emit('getCollect','点击收藏时候刷新');
+                DeviceEventEmitter.emit('getRefresh','点击收藏时候刷新');
                 Toast.show(responseJson.msg)
             })
             .catch((error) => {
@@ -73,13 +75,9 @@ export default class CollectItem extends React.PureComponent  {
 
     render() {
         return (
-
                     <TouchableOpacity onPress={()=>this._goDetails()}
-
                         activeOpacity={1}   style={{marginRight:2.5,marginLeft:2.5,marginTop:15}} >
-                        <View style={{width:(width-30)/2-2.5}}
-
-                                           >
+                        <View style={{width:(width-30)/2-2.5}}>
                             <View style={{backgroundColor:'#ccc',borderRadius:10}}>
                                 <Image source={{uri:this.state.data.showimg}} style={{height: (width-30)/2-2.5, width:(width-30)/2-2.5,borderRadius:10}}/>
                                 <TouchableOpacity activeOpacity={0.9} onPress={()=>{this._collect()}} style={{position:'absolute',bottom:10,left:10,width:20,height:20}}>
@@ -90,7 +88,6 @@ export default class CollectItem extends React.PureComponent  {
                         <View style={{paddingLeft:15,marginTop:5}}>
                             <Text numberOfLines={1} style={{height:20, fontWeight:'100',lineHeight:20,fontSize:14,color:'#666'}} >{this.state.data.biaoti}</Text>
                             <Text numberOfLines={1} style={{height:15, letterSpacing:5,lineHeight:15,fontSize:10,color:'#aaa'}} >{this.state.data.biaoti}</Text>
-
                         </View>
                     </TouchableOpacity>
 
