@@ -23,7 +23,6 @@ export default class BaseScene extends Component {
        tabBarIcon: ({focused,tintColor}) => (<Image  source={focused ?Config.icons_s[2]:Config.icons[2]}/>)
     };
 
-
     componentWillUnmount(){
         this.getCollect.remove();
     }
@@ -31,20 +30,17 @@ export default class BaseScene extends Component {
     componentDidMount () {
         this.getCollect = DeviceEventEmitter.addListener("getCollect",this._getData);
         InteractionManager.runAfterInteractions(() => {
-
             if(Config.usertype=="1"){
                 this._getData();
             }
-
         });
     }
-
-
 
     _getData=()=>{
         let parpam="thetype=1022";
         Request('1022',parpam)
             .then((responseJson) => {
+            console.log('responseJson',responseJson);
                   this.setState({
                       collectnum:responseJson.data.length
                   })
@@ -52,7 +48,7 @@ export default class BaseScene extends Component {
             .catch((error) => {
                 Toast.show(error.toString());
             });
-    }
+    };
 
     render() {
         return (
@@ -62,7 +58,6 @@ export default class BaseScene extends Component {
                            translucent={true}
                            hidden={false}/>
                 <View style={{width:width,height:Config.STATUSBARHEIGHT,backgroundColor:Config.StatusBarColor}}>
-
                 </View>
                 <View  //androidStatusBarColor='#f00'
                     style={{height:44,backgroundColor:'#fff',alignItems:'center',
@@ -85,7 +80,6 @@ export default class BaseScene extends Component {
                             <View style={{paddingLeft:12.5,paddingRight:12.5,flex:1}}>
                                 <ListScene url={"thetype=1022"} thetype="1022"  item={"collect"}/>
                             </View>
-
                             )
                     ):(
                         <View style={{flex:1,justifyContent:'center',alignItems:'center',backgroundColor:'#f0f2f1'}}>

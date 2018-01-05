@@ -99,15 +99,16 @@ export default class Comment extends Component {
                 disabled:true
             })
         }
-    }
+    };
+
     render() {
         return (
             <Container style={{backgroundColor:'#fafafa'}}>
                 {Platform.OS=='ios'?(null):(
                     <Header style={{height:0}} androidStatusBarColor={Config.StatusBarColor}>
-
                     </Header>
                 )}
+
                 {/*<Content showsVerticalScrollIndicator={false}>*/}
                     {/*<List>*/}
                         {/*{this.state.data.map((item,i)=>*/}
@@ -121,8 +122,8 @@ export default class Comment extends Component {
                         {/*)}*/}
                     {/*</List>*/}
                 {/*</Content>*/}
-                <ListScene url={"thetype=1018&nowid="+this.props.nowid} thetype="1018" item={"comment"} />
 
+                <ListScene url={"thetype=1018&nowid="+this.props.nowid} thetype="1018" item={"comment"} />
                 <Footer style={{backgroundColor:'#eee',justifyContent:'center',alignItems:'center',height:50,}}>
                     <Input  multiline={true}
                             style={{backgroundColor:'#fff',height:30,borderWidth:1,borderColor:'#666',fontSize:12,padding:0,marginLeft:15,marginRight:15,lineHeight:14}}
@@ -131,12 +132,9 @@ export default class Comment extends Component {
                     />
                     {Platform.OS=='ios'?(
                         <Button  disabled={this.state.disabled} onPress={()=>this._sendMsg()} style={{backgroundColor:this.state.disabled?'#ccc':'#C5B361',height:30,width:70,marginTop:10,marginRight:15}} ><Text >发送</Text></Button>
-
                     ):(
                         <Button disabled={this.state.disabled} onPress={()=>this._sendMsg()} style={{backgroundColor:this.state.disabled?'#ccc':'#C5B361',height:30,width:60,marginTop:10,marginRight:15}} small={true} ><Text>发送</Text></Button>
-
                     )}
-
                 </Footer>
                 <Spinnera loadvalue="提交评论中..." modalVisible={this.state.isvisiable} />
             </Container>

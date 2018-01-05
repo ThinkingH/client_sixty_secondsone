@@ -728,8 +728,12 @@ export default class VideoDetails extends Component {
                       opacity:this.state.navibaropacity,justifyContent:'center',alignItems:'center',backgroundColor:'transparent'}}>
                     <Text style={{fontSize:16,color:'#fff'}}>断开连接回复克鲁斯的给你礼物</Text>
                 </View>
-                <Image  style={{position:'absolute',left:10,top:StatusBar.currentHeight+15,width:20,height:20}} source={require('../img/icon_videodetails_comment_n.png')} />
-                <Image  style={{position:'absolute',right:10,top:StatusBar.currentHeight+15,width:20,height:20}} source={require('../img/icon_videodetails_comment_n.png')} />
+                <TouchableOpacity style={{position:'absolute',left:20,top:StatusBar.currentHeight+15,width:20,height:20}} activeOpacity={0.9} onPress={()=>Actions.pop()}>
+                <Image  style={{width:20,height:20}} source={require('../img/newicon_closeback.png')} />
+                </TouchableOpacity>
+                <TouchableOpacity style={{position:'absolute',right:20,top:StatusBar.currentHeight+15,width:20,height:20}} activeOpacity={0.9} onPress={()=>this._share()}>
+                    <Image  style={{width:20,height:20}} source={require('../img/newicon_share.png')} />
+                </TouchableOpacity>
 
             </Container>
         );

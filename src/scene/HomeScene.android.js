@@ -73,7 +73,7 @@ class HomeScene extends Component {
             this.setState({
                 isshowtab:true
             })
-        },500);
+        },1000);
         this.changeHeaderd= DeviceEventEmitter.addListener("changeHeaderd",this._changeHeaderd);
         this.changeHeaderu= DeviceEventEmitter.addListener("changeHeaderu",this._changeHeaderu);
          this._getDataa();
@@ -95,7 +95,6 @@ class HomeScene extends Component {
             });
     };
 
-
     _getDataa=()=>{
         let parpam="thetype=1040&imgwidth=100&imgheight=100";
         Request('1040',parpam)
@@ -115,15 +114,11 @@ class HomeScene extends Component {
                     data:responseJson.data,
                     imgurlarr:imgurla
                 });
-
-
-
             })
             .catch((error) => {
                 Toast.show(error.toString());
             });
     };
-
 
     _changeHeaderu=()=>{
         if(Config.tabBarHight<80){
@@ -138,7 +133,7 @@ class HomeScene extends Component {
             })
            // this.state.translateValue.setValue({x:0, y:-60});
         }
-    }
+    };
 
     _changeHeaderd=()=>{
         if(Config.tabBarHight<60){
@@ -147,7 +142,7 @@ class HomeScene extends Component {
         }else{
             this.state.translateValue.setValue({x:0, y:60});
         }
-    }
+    };
 
     _onChangeTab=(index)=>{
         if(index.i==0){
@@ -155,7 +150,8 @@ class HomeScene extends Component {
         }else{
             DeviceEventEmitter.emit("zanting","暂停视频")
         }
-    }
+    };
+
     _goT=()=>{
         Storage.saveWithKeyValue("timevalue",'');
         Storage.saveWithKeyValue("titlevalue",'');
@@ -166,7 +162,8 @@ class HomeScene extends Component {
         Storage.saveWithKeyValue("several",'');
         Storage.saveWithKeyValue("valuepoint",'');
         Actions.contributebyuser();
-    }
+    };
+
     _goContribute=()=>{
         Alert.alert(
             '',

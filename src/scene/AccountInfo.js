@@ -55,17 +55,18 @@ export default class AccountInfo extends Component {
             desc:this.props.desc?this.props.desc:null,
             imageheader:this.props.image?{uri:this.props.image}:require('../img/noob.png'),
             isvisiable:false,
-            isboy:false,
+            isboy:this.props.sex?this.props.sex=='1'?true:false:null,
             inputcolor:'#000',
             aaaaa:0,
         };
         UIManager.setLayoutAnimationEnabledExperimental(true)
     }
-    componentWillUpdate() {
+
+    componentWillUpdate () {
         LayoutAnimation.easeInEaseOut();
     }
-    componentWillReceiveProps(nextProps){
 
+    componentWillReceiveProps(nextProps){
         if(nextProps.save==true) {
             this.setState({
                 isvisiable:true,
@@ -77,12 +78,8 @@ export default class AccountInfo extends Component {
                 });
                 this.upload();
             }
-
-
         }
     }
-
-
 
     _saveInfo=()=>{
         let sex='';
@@ -91,15 +88,15 @@ export default class AccountInfo extends Component {
         }else{
             sex='2'
         }
-        let parpam="thetype=1007"+'&nickname='+this.state.name+'&describes='+this.state.desc+'&sex='+sex+'&address='+this.state.address;
-        console.log(this.state.name)
-        Request('1007',parpam)
+        let parpam="thetype=1037"+'&nickname='+this.state.name+'&describes='+this.state.desc+'&sex='+sex+'&address='+this.state.address;
+        console.log(this.state.name);
+        Request('1037',parpam)
             .then((responseJson) => {
-                console.log(responseJson)
+                console.log(responseJson);
                 this.setState({
                     isvisiable:false,
                 })
-                Actions.pop({ refresh: { isaccountinfo: true }})
+                Actions.pop({ refresh: { isaccountinfo: true }});
                 imagedate='';
             })
             .catch((error) => {
@@ -109,8 +106,6 @@ export default class AccountInfo extends Component {
                 })
             });
     };
-
-
 
     upload=()=>{
         let base64DataString=encodeURI(imgdata) ;
@@ -187,15 +182,10 @@ export default class AccountInfo extends Component {
                 isboy:false
             })
         }
-
-
-    }
-
+    };
 
     getValue=(desc)=>{
-
         this.setState({desc});
-
     };
 
     _renderTextInput=()=>{
@@ -218,9 +208,13 @@ export default class AccountInfo extends Component {
                     />
                 </ScrollView>
             </View>
-
         )
-    }
+    };
+
+    onContentSizeChange=(event)=> {
+        this.setState({height: event.nativeEvent.contentSize.height});
+        this.ScrollView.scrollTo({y: event.nativeEvent.contentSize.height});
+    };
 
     render() {
         return (
@@ -235,24 +229,20 @@ export default class AccountInfo extends Component {
                             <View style={{width:width-80,flexDirection:"row",backgroundColor:'#f00'}}>
                                 <View style={{backgroundColor:'#fff'}}>
                                     <Image  style={{width:width/5,height:width/5,borderRadius:width/10,margin:20,marginLeft:width/24}}
-                                               source={require('../img/icon_unloginbg.png')} />
+                                               source={imagedate==""?require('../img/icon_unloginbg.png'):imagedate} />
                                 </View>
                                 <View style={{flex:1,backgroundColor:'#fff',alignItems:'center',justifyContent:'center'}}>
 
                                         <View style={{flexDirection:'row',alignItems:'center'}}>
                                             <Text style={{fontSize:16}} >昵称</Text>
-
-
-                                               <Input
-                                                   style={{padding:0,height:20,fontSize:14,margin:0,textAlign:'right',width:null,flex:1}}
-                                                   maxLength={5}
-                                                   onChangeText={(name)=>this.setState({name})}
-                                                   value={this.state.name}/>
+                                            <Input
+                                                style={{padding:0,height:20,fontSize:14,margin:0,textAlign:'right',width:null,flex:1}}
+                                                maxLength={5}
+                                                onChangeText={(name)=>this.setState({name})}
+                                                value={this.state.name}/>
                                             <Image source={require('../img/newicon_account_edit.png')} style={{height:15, width:15}}/>
                                         </View>
                                        <View style={{height:1,width:width-50,backgroundColor:'#ccc'}}></View>
-
-
                                         <View style={{flexDirection:'row',alignItems:'center'}}>
                                             <Image source={require('../img/newicon_account_address.png')} style={{height:15, width:15}}/>
                                             <View style={{flex:1}}></View>
@@ -264,29 +254,24 @@ export default class AccountInfo extends Component {
                                             <Image source={require('../img/newicon_account_edit.png')} style={{height:15, width:15}}/>
                                         </View>
                                    <View style={{height:1,width:width-50,backgroundColor:'#ccc'}}></View>
-
-
                                 </View>
-                                <Image style={{width:width/12,height:width/12,position:'absolute',left:5,top:width/10+20-width/24}}
+                                <TouchableOpacity activeOpacity={0.9} onPress={()=>{this.openPicker(true)}}
+                                                  style={{width:width/12,height:width/12,position:'absolute',left:5,top:width/10+20-width/24}}>
+                                    <Image style={{width:width/12,height:width/12}}
                                            source={require('../img/newicon_account_camera.png')} />
-
-
-
+                                </TouchableOpacity>
                             </View>
                             <View style={{marginTop:20,marginBottom:20}}>
                                 <Surface  width={width-80} height={1}>
                                     <Shape d={path} stroke="#C5B061" strokeWidth={1} strokeDash={[3,5]}/>
                                 </Surface>
                             </View>
-
                             <View style={{flexDirection:'row',width:width-80,alignItems:'center'}}>
                                 <Text>性别</Text>
                                 <View style={{flex:1}}></View>
-                                 <TouchableOpacity style={{flexDirection:'row',alignItems:'center'}} activeOpacity={0.9} onPress={()=>this._radioButton(2)}>
+                                <TouchableOpacity style={{flexDirection:'row',alignItems:'center'}} activeOpacity={0.9} onPress={()=>this._radioButton(2)}>
                                      <Thumbnail square style={{width:14,height:14}} source={this.state.isboy?require('../img/newicon_account_radion.png'):require('../img/newicon_account_radios.png')} />
-                                     <Text style={{marginLeft:5}}>女生</Text>
-                                 </TouchableOpacity>
-
+                                     <Text style={{marginLeft:5}}>女生</Text></TouchableOpacity>
                                 <TouchableOpacity style={{flexDirection:'row',alignItems:'center'}} activeOpacity={0.9} onPress={()=>this._radioButton(1)}>
                                 <Thumbnail square style={{width:14,height:14,marginLeft:10}} source={this.state.isboy?require('../img/newicon_account_radios.png'):require('../img/newicon_account_radion.png')} />
                                 <Text style={{marginLeft:5}}>男生</Text>
@@ -296,24 +281,12 @@ export default class AccountInfo extends Component {
                             <View style={{width:width-80}}>
                                 <Text style={{fontSize:16}}>介绍<Text style={{fontSize:14}}>（80字以内）</Text></Text>
                             </View>
-
                             {this._renderTextInput()}
-
-
                         </View>
                     </View>
                 </Content>
-
             </Container>
         );
-    }
-
-    onContentSizeChange=(event)=> {
-        this.setState({height: event.nativeEvent.contentSize.height});
-        this.ScrollView.scrollTo({y: event.nativeEvent.contentSize.height});
-    }
-    _onChangeText=()=>{
-
     }
 }
 

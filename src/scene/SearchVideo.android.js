@@ -66,7 +66,7 @@ export default class SearchVideo extends React.Component {
 
          }else{
 
-            await this.setState({parpam:"thetype=1015&searchstr="+this.state.value})
+            await this.setState({parpam:"thetype=1034&searchstr="+this.state.value})
              // this.setState({parpam:"thetype=1015&searchstr="+this.state.value},()=>{})   setstate（{}）回调 也可以
              DeviceEventEmitter.emit('getRefresh','搜索结果');
 
@@ -156,6 +156,9 @@ console.log(this.state.parpam)
                            placeholderTextColor="#999"
                            style={{height:40,padding:0,fontSize:14,}}
                            maxLength={6}
+                           value={this.state.value}
+                           onSubmitEditing={()=>{this._getData(_pageNo);this.saveHistory()}}
+                           returnKeyLabel="搜索"
                            placeholder='  请输入验证码'/>
                 </Item>
                 <TouchableOpacity activeOpacity={0.9} onPress={()=>Actions.pop()}>

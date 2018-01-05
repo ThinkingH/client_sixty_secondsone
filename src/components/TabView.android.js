@@ -166,11 +166,14 @@ export default class TabView extends React.Component {
         return(
             <View   style={{backgroundColor:'#fff',alignItems:'center',justifyContent:'center',flexDirection:'row',width:width,height:60}}>
                 <Item  rounded style={{height:40,width:width-60,borderColor:'#C5B361'}}>
-                    <Input onChangeText={(code)=>this.setState({code})}
+                    <Input onChangeText={(value)=>this.setState({value})}
                            placeholderTextColor="#999"
                            style={{height:40,padding:0,fontSize:14,}}
                            maxLength={6}
-                           placeholder='  请输入验证码'/>
+                           value={this.state.value}
+                           onSubmitEditing={()=>this.saveHistory()}
+                           returnKeyLabel="搜索"
+                           placeholder='  请输入菜名'/>
                 </Item>
                 <TouchableOpacity activeOpacity={0.9} onPress={()=>Actions.pop()}>
                     <Image style={{width:25,height:25,marginLeft:10}} source={require('../img/icon_tipclose.png')}/>

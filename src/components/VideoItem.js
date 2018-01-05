@@ -48,6 +48,8 @@ export default class VideoItem extends React.PureComponent  {
                 this.setState({
                     iscollect:isCollect,
                 });
+                DeviceEventEmitter.emit('getCollect','点击收藏时候刷新');
+                DeviceEventEmitter.emit('getRefresh','点击收藏时候刷新');
                 Toast.show(responseJson.msg)
             })
             .catch((error) => {
