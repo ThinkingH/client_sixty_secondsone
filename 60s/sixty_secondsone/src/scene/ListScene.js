@@ -28,7 +28,7 @@ export default class ListScene extends Component {
     constructor(props) {
         super(props);
         this.state={
-            numcolumns:this.props.item=="video"||'tip'||'search'||'collect'?2:1,
+            numcolumns:this.props.item==='collect'||this.props.item==="video"||this.props.item==='tip'||this.props.item==='search'?2:1,
             datas:[],
             refreshing: false,
             isLoadingMore:false,
@@ -92,7 +92,7 @@ export default class ListScene extends Component {
 
         this.getRefresh = DeviceEventEmitter.addListener("getRefresh",this._onRefresh);
         InteractionManager.runAfterInteractions(() => {
-            this. _onRefresh();
+            this._onRefresh();
 
         });
     }
@@ -117,17 +117,18 @@ export default class ListScene extends Component {
             });
     }
 
-    _onRefresh=async()=> {
-       await this.setState({
-            refreshing:true,
-        });
+    _onRefresh=()=> {
         _pageNo = 1;
+        this.setState({
+            refreshing:true,
+        },()=>this._getData(_pageNo));
+
          // if(this.props.header=='header'){
          //     this._getMainVideo();
          // }
 
 
-        this._getData(_pageNo);
+
 
     };
 
@@ -145,6 +146,8 @@ export default class ListScene extends Component {
     };
 
     _getData=(_pageNo)=>{
+
+        console.log("this.props.urlnumcolumnsnumcolumnsnumcolumnsnumcolumns",this.state.numcolumns,'numcolumnsnumcolumnsnumcolumns',this.props.item);
         console.log("this.props.url",this.props.url);
         let parpam=null;
         parpam=this.props.url+"&pagesize=10&page="+_pageNo;
@@ -157,10 +160,7 @@ export default class ListScene extends Component {
                         isshowfooter:false,
                     })
                 }
-                let b=new Array();
-
-
-
+                        let b=new Array();
                         if(this.state.refreshing){
                             console.log('bbbbbbbbbbbbbbbbbbbbbbbbbbbbb')
                             b=responseJson.data.list
@@ -198,13 +198,11 @@ export default class ListScene extends Component {
         }
         else if(this.props.header=='search'){
             return(
-
                 isshowsearch?(
                     <Text  style={{marginLeft:6,marginTop:10,marginBottom:5,color:'#555',fontSize:14}}>搜索结果：{this.state.totalCount?this.state.totalCount:0}条</Text>
                 ):(
                     null
                 )
-
             )
         }else{
             return null;
@@ -217,6 +215,7 @@ export default class ListScene extends Component {
             return(
                 <CommentItem key={item.id}
                              id={item.id}
+                             callBack={this.props.itemCallBack}
                     // onPressItem={this._onPressItem}
                              title={item}
                 />
@@ -226,6 +225,7 @@ export default class ListScene extends Component {
             return(
                 <VideoItem key={item.id}
                            id={item.id}
+                           selected={item.coll}
                            sign={this.props.sign}
                     // onPressItem={this._onPressItem}
                          thetype={this.props.thetype}
@@ -267,7 +267,8 @@ export default class ListScene extends Component {
         }else if(this.props.item=="collect"){
             return(
                 <CollectItem key={item.id}
-
+                             selected={item.coll}
+                             thetype={this.props.thetype}
                     // onPressItem={this._onPressItem}
                             data={item}
                 />

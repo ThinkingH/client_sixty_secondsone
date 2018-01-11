@@ -65,14 +65,18 @@ export default class TipDetails extends Component {
             ismute:false,
             isplay:false,
             duration:0,
-            vurl:this.props.vurl,
-            imgurl:this.props.imgurl,
-            biaoti:this.props.biaoti,
+            vurl:this.props.data.videourl,
+            imageurl:this.props.data.showimg,
+            vimage:this.props.data.showimg,
+            biaoti:this.props.data.biaoti,
+            class:this.props.data.class,
             time:0,
+            vid:this.props.data.vid,
             totalTime:null,
             isshowreplay:false,
 
         };
+
         if (Platform.OS === 'android') {
             UIManager.setLayoutAnimationEnabledExperimental(true)
         }
@@ -118,6 +122,7 @@ export default class TipDetails extends Component {
     componentWillUnmount () {
         console.log("VideoDetails ====>componentWillUnmount")
         this.videos.relese();
+        num=0
         //  this.onCompletion.remove();
         NetWorkTool.removeEventListener(NetWorkTool.TAG_NETWORK_CHANGE,this.handleMethod);
     }
@@ -129,7 +134,7 @@ export default class TipDetails extends Component {
           //  this._getData();
             this._autoHide();
             this._getData();
-
+           // this.videos.setVideoPath(this.state.vurl,this.state.vimage);
         });
 
     }
@@ -172,13 +177,17 @@ export default class TipDetails extends Component {
     };
 
     _getData=()=>{
-        let parpam="thetype=1036&typex=3&imgwidth=800&imgheight=800&dataid="+this.props.nowid+'&searchstr='+this.props.tiptype;
+        let parpam="thetype=1036&typex=3&imgwidth=800&imgheight=800&dataid="+this.state.vid+'&searchstr='+this.state.class;
         Request('1036',parpam)
             .then((responseJson) => {
                 // this.setState({
                 //     data:responseJson.data,
                 // })
                 videoarr=responseJson.data;
+                this.setState({
+                    biaoti:videoarr[num].biaoti,
+                    imageurl:videoarr[num].showimg,
+                });
                 console.log('ssssssssssssssssssssss',videoarr)
             })
             .catch((error) => {
@@ -271,7 +280,7 @@ export default class TipDetails extends Component {
     };
 
     _replay=()=>{
-        this.videos.setVideoPath(videoarr[num].videourl,videoarr[num].showimg);
+        this.videos.setVideoPath(videoarr[num-1].videourl,videoarr[num-1].showimg);
         this._autoHide();
     };
 
@@ -436,11 +445,11 @@ export default class TipDetails extends Component {
                     style={{width:width,height:width}}
                     source={
                             {
-                                 url: this.state.data.videourl,
+                                 url: this.props.vurl,
                                  looping:false,
                                  autoplay:false,
-                                 coverurl:this.state.data.showimg,
-                                 bufferurl:this.state.data.showimg,
+                                 coverurl:this.props.imgurl,
+                                // bufferurl:this.state.vimage,
                             }
                             }
                     onPrepared={(duration)=>{
@@ -696,8 +705,6 @@ export default class TipDetails extends Component {
          )
      };
 
-
-
     _isMute=()=>{
         this._autoHide();
          //执行静音  或者打开音量的操作
@@ -714,7 +721,6 @@ export default class TipDetails extends Component {
             //执行静音的操作
             this.videos.mute();
         }
-
     };
 
     _isPlay=()=>{
@@ -745,19 +751,26 @@ export default class TipDetails extends Component {
     };
 
     _nextPlay=()=>{
-            console.log('num:',num,'videoarr:',videoarr.length-1)
+            console.log('numaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa:',num,'videoarr:',videoarr.length-1)
         if(num==videoarr.length){
             this.setState({
                 isshowreplay:true
             });
             return;
         }
-        this.setState({
-            biaoti:videoarr[num].biaoti,
-            isshow:false,
-            movevalue:width/2
-        });
         this.videos.setVideoPath(videoarr[num].videourl,videoarr[num].showimg);
+              if(num<videoarr.length-1){
+                  this.setState({
+                      biaoti:videoarr[num+1].biaoti,
+                      isshow:false,
+                      movevalue:width/2,
+                      imageurl:videoarr[num+1].showimg,
+
+                  });
+              }
+
+
+
         this._autoHide();
         num++;
     };
@@ -838,13 +851,7 @@ export default class TipDetails extends Component {
                             console.log("JS progress = "+progress+"::time::"+Math.floor(progress/1000));
                             }}
                        />
-                       {this.state.isshowreplay?(
-                               <View style={{width:width,height:width,position:'absolute',alignItems:'center',justifyContent:'center'}}>
-                                   <TouchableOpacity activeOpacity={1} onPress={()=> {this._replay()}}>
-                                       <Thumbnail square style={{width:60,height:60}} source={require('../img/icon_videodetailsloop.png')} />
-                                   </TouchableOpacity>
-                               </View>
-                           ):(null)}
+
 
 
                    </View>
@@ -911,13 +918,20 @@ export default class TipDetails extends Component {
                <TouchableOpacity activeOpacity={0.9} onPress={()=>{this._nextPlay()}}
                                  style={{position:'absolute',width:width/2,height:60,right:-this.state.movevalue,backgroundColor:'#1f1f1f',bottom:60,borderBottomLeftRadius:10,borderTopLeftRadius:10,flexDirection:'row'}}    >
                    <View style={{width:60,height:60,alignItems:'center',justifyContent:'center'}}>
-                       <Image style={{width:50,height:50,borderRadius:10}} source={require('../img/noob.png')}/>
+                       <Image style={{width:50,height:50,borderRadius:10}} source={{uri:this.state.imageurl}}/>
                    </View>
                    <View style={{flex:1,justifyContent:'center'}}>
                        <Text style={{color:'#ccc',fontSize:12,marginLeft:10}}>下一个视频</Text>
                        <Text style={{color:'#fff',fontSize:14,marginLeft:10}}>{this.state.biaoti}</Text>
                    </View>
                </TouchableOpacity>
+               {this.state.isshowreplay?(
+                       <TouchableOpacity onPress={()=> {this._replay()}} style={{width:width,height:width,position:'absolute',alignItems:'center',justifyContent:'center'}}>
+                           <TouchableOpacity activeOpacity={1} onPress={()=> {this._replay()}}>
+                               <Thumbnail square style={{width:60,height:60}} source={require('../img/icon_videodetailsloop.png')} />
+                           </TouchableOpacity>
+                       </TouchableOpacity>
+                   ):(null)}
            </Container>
         );
     }

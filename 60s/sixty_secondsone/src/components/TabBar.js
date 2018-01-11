@@ -139,9 +139,13 @@ const ScrollableTabBar = createReactClass({
             onLayout={onLayoutHandler}
         >
             <View style={[styles.tab, this.props.tabStyle, ]}>
-                <Image  style={[this.props.imageStyle]}
-                        source={this.props.imgurl.length==0?this.props.imgurla[page]:{uri:this.props.imgurl[page]}}
-                />
+                <View style={{backgroundColor:'#ccc',borderRadius:12.5}}>
+                    <Image  style={[this.props.imageStyle]}
+                            source={this.props.imgurl.length==0?this.props.imgurla[page]:{uri:this.props.imgurl[page]}}
+                    />
+                </View>
+
+
                 <Text style={[{color: textColor, fontWeight, }, textStyle, ]}>
                     {name}
                 </Text>
@@ -226,10 +230,10 @@ module.exports = ScrollableTabBar;
 const styles = StyleSheet.create({
     tab: {
         height: 79,
+        width:WINDOW_WIDTH/4,
         alignItems: 'center',
         //justifyContent: 'center',
-        paddingLeft: 35,
-        paddingRight: 35,
+
     },
     container: {
         height: 80,

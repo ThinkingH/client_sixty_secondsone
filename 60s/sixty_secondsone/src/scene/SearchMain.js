@@ -79,23 +79,21 @@ class SearchMain extends Component {
 
                 </View>
 
-                <View  //androidStatusBarColor='#f00'
-                    style={{height:80,backgroundColor:'#fff',alignItems:'center'
-                       }}>
-                    <ImageBackground   style={{position:'absolute',top:0,width:width,height:width/472*65,flexDirection:'row'}} source={require('../img/icon_homebg.png')} >
 
-                        <TouchableOpacity style={{position:'absolute',top:10,right:10}} activeOpacity={1}
+                    <ImageBackground    style={{position:'absolute',top:Config.STATUSBARHEIGHT,width:width,height:50,flexDirection:'row'}} source={require('../img/icon_homebg.png')} >
+
+                        <TouchableOpacity style={{position:'absolute',top:12.5,right:12.5}} activeOpacity={1}
                                           onPress={()=>Actions.TabView()}>
-                            <Thumbnail square={true} style={{width:25,height:25}} source={require('../img/icon_videodetails_parse.png')} />
+                            <Thumbnail square={true} style={{width:25,height:25}} source={require('../img/icon_header.png')} />
                         </TouchableOpacity>
+                        <View style={{width:width,height:50,position:'absolute',alignItems:'center',justifyContent:'center'}}>
+                            <Text style={{color:'#fff'}}>查找</Text>
+                        </View>
                     </ImageBackground>
-                    <TouchableOpacity style={{position:'absolute',top:width/472*65-width/1.28/850*130/3}} activeOpacity={1}
-                                      onPress={()=>Actions.TabView()}>
-                        <Image  style={{width:width/1.28,height:width/1.28/850*130}} source={require('../img/newicon_seachbar.png')} />
-                    </TouchableOpacity>
-                </View>
-                    <Content>
-                    <View style={{padding:20}}>
+
+
+                    <Content style={{marginTop:width/472*65}}>
+                    <View style={{padding:20,marginTop:width/1.28/850*130/3*2}}>
                         <Text style={{marginBottom:10,fontSize:14,color:'#C5B061'}}>人气分类</Text>
                         <Surface  width={width-40} height={1}>
                             <Shape d={path} stroke="#C5B061" strokeWidth={1} strokeDash={[3,5]}/>
@@ -128,7 +126,10 @@ class SearchMain extends Component {
 
                     </View>
                     </Content>
-
+                <TouchableOpacity style={{position:'absolute',left:(width-width/1.28)/2,top:width/472*65-width/1.28/850*130/3+Config.STATUSBARHEIGHT}} activeOpacity={1}
+                                  onPress={()=>Actions.TabView()}>
+                    <Image  style={{width:width/1.28,height:width/1.28/850*130}} source={require('../img/newicon_seachbar.png')} />
+                </TouchableOpacity>
 
             </Container>
         );

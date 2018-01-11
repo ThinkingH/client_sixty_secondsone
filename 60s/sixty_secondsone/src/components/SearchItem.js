@@ -20,6 +20,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#F5FCFF',
     },
 });
+
 let isfromcollect=false;
 export default class SearchItem extends React.PureComponent  {
     constructor(props) {
@@ -32,25 +33,20 @@ export default class SearchItem extends React.PureComponent  {
     _isVideo=()=>{
       if(this.state.data.vtype=='1'){
         //跳转到视频页面
+          console.log('sssssssssssssss')
           Actions.videodetails({title:this.state.data.biaoti,nowid:this.state.data.vid,isfromcollect:isfromcollect})
       }else if(this.state.data.vtype=='2'){
           //跳转到小贴士页面
-          Actions.tipdetails()
+        Actions.tipdetails({data:this.state.data});
       }
     };
 
-
-
     render() {
         return (
-                    <TouchableOpacity   activeOpacity={1}   style={{marginRight:2.5,marginLeft:2.5}} >
-                        <View style={{width:(width-30)/2-2.5}}
-                                          activeOpacity={0.9}
-                              onPress={()=>this._isVideo()}
-                        >
+                    <TouchableOpacity  onPress={()=>this._isVideo()}   activeOpacity={0.9}   style={{marginRight:2.5,marginLeft:2.5}} >
+                        <View style={{width:(width-30)/2-2.5}}>
                             <View style={{backgroundColor:'#ccc',borderRadius:10}}>
                                 <Image source={{uri:this.state.data.showimg}} style={{height: (width-30)/2-2.5, width:(width-30)/2-2.5,borderRadius:10}}/>
-
                             </View>
                         </View>
                         <View style={{paddingLeft:15,marginBottom:10,marginTop:5}}>

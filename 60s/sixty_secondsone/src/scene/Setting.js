@@ -119,7 +119,7 @@ export default class Setting extends Component {
     render() {
         return (
             <Container style={{backgroundColor:'#fff'}}>
-                <StatusBar backgroundColor="#C5B361"
+                <StatusBar backgroundColor={Config.StatusBarColor}
                            barStyle="light-content"
                            translucent={false}
                            hidden={false}/>

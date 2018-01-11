@@ -106,8 +106,10 @@ export default  class ContributeDetails extends Component {
     render (){
         return(
             <Container>
-                <Header androidStatusBarColor={Config.StatusBarColor} style={{height:0}}>
-                </Header>
+                <StatusBar backgroundColor={Config.StatusBarColor}
+                           barStyle="light-content"
+                           translucent={false}
+                           hidden={false}/>
                 <Content showsVerticalScrollIndicator={false} style={{backgroundColor:'#f1f1f2'}}>
                     <TouchableNativeFeedback   onPress={()=>Actions.videodetails({title:this.state.data.biaoti,nowid:this.state.data.vid})}
                                                background={TouchableNativeFeedback.Ripple("#ccc", true)}>

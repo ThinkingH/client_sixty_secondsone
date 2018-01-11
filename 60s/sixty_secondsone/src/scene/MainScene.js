@@ -33,6 +33,7 @@ export default class MainScene extends Component {
             classify:this.props.classify,
             isshowfooter:true,
             mainvideo:[],
+            hideTabBar: false
         }
     }
 
@@ -89,16 +90,27 @@ export default class MainScene extends Component {
 
     componentDidMount() {
 
-       // this.getMainRefresh = DeviceEventEmitter.addListener("getMainRefresh",this._onRefresh);
+        this.getMainRefresh = DeviceEventEmitter.addListener("getMainRefresh",this._getDatamain);
         InteractionManager.runAfterInteractions(() => {
-            this. _onRefresh();
+            this._onRefresh();
 
-            this._getData(_pageNo);
+           // this._getData(_pageNo);
         });
     }
 
     componentWillUnmount() {
-      //  this.getMainRefresh.remove();
+        this.getMainRefresh.remove();
+    }
+
+    _getDatamain=()=>{
+        this.setState({
+            refreshing:true,
+        },()=>{this._getData(_pageNo)});
+
+    }
+
+    componentWillUpdate () {
+
     }
 
     _getMainVideo=()=>{
@@ -133,7 +145,7 @@ export default class MainScene extends Component {
        // _pageNo = 1;
 
         this._getMainVideo();
-
+        this._getData(_pageNo);
     };
 
     _loadMoreData=()=> {
@@ -146,72 +158,29 @@ export default class MainScene extends Component {
 
     };
 
+
+
     _getData=(_pageNo)=>{
         console.log("this.props.url",this.props.url);
         let parpam=null;
         parpam=this.props.url+"&pagesize=10&page="+_pageNo;
         let thetype=this.props.thetype;
-
-        //     if(this.props.url==""||null||"undefined"){
-        //         console.log("视频列表");
-        //     parpam="thetype=1015&pagesize=10&page="+_pageNo+'&searchstr='+this.props.classify;
-        // }else{
-        //         console.log("留言列表");
-        //         parpam=this.props.url;
-        //     }
         Request(thetype,parpam)
             .then((responseJson) => {
+                console.log("this.props.urlthis.props.urlthis.props.url",responseJson);
                 if(responseJson.data.pagemsg.sumpage=="1"){
                     this.setState({
                         isshowfooter:false,
                     })
                 }
-
                 let b=new Array();
-
-                if(responseJson.data.pagemsg.sumpage=='undefined'){
-                    console.log('pagemsgpagemsgpagemsgpagemsg')
-                    return
-                }
-
-                if(this.props.item=="video"){
-
-                    if(responseJson.data.pagemsg.allcount%2==0){
-
-                        if(this.state.refreshing){
-                            b=responseJson.data.list
-                        }else{
-                            b=this.state.datas.concat(responseJson.data.list);
-                        }
-                    }else{
-                        if(responseJson.data.pagemsg.sumpage==responseJson.data.pagemsg.nowpage){
-
-                            if(this.state.refreshing){
-                                b=responseJson.data.list.concat(aa);
-
-                            }else {
-
-                                b=this.state.datas.concat(responseJson.data.list.concat(aa));
-                            }
-                        }else{
-
-                            if(this.state.refreshing){
-                                b=responseJson.data.list
-                            }else{
-                                b=this.state.datas.concat(responseJson.data.list);
-                            }
-                        }
-
-                    }
+                if(this.state.refreshing){
+                    console.log('bbbbbbbbbbbbbbbbbbbbbbbbbbbbb')
+                    b=responseJson.data.list
                 }else{
-                    if(this.state.refreshing){
-                        b=responseJson.data.list
-                    }else{
-                        b=this.state.datas.concat(responseJson.data.list);
-                    }
+                    console.log('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa')
+                    b=this.state.datas.concat(responseJson.data.list);
                 }
-
-
                 this.setState({
                     datas:b,
                     refreshing:false,
@@ -220,11 +189,14 @@ export default class MainScene extends Component {
                 });
             })
             .catch((error) => {
+                this.setState({
+                    refreshing:false,
+                    isLoadingMore:false,
+                })
                 console.log(error.toString())
                 // Toast.show(error.toString());
             });
     };
-
 
     _header = () => {
         if(this.props.header=="header"){
@@ -243,6 +215,7 @@ export default class MainScene extends Component {
             return(
                 <CommentItem key={item.id}
                              id={item.id}
+
                     // onPressItem={this._onPressItem}
                              title={item}
                 />
@@ -252,6 +225,8 @@ export default class MainScene extends Component {
             return(
                 <VideoItem key={item.id}
                            id={item.id}
+                           selected={item.coll}
+                           thetype={this.props.thetype}
                     // onPressItem={this._onPressItem}
                            title={item}
                 />
@@ -313,9 +288,21 @@ export default class MainScene extends Component {
         }
 
     };
+    toggleNavBar = () => {
+        this.setState({ hideTabBar: true }, () =>
+            Actions.refresh({ hideTabBar: this.state.hideTabBar })
+        );
+    }
+
     _onScrollEnd=(e)=>{
         dy=e.nativeEvent.contentOffset.y;
         console.log("dy:",dy,"dx:",dx);
+
+        if(dy>0){
+           //this.toggleNavBar()
+           // Actions.refresh({ hideTabBar: true })
+            Config.SCROLLY=dy
+        }
 
 
 
@@ -383,7 +370,7 @@ export default class MainScene extends Component {
                     showsVerticalScrollIndicator={false}
                     data={this.state.datas}
                     initialNumToRender={4}
-                    //extraData={this.state}
+                    extraData={this.state}
                     keyExtractor={this.state.datas.id}
                     renderItem={this._renderItem}
                     ListHeaderComponent={this._header}

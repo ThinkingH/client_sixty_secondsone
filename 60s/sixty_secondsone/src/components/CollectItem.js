@@ -54,12 +54,25 @@ export default class CollectItem extends React.PureComponent  {
                 });
                 DeviceEventEmitter.emit('getCollect','点击收藏时候刷新');
                 DeviceEventEmitter.emit('getRefresh','点击收藏时候刷新');
+                DeviceEventEmitter.emit('refreshmain','点击收藏时候刷新');
+                DeviceEventEmitter.emit('getMainRefresh','点击收藏时候刷新');
+
                 Toast.show(responseJson.msg)
             })
             .catch((error) => {
                 Toast.show(error.toString());
             });
     };
+
+    componentWillReceiveProps(nextProps){
+        console.log('22222222222222222222222222',nextProps)
+            let data=nextProps.data;
+            this.setState({
+                iscollect:true,
+               data:data
+            })
+
+    }
 
     _collect=()=>{
         if(Config.usertype=="1"){

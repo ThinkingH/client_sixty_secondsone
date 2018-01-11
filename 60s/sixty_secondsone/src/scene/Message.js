@@ -5,13 +5,14 @@
  * Created by Administrator on 2017/10/11.
  */
 import React, { Component } from 'react';
-import {StyleSheet, InteractionManager, TouchableNativeFeedback, View, Image, Platform} from "react-native";
+import {StyleSheet, InteractionManager, TouchableNativeFeedback, View,Dimensions, Image, Platform,StatusBar} from "react-native";
 import { Container, Header,Footer, Content, List, ListItem, Text, Left, Right, Switch, Body, Thumbnail, Item, Col, Input, Button } from 'native-base';
 import {Actions} from "react-native-router-flux";
 import Config from '../utils/Config';
 import Request from '../utils/Fetch';
 import Toast from '@remobile/react-native-toast'
 import ListScene from "./ListScene";
+const {width, height} = Dimensions.get('window');
 const styles = StyleSheet.create({
     container: {
         flex: 1,backgroundColor: '#efeff4',
@@ -51,11 +52,16 @@ value:''
     render() {
         return (
             <Container style={{backgroundColor:'#fafafa'}}>
-                {Platform.OS=='ios'?(null):(
-                    <Header style={{height:0}} androidStatusBarColor={Config.StatusBarColor}>
+                {/*{Platform.OS=='ios'?(null):(*/}
+                    {/*<Header style={{height:0}} androidStatusBarColor={Config.StatusBarColor}>*/}
 
-                    </Header>
-                )}
+                    {/*</Header>*/}
+                {/*)}*/}
+                <StatusBar backgroundColor={Config.StatusBarColor}
+                           barStyle="light-content"
+                           translucent={false}
+                           hidden={false}/>
+
                 <ListScene url={"thetype=1024"} thetype="1024" item={"message"} />
 
 

@@ -144,7 +144,7 @@ export default class Account extends Component {
                     <Body style={{flex:1}}>
                         <ImageBackground   style={{width:width,height:width,justifyContent:'flex-end',alignItems:'center'}}
                                            source={require('../img/noob.png')} >
-                            <Button  rounded block onPress={()=>Actions.login2()}  style={{backgroundColor:'#c5b361',width:width-60,height:40,marginLeft:30}}>
+                            <Button  rounded block onPress={()=>Actions.login2()}  style={{backgroundColor:'#f5c61e',width:width-60,height:40,marginLeft:30}}>
                                 <Text style={{fontSize:16,color:'#fff'}} >用  户  登  录</Text>
                             </Button>
                         </ImageBackground>
@@ -232,19 +232,16 @@ export default class Account extends Component {
 
     _renderContribute=()=>{
         return (
-
                 this.state.iscontribute?(
                         <View style={{width:width-40,backgroundColor:'#ffffff',borderRadius:10,marginTop:20}}>
                         <View style={{width:width-40,height:40,flexDirection:'row'}}>
                             <TouchableOpacity activeOpacity={0.9} style={{flex:1,alignItems:'center',justifyContent:'center'}}>
-                                <Text style={{fontSize:14,color:'#DDCE53'}}>我的成果展示</Text>
-                                <View style={{width:(width-40)/2,height:1,backgroundColor:'#ddce53',position:'absolute',bottom:0}}>
-
+                                <Text style={{fontSize:14,color:'#f5c61e'}}>我的成果展示</Text>
+                                <View style={{width:(width-40)/2,height:1,backgroundColor:'#f5c61e',position:'absolute',bottom:0}}>
                                 </View>
                             </TouchableOpacity>
                             <TouchableOpacity activeOpacity={0.9} onPress={()=>{this._exchange()}} style={{flex:1,alignItems:'center',justifyContent:'center'}}>
                                 <Text style={{fontSize:14}}>我的上传食谱</Text>
-
                             </TouchableOpacity>
                         </View>
                             {this._renderContributeList()}
@@ -254,20 +251,16 @@ export default class Account extends Component {
                         <View style={{width:width-40,height:40,flexDirection:'row'}}>
                             <TouchableOpacity activeOpacity={0.9} onPress={()=>{this._exchange()}} style={{flex:1,alignItems:'center',justifyContent:'center'}}>
                                 <Text style={{fontSize:14}}>我的成果展示</Text>
-
                             </TouchableOpacity>
                             <TouchableOpacity activeOpacity={0.9}  style={{flex:1,alignItems:'center',justifyContent:'center'}}>
-                                <Text style={{fontSize:14,color:'#DDCE53'}}>我的上传食谱</Text>
-                                <View style={{width:(width-40)/2,height:1,backgroundColor:'#ddce53',position:'absolute',bottom:0}}>
-
+                                <Text style={{fontSize:14,color:'#f5c61e'}}>我的上传食谱</Text>
+                                <View style={{width:(width-40)/2,height:1,backgroundColor:'#f5c61e',position:'absolute',bottom:0}}>
                                 </View>
                             </TouchableOpacity>
                         </View>
                             {this._renderUploadList()}
                         </View>
                     )
-
-
         )
     }
 
@@ -275,7 +268,7 @@ export default class Account extends Component {
         return (
             <View style={{flex:1}}>
                 {this.state.arr.length==0?(
-                        <Body style={{height:100,width:width,backgroundColor:'#fafafa'}}>
+                        <Body style={{height:300,width:width,backgroundColor:'#f5f5f5'}}>
                         <Text note style={{marginTop:30}}>暂无投稿,快去投稿吧！</Text>
                         </Body>
                     ):(
@@ -302,7 +295,7 @@ export default class Account extends Component {
         return (
             <View style={{flex:1}}>
                 {this.state.arr.length==0?(
-                        <Body style={{height:100,width:width,backgroundColor:'#fafafa'}}>
+                        <Body style={{height:100,width:width,backgroundColor:'#f5f5f5'}}>
                         <Text note style={{marginTop:30}}>暂无投稿,快去投稿吧！</Text>
                         </Body>
                     ):(
@@ -327,11 +320,11 @@ export default class Account extends Component {
     _onScrollEnd=(e)=>{
         if(e.nativeEvent.contentOffset.y<=60){
             this.viewopacity.setNativeProps({
-                style: {backgroundColor:'rgba(197,179,97,'+e.nativeEvent.contentOffset.y/60+')'}
+                style: {backgroundColor:'rgba(245,198,30,'+e.nativeEvent.contentOffset.y/60+')'}
             });
         }else if(e.nativeEvent.contentOffset.y>60){
             this.viewopacity.setNativeProps({
-                style: {backgroundColor:'rgba(197,179,97,'+e.nativeEvent.contentOffset.y/60+')'}
+                style: {backgroundColor:'rgba(245,198,30,'+e.nativeEvent.contentOffset.y/60+')'}
             });
         }
 
@@ -358,8 +351,8 @@ export default class Account extends Component {
 
     _renderLogina=()=>{
         return (
-            <Container  style={{backgroundColor:'#fafafa'}}>
-                <Content onScroll={(e)=>this._onScrollEnd(e)}  style={{backgroundColor:'#fff'}} showsVerticalScrollIndicator={false}
+            <Container  style={{backgroundColor:'#f5f5f5'}}>
+                <Content onScroll={(e)=>this._onScrollEnd(e)}   showsVerticalScrollIndicator={false}
                         //  onScroll={Animated.event([{nativeEvent:{contentOffset:{y:this.state.imgscale}}}])}
                           refreshControl={
                             <RefreshControl
@@ -412,8 +405,8 @@ export default class Account extends Component {
                     </View>
                     <TouchableOpacity activeOpacity={0.9} style={{position:'absolute',right:0,top:Config.STATUSBARHEIGHT+50+width/10}}
                                       onPress={() => {Actions.accountinfo({image:this.state.imageheader,namea:this.state.name,desc:this.state.desc,address:this.state.address,sex:this.state.sex})}} >
-                        <View style={{height:30,borderBottomLeftRadius:15,borderTopLeftRadius:15,backgroundColor:'#C5B361',flexDirection:'row',alignItems:'center',marginTop:10,right:0}}>
-                            <Text style={{marginLeft:5,marginRight:5,marginLeft:10,color:'#fff',fontSize:12}}>修改个人资料</Text>
+                        <View style={{height:40,borderBottomLeftRadius:20,borderTopLeftRadius:20,backgroundColor:'#f5c61e',flexDirection:'row',alignItems:'center',marginTop:10,right:0}}>
+                            <Text style={{marginLeft:15,marginRight:10,color:'#fff',fontSize:12}}>修改个人资料</Text>
                         </View>
                     </TouchableOpacity>
 
@@ -427,7 +420,7 @@ export default class Account extends Component {
 
     render() {
         return (
-            <Container  style={{backgroundColor:'#fafafa'}}>
+            <Container  style={{backgroundColor:'#f5f5f5'}}>
                 <StatusBar backgroundColor="transparent"
                            barStyle="light-content"
                            translucent={true}

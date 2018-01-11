@@ -71,7 +71,7 @@ export default class VideoDetails extends Component {
             viewopacity:'transparent',
             navibaropacity:0,
             tipsarr:[],
-        }
+        };
 
         NetWorkTool.checkNetworkState((isConnected)=>{
             console.log(isConnected);
@@ -100,7 +100,6 @@ export default class VideoDetails extends Component {
                     ],
                     // { cancelable: false }
                 );
-
             }
             console.log(info);
         });
@@ -128,6 +127,7 @@ export default class VideoDetails extends Component {
         });
 
     }
+
     componentWillReceiveProps(nextProps){
         if(nextProps.iscontribute==true){
             this._getData();
@@ -153,9 +153,7 @@ export default class VideoDetails extends Component {
                 Toast.show(message);
                 this.setState({
                     isplay:true,
-
                 });
-
                // this.videos.start();
             });
     };
@@ -173,23 +171,17 @@ export default class VideoDetails extends Component {
                     iscollect:responseJson.data.shoucangflag=="1"?true:false,
                     tipsarr:responseJson.data.tips,
                 })
-
-
             })
             .catch((error) => {
-
                 Toast.show(error.toString());
             });
     };
 
     _getCollect=(isCollect)=>{
         let typeid=null;
-
         if(isCollect){
-
             typeid="1"
         }else{
-
             typeid="2"
         }
         let parpam="thetype=1023&nowid="+this.props.nowid+"&typeid="+typeid;
@@ -198,7 +190,6 @@ export default class VideoDetails extends Component {
                 //如果请求成功就走下面的方法
                 DeviceEventEmitter.emit('getCollect','点击收藏时候刷新');
                 DeviceEventEmitter.emit('getRefresh','点击收藏时候刷新');
-
                 this.setState({
                     iscollect:isCollect,
                     //collectdisable:false,
@@ -208,7 +199,7 @@ export default class VideoDetails extends Component {
             .catch((error) => {
                 this.setState({
                     //  collectdisable:false
-                })
+                });
                 Toast.show(error.toString());
             });
     };
@@ -261,7 +252,6 @@ export default class VideoDetails extends Component {
                 isplay:true,
                 isshowloop:false,
             });
-
             this.videos.start();
         }
     };
@@ -273,7 +263,6 @@ export default class VideoDetails extends Component {
         //     value:0
         // });
         //
-
         this.videos.setVideoPath(this.state.data.videourl,this.state.data.showimg);
         this.setState({
             isshowloop:false,
@@ -281,7 +270,7 @@ export default class VideoDetails extends Component {
             value:0
         });
         // this.videos.start();
-    }
+    };
 
     _onPressSeekTo=(value)=>{
         // let millSecond = this.state.totalTime*(value/60);
@@ -350,9 +339,16 @@ export default class VideoDetails extends Component {
                                           style={{flex:1}}
                                           onPress={()=>this._listItemPress(2)}
                         >
-                            <Image square style={{width:width/2,height:width/2,borderRadius:10}} source={{uri:item.showimg}} />
+                            <View style={{backgroundColor:'#ccc',width:width/2,height:width/2,borderRadius:10}}>
+                                <Image square style={{width:width/2,height:width/2,borderRadius:10}} source={{uri:item.showimg}} />
+                            </View>
+
+
                             <View style={{flexDirection:'row',marginTop:10}}>
-                                <Thumbnail  style={{width:50,height:50}} source={{uri:item.touxiang}} />
+                                <View style={{backgroundColor:'#ccc',width:50,height:50,borderRadius:25}}>
+                                    <Thumbnail  style={{width:50,height:50}} source={{uri:item.touxiang}} />
+                                </View>
+
                                 <View style={{marginLeft:10,marginTop:10,justifyContent:'center'}}>
                                     <Text numberOfLines={1} style={{color:'#000'}}>{item.nickname}</Text>
                                     <Text style={{color:'#595959',fontSize:14}}>9:25</Text>
@@ -364,19 +360,16 @@ export default class VideoDetails extends Component {
                 )}
             </ScrollView>
         )
-    }
+    };
 
     _renderViderDetails=()=>{
-
         return(
             <View style={{paddingLeft:20,paddingRight:20}}>
                 <Text numberOfLines={2} style={{fontSize:18,color:'#212121',marginTop:20}}>{this.props.title}</Text>
                 <Row style={{alignItems:'center',marginTop:10}}>
                     <Thumbnail square style={{width:14,height:14}} source={require('../img/icon_videodetails_time.png')} />
-                    <Text style={[styles.texts,{marginLeft:5,color:'#C5B361'}]}>制作时间：{this.state.data.maketime}</Text>
+                    <Text style={[styles.texts,{marginLeft:5,color:'#f5c61e'}]}>制作时间：{this.state.data.maketime}</Text>
                 </Row>
-
-
                 <Body style={{marginBottom:20,marginTop:20}}>
                 <Text note style={[styles.texts,{lineHeight:20,color:'#000'}]}>{this.state.data.jieshao}</Text>
                 </Body>
@@ -385,16 +378,16 @@ export default class VideoDetails extends Component {
                 </Surface>
             </View>
         )
-    }
+    };
 
     _onScrollEnd=(e)=>{
         if(e.nativeEvent.contentOffset.y<=width/2){
             this.viewopacity.setNativeProps({
-                style: {backgroundColor:'rgba(197,179,97,'+e.nativeEvent.contentOffset.y/(width/2)+')'}
+                style: {backgroundColor:'rgba(245,198,30,'+e.nativeEvent.contentOffset.y/(width/2)+')'}
             });
         }else if(e.nativeEvent.contentOffset.y>width/2){
             this.viewopacity.setNativeProps({
-                style: {backgroundColor:'rgba(197,179,97,'+e.nativeEvent.contentOffset.y/(width/2)+')'}
+                style: {backgroundColor:'rgba(245,198,30,'+e.nativeEvent.contentOffset.y/(width/2)+')'}
             });
         }
 
@@ -417,7 +410,6 @@ export default class VideoDetails extends Component {
                 style: {opacity:e.nativeEvent.contentOffset.y/(width/2)}
             });
         }
-
         if(this.state.isplay){
             let dy=e.nativeEvent.contentOffset.y;
 
@@ -429,10 +421,8 @@ export default class VideoDetails extends Component {
                 console.log(e.nativeEvent.contentOffset.y)
             }
         }
-
         // console.log("e.nativeEvent.contentOffset",e.nativeEvent.contentOffset)
         // console.log("e.nativeEventt",e.nativeEvent)
-
     }
 
     _renderVideo=()=>{
@@ -442,15 +432,13 @@ export default class VideoDetails extends Component {
                     // ref={PLVideoView}
                     ref={(video)=>{this.videos = video}}
                     style={{width:width,height:width}}
-                    source={
-                            {
+                    source={{
                                  url: this.state.data.videourl,
                                  looping:false,
                                  autoplay:false,
                                  coverurl:this.state.data.showimg,
                                  bufferurl:this.state.data.showimg,
-                            }
-                            }
+                            }}
                     onPrepared={(duration)=>{
                                 this.setState({
                                     isvideo:true,
@@ -502,9 +490,9 @@ export default class VideoDetails extends Component {
                                 maximumValue={60}
                                 minimumValue={0}
                                 value={this.state.value}
-                                minimumTrackTintColor ="#C5B361"
-                                maximumTrackTintColor ="#C5B361"
-                                thumbTintColor="#C5B361"
+                                minimumTrackTintColor ="#F5C61E"
+                                maximumTrackTintColor ="#F5C61E"
+                                thumbTintColor="#F5C61E"
                                 onSlidingComplete={(value)=>{
                                       let t=Math.floor(value);
                                       this.setState({
@@ -519,7 +507,6 @@ export default class VideoDetails extends Component {
                                 <Text style={{fontSize:10,marginRight:15}}>{this._timeToStr(this.state.totalTime)}</Text>
                             </View>
                         </View>
-
                         <TouchableOpacity  activeOpacity={1} onPress={()=>this._mute()}>
                             <Thumbnail square style={{width:40,height:40}} source={this.state.ismute?require('../img/icon_videodetails_mute.png'):require('../img/icon_videodetails_unmute.png')} />
                         </TouchableOpacity>
@@ -529,20 +516,18 @@ export default class VideoDetails extends Component {
                     <Shape d={path} stroke="#C5B061" strokeWidth={1} strokeDash={[3,5]}/>
                 </Surface>
             </View>
-
         )
     };
 
 
     _renderTipVideo=()=>{
         return (
-
             <ScrollView contentContainerStyle={{paddingLeft:20,paddingRight:10}} showsHorizontalScrollIndicator={false} horizontal={true} >
                 {this.state.tipsarr.map((item,i)=>
                     <View  style={{width:width/1.5,marginRight:10}}  key={i}>
                         <TouchableOpacity activeOpacity={0.8}
                                           style={{flex:1}}
-                                          onPress={()=>{Actions.tipdetails({nowid:item.id,vurl:item.videourl,imgurl:item.showimg,tiptype:item.class,biaoti:item.biaoti});this.videos.pause();}}
+                                          onPress={()=>{Actions.tipdetails({data:item});this.videos.pause();}}
                         >
                             <View style={{width:width/1.5,height:width/1.5,borderRadius:10,backgroundColor:'#ccc'}}>
                                 <Image square style={{width:width/1.5,height:width/1.5,borderRadius:10}} source={{uri:item.showimg}} />
@@ -553,17 +538,14 @@ export default class VideoDetails extends Component {
                                     <Text style={{color:'#595959',fontSize:14}}>{item.videosavename}</Text>
                                 </View>
                             </View>
-
                         </TouchableOpacity>
                     </View>
                 )}
             </ScrollView>
         )
-    }
-
+    };
 
     render() {
-
         return (
             <Container style={{backgroundColor:'#fff'}}>
                 <StatusBar backgroundColor="transparent"
@@ -573,7 +555,6 @@ export default class VideoDetails extends Component {
 
                 <Content onScroll={(e)=>this._onScrollEnd(e)} showsVerticalScrollIndicator={false}>
                     {this._renderVideo()}
-
                     {this._renderViderDetails()}
                     <Text style={{margin:20,fontSize:16,color:'#000'}}>小贴士视频</Text>
                     {this._renderTipVideo()}
@@ -589,7 +570,6 @@ export default class VideoDetails extends Component {
                                         </View>
                                         <Text   style={[styles.texts,{color:'#000'}]}>{item.yongliang}</Text>
                                     </View>
-
                                     {i==this.state.cailiaoarr.length-1?(null):(
                                             <Surface  width={width-40} height={1}>
                                                 <Shape d={path} stroke="#aaa" strokeWidth={1} strokeDash={[3,5]}/>
@@ -599,10 +579,7 @@ export default class VideoDetails extends Component {
                             )}
                             <View style={{width:width,height:20}}></View>
                         </Card>
-
-
                      <View style={{marginBottom:20,marginTop:10}}>
-
 
                     <ListItem style={{backgroundColor:'#fff'}} itemDivider>
                         <Text style={[styles.textb,{color:'#000'}]}>操作步骤</Text>
@@ -620,38 +597,24 @@ export default class VideoDetails extends Component {
                                     <Shape d={path} stroke="#aaa" strokeWidth={1} strokeDash={[3,5]}/>
                                 </Surface>
                             )}
-
-
                     </View>
-
-
                     )}
-
-
                      </View>
                     <View style={{marginLeft:20}}>
                         <Surface  width={width-40} height={1}>
                             <Shape d={path} stroke="#C5B061" strokeWidth={1} strokeDash={[3,5]}/>
                         </Surface>
                     </View>
-
-
-
-                    <ListItem style={{backgroundColor:'#fff',marginTop:10}} >
-                        <Text style={[styles.textb,{color:'#000'}]}>贴心提示</Text>
-                    </ListItem>
-                    <View style={{backgroundColor:'#fff',marginLeft:17,marginRight:17,paddingBottom:15,marginTop:15}} >
+                    <View style={{backgroundColor:'#fff',marginTop:20,marginLeft:20}} >
+                        <Text style={[styles.textb,{color:'#000',}]}>贴心提示</Text>
+                    </View>
+                    <View style={{backgroundColor:'#fff',marginLeft:20,marginRight:17,paddingBottom:15,marginTop:15}} >
                         <Text note style={[styles.texts,{color:'#000'}]}>{this.state.data.tishishuoming}</Text>
                     </View>
-
-                        <Button rounded={true} block={true} onPress={()=>this._comment()} style={{height:45,marginLeft:30,width:width-60,marginBottom:10,marginTop:10,backgroundColor:'#c5b361'}}   iconLeft >
+                        <Button rounded={true} block={true} onPress={()=>this._comment()} style={{height:45,marginLeft:30,width:width-60,marginBottom:10,marginTop:10,backgroundColor:'#f5c61e'}} iconLeft >
                             <Image style={[styles.imagelogo,{marginRight:5}]} source={require('../img/icon_videodetails_comment_s.png')} />
                             <Text style={{color:'#fff',marginLeft:5}}>欢  迎  留  言</Text>
                         </Button>
-
-
-
-
                     {this.state.data.picpingluncount=="0"?(null):(
                             <View>
                                 <View style={{marginLeft:20,marginBottom:10,marginTop:10}}>
@@ -664,23 +627,18 @@ export default class VideoDetails extends Component {
                                     <View style={{flex:1}}>
                                     </View>
                                     {this.state.data.picpingluncount>5?(
-                                            <Text onPress={()=>this._listItemPress(2)} style={{color:'#c5b361'}}>查看更多</Text>
+                                            <Text onPress={()=>this._listItemPress(2)} style={{color:'#f5c61e'}}>查看更多</Text>
                                         ):(null)}
-
                                 </ListItem>
                                 {this._renderContributeList()}
-
                                 <View style={{width:width,height:1,backgroundColor:'#dfdfdf',marginTop:15}}>
                                 </View>
                                 <Button onPress={()=>this._listItemPress(1)} style={{height:45,marginBottom:10,marginTop:10}} transparent={true} full iconLeft >
                                     <Image style={[styles.imagelogo]} source={require('../img/icon_videodetails_contribute_s.png')} />
-                                    <Text style={{color:'#c5b361',marginLeft:5}}>我要投稿</Text>
+                                    <Text style={{color:'#f5c61e',marginLeft:5}}>我要投稿</Text>
                                 </Button>
-
                             </View>
                         )}
-
-
                 </Content>
 
                 <Footer style={{backgroundColor:'#fff'}}>
@@ -697,9 +655,7 @@ export default class VideoDetails extends Component {
                                         <Text style={{color:'#fff',fontSize:10,marginBottom:1}}>{this.state.data.pingluncount}</Text>
                                     </View>
                                 )}
-
                             <Image  style={[styles.imagelogo]} source={require('../img/icon_videodetails_comment_n.png')} >
-
                             </Image>
                             <Text style={[styles.texts,{fontSize:12}]}>留言</Text>
                         </Button>
@@ -717,23 +673,22 @@ export default class VideoDetails extends Component {
 
                 <View ref={(viewopacity)=>this.viewopacity=viewopacity}
                       style={{position:'absolute',top:0,width:width,height:StatusBar.currentHeight,backgroundColor:this.state.viewopacity}}>
-
                 </View>
                 <View ref={(navibar)=>this.navibar=navibar}
                       style={{position:'absolute',top:StatusBar.currentHeight,width:width,height:50,opacity:this.state.navibaropacity,justifyContent:'center',alignItems:'center',backgroundColor:'rgba(0,0,0,0.5)'}}>
-
                 </View>
                 <View ref={(navibar)=>this.navibara=navibar}
                       style={{position:'absolute',top:StatusBar.currentHeight,width:width,height:50,
                       opacity:this.state.navibaropacity,justifyContent:'center',alignItems:'center',backgroundColor:'transparent'}}>
                     <Text style={{fontSize:16,color:'#fff'}}>断开连接回复克鲁斯的给你礼物</Text>
                 </View>
-                <TouchableOpacity style={{position:'absolute',left:20,top:StatusBar.currentHeight+15,width:20,height:20}} activeOpacity={0.9} onPress={()=>Actions.pop()}>
+                <TouchableOpacity style={{position:'absolute',left:20,top:StatusBar.currentHeight+15,width:20,height:20}} activeOpacity={0.9} onPress={()=>Actions.popTo('homescene')}>
                 <Image  style={{width:20,height:20}} source={require('../img/newicon_closeback.png')} />
                 </TouchableOpacity>
                 <TouchableOpacity style={{position:'absolute',right:20,top:StatusBar.currentHeight+15,width:20,height:20}} activeOpacity={0.9} onPress={()=>this._share()}>
                     <Image  style={{width:20,height:20}} source={require('../img/newicon_share.png')} />
                 </TouchableOpacity>
+
 
             </Container>
         );
