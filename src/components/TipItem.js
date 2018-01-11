@@ -33,7 +33,7 @@ export default class TipItem extends React.PureComponent  {
         return (
 
             <TouchableOpacity
-                onPress={()=>{Actions.tipdetails({nowid:this.state.data.id,vurl:this.state.data.videourl,imgurl:this.state.data.showimg,tiptype:this.state.data.class,biaoti:this.state.data.biaoti})}}
+                onPress={()=>{Actions.tipdetails({data:this.state.data})}}
                 activeOpacity={0.9}
                 style={{marginRight:2.5,marginLeft:2.5}} >
                 <View

@@ -22,7 +22,7 @@ export default class VideoItem extends React.PureComponent  {
     constructor(props) {
         super(props);
         this.state={
-            iscollect:this.props.title.coll=='1'?true:false,
+            iscollect:this.props.selected=='1'?true:false,
         };
     }
     _goDetails=()=>{
@@ -34,6 +34,36 @@ export default class VideoItem extends React.PureComponent  {
             Actions.videodetails({title:this.props.title.biaoti,nowid:this.props.title.vid,isfromcollect:isfromcollect})
         }
     };
+
+    // componentWillUpdate () {
+    //     console.log('qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq',this.state.iscollect)
+    //    this.setState({
+    //        iscollect:this.props.selected=='1'?true:false
+    //    })
+    // }
+
+    // shouldComponentUpdate (){
+    //     console.log('qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq',this.state.iscollect)
+    //     this.setState({
+    //         iscollect:this.props.selected=='1'?true:false
+    //     })
+    // }
+
+    componentWillReceiveProps(nextProps){
+       // console.log('nextPropsnextPropsnextProps',nextProps)
+       // console.log('this.state.iscollectthis.state.iscollect',this.state.iscollect)
+        if(nextProps.selected=='1'){
+            this.setState({
+                iscollect:true
+            })
+        }else{
+            this.setState({
+                iscollect:false
+            })
+        }
+
+
+    }
 
     _getCollect=(isCollect)=>{
         let typeid=null;
@@ -48,6 +78,8 @@ export default class VideoItem extends React.PureComponent  {
                 this.setState({
                     iscollect:isCollect,
                 });
+                DeviceEventEmitter.emit('getMainRefresh','点击收藏时候刷新');
+               // DeviceEventEmitter.emit('refreshmain','点击收藏时候刷新');
                 DeviceEventEmitter.emit('getCollect','点击收藏时候刷新');
                 DeviceEventEmitter.emit('getRefresh','点击收藏时候刷新');
                 Toast.show(responseJson.msg)
@@ -70,11 +102,9 @@ export default class VideoItem extends React.PureComponent  {
     };
 
     render() {
+      //  console.log('this.props.selected..........................',this.state.iscollect)
         return (
-        this.props.title=="1"?(
-            <View style={{width:width/2,backgroundColor:'#fafafa'}}>
-            </View>
-            ):(
+
                 <TouchableOpacity  onPress={()=>{ DeviceEventEmitter.emit("zanting","让视频暂停");
                         if(this.props.sign){
                             Actions.dietarycontribute({title:this.props.title.biaoti,nowid:this.props.title.vid,isfromcollect:isfromcollect})
@@ -93,21 +123,21 @@ export default class VideoItem extends React.PureComponent  {
                         }}   >
                         <View style={{backgroundColor:'#ccc',borderRadius:10}}>
                             <Image source={{uri:this.props.title.showimg}} style={{height: (width-30)/2-2.5, width:(width-30)/2-2.5,borderRadius:10}}/>
-                            <TouchableOpacity activeOpacity={0.9} onPress={()=>{this._collect()}} style={{position:'absolute',bottom:10,left:10,width:20,height:20}}>
+                            <TouchableOpacity activeOpacity={0.9} onPress={()=>{this._collect()}} style={{position:'absolute',bottom:10,left:10,width:40,height:40,justifyContent:'flex-end'}}>
                                 <Image style={{width:20,height:20}} source={this.state.iscollect?require('../img/newicon_listitem_collect.png'):require('../img/newicon_listitem_uncollect.png')}/>
                             </TouchableOpacity>
                         </View>
                     </TouchableOpacity>
                     <View style={{paddingLeft:15,marginBottom:5,marginTop:5}}>
-                        <Text numberOfLines={1} style={{height:20, fontWeight:'100',lineHeight:20,fontSize:14,color:'#666'}} >{this.props.title.biaoti}</Text>
+                        <Text numberOfLines={1} style={{height:20, fontWeight:'100',fontFamily:'MSYH',lineHeight:20,fontSize:14,color:'#666'}} >{this.props.title.biaoti}</Text>
                         <Text numberOfLines={1} style={{height:15, letterSpacing:5,lineHeight:15,fontSize:10,color:'#aaa'}} >{this.props.title.biaoti}</Text>
                         <TouchableOpacity activeOpacity={1} style={{flexDirection:'row',alignItems:'center',height:15,}}>
                             <Image source={{uri:this.props.title.showimg}} style={{height:10, width:10,borderRadius:5}}/>
-                            <Text numberOfLines={1} style={{ letterSpacing:5,lineHeight:15,fontSize:10,marginLeft:5,color:'#C5B061'}} >{this.props.title.biaoti}</Text>
+                            <Text numberOfLines={1} style={{ letterSpacing:5,lineHeight:15,fontSize:10,marginLeft:5,color:'#C5B061',fontFamily:'MSYH'}} >{this.props.title.biaoti}</Text>
                         </TouchableOpacity>
                     </View>
                 </TouchableOpacity>
-            )
+
         )
     }
 }

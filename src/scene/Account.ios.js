@@ -152,9 +152,7 @@ export default class Account extends Component {
                                   progressBackgroundColor="white"/>
                           } >
                     <Body style={{alignItems:'center',height:width/750*300+45,}}>
-
                     <Thumbnail square  style={{width:width,height:width/750*300}} source={require('../img/icon_account_bg.png')} ></Thumbnail>
-
                     <Animated.Image    style={[{position:'absolute',top:width/750*300-40,width:80,height:80,borderRadius:40,borderWidth:2,borderColor:'#fff'},
                         {transform:[
                                 {scale: this.state.imgscale.interpolate({
@@ -163,21 +161,18 @@ export default class Account extends Component {
                                 },
                             ]}]}
                                        source={this.state.imageheader==null?require('../img/icon_logobg.png'):{uri:this.state.imageheader}}
-
                     />
                     {/*{this.state.isshow?(*/}
                     {/*<Image    style={{position:'absolute',top:width/750*300-40,width:80,height:80,borderRadius:40,borderWidth:2,borderColor:'#fff'}}*/}
                     {/*source={require('../img/icon_logobg.png')}*/}
-
                     {/*/>*/}
                     {/*):(null)}*/}
-
                     </Body>
                     <Body >
                     <Text style={{marginBottom:20,paddingLeft:20,paddingRight:20}}>{this.state.name}</Text>
                     <Text style={{marginBottom:20,paddingLeft:20,paddingRight:20,fontSize:14,color:'#777'}}>{this.state.desc}</Text>
                     </Body>
-                    <Body >
+                    <Body>
                     <Button transparent={true} block  style={{backgroundColor:'#fff',borderWidth:1,borderColor:'#8c8c8c',height:30,width:width/2.5}}
                             onPress={()=>Actions.accountinfo({image:this.state.imageheader,namea:this.state.name,desc:this.state.desc})}>
                         <Text style={{color:'#8b8b8b',fontSize:14}}>修改个人资料</Text>
@@ -185,8 +180,7 @@ export default class Account extends Component {
                     </Body>
                     <View style={{width:width,height:1,backgroundColor:'#eeeeee',marginTop:20,marginBottom:15}} >
                     </View>
-                    <Body  >
-
+                    <Body>
                     <Text style={{marginBottom:15,color:'#C5B061'}}>我的成果展示</Text>
                     <View style={{width:width,height:1,backgroundColor:'#eeeeee',}} ></View>
                     </Body>
@@ -208,7 +202,7 @@ export default class Account extends Component {
                 </Content>
             </Container>
         )
-    }
+    };
 
     render() {
         return (

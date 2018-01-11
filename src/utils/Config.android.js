@@ -26,11 +26,15 @@ export default class Config{
      static navs_txt=["首页","搜索","收藏","我的"]
      static pageCount=10;
      static tabBarHight=0;
-     static StatusBarColor='#C5B061';
+     static StatusBarColor='#f5c61e';
      static IECEIVESOCKET=2;
      static ISCOLLECT=1;
      static ISJPUSH=true;
      static STATUSBARHEIGHT=Platform.OS == 'ios' ? 20 : StatusBar.currentHeight;
+    static SCROLLY=0;
+
+
+
      static initJpush=()=>{
         JPushModule.initPush();
         JPushModule.debug=false;

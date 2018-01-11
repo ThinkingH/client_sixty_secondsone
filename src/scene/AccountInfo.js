@@ -50,12 +50,12 @@ export default class AccountInfo extends Component {
         super(props);
         this.state = {
             arr:aa,
-            name:this.props.namea?this.props.namea:null,
-            address:this.props.address?this.props.address:null,
-            desc:this.props.desc?this.props.desc:null,
+            name:this.props.namea?this.props.namea:'',
+            address:this.props.address?this.props.address:'',
+            desc:this.props.desc?this.props.desc:'',
             imageheader:this.props.image?{uri:this.props.image}:require('../img/noob.png'),
             isvisiable:false,
-            isboy:this.props.sex?this.props.sex=='1'?true:false:null,
+            isboy:this.props.sex?this.props.sex=='1'?true:false:true,
             inputcolor:'#000',
             aaaaa:0,
         };
@@ -219,7 +219,7 @@ export default class AccountInfo extends Component {
     render() {
         return (
             <Container  style={{backgroundColor:'#ccc'}}>
-                <StatusBar backgroundColor="#C5B061"
+                <StatusBar backgroundColor={Config.StatusBarColor}
                            barStyle="light-content"
                            translucent={false}
                            hidden={false}/>
@@ -238,6 +238,8 @@ export default class AccountInfo extends Component {
                                             <Input
                                                 style={{padding:0,height:20,fontSize:14,margin:0,textAlign:'right',width:null,flex:1}}
                                                 maxLength={5}
+                                                placeholderTextColor={'#bbbbbb'}
+                                                placeholder={"您的名字"}
                                                 onChangeText={(name)=>this.setState({name})}
                                                 value={this.state.name}/>
                                             <Image source={require('../img/newicon_account_edit.png')} style={{height:15, width:15}}/>
@@ -249,6 +251,9 @@ export default class AccountInfo extends Component {
                                             <Input
                                                 style={{padding:0,height:20,fontSize:14,margin:0,textAlign:'right',width:null,flex:1}}
                                                 maxLength={8}
+                                                multiline={false}
+                                                placeholderTextColor={'#bbbbbb'}
+                                                placeholder={"位置"}
                                                 onChangeText={(address)=>this.setState({address})}
                                                 value={this.state.address}/>
                                             <Image source={require('../img/newicon_account_edit.png')} style={{height:15, width:15}}/>

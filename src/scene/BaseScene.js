@@ -60,14 +60,17 @@ export default class BaseScene extends Component {
                 <View style={{width:width,height:Config.STATUSBARHEIGHT,backgroundColor:Config.StatusBarColor}}>
                 </View>
                 <View  //androidStatusBarColor='#f00'
-                    style={{height:44,backgroundColor:'#fff',alignItems:'center',
+                    style={{height:50,backgroundColor:'#fff',alignItems:'center',
                        }}>
-                    <ImageBackground   style={{position:'absolute',top:0,width:width,height:60,flexDirection:'row'}} source={require('../img/icon_homebg.png')} >
+                    <ImageBackground    style={{position:'absolute',top:0,width:width,height:50,flexDirection:'row'}} source={require('../img/icon_homebg.png')} >
 
-                        <TouchableOpacity style={{position:'absolute',top:10,right:10}} activeOpacity={1}
+                        <TouchableOpacity style={{position:'absolute',top:12.5,right:12.5}} activeOpacity={1}
                                           onPress={()=>Actions.TabView()}>
-                            <Thumbnail square={true} style={{width:25,height:25}} source={require('../img/icon_videodetails_parse.png')} />
+                            <Thumbnail square={true} style={{width:25,height:25}} source={require('../img/icon_header.png')} />
                         </TouchableOpacity>
+                        <View style={{width:width,height:50,position:'absolute',alignItems:'center',justifyContent:'center'}}>
+                            <Text style={{color:'#fff'}}>收藏</Text>
+                        </View>
                     </ImageBackground>
 
                 </View>

@@ -40,7 +40,9 @@ let aaa=['dvdf','dvdf','dvdf','dvdf','dvdf','dvdf','dvdf','dvdf'];
 class HomeScene extends Component {
     static navigationOptions = {
         // tabBarLabel: Config.navs_txt[0],
-        tabBarIcon: ({focused,tintColor}) => (<Image source={focused ?Config.icons_s[0]:Config.icons[0]}/>)
+        tabBarIcon: ({focused,tintColor}) => (<Image source={focused ?Config.icons_s[0]:Config.icons[0]}/>),
+        hideTabBar:true
+
     };
 
     constructor(props) {
@@ -51,7 +53,7 @@ class HomeScene extends Component {
             lock:true,
             imgurlarr:imgurl,
             translateValue: new Animated.ValueXY({x:0, y:0}), // 二维坐标
-            isshowtab:false,
+            isshowtab:true,
             tabheight:0,
             data:[],
         }
@@ -69,11 +71,8 @@ class HomeScene extends Component {
     }
 
     componentDidMount(){
-        setTimeout(()=>{
-            this.setState({
-                isshowtab:true
-            })
-        },1000);
+
+        this.refreshmain= DeviceEventEmitter.addListener("refreshmain",this._getDataa);
         this.changeHeaderd= DeviceEventEmitter.addListener("changeHeaderd",this._changeHeaderd);
         this.changeHeaderu= DeviceEventEmitter.addListener("changeHeaderu",this._changeHeaderu);
          this._getDataa();
@@ -81,6 +80,7 @@ class HomeScene extends Component {
     componentWillUnmount() {
         this.changeHeaderu.remove();
         this.changeHeaderd.remove();
+        this.refreshmain.remove();
     }
 
     _deleteAll=()=>{
@@ -99,7 +99,7 @@ class HomeScene extends Component {
         let parpam="thetype=1040&imgwidth=100&imgheight=100";
         Request('1040',parpam)
             .then((responseJson) => {
-                console.log('aaaaaaaaaaaaaaaaaaaaaaaaaa',responseJson.data)
+                console.log('aaaaaaaaaaaaaaaaaaaaaaaaaa',responseJson)
                 for(let i=0;i<responseJson.data.length;i++){
                     imgurla.push(responseJson.data[i].showimg);
                 }
@@ -112,8 +112,10 @@ class HomeScene extends Component {
                 console.log('aaaaaaaaaa',imgurla);
                 this.setState({
                     data:responseJson.data,
-                    imgurlarr:imgurla
+                    imgurlarr:imgurla,
+                    isshowtab:true
                 });
+
             })
             .catch((error) => {
                 Toast.show(error.toString());
@@ -189,7 +191,7 @@ class HomeScene extends Component {
             <TabBar ref={(tabbar)=>this.tabbar=tabbar} // tabStyle={{paddingLeft:0,paddingRight:0}}
                 imgurl={this.state.imgurlarr} //网络图
                 imgurla={img}       //本地图
-                imageStyle={{width:25,height:25,borderRadius:8}}
+                imageStyle={{width:25,height:25}}
                 textva={aaa}
                 activeTextColor={"#c5b061"}
                 backgroundColor={"#FFFFFF"}
@@ -242,6 +244,18 @@ class HomeScene extends Component {
         }
     };
 
+    _rightView=()=>{
+        return(
+            <View style={{width:width/5,height:width/5,backgroundColor:'#f00'}}>
+
+            </View>
+        )
+    }
+
+    onScrollback=(e)=>{
+        console.log('滑动的回调...........',e.nativeEvent.contentOffset.y)
+    }
+
     render(){
         return (
             <Container>
@@ -252,16 +266,22 @@ class HomeScene extends Component {
                 <View style={{width:width,height:Config.STATUSBARHEIGHT,backgroundColor:Config.StatusBarColor}}>
 
                 </View>
-                <View   style={{flex:1,backgroundColor:'#fff'}} >
+
+
+
+                <View  style={{flex:1,backgroundColor:'#fff',marginTop:Config.SCROLLY}} >
                     <View  //androidStatusBarColor='#f00'
                         style={{height:80,backgroundColor:'#fff',alignItems:'center'
                        }}>
-                        <ImageBackground   style={{position:'absolute',top:0,width:width,height:width/472*65,flexDirection:'row'}} source={require('../img/icon_homebg.png')} >
+                        <ImageBackground   style={{position:'absolute',top:0,width:width,height:50,flexDirection:'row'}} source={require('../img/icon_homebg.png')} >
 
-                            <TouchableOpacity style={{position:'absolute',top:10,right:10}} activeOpacity={1}
+                            <TouchableOpacity style={{position:'absolute',top:12.5,right:12.5}} activeOpacity={1}
                                               onPress={()=>Actions.TabView()}>
-                                <Thumbnail square={true} style={{width:25,height:25}} source={require('../img/icon_videodetails_parse.png')} />
+                                <Thumbnail square={true} style={{width:25,height:25}} source={require('../img/icon_header.png')} />
                             </TouchableOpacity>
+                            <View style={{width:width,height:50,position:'absolute',alignItems:'center',justifyContent:'center'}}>
+                                <Text style={{color:'#fff'}}>60sec</Text>
+                            </View>
                         </ImageBackground>
                         <TouchableOpacity style={{position:'absolute',top:width/472*65-width/1.28/850*130/3}} activeOpacity={1}
                                           onPress={()=>Actions.TabView()}>

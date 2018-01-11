@@ -50,32 +50,28 @@ export default class SearchVideo extends React.Component {
     };
 
     _getData=async(_pageNo)=>{
-
         let txt=this.state.value;
         if (txt.length==0){
             Toast.show("搜索内容不能为空");
             return
         }
-
          if(this.state.isassort){
             console.log("ssssssssssssss",this.state.value)
              await  this.setState({
                  parpam:"thetype=1034&classify3="+this.state.value,
                  isassort:false
-             })
+             });
 
          }else{
-
-            await this.setState({parpam:"thetype=1034&searchstr="+this.state.value})
+           this.setState({parpam:"thetype=1034&searchstr="+this.state.value},()=>{
+               DeviceEventEmitter.emit('getRefresh','搜索结果');
+           });
              // this.setState({parpam:"thetype=1015&searchstr="+this.state.value},()=>{})   setstate（{}）回调 也可以
-             DeviceEventEmitter.emit('getRefresh','搜索结果');
-
 
          }
-
-console.log(this.state.parpam)
-
+             console.log(this.state.parpam)
     };
+
     _removeArr=(data)=>{
         return Array.from(new Set(data))
     };
@@ -152,7 +148,7 @@ console.log(this.state.parpam)
         return(
             <Header  androidStatusBarColor={Config.StatusBarColor} style={{backgroundColor:'#fff',alignItems:'center'}}>
                 <Item  rounded style={{height:40,width:width-60,borderColor:'#C5B361'}}>
-                    <Input onChangeText={(code)=>this.setState({code})}
+                    <Input onChangeText={(value)=>this.setState({value})}
                            placeholderTextColor="#999"
                            style={{height:40,padding:0,fontSize:14,}}
                            maxLength={6}

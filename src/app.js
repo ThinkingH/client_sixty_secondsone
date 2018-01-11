@@ -193,7 +193,7 @@ export default class apps extends Component {
 
         this.isshare = DeviceEventEmitter.addListener("isshare",this._isshare);
 
-     this.changeTab = DeviceEventEmitter.addListener("changeTab",this._changeTab);
+        this.changeTab = DeviceEventEmitter.addListener("changeTab",this._changeTab);
 
     }
     componentWillUnmount() {
@@ -445,9 +445,6 @@ export default class apps extends Component {
                                     panHandlers={null}
                                     duration={1}
                                 />
-
-
-
                                 <Scene
                                     titleStyle={[styles.titleStyle]}
                                     key="assortmenttwo"
@@ -556,7 +553,7 @@ export default class apps extends Component {
 
 
                                 {/*下部导航开始*/}
-                                <Scene
+                                <Tabs
                                 // type={ActionConst.REPLACE}
                                     key="tabbar"
                                     duration={0}
@@ -611,7 +608,7 @@ export default class apps extends Component {
                                             {/*icon={TabIcon}*/}
                                             {/*component={Main}*/}
                                     {/*/>*/}
-                                </Scene>
+                                </Tabs>
                                 {/*下部导航结束*/}
 
                                 <Scene

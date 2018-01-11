@@ -70,24 +70,22 @@ export default class TipView extends Component {
                 <View style={{width:width,height:Config.STATUSBARHEIGHT,backgroundColor:Config.StatusBarColor}}>
 
                 </View>
-                <View  //androidStatusBarColor='#f00'
-                    style={{height:80,backgroundColor:'#fff',alignItems:'center'
-                       }}>
-                    <ImageBackground   style={{position:'absolute',top:0,width:width,height:width/472*65,flexDirection:'row'}} source={require('../img/icon_homebg.png')} >
 
-                        <TouchableOpacity style={{position:'absolute',top:10,right:10}} activeOpacity={1}
-                                          onPress={()=>Actions.TabView()}>
-                            <Thumbnail square={true} style={{width:25,height:25}} source={require('../img/icon_videodetails_parse.png')} />
-                        </TouchableOpacity>
-                    </ImageBackground>
-                    <TouchableOpacity style={{position:'absolute',top:width/472*65-width/1.28/850*130/3}} activeOpacity={1}
+                <ImageBackground    style={{position:'absolute',top:Config.STATUSBARHEIGHT,width:width,height:50,flexDirection:'row'}} source={require('../img/icon_homebg.png')} >
+
+                    <TouchableOpacity style={{position:'absolute',top:12.5,right:12.5}} activeOpacity={1}
                                       onPress={()=>Actions.TabView()}>
-                        <Image  style={{width:width/1.28,height:width/1.28/850*130}} source={require('../img/newicon_seachbar.png')} />
+                        <Thumbnail square={true} style={{width:25,height:25}} source={require('../img/icon_header.png')} />
                     </TouchableOpacity>
-                </View>
+                    <View style={{width:width,height:50,position:'absolute',alignItems:'center',justifyContent:'center'}}>
+                        <Text style={{color:'#fff'}}>小窍门</Text>
+                    </View>
+                </ImageBackground>
 
-                <Content style={{marginTop:10}} showsVerticalScrollIndicator={false}>
-                    <View style={{padding:20}} >
+
+
+                <Content style={{marginTop:width/472*65}} showsVerticalScrollIndicator={false}>
+                    <View style={{padding:20,marginTop:width/1.28/850*130/3*2}} >
                         <Surface  width={width-40} height={1}>
                             <Shape d={path} stroke="#C5B061" strokeWidth={1} strokeDash={[3,5]}/>
                         </Surface>
@@ -111,7 +109,7 @@ export default class TipView extends Component {
                                     <View  style={{width:width/2,marginRight:15}}  key={i}>
                                         <TouchableOpacity activeOpacity={0.8}
                                                           style={{flex:1}}
-                                                          onPress={()=>Actions.tipdetails({nowid:item.vid,vurl:item.videourl,imgurl:item.showimg,tiptype:itema.classname,biaoti:item.biaoti})}
+                                                          onPress={()=>Actions.tipdetails({data:item})}
                                         >
                                             <View style={{width:width/2,height:width/2,borderRadius:10,backgroundColor:'#ccc'}}>
                                                 <Image square style={{width:width/2,height:width/2,borderRadius:10}} source={{uri:item.showimg}} />
@@ -140,6 +138,11 @@ export default class TipView extends Component {
 
 
                 </Content>
+
+                <TouchableOpacity style={{position:'absolute',left:(width-width/1.28)/2,top:width/472*65-width/1.28/850*130/3+Config.STATUSBARHEIGHT}} activeOpacity={1}
+                                  onPress={()=>Actions.TabView()}>
+                    <Image  style={{width:width/1.28,height:width/1.28/850*130}} source={require('../img/newicon_seachbar.png')} />
+                </TouchableOpacity>
             </Container>
         );
     }
