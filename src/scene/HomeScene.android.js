@@ -95,6 +95,51 @@ class HomeScene extends Component {
             });
     };
 
+    animatedPlay=()=>{
+        console.log("animatedPlay--------");
+        let count = 0;
+        let _th=100
+        let opacity
+        while(count++<50){
+            requestAnimationFrame(()=> {
+                _th += (0 - _th) / 10
+                this.refs.header.setNativeProps({
+                    style: {
+                        height : _th
+                    }
+                });
+
+               /* this.refs.footer.setNativeProps({
+                    style: {
+                        height : _th
+                    }
+                });*/
+            })
+        }
+    }
+
+    animatedReplay=()=>{
+        console.log("animatedReplay--------");
+        var count = 0;
+        let _th=0
+        while(count++<30){
+            requestAnimationFrame(()=>{
+                _th +=(100-_th)/10
+                this.refs.header.setNativeProps({
+                    style: {
+                        height : _th
+                    }
+                });
+
+                /*this.refs.footer.setNativeProps({
+                    style: {
+                        height : _th
+                    }
+                });*/
+            })
+        }
+    }
+
     _getDataa=()=>{
         let parpam="thetype=1040&imgwidth=100&imgheight=100";
         Request('1040',parpam)
@@ -271,7 +316,7 @@ class HomeScene extends Component {
 
                 <View  style={{flex:1,backgroundColor:'#fff',marginTop:Config.SCROLLY}} >
                     <View  //androidStatusBarColor='#f00'
-                        style={{height:80,backgroundColor:'#fff',alignItems:'center'
+                        ref="header" style={{height:80,backgroundColor:'#fff',alignItems:'center'
                        }}>
                         <ImageBackground   style={{position:'absolute',top:0,width:width,height:50,flexDirection:'row'}} source={require('../img/icon_homebg.png')} >
 
@@ -288,6 +333,16 @@ class HomeScene extends Component {
                             <Image  style={{width:width/1.28,height:width/1.28/850*130}} source={require('../img/newicon_seachbar.png')} />
                         </TouchableOpacity>
                     </View>
+                    <Button onPress={()=>{
+                        this.animatedPlay();
+                    }}>
+                        <Text>play</Text>
+                    </Button>
+                    <Button onPress={()=>{
+                        this.animatedReplay()
+                    }}>
+                        <Text>replay</Text>
+                    </Button>
                     {this.state.isshowtab?(<ScrollableTabView ref={(ScrollableTabView)=>this.ScrollableTabView=ScrollableTabView}
                                                               initialPage={this.state.numpage}
                                                               onChangeTab={(obj) => {this._onChangeTab(obj)}}
