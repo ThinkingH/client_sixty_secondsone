@@ -77,8 +77,8 @@ export default class TipView extends Component {
                                       onPress={()=>Actions.TabView()}>
                         <Thumbnail square={true} style={{width:25,height:25}} source={require('../img/icon_header.png')} />
                     </TouchableOpacity>
-                    <View style={{width:width,height:50,position:'absolute',alignItems:'center',justifyContent:'center'}}>
-                        <Text style={{color:'#fff'}}>小窍门</Text>
+                    <View style={{width:width,height:50,position:'absolute',alignItems:'center',justifyContent:'center',backgroundColor:'transparent'}}>
+                        <Text style={{color:'#fff',backgroundColor:'transparent'}}>小窍门</Text>
                     </View>
                 </ImageBackground>
 

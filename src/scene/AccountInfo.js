@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
     textInputStyle: {
         width:width-80,
         textAlignVertical:'top',
-        marginLeft:10,
+        marginLeft: 0,
         padding:0,
         backgroundColor:'#fff',
         marginTop:5,

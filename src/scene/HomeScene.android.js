@@ -56,6 +56,7 @@ class HomeScene extends Component {
             isshowtab:true,
             tabheight:0,
             data:[],
+            margintop:0,
         }
 
     }
@@ -168,27 +169,45 @@ class HomeScene extends Component {
     };
 
     _changeHeaderu=()=>{
-        if(Config.tabBarHight<80){
-            this.setState({
-                tabheight:Config.tabBarHight
-            })
-            //this.state.translateValue.setValue({x:0, y:-Config.tabBarHight});
-            // this.state.translateValue.setValue({x:0, y:-60});
-        }else{
-            this.setState({
-                tabheight:80
-            })
-           // this.state.translateValue.setValue({x:0, y:-60});
-        }
+        this.setState({
+            margintop:Config.tabBarHight
+        })
+        console.log('aaaaaaaaaaaaaaaaaaaa',Config.tabBarHight)
+        // if(Config.tabBarHight>-80){
+        //     console.log('1111111111111111',Config.tabBarHight)
+        //     this.setState({
+        //         margintop:Config.tabBarHight
+        //     })
+        //     //this.state.translateValue.setValue({x:0, y:-Config.tabBarHight});
+        //     // this.state.translateValue.setValue({x:0, y:-60});
+        // }else{
+        //     console.log('222222222222222',Config.tabBarHight)
+        //     this.setState({
+        //         margintop:-80
+        //     })
+        //    // this.state.translateValue.setValue({x:0, y:-60});
+        // }
     };
 
     _changeHeaderd=()=>{
-        if(Config.tabBarHight<60){
-            this.state.translateValue.setValue({x:0, y:Config.tabBarHight-60});
-            // this.state.translateValue.setValue({x:0, y:0});
-        }else{
-            this.state.translateValue.setValue({x:0, y:60});
-        }
+        this.setState({
+                     margintop:Config.tabBarHight
+                })
+        console.log('bbbbbbbbbbbbbbbbbbbbbbbbbb',Config.tabBarHight)
+        // if(Config.tabBarHight<60){
+        //     console.log('333333333333333333',Config.tabBarHight)
+        //     //this.state.translateValue.setValue({x:0, y:Config.tabBarHight-60});
+        //     this.setState({
+        //         margintop:Config.tabBarHight+10
+        //     })
+        //     // this.state.translateValue.setValue({x:0, y:0});
+        // }else{
+        //     console.log('4444444444444444',Config.tabBarHight)
+        //   //  this.state.translateValue.setValue({x:0, y:60});
+        //     this.setState({
+        //         margintop:10
+        //     })
+        // }
     };
 
     _onChangeTab=(index)=>{
@@ -314,7 +333,7 @@ class HomeScene extends Component {
 
 
 
-                <View  style={{flex:1,backgroundColor:'#fff',marginTop:Config.SCROLLY}} >
+                <View  style={{flex:1,backgroundColor:'#fff',marginTop:this.state.margintop}} >
                     <View  //androidStatusBarColor='#f00'
                         ref="header" style={{height:80,backgroundColor:'#fff',alignItems:'center'
                        }}>
@@ -359,13 +378,9 @@ class HomeScene extends Component {
                                 return(
                                     <Sofitel key={i}  tabLabel={item.word}  />
                                 )
-                            }else if(i>1&&i<this.state.data.length-1){
+                            }else if(i>1&&i<this.state.data.length){
                                 return(
                                     <ListScene key={i}  url={"thetype=1034&classify2="+item.keyword} tabLabel={item.word}   thetype="1034" item={"video"} />
-                                )
-                            }else if(i==this.state.data.length-1){
-                                return(
-                                    <ListScene key={i} sign={true}  url={"thetype=1034&classify2="+item.keyword} tabLabel={item.word}   thetype="1034" item={"video"} />
                                 )
                             }
                             })}
@@ -502,3 +517,8 @@ const styles = StyleSheet.create({
 {/*</Tab>*/}
 {/*</Tabs>*/}
 
+// else if(i==this.state.data.length-1){
+//     return(
+//         <ListScene key={i} sign={true}  url={"thetype=1034&classify2="+item.keyword} tabLabel={item.word}   thetype="1034" item={"video"} />
+//     )
+// }

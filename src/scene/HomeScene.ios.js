@@ -9,11 +9,23 @@ import Toast from '@remobile/react-native-toast'
 import { Container, Header, Title, Content,Thumbnail, Footer, FooterTab, Button, Left, Right, Body, Icon, Text ,Tab, Tabs,ScrollableTab,Item, Input,Row  } from 'native-base';
 import {
     StyleSheet, Image, Dimensions, View, Alert, ScrollView, DeviceEventEmitter, TouchableOpacity,
-    TouchableNativeFeedback, Animated, StatusBar, Platform
+    TouchableNativeFeedback, Animated, StatusBar, Platform,ImageBackground
 } from "react-native";
 import Config from "../utils/Config";
 import Storage  from '../utils/Storage';
+import TabBar from '../components/TabBar';
+
+
 const {width, height} = Dimensions.get('window');
+let imgurla=[];
+let imgurl=[];
+let img=[require('../../src/img/icon_message.png'),require('../../src/img/icon_qq.png'),
+    require('../../src/img/icon_videodetails_collect_s.png'),require('../../src/img/icon_videodetails_comment_s.png'),
+    require('../../src/img/icon_wb.png'),require('../../src/img/icon_message.png'),
+    require('../../src/img/icon_message.png'),require('../../src/img/icon_wx.png'),]
+let wordarr=[];
+let keywordarr=[];
+let aaa=['dvdf','dvdf','dvdf','dvdf','dvdf','dvdf','dvdf','dvdf'];
 class HomeScene extends BaseScene {
     static navigationOptions = {
         // tabBarLabel: Config.navs_txt[0],
@@ -23,8 +35,14 @@ class HomeScene extends BaseScene {
         super(props);
         this.state={
             //  numpage:this.props.num?this.props.num:0
-            // data:[],
+             data:[],
             translateValue: new Animated.ValueXY({x:0, y:0}), // 二维坐标
+            numpage:this.props.num?this.props.num:0,
+            // data:[],
+            lock:true,
+            imgurlarr:imgurl,
+            isshowtab:true,
+            tabheight:0,
         }
 
     }
@@ -33,7 +51,7 @@ class HomeScene extends BaseScene {
         this.changeHeaderd= DeviceEventEmitter.addListener("changeHeaderd",this._changeHeaderd);
         this.changeHeaderu= DeviceEventEmitter.addListener("changeHeaderu",this._changeHeaderu);
         console.log(this.props.num);
-        // this._getDataa();
+         this._getDataa();
     };
     componentWillUnmount() {
         this.changeHeaderu.remove();
@@ -54,14 +72,25 @@ class HomeScene extends BaseScene {
 
 
     _getDataa=()=>{
-
-        let parpam="thetype=1017&classtype=classify1&searchstr=美食";
-        Request('1017',parpam)
+        let parpam="thetype=1040&imgwidth=100&imgheight=100";
+        Request('1040',parpam)
             .then((responseJson) => {
-                console.log('aaaaaaaaaaaaaaaaaaaaaaaaaa',responseJson.data.list)
+                console.log('aaaaaaaaaaaaaaaaaaaaaaaaaa',responseJson)
+                for(let i=0;i<responseJson.data.length;i++){
+                    imgurla.push(responseJson.data[i].showimg);
+                }
+                for(let i=0;i<responseJson.data.length;i++){
+                    wordarr.push(responseJson.data[i].word);
+                }
+                for(let i=0;i<responseJson.data.length;i++){
+                    keywordarr.push(responseJson.data[i].keyword);
+                }
+                console.log('aaaaaaaaaa',imgurla);
                 this.setState({
-                    data:responseJson.data.list,
-                })
+                    data:responseJson.data,
+                    imgurlarr:imgurla,
+                    isshowtab:true
+                });
 
             })
             .catch((error) => {
@@ -131,46 +160,68 @@ class HomeScene extends BaseScene {
         );
     }
 
+    renderTabBar=()=>{
+        return(
+            <TabBar ref={(tabbar)=>this.tabbar=tabbar} // tabStyle={{paddingLeft:0,paddingRight:0}}
+                    imgurl={this.state.imgurlarr} //网络图
+                    imgurla={img}       //本地图
+                    imageStyle={{width:25,height:25}}
+                    textva={aaa}
+                    activeTextColor={"#c5b061"}
+                    backgroundColor={"#FFFFFF"}
+                    textStyle={{fontSize:12,fontWeight:'normal',marginTop:7}}
+                    inactiveTextColor={"#313131"}
+                    underlineStyle={{backgroundColor:"#c5b061",height:2}}
+            />
+        )
+    };
+
     render(){
         return (
             <Container>
-                {Platform.OS=='ios'?(null):(
-                    <Header style={{height:0}} androidStatusBarColor={Config.StatusBarColor}>
+                <StatusBar backgroundColor="transparent"
+                           barStyle="light-content"
+                           translucent={true}
+                           hidden={false}/>
+                <View style={{width:width,height:Config.STATUSBARHEIGHT,backgroundColor:Config.StatusBarColor}}>
 
-                    </Header>
-                )}
+                </View>
 
-                <Animated.View style={[{backgroundColor:'#fff',flex:1,transform: [
-                        {translateX: this.state.translateValue.x}, // x轴移动
-                        {translateY: this.state.translateValue.y}, // y轴移动
-                    ]}
-                ]} >
-                    <Row  //androidStatusBarColor='#f00'
-                        style={{height:50,backgroundColor:'#fefefe',marginTop:20
+
+
+                <View  style={{flex:1,backgroundColor:'#fff',marginTop:Config.SCROLLY}} >
+                    <View  //androidStatusBarColor='#f00'
+                        style={{height:80,backgroundColor:'#fff',alignItems:'center'
                         }}>
-                        <View style={{flex:1,alignItems:'center',justifyContent:'center'}}>
-                            <Thumbnail square={true} style={{width:33,height:33}} source={require('../img/icon_mainlogo.png')} />
-                        </View>
+                        <ImageBackground   style={{position:'absolute',top:0,width:width,height:50,flexDirection:'row'}} source={require('../img/icon_homebg.png')} >
 
-                        <TouchableOpacity style={{flex:5,justifyContent:'center'}} activeOpacity={1}
+                            <TouchableOpacity style={{position:'absolute',top:12.5,right:12.5}} activeOpacity={1}
+                                              onPress={()=>Actions.TabView()}>
+                                <Thumbnail square={true} style={{width:25,height:25}} source={require('../img/icon_header.png')} />
+                            </TouchableOpacity>
+                            <View style={{width:width,height:50,position:'absolute',alignItems:'center',justifyContent:'center',backgroundColor:'transparent'}}>
+                                <Text style={{color:'#fff',backgroundColor:'transparent'}}>60sec</Text>
+                            </View>
+                        </ImageBackground>
+                        <TouchableOpacity style={{position:'absolute',top:width/472*65-width/1.28/850*130/3}} activeOpacity={1}
                                           onPress={()=>Actions.TabView()}>
-                            <Thumbnail square={true} style={{width:width/1.28,height:width/1.28/595*70}} source={require('../img/icon_homescence_search.png')} />
+                            <Image  style={{width:width/1.28,height:width/1.28/850*130}} source={require('../img/newicon_seachbar.png')} />
                         </TouchableOpacity>
-
-                    </Row>
-                    <Tabs  tabBarUnderlineStyle={{backgroundColor:'#c5b361',height:2}}
+                    </View>
+                    <Tabs style={{flex:1,width:width,marginTop:10,paddingLeft:12.5,paddingRight:12.5}}
+                          tabBarUnderlineStyle={{backgroundColor:'#c5b361',height:2}}
                            initialPage={this.props.num?this.props.num:0}
                            locked={true}
                            onChangeTab={(onChangeTab)=>this._onChangeTab(onChangeTab)}
                         //let parpam="thetype=1015&searchstr="+this.props.classify;
-                           renderTabBar={()=> <ScrollableTab />}>
+                           renderTabBar={()=> this.renderTabBar()}>
                         <Tab
                         activeTextStyle={{color:'#c5b361',fontSize:14,fontWeight:'normal'}}
                         textStyle={{color:'#8c8c8c',fontSize:14}}
                         activeTabStyle={{backgroundColor:'#fff'}}
                         tabStyle={{backgroundColor:'#fff'}}
                         heading={'最新'} >
-                        <MainScene url={"thetype=1015&searchstr="} thetype="1015" header={"header"}  item={"video"} />
+                        <MainScene url={"thetype=1034&searchstr="} thetype="1034" header={"header"}  item={"video"} />
                         </Tab>
                         <Tab  activeTextStyle={{color:'#c5b361',fontSize:14,fontWeight:'normal'}}
                               textStyle={{color:'#8c8c8c',fontSize:14}}
@@ -179,71 +230,79 @@ class HomeScene extends BaseScene {
                               heading="特辑">
                             <Sofitel />
                         </Tab>
-                        {/*{this.state.data.map((item,i)=>*/}
-                        {/*<Tab key={i} activeTextStyle={{color:'#c5b361',fontSize:14}}*/}
-                        {/*textStyle={{color:'#8c8c8c',fontSize:14}}*/}
-                        {/*tabStyle={{backgroundColor:'#fff'}}*/}
-                        {/*activeTabStyle={{backgroundColor:'#fff'}}*/}
-                        {/*heading={item.name}>*/}
-                        {/*<ListScene url={"thetype=1015&classify2="+item.name} thetype="1015" item={"video"} />*/}
+                        {this.state.data.map((item,i)=>{
+                            if(i>1){
+                                return(
+                                    <Tab key={i} activeTextStyle={{color:'#c5b361',fontSize:14}}
+                                         textStyle={{color:'#8c8c8c',fontSize:14}}
+                                         tabStyle={{backgroundColor:'#fff'}}
+                                         activeTabStyle={{backgroundColor:'#fff'}}
+                                         heading={item.word}>
+                                        <ListScene url={"thetype=1034&classify2="+item.keyword} thetype="1034" item={"video"} />
+                                    </Tab>
+                                )
+                            }
+                        }
+
+                        )}
+
+                        {/*<Tab activeTextStyle={{color:'#c5b361',fontSize:14,fontWeight:'normal'}}*/}
+                             {/*textStyle={{color:'#8c8c8c',fontSize:14}}*/}
+                             {/*tabStyle={{backgroundColor:'#fff'}}*/}
+                             {/*activeTabStyle={{backgroundColor:'#fff'}}*/}
+                             {/*heading={"融合菜"}>*/}
+                            {/*<ListScene url={"thetype=1015&classify2=融合菜"} thetype="1015" item={"video"} />*/}
                         {/*</Tab>*/}
-                        {/*)}*/}
-                        <Tab activeTextStyle={{color:'#c5b361',fontSize:14,fontWeight:'normal'}}
-                             textStyle={{color:'#8c8c8c',fontSize:14}}
-                             tabStyle={{backgroundColor:'#fff'}}
-                             activeTabStyle={{backgroundColor:'#fff'}}
-                             heading={"融合菜"}>
-                            <ListScene url={"thetype=1015&classify2=融合菜"} thetype="1015" item={"video"} />
-                        </Tab>
-                        <Tab activeTextStyle={{color:'#c5b361',fontSize:14,fontWeight:'normal'}}
-                             textStyle={{color:'#8c8c8c',fontSize:14}}
-                             tabStyle={{backgroundColor:'#fff'}}
-                             activeTabStyle={{backgroundColor:'#fff'}}
-                             heading={"甜品"}>
-                            <ListScene url={"thetype=1015&classify2=甜品"} thetype="1015" item={"video"}/>
-                        </Tab>
-                        <Tab activeTextStyle={{color:'#c5b361',fontSize:14,fontWeight:'normal'}}
-                             textStyle={{color:'#8c8c8c',fontSize:14}}
-                             tabStyle={{backgroundColor:'#fff'}}
-                             activeTabStyle={{backgroundColor:'#fff'}}
-                             heading={"特色菜"}>
-                            <ListScene url={"thetype=1015&classify2=特色菜"} thetype="1015" item={"video"}/>
-                        </Tab>
-                        <Tab activeTextStyle={{color:'#c5b361',fontSize:14,fontWeight:'normal'}}
-                             textStyle={{color:'#8c8c8c',fontSize:14}}
-                             tabStyle={{backgroundColor:'#fff'}}
-                             activeTabStyle={{backgroundColor:'#fff'}}
-                             heading={"饮品"}>
-                            <ListScene url={"thetype=1015&classify2=饮品"} thetype="1015" item={"video"}/>
-                        </Tab>
-                        <Tab activeTextStyle={{color:'#c5b361',fontSize:14,fontWeight:'normal'}}
-                             textStyle={{color:'#8c8c8c',fontSize:14}}
-                             tabStyle={{backgroundColor:'#fff'}}
-                             activeTabStyle={{backgroundColor:'#fff'}}
-                             heading={"其他"}>
-                            <ListScene url={"thetype=1015&classify2=其他"} thetype="1015" item={"video"}/>
-                        </Tab>
-                        <Tab activeTextStyle={{color:'#c5b361',fontSize:14,fontWeight:'normal'}}
-                             textStyle={{color:'#8c8c8c',fontSize:14}}
-                             tabStyle={{backgroundColor:'#fff'}}
-                             activeTabStyle={{backgroundColor:'#fff'}}
-                             heading={"小贴士"}>
-                            <ListScene url={"thetype=1015&classify2=小贴士"} thetype="1015" item={"video"}/>
-                        </Tab>
-                        <Tab activeTextStyle={{color:'#c5b361',fontSize:14,fontWeight:'normal'}}
-                             textStyle={{color:'#8c8c8c',fontSize:14}}
-                             tabStyle={{backgroundColor:'#fff'}}
-                             activeTabStyle={{backgroundColor:'#fff'}}
-                             heading={"大家的食谱"}>
-                            <ListScene url={"thetype=1015&classify2=小贴士"} sign={true} thetype="1015" item={"video"}/>
-                            <TouchableOpacity style={{position:'absolute',right:20,bottom:20,width:width/7,height:width/7}} activeOpacity={1} onPress={()=>{this._goContribute()}}>
+                        {/*<Tab activeTextStyle={{color:'#c5b361',fontSize:14,fontWeight:'normal'}}*/}
+                             {/*textStyle={{color:'#8c8c8c',fontSize:14}}*/}
+                             {/*tabStyle={{backgroundColor:'#fff'}}*/}
+                             {/*activeTabStyle={{backgroundColor:'#fff'}}*/}
+                             {/*heading={"甜品"}>*/}
+                            {/*<ListScene url={"thetype=1015&classify2=甜品"} thetype="1015" item={"video"}/>*/}
+                        {/*</Tab>*/}
+                        {/*<Tab activeTextStyle={{color:'#c5b361',fontSize:14,fontWeight:'normal'}}*/}
+                             {/*textStyle={{color:'#8c8c8c',fontSize:14}}*/}
+                             {/*tabStyle={{backgroundColor:'#fff'}}*/}
+                             {/*activeTabStyle={{backgroundColor:'#fff'}}*/}
+                             {/*heading={"特色菜"}>*/}
+                            {/*<ListScene url={"thetype=1015&classify2=特色菜"} thetype="1015" item={"video"}/>*/}
+                        {/*</Tab>*/}
+                        {/*<Tab activeTextStyle={{color:'#c5b361',fontSize:14,fontWeight:'normal'}}*/}
+                             {/*textStyle={{color:'#8c8c8c',fontSize:14}}*/}
+                             {/*tabStyle={{backgroundColor:'#fff'}}*/}
+                             {/*activeTabStyle={{backgroundColor:'#fff'}}*/}
+                             {/*heading={"饮品"}>*/}
+                            {/*<ListScene url={"thetype=1015&classify2=饮品"} thetype="1015" item={"video"}/>*/}
+                        {/*</Tab>*/}
+                        {/*<Tab activeTextStyle={{color:'#c5b361',fontSize:14,fontWeight:'normal'}}*/}
+                             {/*textStyle={{color:'#8c8c8c',fontSize:14}}*/}
+                             {/*tabStyle={{backgroundColor:'#fff'}}*/}
+                             {/*activeTabStyle={{backgroundColor:'#fff'}}*/}
+                             {/*heading={"其他"}>*/}
+                            {/*<ListScene url={"thetype=1015&classify2=其他"} thetype="1015" item={"video"}/>*/}
+                        {/*</Tab>*/}
+                        {/*<Tab activeTextStyle={{color:'#c5b361',fontSize:14,fontWeight:'normal'}}*/}
+                             {/*textStyle={{color:'#8c8c8c',fontSize:14}}*/}
+                             {/*tabStyle={{backgroundColor:'#fff'}}*/}
+                             {/*activeTabStyle={{backgroundColor:'#fff'}}*/}
+                             {/*heading={"小贴士"}>*/}
+                            {/*<ListScene url={"thetype=1015&classify2=小贴士"} thetype="1015" item={"video"}/>*/}
+                        {/*</Tab>*/}
+                        {/*<Tab activeTextStyle={{color:'#c5b361',fontSize:14,fontWeight:'normal'}}*/}
+                             {/*textStyle={{color:'#8c8c8c',fontSize:14}}*/}
+                             {/*tabStyle={{backgroundColor:'#fff'}}*/}
+                             {/*activeTabStyle={{backgroundColor:'#fff'}}*/}
+                             {/*heading={"大家的食谱"}>*/}
+                            {/*<ListScene url={"thetype=1015&classify2=小贴士"} sign={true} thetype="1015" item={"video"}/>*/}
+                            {/*<TouchableOpacity style={{position:'absolute',right:20,bottom:20,width:width/7,height:width/7}} activeOpacity={1} onPress={()=>{this._goContribute()}}>*/}
 
 
-                                <Thumbnail square style={{width:width/7,height:width/7,}} source={require('../img/icon_message.png')} />
-                            </TouchableOpacity>
-                        </Tab>
+                                {/*<Thumbnail square style={{width:width/7,height:width/7,}} source={require('../img/icon_message.png')} />*/}
+                            {/*</TouchableOpacity>*/}
+                        {/*</Tab>*/}
                     </Tabs>
-                </Animated.View>
+                </View>
+
 
             </Container>
         );

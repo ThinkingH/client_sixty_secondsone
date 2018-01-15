@@ -114,7 +114,9 @@ export default  class ContributeDetails extends Component {
                     <TouchableNativeFeedback   onPress={()=>Actions.videodetails({title:this.state.data.biaoti,nowid:this.state.data.vid})}
                                                background={TouchableNativeFeedback.Ripple("#ccc", true)}>
                         <Row   style={{alignItems:'center',width:width,height:60}}>
-                            <Thumbnail   square style={{width:30,height:30,marginLeft:15}} source={{uri:this.state.data.videoimg}} />
+                            <View style={{backgroundColor:'#ccc',width:30,height:30,borderRadius:15,marginLeft:15}}>
+                            <Image    style={{width:30,height:30,borderRadius:15}} source={{uri:this.state.data.videoimg}} />
+                            </View>
                             <Text style={{marginLeft:15}}>点击查看原菜品</Text>
                         </Row>
 
@@ -124,7 +126,9 @@ export default  class ContributeDetails extends Component {
                     </TouchableNativeFeedback>
                     <List >
                         <Item style={{backgroundColor:'#fff',padding:0}} itemDivider>
-                            <Thumbnail  style={{width:50,height:50,margin:15}} source={{uri:this.state.data.touxiang}} />
+                            <View style={{backgroundColor:'#ccc',width:50,height:50,margin:15,borderRadius:25}}>
+                            <Thumbnail  style={{width:50,height:50}} source={{uri:this.state.data.touxiang}} />
+                            </View>
                             <Col>
                                 <Text style={{marginBottom:5}} numberOfLines={1} >{this.state.data.nickname}</Text>
                                 <Text note>{this.state.data.create_date}</Text>
@@ -141,7 +145,9 @@ export default  class ContributeDetails extends Component {
                                     </Right>
 
                         </Item>
+                        <View style={{width:width,height:width,backgroundColor:'#ccc'}}>
                         <Thumbnail square style={{width:width,height:width}} source={{uri:this.state.data.pinglunimg}} />
+                        </View>
                         <Text style={{margin:15}}>{this.state.data.content}</Text>
                         <View style={{width:width,height:1,backgroundColor:'#ccc'}}>
                         </View>

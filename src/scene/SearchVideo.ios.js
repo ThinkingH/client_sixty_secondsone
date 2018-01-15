@@ -3,7 +3,7 @@
  */
 import React from 'react';
 import { PropTypes, } from "react";
-import { StyleSheet, View, ViewPropTypes, TextInput, TouchableNativeFeedback ,Dimensions,DeviceEventEmitter,FlatList,TouchableOpacity} from "react-native";
+import { StyleSheet, View,Image, ViewPropTypes,StatusBar, TextInput, TouchableNativeFeedback ,Dimensions,DeviceEventEmitter,FlatList,TouchableOpacity} from "react-native";
 import { Container, Header, Content, Button, Form, Item, Icon, List, Badge, Col, Input,
     Thumbnail ,ListItem, Text, Left, Body, Right, Switch ,Card, CardItem, Row, FooterTab, Footer} from 'native-base';
 import { Actions } from 'react-native-router-flux';
@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
 });
 const aa=["1"];
 let _pageNo = 1;
-
+let isdisable=false;
 const _pageSize = Config.pageCount;
 export default class SearchVideo extends React.Component {
 
@@ -32,9 +32,7 @@ export default class SearchVideo extends React.Component {
         this.state = {
             value:this.props.value?this.props.value:"",
             his:[],
-
             refreshing: false,
-
             isassort:this.props.isassort,
             parpam:null,
         };
@@ -57,27 +55,23 @@ export default class SearchVideo extends React.Component {
             Toast.show("搜索内容不能为空");
             return
         }
-
         if(this.state.isassort){
-            this.setState({
-                parpam:"thetype=1015&searchstr=&classify2="+this.props.classify2+"&classify3="+this.props.classify3,
+            console.log("ssssssssssssss",this.state.value)
+            await  this.setState({
+                parpam:"thetype=1034&classify3="+this.state.value,
                 isassort:false
-            })
+            });
 
         }else{
-            this.setState({
-
+            this.setState({parpam:"thetype=1034&searchstr="+this.state.value},()=>{
+                DeviceEventEmitter.emit('getRefresh','搜索结果');
             });
-            await this.setState({parpam:"thetype=1015&searchstr="+this.state.value})
             // this.setState({parpam:"thetype=1015&searchstr="+this.state.value},()=>{})   setstate（{}）回调 也可以
-            DeviceEventEmitter.emit('getRefresh','搜索结果');
-
 
         }
-
         console.log(this.state.parpam)
-
     };
+
     _removeArr=(data)=>{
         return Array.from(new Set(data))
     };
@@ -152,34 +146,20 @@ export default class SearchVideo extends React.Component {
 
     _renderHeader=()=>{
         return(
-            <Header  androidStatusBarColor={Config.StatusBarColor} style={{backgroundColor:'#fff'}}>
-                <Row  style={{justifyContent:'center',alignItems:'center'}}>
-                    <TouchableOpacity
-                        onPress={()=>{Actions.pop()}}
-                       >
-                        <Thumbnail square  style={{width:17,height:17,marginRight:15,marginLeft:10}} source={require('../img/icon_back.png')} />
-                    </TouchableOpacity>
-
-                    {/*<Icon style={{marginRight:10,marginLeft:5,color:'#ccc'}}  name='search' />*/}
-                    <Input  style={{height:40,marginTop:5,}}
-                            value={this.state.value}
-                            placeholderTextColor="#ccc"
-                            placeholder='输入内容进行搜索'
-                            onChangeText={(value)=>this.setState({value})}
-                            maxLength={18}
-                    />
-                    <TouchableOpacity
-                        onPress={()=>{this._getData(_pageNo);this.saveHistory();}}
-
-                    >
-                        <View>
-                            <Text  style={{color:'#c5b361'}}>搜索</Text>
-                        </View>
-
-                    </TouchableOpacity>
-
-                </Row>
-                <View style={{position:'absolute',bottom:10,right:50,width:width/1.4,height:1,backgroundColor:'#c5b361'}}></View>
+            <Header  androidStatusBarColor={Config.StatusBarColor} style={{backgroundColor:'#fff',alignItems:'center'}}>
+                <Item  rounded style={{height:40,width:width-60,borderColor:'#C5B361'}}>
+                    <Input onChangeText={(value)=>this.setState({value})}
+                           placeholderTextColor="#999"
+                           style={{height:40,padding:0,fontSize:14,}}
+                           maxLength={6}
+                           value={this.state.value}
+                           onSubmitEditing={()=>{this._getData(_pageNo);this.saveHistory()}}
+                           returnKeyLabel="搜索"
+                           placeholder='  请输入验证码'/>
+                </Item>
+                <TouchableOpacity activeOpacity={0.9} onPress={()=>Actions.pop()}>
+                    <Image style={{width:25,height:25,marginLeft:10}} source={require('../img/icon_tipclose.png')}/>
+                </TouchableOpacity>
             </Header>
         )
     };
@@ -188,8 +168,18 @@ export default class SearchVideo extends React.Component {
     render() {
         return (
             <Container style={{backgroundColor:'#fafafa'}} >
+                <StatusBar backgroundColor="transparent"
+                           barStyle="light-content"
+                           translucent={false}
+                           hidden={false}/>
                 {this._renderHeader()}
-                <ListScene url={this.state.parpam} thetype="1015" header={'search'} item={"video"} />
+                <View style={{flex:1,paddingLeft:12.5,marginTop:15}}>
+                    <ListScene url={this.state.parpam} thetype="1034" header={'search'} item={"search"} />
+                </View>
+
+
+
+
             </Container>
         );
     }
