@@ -51,9 +51,9 @@ export default class MainScene extends Component {
                 // gestureState.{x,y} 现在会被设置为0
             },
             onPanResponderStart: (e, gestureState) => {
-                setTimeout(()=>{
-                    dx=dy
-                },200);
+                // setTimeout(()=>{
+                //  dx=dy
+                // },100);
 
                 console.log("开始滑动",dx)
 
@@ -65,6 +65,8 @@ export default class MainScene extends Component {
                 // 从成为响应者开始时的累计手势移动距离为gestureState.d{x,y}
             },
             onPanResponderEnd: (e, gestureState) => {
+                dx=dy
+                console.log("滑动结束",dx)
                 // console.log("移动结束后",gestureState)
                 //  console.log("移动结束后e",e.nativeEvent.locationY)
             },
@@ -297,14 +299,34 @@ export default class MainScene extends Component {
     _onScrollEnd=(e)=>{
         dy=e.nativeEvent.contentOffset.y;
         console.log("dy:",dy,"dx:",dx);
+        console.log('this.FlatListthis.FlatListthis.FlatListthis.FlatList',this.FlatList);
 
-        if(dy>0){
-           //this.toggleNavBar()
-           // Actions.refresh({ hideTabBar: true })
-            Config.SCROLLY=dy
-        }
-
-
+        // if(dy>dx){
+        //     if(dx-dy>-60){
+        //         Config.tabBarHight=dx-dy;
+        //     }else{
+        //         Config.tabBarHight=-60
+        //     }
+        //
+        //
+        //     // console.log("该执行导航栏沉浸式了该执行导航栏沉浸式了")
+        //     DeviceEventEmitter.emit("changeHeaderu","暂停视频")
+        //
+        //
+        // }
+        //
+        // if(dx>dy){
+        //     if(dy-dx>-60){
+        //         Config.tabBarHight=-60;
+        //     }else{
+        //         Config.tabBarHight=dy-dx
+        //     }
+        //
+        //     // console.log("该执行导航栏沉浸式了该执行导航栏沉浸式了")
+        //     DeviceEventEmitter.emit("changeHeaderd","暂停视频")
+        //
+        //
+        // }
 
 
         if(dy>=width){
@@ -358,7 +380,7 @@ export default class MainScene extends Component {
     render() {
         return (
             <View
-
+               // {...this._panResponder.panHandlers}
                 style={{flex:1,backgroundColor:'#fafafa'}}>
 
                 <FlatList

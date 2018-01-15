@@ -16,6 +16,8 @@ import { Container, Header, Content, Button,Form,Item, Icon, List,Badge,Col,
 
 import NetWorkTool from "../utils/NetWorkTool";
 import ShareUtile from '../utils/ShareUtil'
+import CorrelationItem from '../components/CorrelationItem'
+
 const {width, height} = Dimensions.get('window');
 const styles = StyleSheet.create({
     container: {
@@ -54,6 +56,7 @@ export default class VideoDetails extends Component {
             data:[],
             datas:[],
             dataa:[],
+            youlike:[],
             iscollect:this.props.isfromcollect?true:false,
             videourl:null,
             time:0,
@@ -170,6 +173,7 @@ export default class VideoDetails extends Component {
                     buzhouarr:responseJson.data.buzhouarr,
                     iscollect:responseJson.data.shoucangflag=="1"?true:false,
                     tipsarr:responseJson.data.tips,
+                    youlike:responseJson.data.youlike
                 })
             })
             .catch((error) => {
@@ -425,6 +429,19 @@ export default class VideoDetails extends Component {
         // console.log("e.nativeEventt",e.nativeEvent)
     }
 
+    _renderCorrelation=()=>{
+
+        return(
+           this.state.youlike.map((item,i)=>
+
+                   <CorrelationItem key={i} title={item}>
+
+                   </CorrelationItem>
+
+            )
+        )
+    }
+
     _renderVideo=()=>{
         return(
             <View  style={{backgroundColor:'#FFFFFF',width:width,alignItems:'center'}}>
@@ -519,7 +536,6 @@ export default class VideoDetails extends Component {
         )
     };
 
-
     _renderTipVideo=()=>{
         return (
             <ScrollView contentContainerStyle={{paddingLeft:20,paddingRight:10}} showsHorizontalScrollIndicator={false} horizontal={true} >
@@ -552,7 +568,6 @@ export default class VideoDetails extends Component {
                            barStyle="light-content"
                            translucent={true}
                            hidden={false}/>
-
                 <Content onScroll={(e)=>this._onScrollEnd(e)} showsVerticalScrollIndicator={false}>
                     {this._renderVideo()}
                     {this._renderViderDetails()}
@@ -580,12 +595,11 @@ export default class VideoDetails extends Component {
                             <View style={{width:width,height:20}}></View>
                         </Card>
                      <View style={{marginBottom:20,marginTop:10}}>
-
                     <ListItem style={{backgroundColor:'#fff'}} itemDivider>
                         <Text style={[styles.textb,{color:'#000'}]}>操作步骤</Text>
                     </ListItem>
                     {this.state.buzhouarr.map((item,i)=>
-                    <View style={{marginLeft:20,marginRight:20,paddingTop:15,}}>
+                    <View key={i} style={{marginLeft:20,marginRight:20,paddingTop:15,}}>
                         <View style={{flexDirection:'row',paddingBottom:15}} key={item.id}>
                             <Text style={{flex:1,color:'#000',fontWeight:'800'}}>{item.buzhouid}.</Text>
                             <View style={{flex:20,}}>
@@ -615,6 +629,10 @@ export default class VideoDetails extends Component {
                             <Image style={[styles.imagelogo,{marginRight:5}]} source={require('../img/icon_videodetails_comment_s.png')} />
                             <Text style={{color:'#fff',marginLeft:5}}>欢  迎  留  言</Text>
                         </Button>
+
+
+
+
                     {this.state.data.picpingluncount=="0"?(null):(
                             <View>
                                 <View style={{marginLeft:20,marginBottom:10,marginTop:10}}>
@@ -639,6 +657,15 @@ export default class VideoDetails extends Component {
                                 </Button>
                             </View>
                         )}
+                    {this.state.youlike.length==0?(null):(
+                            <View style={{width:width,flexDirection:'row',justifyContent:'space-between',flexWrap:'wrap',padding:20}}>
+                                <View style={{backgroundColor:'#fff',marginTop:20,marginLeft:20,width:width}} >
+                                    <Text style={[styles.textb,{color:'#000',}]}>相关美食</Text>
+                                </View>
+                                {this._renderCorrelation()}
+                            </View>
+                        )}
+
                 </Content>
 
                 <Footer style={{backgroundColor:'#fff'}}>

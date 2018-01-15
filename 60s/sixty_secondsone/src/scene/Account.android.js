@@ -237,12 +237,12 @@ export default class Account extends Component {
                         <View style={{width:width-40,height:40,flexDirection:'row'}}>
                             <TouchableOpacity activeOpacity={0.9} style={{flex:1,alignItems:'center',justifyContent:'center'}}>
                                 <Text style={{fontSize:14,color:'#f5c61e'}}>我的成果展示</Text>
-                                <View style={{width:(width-40)/2,height:1,backgroundColor:'#f5c61e',position:'absolute',bottom:0}}>
-                                </View>
+                                {/*<View style={{width:(width-40)/2,height:1,backgroundColor:'#f5c61e',position:'absolute',bottom:0}}>*/}
+                                {/*</View>*/}
                             </TouchableOpacity>
-                            <TouchableOpacity activeOpacity={0.9} onPress={()=>{this._exchange()}} style={{flex:1,alignItems:'center',justifyContent:'center'}}>
-                                <Text style={{fontSize:14}}>我的上传食谱</Text>
-                            </TouchableOpacity>
+                            {/*<TouchableOpacity activeOpacity={0.9} onPress={()=>{this._exchange()}} style={{flex:1,alignItems:'center',justifyContent:'center'}}>*/}
+                                {/*<Text style={{fontSize:14}}>我的上传食谱</Text>*/}
+                            {/*</TouchableOpacity>*/}
                         </View>
                             {this._renderContributeList()}
                         </View>

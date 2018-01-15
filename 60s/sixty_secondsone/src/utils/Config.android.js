@@ -31,7 +31,7 @@ export default class Config{
      static ISCOLLECT=1;
      static ISJPUSH=true;
      static STATUSBARHEIGHT=Platform.OS == 'ios' ? 20 : StatusBar.currentHeight;
-    static SCROLLY=0;
+
 
 
 
