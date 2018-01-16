@@ -51,19 +51,20 @@ export default class Comment extends Component {
                 isvisiable:true
             });
             //let base64DataString=encodeURIComponent(this.state.value);
-            let  parpama="thetype=1041&typeid=1&dataid="+this.props.nowid;
+            let  parpama="thetype=1041&dataid="+this.props.nowid;
 
             if(this.state.toItem!=null){
                 //对某人评论
-                console.log('3333333333333333333333333')
-                parpama +="&typeid=3"
-                parpama +="&userdata="+this.state.toItem.nickname
-                parpama +="&plid="+this.state.toItem.id
-                parpama +="&contentdata="+this.state.value
+                console.log('3333333333333333333333333');
+                parpama +="&typeid=3";
+                parpama +="&userdata="+this.state.toItem.userid;
+                parpama +="&plid="+this.state.toItem.id;
+                parpama +="&fid="+this.state.toItem.fplid;
+                parpama +="&contentdata="+this.state.value;
                 //this.state.value.substring(this.state.toItem.nickname.length+2)
             }else{
-                console.log('111111111111111111111111')
-                parpama +="&typeid=1"
+                console.log('111111111111111111111111');
+                parpama +="&typeid=1";
                 parpama +="&contentdata="+this.state.value
             }
 
@@ -115,7 +116,7 @@ export default class Comment extends Component {
     render() {
         return (
             <Container style={{backgroundColor:'#fafafa'}}>
-                <StatusBar backgroundColor="#C5B361"
+                <StatusBar backgroundColor={Config.StatusBarColor}
                            barStyle="light-content"
                            translucent={false}
                            hidden={false}/>

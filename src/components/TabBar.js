@@ -13,7 +13,28 @@ const {
     Dimensions,
 } = ReactNative;
 const Button = require('./Button');
+const {width, height} = Dimensions.get('window');
+const styles = StyleSheet.create({
+    tab: {
+        height: 65,
+        width:width/4,
+        alignItems: 'center',
+        //justifyContent: 'center',
 
+    },
+    container: {
+        height: 66,
+        borderWidth: 1,
+        borderTopWidth: 0,
+        borderLeftWidth: 0,
+        borderRightWidth: 0,
+        borderColor: '#ccc',
+    },
+    tabs: {
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+    },
+});
 const WINDOW_WIDTH = Dimensions.get('window').width;
 
 const ScrollableTabBar = createReactClass({
@@ -227,24 +248,4 @@ const ScrollableTabBar = createReactClass({
 
 module.exports = ScrollableTabBar;
 
-const styles = StyleSheet.create({
-    tab: {
-        height: 79,
-        width:WINDOW_WIDTH/4,
-        alignItems: 'center',
-        //justifyContent: 'center',
 
-    },
-    container: {
-        height: 80,
-        borderWidth: 1,
-        borderTopWidth: 0,
-        borderLeftWidth: 0,
-        borderRightWidth: 0,
-        borderColor: '#ccc',
-    },
-    tabs: {
-        flexDirection: 'row',
-        justifyContent: 'space-around',
-    },
-});

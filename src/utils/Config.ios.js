@@ -26,7 +26,7 @@ export default class Config{
      static navs_txt=["首页","搜索","收藏","我的"]
      static pageCount=10;
      static tabBarHight=0;
-     static StatusBarColor='#8c8c8c';
+     static StatusBarColor='#f5c61e';
      static IECEIVESOCKET=2;
      static ISCOLLECT=1;
      static ISJPUSH=true;

@@ -64,6 +64,7 @@ import TipView from './scene/TipView';
 import TipAll from './scene/TipAll';
 import TipDetails from './scene/TipDetails';
 import SearchMain from './scene/SearchMain';
+import Intro from './scene/Intro'
 
 const styles = StyleSheet.create({
     container: {
@@ -250,26 +251,18 @@ export default class apps extends Component {
         if(JSON.parse(map.extras).action=="shouye"){
            //shouye 代表推送到首页列表   classify 代表推送到哪个分类  对应0 1 2 3....等索引
             Actions.tabbar({num:JSON.parse(map.extras).classify});
-
         }
-
         else if(JSON.parse(map.extras).action=="details"){
             //details 代表推送到视频详情页
             let data=JSON.parse(map.extras);
             Actions.videodetails({title:data.vtitle,nowid:data.vid});
-
         }else if(JSON.parse(map.extras).action=="sofitellist"){
             //sofitellist 代表推送到特辑列表二级页面  sid为特辑列表id    data为特辑数据
             let data=JSON.parse(map.extras);
-
             Actions.sofitellist({id:data.sid,datas:data.data});
         }
-
         Config.IECEIVESOCKET=2;
-
-
-
-    }
+    };
 // 退出时 清除所有推送消息  JPushModule.clearAllNotifications();
     unInitPush=()=>{
         JPushModule.removeReceiveCustomMsgListener();
@@ -286,6 +279,13 @@ export default class apps extends Component {
 
 
                                 <Scene key="launch" hideNavBar component={Launch}  initial />
+                                <Scene
+                                    key="intro"
+                                    hideNavBar={true}
+                                    component={Intro}
+                                    panHandlers={null}
+                                    duration={1}
+                                />
                                 <Scene
                                     navigationBarStyle={[styles.navigationBarStyle]}
                                     titleStyle={[styles.titleStyle]}

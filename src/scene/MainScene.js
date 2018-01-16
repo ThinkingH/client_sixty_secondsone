@@ -301,12 +301,15 @@ export default class MainScene extends Component {
         console.log("dy:",dy,"dx:",dx);
         console.log('this.FlatListthis.FlatListthis.FlatListthis.FlatList',this.FlatList);
 
-        // if(dy>dx){
-        //     if(dx-dy>-60){
-        //         Config.tabBarHight=dx-dy;
-        //     }else{
-        //         Config.tabBarHight=-60
-        //     }
+         /*if(dy>dx) {
+             if (dx - dy > -60) {
+                 Config.tabBarHight = dx - dy;
+             } else {
+                 Config.tabBarHight = -60
+             }
+         }*/
+        Config.tabBarHight=dy;
+        //DeviceEventEmitter.emit("changeHeaderu","暂停视频")
         //
         //
         //     // console.log("该执行导航栏沉浸式了该执行导航栏沉浸式了")
@@ -328,7 +331,7 @@ export default class MainScene extends Component {
         //
         // }
 
-
+        /*
         if(dy>=width){
 
             // Config.tabBarHight=dy-dx;
@@ -346,7 +349,7 @@ export default class MainScene extends Component {
             //  Config.tabBarHight=-56;
         }else{
             console.log(e.nativeEvent.contentOffset.y)
-        }
+        }*/
         // console.log("e.nativeEvent.contentOffset",e.nativeEvent.contentOffset)
         // console.log("e.nativeEventt",e.nativeEvent)
 
