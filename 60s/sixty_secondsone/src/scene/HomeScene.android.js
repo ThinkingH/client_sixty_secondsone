@@ -169,45 +169,11 @@ class HomeScene extends Component {
     };
 
     _changeHeaderu=()=>{
-        this.setState({
-            margintop:Config.tabBarHight
-        })
-        console.log('aaaaaaaaaaaaaaaaaaaa',Config.tabBarHight)
-        // if(Config.tabBarHight>-80){
-        //     console.log('1111111111111111',Config.tabBarHight)
-        //     this.setState({
-        //         margintop:Config.tabBarHight
-        //     })
-        //     //this.state.translateValue.setValue({x:0, y:-Config.tabBarHight});
-        //     // this.state.translateValue.setValue({x:0, y:-60});
-        // }else{
-        //     console.log('222222222222222',Config.tabBarHight)
-        //     this.setState({
-        //         margintop:-80
-        //     })
-        //    // this.state.translateValue.setValue({x:0, y:-60});
-        // }
+         this.animatedPlay()
     };
 
     _changeHeaderd=()=>{
-        this.setState({
-                     margintop:Config.tabBarHight
-                })
-        console.log('bbbbbbbbbbbbbbbbbbbbbbbbbb',Config.tabBarHight)
-        // if(Config.tabBarHight<60){
-        //     console.log('333333333333333333',Config.tabBarHight)
-        //     //this.state.translateValue.setValue({x:0, y:Config.tabBarHight-60});
-        //     this.setState({
-        //         margintop:Config.tabBarHight+10
-        //     })
-        //     // this.state.translateValue.setValue({x:0, y:0});
-        // }else{
-        //     console.log('4444444444444444',Config.tabBarHight)
-        //   //  this.state.translateValue.setValue({x:0, y:60});
-        //     this.setState({
-        //         margintop:10
-        //     })
-        // }
+        
     };
 
     _onChangeTab=(index)=>{
@@ -340,7 +306,7 @@ class HomeScene extends Component {
                         <ImageBackground   style={{position:'absolute',top:0,width:width,height:50,flexDirection:'row'}} source={require('../img/icon_homebg.png')} >
 
                             <TouchableOpacity style={{position:'absolute',top:12.5,right:12.5}} activeOpacity={1}
-                                              onPress={()=>Actions.TabView()}>
+                                              onPress={()=>this._goContribute()}>
                                 <Thumbnail square={true} style={{width:25,height:25}} source={require('../img/icon_header.png')} />
                             </TouchableOpacity>
                             <View style={{width:width,height:50,position:'absolute',alignItems:'center',justifyContent:'center'}}>
@@ -352,16 +318,16 @@ class HomeScene extends Component {
                             <Image  style={{width:width/1.28,height:width/1.28/850*130}} source={require('../img/newicon_seachbar.png')} />
                         </TouchableOpacity>
                     </View>
-                    <Button onPress={()=>{
-                        this.animatedPlay();
-                    }}>
-                        <Text>play</Text>
-                    </Button>
-                    <Button onPress={()=>{
-                        this.animatedReplay()
-                    }}>
-                        <Text>replay</Text>
-                    </Button>
+                    {/*<Button onPress={()=>{*/}
+                        {/*this.animatedPlay();*/}
+                    {/*}}>*/}
+                        {/*<Text>play</Text>*/}
+                    {/*</Button>*/}
+                    {/*<Button onPress={()=>{*/}
+                        {/*this.animatedReplay()*/}
+                    {/*}}>*/}
+                        {/*<Text>replay</Text>*/}
+                    {/*</Button>*/}
                     {this.state.isshowtab?(<ScrollableTabView ref={(ScrollableTabView)=>this.ScrollableTabView=ScrollableTabView}
                                                               initialPage={this.state.numpage}
                                                               onChangeTab={(obj) => {this._onChangeTab(obj)}}

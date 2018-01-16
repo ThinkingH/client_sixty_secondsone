@@ -4,7 +4,7 @@
 import React, { Component } from 'react';
 import {
     ListView, FlatList, View, Dimensions, Image, DeviceEventEmitter, InteractionManager, TouchableNativeFeedback,
-    TouchableOpacity, Modal, Alert, Platform
+    TouchableOpacity, Modal, Alert, Platform,StatusBar
 } from 'react-native';
 import {Actions} from "react-native-router-flux";
 import { Container, Header, Content, Button, Icon, List, Thumbnail ,ListItem, Text,Left,Body,Right,Switch ,Card, CardItem, Col ,Item } from 'native-base';
@@ -75,11 +75,10 @@ export default class ContributeList extends Component {
     render() {
         return (
             <Container style={{backgroundColor:'#fff'}}>
-                {Platform.OS=='ios'?(null):(
-                    <Header style={{height:0}} androidStatusBarColor={Config.StatusBarColor}>
-
-                    </Header>
-                )}
+                <StatusBar backgroundColor={Config.StatusBarColor}
+                           barStyle="light-content"
+                           translucent={false}
+                           hidden={false}/>
                 <ListScene url={"thetype=1019&nowid="+this.props.nowid} thetype="1019"  nowid={this.props.nowid}   item={"contribute"}/>
                 {this._renderModal()}
             </Container>

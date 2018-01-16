@@ -440,14 +440,14 @@ export default class Account extends Component {
                 <View  style={{position:'absolute',top:Config.STATUSBARHEIGHT,height:50,width:width,alignItems:'flex-end',justifyContent:'center'}}>
                     <View style={{flexDirection:'row',marginRight:20}}>
                         <Button style={{marginRight:30}} transparent    onPress={()=> Actions.message({title:'消息'})}>
-                            <Thumbnail  style={{width:20,height:20}} source={require('../img/newicon_warn.png')} />
+                            <Thumbnail  style={{width:25,height:25}} source={require('../img/newicon_warn.png')} />
                         </Button>
                         <Button transparent
                                 onPress={()=> Actions.setting()}
                         >
-                            <Thumbnail   style={{width:20,height:20}} source={require('../img/newicon_setting.png')} />
+                            <Thumbnail   style={{width:25,height:25}} source={require('../img/newicon_setting.png')} />
                         </Button>
-                        {Config.IECEIVESOCKET==1?(
+                        {Config.IECEIVESOCKET!=1?(
                                 <View style={{position:'absolute',top:13,right:45,width:16,height:16,borderRadius:8,backgroundColor:'#f00',alignItems:'center',justifyContent:'center'}}>
                                     <Text style={{fontSize:10,color:'#fff'}}>1</Text>
                                 </View>):(null) }

@@ -9,7 +9,7 @@
  */
 import React from 'react';
 
-import { View,  StyleSheet,Dimensions,DeviceEventEmitter,TouchableNativeFeedback,Alert} from 'react-native';
+import { View,  StyleSheet,Dimensions,DeviceEventEmitter,TouchableOpacity,Alert,ART} from 'react-native';
 import { Container, Header, Content, Button, Icon, List, Thumbnail ,ListItem, Text,Left,Body,Right,Switch ,Card, CardItem, Col ,Item} from 'native-base';
 import Request from '../utils/Fetch';
 import Toast from '@remobile/react-native-toast'
@@ -24,6 +24,10 @@ const styles = StyleSheet.create({
     },
 });
 const {width, height} = Dimensions.get('window');
+const {Surface, Shape, Path} = ART;
+const path = Path()
+    .moveTo(0,1)
+    .lineTo(width-20,1);
 let delid=null;
 export default class ContributeItem extends React.PureComponent {
 
@@ -68,31 +72,31 @@ export default class ContributeItem extends React.PureComponent {
 
     render() {
         return (
-            <List >
-                <Item style={{backgroundColor:'#fff',padding:0}} itemDivider>
-
+            <List style={{backgroundColor:'#fff'}} >
+                <View style={{backgroundColor:'#fff',flexDirection:'row',alignItems:'center'}} >
                     <Thumbnail  style={{width:50,height:50,margin:15}} source={{uri:this.props.data.touxiang}} />
-
                     <Col>
                         <Text style={{color:'#232323'}} numberOfLines={1} >{this.props.data.nickname}</Text>
                         <Text note>{this.props.data.create_datetime}</Text>
                     </Col>
                     {this.props.data.userid==Config.userid?(
                             <Right >
-                                <TouchableNativeFeedback
+                                <TouchableOpacity activeOpacity={0.9}
                                     onPress={()=>{DeviceEventEmitter.emit("ContributeList","弹出modal");delid=this.props.data.id}}
-                                    background={TouchableNativeFeedback.Ripple("#ccc", true)}>
-                                    <View >
-                                        <Thumbnail   square style={{width:20,height:20,marginRight:15}} source={require('../img/icon_contributelist_more.png')} />
-                                    </View>
-                                </TouchableNativeFeedback>
+                                   >
+                                    <Thumbnail   square style={{width:20,height:20,marginRight:15}} source={require('../img/icon_contributelist_more.png')} />
+                                </TouchableOpacity>
                             </Right>
                         ):(null)}
-                </Item>
+                </View>
                 <Thumbnail square style={{width:width,height:width}} source={{uri:this.props.data.showimg}} />
-                <Text style={{margin:15}}>{this.props.data.content}</Text>
-                <View style={{width:width,height:1,backgroundColor:'#ccc'}}>
-
+                <View style={{padding:15}}>
+                    <Text style={{marginTop:15,marginBottom:15}}>{this.props.data.content}</Text>
+                </View>
+                <View style={{paddingLeft:20,paddingRight:20}} >
+                    <Surface  width={width-40} height={1}>
+                        <Shape d={path} stroke="#C5B061" strokeWidth={1} strokeDash={[3,5]}/>
+                    </Surface>
                 </View>
             </List>
         )

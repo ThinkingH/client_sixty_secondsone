@@ -773,6 +773,12 @@ export default class TipDetails extends Component {
 
         this._autoHide();
         num++;
+        if(num==videoarr.length){
+            this.setState({
+                movevalue:width/2,
+            });
+            return;
+        }
     };
 
     _isShowSetting=()=>{

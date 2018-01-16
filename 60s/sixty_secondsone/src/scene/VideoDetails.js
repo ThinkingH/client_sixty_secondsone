@@ -629,10 +629,6 @@ export default class VideoDetails extends Component {
                             <Image style={[styles.imagelogo,{marginRight:5}]} source={require('../img/icon_videodetails_comment_s.png')} />
                             <Text style={{color:'#fff',marginLeft:5}}>欢  迎  留  言</Text>
                         </Button>
-
-
-
-
                     {this.state.data.picpingluncount=="0"?(null):(
                             <View>
                                 <View style={{marginLeft:20,marginBottom:10,marginTop:10}}>
@@ -665,9 +661,7 @@ export default class VideoDetails extends Component {
                                 {this._renderCorrelation()}
                             </View>
                         )}
-
                 </Content>
-
                 <Footer style={{backgroundColor:'#fff'}}>
                     <FooterTab style={{backgroundColor:'#fff'}}>
                         <Button transparent={true}
@@ -697,7 +691,6 @@ export default class VideoDetails extends Component {
                         {/*</Button>*/}
                     </FooterTab>
                 </Footer>
-
                 <View ref={(viewopacity)=>this.viewopacity=viewopacity}
                       style={{position:'absolute',top:0,width:width,height:StatusBar.currentHeight,backgroundColor:this.state.viewopacity}}>
                 </View>
@@ -715,8 +708,6 @@ export default class VideoDetails extends Component {
                 <TouchableOpacity style={{position:'absolute',right:20,top:StatusBar.currentHeight+15,width:20,height:20}} activeOpacity={0.9} onPress={()=>this._share()}>
                     <Image  style={{width:20,height:20}} source={require('../img/newicon_share.png')} />
                 </TouchableOpacity>
-
-
             </Container>
         );
     }

@@ -16,6 +16,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
   },
 });
+let isfirst=null;
 const {width, height} = Dimensions.get('window');
 class Launch extends React.Component {
 
@@ -62,6 +63,12 @@ class Launch extends React.Component {
         Storage.getValueForKey("userid").then((value) => {
             console.log("userid :", value);
             Config.userid = value;
+        });
+
+        Storage.getValueForKey("isfirst").then((value) => {
+            console.log("userid :", value);
+            isfirst=value
+
         });
 
         Storage.getValueForKey("userkey").then((value) => {
@@ -132,10 +139,15 @@ class Launch extends React.Component {
         let parpam="thetype=1009";
         Request('1009',parpam)
             .then((responseJson) => {
-                //如果请求成功就走下面的方法
+                //如果请求成功就走下面的方法 n
              if(Config.version==responseJson.data.version){
                  console.log('dddddddddddddddddd')
-                 Actions.tabbar({type: ActionConst.RESET});
+                 if(isfirst=='1'){
+                     Actions.tabbar({type: ActionConst.RESET});
+                 }else{
+                     Actions.intro({type: ActionConst.RESET});
+                 }
+
              }else if(Config.version<responseJson.data.version){
                  Alert.alert(
                      '',

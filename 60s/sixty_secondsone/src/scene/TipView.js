@@ -97,7 +97,7 @@ export default class TipView extends Component {
                                 <Text style={{marginLeft:5}}>{itema.classname}</Text>
                                 <View style={{flex:1}}></View>
                                 <TouchableOpacity activeOpacity={0.9}
-                                                  onPress={()=>Actions.tipall({tiptype:itema.classname})}
+                                                  onPress={()=>Actions.tipall({tiptype:itema.class})}
                                 >
                                     <Text style={{marginRight:20,fontSize:14,color:'#ffe55f'}}>查看全部</Text>
                                 </TouchableOpacity>
