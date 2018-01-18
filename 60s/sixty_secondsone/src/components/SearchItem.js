@@ -43,7 +43,7 @@ export default class SearchItem extends React.PureComponent  {
 
     render() {
         return (
-                    <TouchableOpacity  onPress={()=>this._isVideo()}   activeOpacity={0.9}   style={{marginRight:2.5,marginLeft:2.5}} >
+                    <TouchableOpacity  onPress={()=>this._isVideo()}   activeOpacity={0.9}   style={{marginLeft:this.props.index%2==0?15:0,marginRight:this.props.index%2==1?0:5,marginTop:10}} >
                         <View style={{width:(width-30)/2-2.5}}>
                             <View style={{backgroundColor:'#ccc',borderRadius:10}}>
                                 <Image source={{uri:this.state.data.showimg}} style={{height: (width-30)/2-2.5, width:(width-30)/2-2.5,borderRadius:10}}/>

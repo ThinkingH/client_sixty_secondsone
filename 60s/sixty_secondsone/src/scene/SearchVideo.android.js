@@ -40,7 +40,7 @@ export default class SearchVideo extends React.Component {
     }
     componentDidMount() {
         this._getHistory()
-             this._onRefresh();
+        this._onRefresh();
 
 
     }
@@ -61,7 +61,7 @@ export default class SearchVideo extends React.Component {
                  parpam:"thetype=1034&classify3="+this.state.value,
                  isassort:false
              });
-
+             DeviceEventEmitter.emit('getRefresh','搜索结果');
          }else{
            this.setState({parpam:"thetype=1034&searchstr="+this.state.value},()=>{
                DeviceEventEmitter.emit('getRefresh','搜索结果');
@@ -173,7 +173,7 @@ export default class SearchVideo extends React.Component {
                            translucent={false}
                            hidden={false}/>
                 {this._renderHeader()}
-                      <View style={{flex:1,paddingLeft:12.5,marginTop:15}}>
+                      <View style={{flex:1,marginTop:15}}>
                           <ListScene url={this.state.parpam} thetype="1034" header={'search'} item={"search"} />
                       </View>
 

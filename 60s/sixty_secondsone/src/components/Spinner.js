@@ -7,6 +7,8 @@
 import React from 'react';
 import { View,  StyleSheet,Image,Dimensions,DeviceEventEmitter,Modal } from 'react-native';
 import { Container, Header, Content, Button, Icon, List, Thumbnail ,ListItem, Text,Left,Body,Right,Switch ,Card, CardItem,Spinner} from 'native-base';
+import {LineDotsLoader} from 'react-native-indicator';
+
 const {width, height} = Dimensions.get('window');
 
 export default class Spinnera extends React.Component {
@@ -20,23 +22,19 @@ export default class Spinnera extends React.Component {
         return (
             <Modal
                    transparent={true}
-                  // onRequestClose={() => { this.setState({modalVisible: false});}}
+                   onRequestClose={() => { this.setState({modalVisible: false});}}
                    visible={isvisiable}
             >
-                <View style={{flex:1,alignItems:'center',justifyContent:'center',backgroundColor:'rgba(0,0,0,0.3)'}}>
+                <View style={{flex:1,alignItems:'center',justifyContent:'center',backgroundColor:'rgba(255,255,255,0.8)'}}>
 
-                    <View style={{width:width/1.1,height:100,backgroundColor:'transparent'}}>
-                        <Card >
-                            <View style={{width:width,height:90,backgroundColor:'#fff',flexDirection:'row',alignItems:'center'}}>
-                                <Spinner style={{marginLeft:20,padding:0}} color={'#999'} inverse={isvisiable}>
 
-                                </Spinner>
-                                <Text style={{marginLeft:20,color:'#8c8c8c'}}>{this.props.loadvalue}</Text>
-                            </View>
 
-                        </Card>
 
-                    </View>
+                                <Text style={{color:'#666',fontSize:18,marginBottom:10}}>{this.props.loadvalue}</Text>
+                                <LineDotsLoader color={'#F5C61E'} />
+
+
+
 
                 </View>
 

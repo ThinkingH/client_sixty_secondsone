@@ -4,18 +4,19 @@
 import React, { Component } from 'react';
 import {
     ListView, FlatList, View, Dimensions, Image, InteractionManager, DeviceEventEmitter,
-    Platform
+    Platform,StatusBar
 } from 'react-native';
 import {Actions} from "react-native-router-flux";
 import Request from '../utils/Fetch';
 import Toast from '@remobile/react-native-toast'
 import Storage  from '../utils/Storage';
 import Config from '../utils/Config';
-
+import { UltimateListView, UltimateRefreshView } from 'react-native-ultimate-listview'
 import { Container, Header, Content, Button, Icon, List, Thumbnail ,ListItem, Text,Left,Body,Right,Switch ,Card, CardItem,} from 'native-base';
 import PLVideoView from "../widget/PLVideoView";
 //import UMSocialUtils from "../utils/UMSocialUtils";
-
+import {LineDotsLoader,PulseLoader,DotsLoader,TextLoader,BubblesLoader,CirclesLoader,BreathingLoader,RippleLoader,LinesLoader,MusicBarLoader,EatBeanLoader
+    ,DoubleCircleLoader,RotationCircleLoader,RotationHoleLoader,CirclesRotationScaleLoader,NineCubesLoader  ,ColorDotsLoader} from 'react-native-indicator';
 const data = [
     {"name" : "Melody", age: 21,id:1},
     {"name" : "ZZ", age: 22,id:2},
@@ -41,20 +42,19 @@ export default class Sofitel extends Component {
     }
 
     componentDidMount() {
-        InteractionManager.runAfterInteractions(() => {
-
         this._getData();
-
-        });
+        // InteractionManager.runAfterInteractions(() => {
+        //
+        // this._getData();
+        //
+        // });
     }
     _onRefresh=()=> {
         this.setState({
             refreshing:true,
         });
        _pageNo = 1;
-
         this._getData(_pageNo);
-
     };
 
     _getData=(_pageNo)=>{
@@ -65,7 +65,6 @@ export default class Sofitel extends Component {
                 data:responseJson.data.list,
                 refreshing:false,
             })
-
             })
             .catch((error) => {
                 this.setState({
@@ -82,35 +81,111 @@ export default class Sofitel extends Component {
         //  UMSocialUtils.shareWeixin()
     };
 
-    _renderItem = ({item}) => (
+    _renderItem = (item, index, separator) => (
         <MyListItem key={item.id}
                     id={item.id}
                     onPressItem={this._onPressItem}
                     data={item}
         />
     );
+    onFetch = async(_pageNo, startFetch, abortFetch) => {
 
-    _header = () => {
-        return(<MyListHeader/>);
+        let parpam=null;
+        parpam="thetype=1017&classtype=msgjihe&imgwidth=800&imgheight=450"+"&pagesize=10&page="+_pageNo;
+
+        Request('1017',parpam)
+            .then((responseJson) => {
+                console.log("this.props.urlthis.props.urlthis.props.url",responseJson);
+                let rowData =responseJson.data.list;
+                startFetch(rowData, 24)
+            })
+            .catch((error) => {
+                abortFetch()
+                console.log(error.toString())
+                // Toast.show(error.toString());
+            });
+
+
+
+    };
+
+
+    _renderPaginationFetchingView=()=> {
+        return(
+            <View style={{width:width, justifyContent: 'center', alignItems: 'center', height: 90,backgroundColor:'#f8f8f8'}}>
+                <Text style={{color:'#666',fontSize:18}}>6 0 S e c
+                </Text>
+                {this._renderLoading()}
+                {/*<Image ref={(c) => {this.txtPulling = c;}} source={require('../../src/img/icon_account_warn.png')} style={[styles.hide,{width:40,height:40}]}></Image>*/}
+                {/*<Image ref={(c) => {this.txtPullok = c;}} source={require('../../src/img/icon_header.png')} style={[styles.hide,{width:40,height:40}]}></Image>*/}
+
+                {/*<Image ref={(c) => {this.txtPullrelease = c;}} source={require('../../src/img/icon_search_result.png')} style={[styles.hide,{width:40,height:40}]}></Image>*/}
+
+            </View>
+        )
+    }
+
+    _renderLoading=()=>{
+        return(
+            <LineDotsLoader color={'#F5C61E'} />
+        )
     }
 
     render() {
         return (
-            <View style={{flex:1,backgroundColor:'#fafafa'}}>
+            <View style={{flex:1,backgroundColor:'#fff'}}>
 
-                <FlatList
+                <UltimateListView
 
-                    ref={(FlatList)=>this.FlatList=FlatList}
+                    scrollEventThrottle={1}
+                   // onScroll={(e)=>this._onScrollEnd(e)}
+
                     // columnWrapperStyle={{width:width/2}}
-                    onRefresh={this._onRefresh}
-                    refreshing={this.state.refreshing}
+
                     showsVerticalScrollIndicator={false}
-                    data={this.state.data}
+                    //data={this.state.datas}
                     initialNumToRender={4}
-                    //extraData={this.state}
-                    keyExtractor={data.id}
-                    renderItem={this._renderItem}
-                    //  ListHeaderComponent={this._header}
+                    extraData={this.state}
+                    // keyExtractor={this.state.datas.id}
+                    // renderItem={this._renderItem}
+                    // ListHeaderComponent={this._header}
+                   // ListFooterComponent={this._renderFooter()}
+                    // refreshing={this.state.refreshing}
+                    // onRefresh={this._onRefresh}
+                    onEndReachedThreshold={0.1}
+                    onEndReached={(info) => {
+                            this._toEnd()
+                        } }
+                    paginationBtnText={'正在载入'}
+                    waitingSpinnerText={'正在载入'}
+                    ref={ref => this.listViewa = ref}
+                    key={this.state.layout} // this is important to distinguish different FlatList, default is numColumns
+                    onFetch={this.onFetch}
+                    keyExtractor={(item, index) => `${index} - ${item}`} // this is required when you are using FlatList
+                    refreshableMode="advanced" // basic or advanced
+
+                    item={this._renderItem} // this takes three params (item, index, separator)
+                    numColumns={1} // to use grid layout, simply set gridColumn > 1
+                    // customRefreshView={this._renderPaginationFetchingView()}
+                    customRefreshView={()=>this._renderPaginationFetchingView()}
+                    // ----Extra Config----
+                    pagination={true}
+                    autoPagination={true}
+                   // header={this._header}
+                    //paginationFetchingView={this._renderPaginationFetchingView}
+                    // sectionHeaderView={this.renderSectionHeaderView}   //not supported on FlatList
+                    // paginationFetchingView={this._renderPaginationFetchingView}
+                    // paginationAllLoadedView={this._renderPaginationFetchingView}
+                    //  paginationWaitingView={this._renderPaginationFetchingView}
+                    // emptyView={this.renderEmptyView}
+                    // separator={this.renderSeparatorView}
+
+                    // new props on v3.2.0
+                    // arrowImageStyle={{ width: 20, height: 20, resizeMode: 'contain' }}
+                    dateStyle={{ color: 'lightgray' }}
+                    refreshViewStyle={Platform.OS === 'ios' ? { height: 90, top: -90 } : { height: 90 }}
+                    refreshViewHeight={90}
+
                 />
             </View>
 

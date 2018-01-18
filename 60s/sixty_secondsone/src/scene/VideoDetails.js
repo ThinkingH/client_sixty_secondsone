@@ -49,6 +49,7 @@ const {Surface, Shape, Path} = ART;
 const path = Path()
     .moveTo(0,1)
     .lineTo(width-20,1);
+let  num=  Math.ceil(Math.random()*4)-1
 export default class VideoDetails extends Component {
     constructor(props) {
         super(props);
@@ -122,7 +123,7 @@ export default class VideoDetails extends Component {
     }
 
     componentDidMount () {
-
+        this._getData();
         // this.onCompletion = DeviceEventEmitter.addListener("onCompletion",this._onCompletion);
         InteractionManager.runAfterInteractions(() => {
             this._getData();
@@ -149,7 +150,7 @@ export default class VideoDetails extends Component {
         let list = [0,2,3];
         ShareUtile.shareboard("分享描述",
             this.state.data.showimg,
-            'http://www.baidu.com/',
+            this.state.data.share,
             this.props.title,
             list,(code,message) =>{
                 console.log('wwwwwwwwwwwwwwwwwwwwwwww',message,code)
@@ -162,6 +163,7 @@ export default class VideoDetails extends Component {
     };
 
     _getData=()=>{
+        console.log('11111111111111111111111111',this.props.nowid)
         let parpam="thetype=1035&imgwidth=800&imgheight=800&nowid="+this.props.nowid+"";
         Request('1035',parpam)
             .then((responseJson) => {
@@ -223,7 +225,8 @@ export default class VideoDetails extends Component {
             //     collectdisable:false
             // })
             this.videos.pause();
-            Actions.login2();
+
+            Actions.login2({num:num});
         }
     };
 
@@ -313,12 +316,13 @@ export default class VideoDetails extends Component {
         if(Config.usertype=="1"){
             // this.videos.pause();
             if(num==1){
-                Actions.contribute({dataid:this.state.data.id});
+                Actions.contribute({dataid:this.props.nowid});
             }else{
-                Actions.contributelist({nowid:this.state.data.id});
+                Actions.contributelist({nowid:this.props.nowid});
             }
         }else{
-            Actions.login2();
+
+            Actions.login2({num:num});
         }
     };
 
@@ -328,9 +332,10 @@ export default class VideoDetails extends Component {
             isplay:false
         })
         if(Config.usertype=="1"){
-            Actions.comment({title:"留言",nowid:this.state.data.id})
+            Actions.comment({title:"留言",nowid:this.props.nowid})
         }else{
-            Actions.comment({title:"留言",nowid:this.state.data.id})
+
+            Actions.login2({num:num});
         }
     };
 
@@ -571,7 +576,9 @@ export default class VideoDetails extends Component {
                 <Content onScroll={(e)=>this._onScrollEnd(e)} showsVerticalScrollIndicator={false}>
                     {this._renderVideo()}
                     {this._renderViderDetails()}
-                    <Text style={{margin:20,fontSize:16,color:'#000'}}>小贴士视频</Text>
+                    {this.state.tipsarr.length==0?(null):(
+                            <Text style={{margin:20,fontSize:16,color:'#000'}}>小贴士视频</Text>
+                        )}
                     {this._renderTipVideo()}
                         <Card style={{borderRadius:10,marginRight:10,marginLeft:10,width:width-20,marginTop:20}}>
                             <View style={{backgroundColor:'#fff',marginTop:20,marginBottom:10,marginLeft:10}} >

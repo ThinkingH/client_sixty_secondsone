@@ -20,7 +20,9 @@ const styles = StyleSheet.create({
         width:width/7,height:width/7,marginTop:15
     }
 });
-let _this;
+
+
+const imgarr=[require('../img/icon_login1.png'),require('../img/icon_login2.png'),require('../img/icon_login3.png'),require('../img/icon_login4.png')]
 export default class Login2 extends Component {
     constructor(props) {
         super(props);
@@ -36,7 +38,7 @@ export default class Login2 extends Component {
         _this=this;
     };
     componentWillMount() {
-
+      num=this.props.num
     }
 
     componentDidMount(){
@@ -303,7 +305,7 @@ export default class Login2 extends Component {
                      <Content >
                     <Body style={{flex:1,alignItems:'center'}}>
                     <ImageBackground   style={{width:width,height:width,justifyContent:'flex-end',alignItems:'center'}}
-                                       source={require('../img/noob.png')} >
+                                       source={imgarr[num]} >
                         {/*<Button rounded block onPress={()=>Actions.login2()}  style={{backgroundColor:'#c5b361',width:width-60,height:40,marginLeft:30}}>*/}
                             {/*<Text style={{fontSize:16,color:'#fff'}} >用  户  登  录</Text>*/}
                         {/*</Button>*/}

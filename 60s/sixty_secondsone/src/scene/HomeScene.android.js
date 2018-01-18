@@ -221,7 +221,7 @@ class HomeScene extends Component {
             <TabBar ref={(tabbar)=>this.tabbar=tabbar} // tabStyle={{paddingLeft:0,paddingRight:0}}
                 imgurl={this.state.imgurlarr} //网络图
                 imgurla={img}       //本地图
-                imageStyle={{width:25,height:25}}
+                imageStyle={{width:25,height:25,backgroundColor:'transparent'}}
                 textva={aaa}
                 activeTextColor={"#c5b061"}
                 backgroundColor={"#FFFFFF"}
@@ -286,6 +286,8 @@ class HomeScene extends Component {
         console.log('滑动的回调...........',e.nativeEvent.contentOffset.y)
     }
 
+
+
     render(){
         return (
             <Container>
@@ -303,15 +305,10 @@ class HomeScene extends Component {
                     <View  //androidStatusBarColor='#f00'
                         ref="header" style={{height:80,backgroundColor:'#fff',alignItems:'center'
                        }}>
+
                         <ImageBackground   style={{position:'absolute',top:0,width:width,height:50,flexDirection:'row'}} source={require('../img/icon_homebg.png')} >
 
-                            <TouchableOpacity style={{position:'absolute',top:12.5,right:12.5}} activeOpacity={1}
-                                              onPress={()=>this._goContribute()}>
-                                <Thumbnail square={true} style={{width:25,height:25}} source={require('../img/icon_header.png')} />
-                            </TouchableOpacity>
-                            <View style={{width:width,height:50,position:'absolute',alignItems:'center',justifyContent:'center'}}>
-                                <Text style={{color:'#fff'}}>60sec</Text>
-                            </View>
+
                         </ImageBackground>
                         <TouchableOpacity style={{position:'absolute',top:width/472*65-width/1.28/850*130/3}} activeOpacity={1}
                                           onPress={()=>Actions.TabView()}>
@@ -332,24 +329,26 @@ class HomeScene extends Component {
                                                               initialPage={this.state.numpage}
                                                               onChangeTab={(obj) => {this._onChangeTab(obj)}}
                                                               scrollWithoutAnimation={true}
-                                                              style={{flex:1,width:width,marginTop:10,paddingLeft:12.5,paddingRight:12.5}}
+                                                              style={{flex:1,width:width,marginTop:10}}
                                                               renderTabBar={() =>this.renderTabBar()}>
 
-                            {this.state.data.map((item,i)=>{
-                            if(i==0){
-                                return(
-                                       <MainScene  header={"header"} key={i}  url={"thetype=1034&searchstr="+item.keyword} tabLabel={item.word}   thetype="1034" item={"video"} />
-                                )
-                            }else if(i==1){
-                                return(
-                                    <Sofitel key={i}  tabLabel={item.word}  />
-                                )
-                            }else if(i>1&&i<this.state.data.length){
-                                return(
-                                    <ListScene key={i}  url={"thetype=1034&classify2="+item.keyword} tabLabel={item.word}   thetype="1034" item={"video"} />
-                                )
-                            }
-                            })}
+
+                                {this.state.data.map((item,i)=>{
+                                    if(i==0){
+                                        return(
+                                            <MainScene load={this.props.load}  header={"header"} key={i}  url={"thetype=1034&searchstr="+item.keyword} tabLabel={item.word}   thetype="1034" item={"video"} />
+                                        )
+                                    }else if(i==1){
+                                        return(
+                                            <Sofitel key={i}  tabLabel={item.word}  />
+                                        )
+                                    }else if(i>1&&i<this.state.data.length){
+                                        return(
+                                            <ListScene load={this.props.load} key={i}  url={"thetype=1034&classify2="+item.keyword} tabLabel={item.word}   thetype="1034" item={"video"} />
+                                        )
+                                    }
+                                })}
+
 
                             {/*<ListScene url={"thetype=1015&classify2=融合菜"} tabLabel="融合菜" thetype="1015" item={"video"} />*/}
                             {/*<ListScene url={"thetype=1015&classify2=甜品"} tabLabel="甜品" thetype="1015" item={"video"}/>*/}
