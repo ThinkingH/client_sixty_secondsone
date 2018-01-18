@@ -23,9 +23,9 @@ const styles = StyleSheet.create({
         marginBottom:100,
     },
     textInputStyle: {
-        width:width-80,
+        width:width-100,
         textAlignVertical:'top',
-        marginLeft: 0,
+
         padding:0,
         backgroundColor:'#fff',
         marginTop:5,
@@ -190,30 +190,33 @@ export default class AccountInfo extends Component {
 
     _renderTextInput=()=>{
         return(
-            <View style={{height:60}}>
-                <ScrollView
-                    ref={(ScrollView)=>this.ScrollView=ScrollView}
-                    style={{marginLeft:20,width:width-40,height:50,borderRadius:10,backgroundColor:'#fff'}}>
+            <View style={{height:100}}>
+                <View
+                    //ref={(ScrollView)=>this.ScrollView=ScrollView}
+                    style={{width:width-80,height:80,alignItems:'center',borderRadius:10,borderColor:'#ccc',borderWidth:1,backgroundColor:'#fff'}}>
                     <TextInput
                         // defaultValue={"例）制作步骤简单、非常好吃！想让我的朋友们也来尝尝！例）制作步骤简单、非常好吃！想让我的朋友们也来尝尝！"}
                         underlineColorAndroid='transparent'
                         placeholderTextColor={'#bbbbbb'}
-                        style={[styles.textInputStyle,{height:Math.max(35,this.state.height),marginBottom:35}]}
-                        placeholder={"简单的介绍你所做的成品"}
+                        style={[styles.textInputStyle,{height:Math.max(35,this.state.height)}]}
+                        placeholder={"简单的介绍你自己"}
                         maxLength={80}
                         multiline={true}
                         value={this.state.desc}
                         onChangeText={(value)=>{this.getValue(value)}}
                         onContentSizeChange={(event)=>this.onContentSizeChange(event)}
                     />
-                </ScrollView>
+                </View>
+
+
+
             </View>
         )
     };
 
     onContentSizeChange=(event)=> {
         this.setState({height: event.nativeEvent.contentSize.height});
-        this.ScrollView.scrollTo({y: event.nativeEvent.contentSize.height});
+
     };
 
     render() {
@@ -223,7 +226,7 @@ export default class AccountInfo extends Component {
                            barStyle="light-content"
                            translucent={false}
                            hidden={false}/>
-                <Content    keyboardShouldPersistTaps="handled" >
+                <Content showsVerticalScrollIndicator={false}    keyboardShouldPersistTaps="handled" >
                     <View style={{marginLeft:20,width:width-40,height:height,backgroundColor:'#ccc',marginTop:10}}>
                         <View style={{flex:1,alignItems:'center',backgroundColor:'#fff',borderTopRightRadius:10,borderTopLeftRadius:10}}>
                             <View style={{width:width-80,flexDirection:"row",backgroundColor:'#f00'}}>
@@ -283,7 +286,7 @@ export default class AccountInfo extends Component {
                                 </TouchableOpacity>
                             </View>
                             <View style={{height:1,width:width-80,backgroundColor:'#ccc',marginTop:5,marginBottom:20}}></View>
-                            <View style={{width:width-80}}>
+                            <View style={{width:width-80,marginBottom:10}}>
                                 <Text style={{fontSize:16}}>介绍<Text style={{fontSize:14}}>（80字以内）</Text></Text>
                             </View>
                             {this._renderTextInput()}

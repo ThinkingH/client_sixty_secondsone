@@ -17,22 +17,19 @@ const {width, height} = Dimensions.get('window');
 const styles = StyleSheet.create({
     tab: {
         height: 65,
-        width:width/4,
+        width:90,
         alignItems: 'center',
         //justifyContent: 'center',
-
     },
     container: {
         height: 66,
-        borderWidth: 1,
-        borderTopWidth: 0,
-        borderLeftWidth: 0,
-        borderRightWidth: 0,
-        borderColor: '#ccc',
     },
     tabs: {
         flexDirection: 'row',
         justifyContent: 'space-around',
+        paddingLeft:10,
+        paddingRight:10,
+
     },
 });
 const WINDOW_WIDTH = Dimensions.get('window').width;
@@ -165,8 +162,6 @@ const ScrollableTabBar = createReactClass({
                             source={this.props.imgurl.length==0?this.props.imgurla[page]:{uri:this.props.imgurl[page]}}
                     />
                 </View>
-
-
                 <Text style={[{color: textColor, fontWeight, }, textStyle, ]}>
                     {name}
                 </Text>
@@ -207,7 +202,7 @@ const ScrollableTabBar = createReactClass({
                 scrollsToTop={false}
             >
                 <Animated.View
-                    style={[styles.tabs, {width: this.state._containerWidth, }, this.props.tabsContainerStyle, ]}
+                    style={[styles.tabs,{width:90}, {width: this.state._containerWidth, }, this.props.tabsContainerStyle, ]}
                     ref={'tabContainer'}
                     onLayout={this.onTabContainerLayout}
                 >

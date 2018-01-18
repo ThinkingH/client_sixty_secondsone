@@ -89,7 +89,7 @@ export default class CollectItem extends React.PureComponent  {
     render() {
         return (
                     <TouchableOpacity onPress={()=>this._goDetails()}
-                        activeOpacity={1}   style={{marginRight:2.5,marginLeft:2.5,marginTop:15}} >
+                        activeOpacity={1}   style={{marginLeft:this.props.index%2==0?15:0,marginRight:this.props.index%2==1?0:5,marginTop:10}} >
                         <View style={{width:(width-30)/2-2.5}}>
                             <View style={{backgroundColor:'#ccc',borderRadius:10}}>
                                 <Image source={{uri:this.state.data.showimg}} style={{height: (width-30)/2-2.5, width:(width-30)/2-2.5,borderRadius:10}}/>

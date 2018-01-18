@@ -37,10 +37,10 @@ export default class TipView extends Component {
     }
 
     componentDidMount () {
-
-        InteractionManager.runAfterInteractions(() => {
-                 this._getData()
-        });
+        this._getData()
+        // InteractionManager.runAfterInteractions(() => {
+        //          this._getData()
+        // });
     }
 
     _getData=()=>{
@@ -71,21 +71,20 @@ export default class TipView extends Component {
 
                 </View>
 
-                <ImageBackground    style={{position:'absolute',top:Config.STATUSBARHEIGHT,width:width,height:50,flexDirection:'row'}} source={require('../img/icon_homebg.png')} >
+                <ImageBackground    style={{width:width,height:50,flexDirection:'row'}} source={require('../img/icon_homebg.png')} >
 
-                    <TouchableOpacity style={{position:'absolute',top:12.5,right:12.5}} activeOpacity={1}
-                                      onPress={()=>Actions.TabView()}>
-                        <Thumbnail square={true} style={{width:25,height:25}} source={require('../img/icon_header.png')} />
-                    </TouchableOpacity>
+
                     <View style={{width:width,height:50,position:'absolute',alignItems:'center',justifyContent:'center',backgroundColor:'transparent'}}>
                         <Text style={{color:'#fff',backgroundColor:'transparent'}}>小窍门</Text>
                     </View>
                 </ImageBackground>
+                <View style={{width:width,height:width/1.28/850*130/5*4,backgroundColor:'transparent'}}>
+
+                </View>
 
 
-
-                <Content style={{marginTop:width/472*65}} showsVerticalScrollIndicator={false}>
-                    <View style={{padding:20,marginTop:width/1.28/850*130/3*2}} >
+                <Content  showsVerticalScrollIndicator={false}>
+                    <View style={{padding:20,}} >
                         <Surface  width={width-40} height={1}>
                             <Shape d={path} stroke="#C5B061" strokeWidth={1} strokeDash={[3,5]}/>
                         </Surface>

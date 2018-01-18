@@ -2,7 +2,7 @@
  * Created by Administrator on 2017/11/20.
  */
 import React, { Component } from 'react';
-import { ListView ,FlatList,View,Dimensions,Image,InteractionManager,TouchableOpacity,DeviceEventEmitter,PanResponder} from 'react-native';
+import { ListView ,Platform,FlatList,View,Dimensions,Image,InteractionManager,TouchableOpacity,DeviceEventEmitter,PanResponder} from 'react-native';
 import {Actions} from "react-native-router-flux";
 import { Container, Header, Content, Button, Icon, List, Thumbnail ,ListItem, Text,Left,Body,Right,Switch ,Card, CardItem,} from 'native-base';
 import PLVideoView from "../widget/PLVideoView";
@@ -16,6 +16,10 @@ import ContributeItem from '../components/ContributeItem'
 import VideoItem from '../components/VideoItem';
 import MessageItem from '../components/MessageItem';
 import CommentItem from '../components/CommentItme';
+import {PullView,PullList} from 'react-native-pull';
+import {LineDotsLoader,PulseLoader,DotsLoader,TextLoader,BubblesLoader,CirclesLoader,BreathingLoader,RippleLoader,LinesLoader,MusicBarLoader,EatBeanLoader
+,DoubleCircleLoader,RotationCircleLoader,RotationHoleLoader,CirclesRotationScaleLoader,NineCubesLoader  ,ColorDotsLoader} from 'react-native-indicator';
+import { UltimateListView, UltimateRefreshView } from 'react-native-ultimate-listview'
 const {width, height} = Dimensions.get('window');
 let _pageNo = 1;
 const _pageSize = Config.pageCount;
@@ -94,8 +98,8 @@ export default class MainScene extends Component {
 
         this.getMainRefresh = DeviceEventEmitter.addListener("getMainRefresh",this._getDatamain);
         InteractionManager.runAfterInteractions(() => {
-            this._onRefresh();
-
+          //  this._onRefresh();
+            this._getMainVideo();
            // this._getData(_pageNo);
         });
     }
@@ -105,9 +109,8 @@ export default class MainScene extends Component {
     }
 
     _getDatamain=()=>{
-        this.setState({
-            refreshing:true,
-        },()=>{this._getData(_pageNo)});
+        console.log('s5s5s55s5s555555555555555555555555555555555555555')
+        this.listView.refresh();
 
     }
 
@@ -122,33 +125,20 @@ export default class MainScene extends Component {
                 console.log(responseJson);
                 this.setState({
                     mainvideo:responseJson.data,
-
                 });
                 this.setState({
                     refreshing:false,
                 });
-
             })
             .catch((error) => {
                 this.setState({
                     refreshing:false,
                 });
-
                 Toast.show(error.toString());
             });
 
     }
 
-    _onRefresh=()=> {
-
-        this.setState({
-            refreshing:true,
-        });
-       // _pageNo = 1;
-
-        this._getMainVideo();
-        this._getData(_pageNo);
-    };
 
     _loadMoreData=()=> {
 
@@ -170,31 +160,13 @@ export default class MainScene extends Component {
         Request(thetype,parpam)
             .then((responseJson) => {
                 console.log("this.props.urlthis.props.urlthis.props.url",responseJson);
-                if(responseJson.data.pagemsg.sumpage=="1"){
-                    this.setState({
-                        isshowfooter:false,
-                    })
-                }
-                let b=new Array();
-                if(this.state.refreshing){
-                    console.log('bbbbbbbbbbbbbbbbbbbbbbbbbbbbb')
-                    b=responseJson.data.list
-                }else{
-                    console.log('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa')
-                    b=this.state.datas.concat(responseJson.data.list);
-                }
-                this.setState({
-                    datas:b,
-                    refreshing:false,
-                    isLoadingMore:false,
-                    totalCount:responseJson.data.pagemsg.allcount,
-                });
+
+                let rowData =responseJson.data.list;
+
+               
             })
             .catch((error) => {
-                this.setState({
-                    refreshing:false,
-                    isLoadingMore:false,
-                })
+
                 console.log(error.toString())
                 // Toast.show(error.toString());
             });
@@ -211,56 +183,13 @@ export default class MainScene extends Component {
         }
     };
 
-    _renderItem = ({item}) => {
-        if(this.props.item=="comment"){
-            console.log("commentcommentcommentcomment");
-            return(
-                <CommentItem key={item.id}
-                             id={item.id}
-
-                    // onPressItem={this._onPressItem}
-                             title={item}
-                />
-            )
-        }else if(this.props.item=="video"){
-           // console.log("videovideovideovideovideo");
-            return(
-                <VideoItem key={item.id}
-                           id={item.id}
-                           selected={item.coll}
-                           thetype={this.props.thetype}
-                    // onPressItem={this._onPressItem}
-                           title={item}
-                />
-            )
-        }else if(this.props.item=="contribute"){
-            return(
-                <ContributeItem key={item.id}
-                                id={this.props.nowid}
-                    // onPressItem={this._onPressItem}
-                                data={item} callBack={()=>this._onRefresh()}
-                />
-            )
-        }else if(this.props.item=="message"){
-            return(
-                <MessageItem key={item.id}
-                             id={item.nowid}
-                    // onPressItem={this._onPressItem}
-                             title={item}
-                />
-            )
-        }else{
-            console.log("elseelseelseelseelseelse");
-            return(
-                <VideoItem key={item.id}
-                           id={item.id}
-                    // onPressItem={this._onPressItem}
-                           title={item}
-                />
+    renderItem = (item, index, separator) => {
+        if (this.props.item === 'video') {
+            return (
+                <VideoItem selected={item.coll} item={item} index={index}  />
             )
         }
-
-    };
+    }
 
     _toEnd=()=> {
 
@@ -294,7 +223,7 @@ export default class MainScene extends Component {
         this.setState({ hideTabBar: true }, () =>
             Actions.refresh({ hideTabBar: this.state.hideTabBar })
         );
-    }
+    };
 
     _onScrollEnd=(e)=>{
         dy=e.nativeEvent.contentOffset.y;
@@ -380,32 +309,108 @@ export default class MainScene extends Component {
 
     }
 
+    _renderPaginationFetchingView=()=> {
+       return(
+           <View style={{width:width, justifyContent: 'center', alignItems: 'center', height: 90,backgroundColor:'#f8f8f8'}}>
+               <Text style={{color:'#666',fontSize:18}}>6 0 S e c
+               </Text>
+               {this._renderLoading()}
+               {/*<Image ref={(c) => {this.txtPulling = c;}} source={require('../../src/img/icon_account_warn.png')} style={[styles.hide,{width:40,height:40}]}></Image>*/}
+               {/*<Image ref={(c) => {this.txtPullok = c;}} source={require('../../src/img/icon_header.png')} style={[styles.hide,{width:40,height:40}]}></Image>*/}
+
+               {/*<Image ref={(c) => {this.txtPullrelease = c;}} source={require('../../src/img/icon_search_result.png')} style={[styles.hide,{width:40,height:40}]}></Image>*/}
+
+           </View>
+       )
+    }
+
+    _renderLoading=()=>{
+            return(
+                <LineDotsLoader color={'#F5C61E'} />
+            )
+    }
+
+        onFetch = async(_pageNo, startFetch, abortFetch) => {
+            this._getMainVideo();
+
+                let parpam=null;
+                parpam=this.props.url+"&pagesize=10&page="+_pageNo;
+                let thetype=this.props.thetype;
+                Request(thetype,parpam)
+                    .then((responseJson) => {
+                        console.log("this.props.urlthis.props.urlthis.props.url",responseJson);
+                        let rowData =responseJson.data.list;
+                        startFetch(rowData, 24)
+                    })
+                    .catch((error) => {
+                        abortFetch()
+                        console.log(error.toString())
+                        // Toast.show(error.toString());
+                    });
+
+
+
+        };
+
+
     render() {
         return (
             <View
                // {...this._panResponder.panHandlers}
-                style={{flex:1,backgroundColor:'#fafafa'}}>
+                style={{flex:1,backgroundColor:'#fff',alignItems:'center'}}>
 
-                <FlatList
+
+                <UltimateListView
+
                     scrollEventThrottle={1}
-                     onScroll={(e)=>this._onScrollEnd(e)}
-                    ref={(FlatList)=>this.FlatList=FlatList}
+                   // onScroll={(e)=>this._onScrollEnd(e)}
+
                     // columnWrapperStyle={{width:width/2}}
-                    numColumns={this.state.numcolumns}
+
                     showsVerticalScrollIndicator={false}
-                    data={this.state.datas}
+                    //data={this.state.datas}
                     initialNumToRender={4}
                     extraData={this.state}
-                    keyExtractor={this.state.datas.id}
-                    renderItem={this._renderItem}
-                    ListHeaderComponent={this._header}
-                    ListFooterComponent={this._renderFooter()}
-                    refreshing={this.state.refreshing}
-                    onRefresh={this._onRefresh}
+                   // keyExtractor={this.state.datas.id}
+                   // renderItem={this._renderItem}
+                   // ListHeaderComponent={this._header}
+                    //ListFooterComponent={this._renderFooter()}
+                    // refreshing={this.state.refreshing}
+                    // onRefresh={this._onRefresh}
                     onEndReachedThreshold={0.1}
                     onEndReached={(info) => {
                             this._toEnd()
                         } }
+                    paginationBtnText={'正在载入'}
+                    waitingSpinnerText={'正在载入'}
+                    ref={ref => this.listView = ref}
+                    key={this.state.layout} // this is important to distinguish different FlatList, default is numColumns
+                    onFetch={this.onFetch}
+                    keyExtractor={(item, index) => `${index} - ${item}`} // this is required when you are using FlatList
+                    refreshableMode="advanced" // basic or advanced
+
+                    item={this.renderItem} // this takes three params (item, index, separator)
+                    numColumns={2} // to use grid layout, simply set gridColumn > 1
+                   // customRefreshView={this._renderPaginationFetchingView()}
+                    customRefreshView={()=>this._renderPaginationFetchingView()}
+                    // ----Extra Config----
+                    pagination={true}
+                    autoPagination={true}
+                    header={this._header}
+                    //paginationFetchingView={this._renderPaginationFetchingView}
+                    // sectionHeaderView={this.renderSectionHeaderView}   //not supported on FlatList
+                    // paginationFetchingView={this._renderPaginationFetchingView}
+                    // paginationAllLoadedView={this._renderPaginationFetchingView}
+                   //  paginationWaitingView={this._renderPaginationFetchingView}
+                    // emptyView={this.renderEmptyView}
+                    // separator={this.renderSeparatorView}
+
+                    // new props on v3.2.0
+                   // arrowImageStyle={{ width: 20, height: 20, resizeMode: 'contain' }}
+                    dateStyle={{ color: 'lightgray' }}
+                    refreshViewStyle={Platform.OS === 'ios' ? { height: 90, top: -90 } : { height: 90 }}
+                    refreshViewHeight={90}
+
                 />
             </View>
 
@@ -461,7 +466,7 @@ class MyListHeader extends React.PureComponent {
 
     render() {
         return (
-            <View style={{flex:1,alignItems:'center'}}>
+            <View  style={{width:width,alignItems:'center'}}>
 
                 <PLVideoView
                     // ref={PLVideoView}
@@ -494,7 +499,8 @@ class MyListHeader extends React.PureComponent {
                     onProgress={(progress)=>{
                              //console.log("JS progress = "+progress);
                          }}/>
-                <TouchableOpacity onPress={()=>this._onPress()} activeOpacity={1}  style={{position:'absolute',width:width,height:width}}>
+                <TouchableOpacity onPress={()=>this._onPress()} activeOpacity={1}  style={{position:'absolute',width:width,height:width,alignItems:'center'}}>
+                    <Image   style={{width:width-30,height:width-30}} source={require('../img/icon_bgbgbg.png')} />
 
                 </TouchableOpacity>
             </View>

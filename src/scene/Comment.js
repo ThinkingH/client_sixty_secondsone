@@ -37,7 +37,7 @@ export default class Comment extends Component {
     }
 
     componentWillUnmount () {
-        Actions.refresh({startdetailsvideo:true});
+
     }
 
     _sendMsg=()=>{
@@ -71,7 +71,7 @@ export default class Comment extends Component {
             Request('1041',parpama)
                 .then((responseJson) => {
                     Toast.show(responseJson.msg);
-                    DeviceEventEmitter.emit('getRefresh','刷新评论');
+                   DeviceEventEmitter.emit('getRefresh','刷新评论');
                     _value='';
                     this.setState({
                         isvisiable:false,
@@ -134,9 +134,9 @@ export default class Comment extends Component {
                         {/*)}*/}
                     {/*</List>*/}
                 {/*</Content>*/}
-                <Content>
+
                     <ListScene url={"thetype=1042&nowid="+this.props.nowid} thetype="1042" item={"comment"} itemCallBack={this.feedBack}/>
-                </Content>
+
                 <Footer style={{backgroundColor:'#eee',justifyContent:'center',alignItems:'center',height:50,}}>
                     <Input  multiline={true}
                             style={{backgroundColor:'#fff',height:30,borderRadius:4,borderWidth:1,borderColor:'#666',fontSize:12,padding:0,marginLeft:15,marginRight:15,lineHeight:14}}

@@ -104,7 +104,7 @@ export default class Setting extends Component {
                                <Text>暂不升级</Text>
                            </TouchableOpacity>
                            <TouchableOpacity onPress={()=> { this._update()}}
-                               style={{flex:1,alignItems:'center',justifyContent:'center',backgroundColor:'#c5b361',borderBottomRightRadius:5}}>
+                               style={{flex:1,alignItems:'center',justifyContent:'center',backgroundColor:'#f5c61e',borderBottomRightRadius:5}}>
                                <Text>立即升级</Text>
                            </TouchableOpacity>
                        </View>
@@ -126,7 +126,7 @@ export default class Setting extends Component {
                 <Content>
                     <List>
                         <ListItem style={{backgroundColor:'#fff'}} itemDivider>
-                            <Text style={{color:'#c5b361',fontSize:14}}>通知</Text>
+                            <Text style={{color:'#f5c61e',fontSize:14}}>通知</Text>
                         </ListItem>
                         <ListItem >
                             <Text style={[styles.textcolor]}>通知开关</Text>
@@ -136,7 +136,7 @@ export default class Setting extends Component {
                             <Right>
                                 <Switch
                                     value={this.state.isopen}
-                                    circleColorActive={'#c5b361'}
+                                    circleColorActive={'#f5c61e'}
                                     backgroundActive={'#f1eeb4'}
                                     circleColorInactive={'#fff'}
                                     backgroundInactive={'#ccc'}
@@ -148,7 +148,7 @@ export default class Setting extends Component {
                             </Right>
                         </ListItem>
                         <ListItem style={{backgroundColor:'#fff'}} itemDivider>
-                            <Text style={{color:'#c5b361',fontSize:14}}>关于我们</Text>
+                            <Text style={{color:'#f5c61e',fontSize:14}}>关于我们</Text>
                         </ListItem>
                         <ListItem onPress={()=>this._checkUpdate()}>
                             <Text style={[styles.textcolor]}>检测版本</Text>
@@ -163,7 +163,7 @@ export default class Setting extends Component {
                             <Text style={[styles.textcolor]}>意见反馈</Text>
                         </ListItem>
                         <ListItem style={{backgroundColor:'#fff'}} itemDivider>
-                            <Text style={{color:'#c5b361',fontSize:14}}>注销</Text>
+                            <Text style={{color:'#f5c61e',fontSize:14}}>注销</Text>
                         </ListItem>
                         <ListItem onPress={()=>this._exit()}>
                             <Text style={[styles.textcolor]}>{Config.usertype==1?'注销':'登录'}</Text>

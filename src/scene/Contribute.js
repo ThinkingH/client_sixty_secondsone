@@ -58,7 +58,7 @@ export default  class Contribute extends Component {
 
     componentWillUnmount () {
 
-        Actions.refresh({startdetailsvideo:true});
+
     }
 
     componentDidMount () {
@@ -275,6 +275,7 @@ export default  class Contribute extends Component {
                     style={[styles.textInputStyle,{height:Math.max(35,this.state.height)}]}
                     placeholder={"简单的介绍你所做的成品"}
                     maxLength={100}
+                    value={this.state.value}
                     multiline={true}
                     onChangeText={(value)=>{this.getValue(value)}}
                     onContentSizeChange={(event)=>this.onContentSizeChange(event)}

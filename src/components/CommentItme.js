@@ -36,7 +36,7 @@ export default class CommentItme extends React.PureComponent {
     }
 
     render() {
-        const datas=[{item:"22"},{item:"22"},{item:"22"},{item:"22"}]
+
         return (
             <Item style={{paddingTop:20,paddingLeft:20,paddingRight:20,margin:0,alignItems:"flex-start"}}>
                 <View style={{marginRight:10}}>

@@ -29,11 +29,14 @@ export default class BaseScene extends Component {
 
     componentDidMount () {
         this.getCollect = DeviceEventEmitter.addListener("getCollect",this._getData);
-        InteractionManager.runAfterInteractions(() => {
-            if(Config.usertype=="1"){
-                this._getData();
-            }
-        });
+        if(Config.usertype=="1"){
+            this._getData();
+        }
+        // InteractionManager.runAfterInteractions(() => {
+        //     if(Config.usertype=="1"){
+        //         this._getData();
+        //     }
+        // });
     }
 
     _getData=()=>{
@@ -64,10 +67,7 @@ export default class BaseScene extends Component {
                        }}>
                     <ImageBackground    style={{position:'absolute',top:0,width:width,height:50,flexDirection:'row'}} source={require('../img/icon_homebg.png')} >
 
-                        <TouchableOpacity style={{position:'absolute',top:12.5,right:12.5}} activeOpacity={1}
-                                          onPress={()=>Actions.TabView()}>
-                            <Thumbnail square={true} style={{width:25,height:25}} source={require('../img/icon_header.png')} />
-                        </TouchableOpacity>
+
                         <View style={{width:width,height:50,position:'absolute',alignItems:'center',justifyContent:'center',backgroundColor:'transparent'}}>
                             <Text style={{color:'#fff',backgroundColor:'transparent'}}>收藏</Text>
                         </View>
@@ -80,7 +80,7 @@ export default class BaseScene extends Component {
                             <Text style={{marginTop:20}}>您还没有收藏任何菜谱哦,快去收藏吧~</Text>
                             </View>
                         ):(
-                            <View style={{paddingLeft:12.5,paddingRight:12.5,flex:1}}>
+                            <View style={{flex:1}}>
                                 <ListScene url={"thetype=1022"} thetype="1022"  item={"collect"}/>
                             </View>
                             )

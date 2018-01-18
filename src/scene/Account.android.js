@@ -18,6 +18,8 @@ const styles = StyleSheet.create({
         backgroundColor:'#ccc'
     },
 });
+let num=0;
+const imgarr=[require('../img/icon_login1.png'),require('../img/icon_login2.png'),require('../img/icon_login3.png'),require('../img/icon_login4.png')]
 export default class Account extends Component {
 
     static navigationOptions = {
@@ -43,6 +45,7 @@ export default class Account extends Component {
             address:'',
             sex:1,
         };
+        num=  Math.ceil(Math.random()*4)-1
     }
 
     componentDidMount(){
@@ -50,11 +53,9 @@ export default class Account extends Component {
 
        this.getInfo = DeviceEventEmitter.addListener("getinfo",this._updatelogin);
         this.onFresh = DeviceEventEmitter.addListener("onFresh",this._onFresh);
-        InteractionManager.runAfterInteractions(() => {
-            if(Config.usertype==1){
-                this._onFresh();
-            }
-        });
+        if(Config.usertype==1){
+            this._onFresh();
+        }
     };
     _onFresh=()=>{
         this._getInfo();
@@ -143,8 +144,8 @@ export default class Account extends Component {
                 <Content style={{backgroundColor:'#fafafa'}}>
                     <Body style={{flex:1}}>
                         <ImageBackground   style={{width:width,height:width,justifyContent:'flex-end',alignItems:'center'}}
-                                           source={require('../img/noob.png')} >
-                            <Button  rounded block onPress={()=>Actions.login2()}  style={{backgroundColor:'#f5c61e',width:width-60,height:40,marginLeft:30}}>
+                                           source={imgarr[num]} >
+                            <Button  rounded block onPress={()=>Actions.login2({num:num})}  style={{backgroundColor:'#f5c61e',width:width-60,height:40,marginLeft:30}}>
                                 <Text style={{fontSize:16,color:'#fff'}} >用  户  登  录</Text>
                             </Button>
                         </ImageBackground>
@@ -447,7 +448,7 @@ export default class Account extends Component {
                         >
                             <Thumbnail   style={{width:25,height:25}} source={require('../img/newicon_setting.png')} />
                         </Button>
-                        {Config.IECEIVESOCKET!=1?(
+                        {Config.IECEIVESOCKET==1?(
                                 <View style={{position:'absolute',top:13,right:45,width:16,height:16,borderRadius:8,backgroundColor:'#f00',alignItems:'center',justifyContent:'center'}}>
                                     <Text style={{fontSize:10,color:'#fff'}}>1</Text>
                                 </View>):(null) }

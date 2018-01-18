@@ -7,7 +7,7 @@ import {Button} from 'native-base'
 import {Actions} from "react-native-router-flux";
 import Request from '../utils/Fetch';
 import Toast from '@remobile/react-native-toast';
-
+import Config from '../utils/Config';
 const styles = StyleSheet.create({
     container: {
         flex: 1,
@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
         marginRight:30,
         marginTop:30,
         borderRadius:5,
-        backgroundColor: '#c5b361',
+        backgroundColor: '#f5c61e',
     }
 });
 
@@ -85,7 +85,7 @@ export default class FeedBack extends Component {
     render(){
         return (
             <View style={styles.container}>
-                <StatusBar backgroundColor="#C5B361"
+                <StatusBar backgroundColor={Config.StatusBarColor}
                            barStyle="light-content"
                            translucent={false}
                            hidden={false}/>

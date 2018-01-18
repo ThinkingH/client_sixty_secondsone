@@ -1,4 +1,7 @@
 /**
+ * Created by Administrator on 2018/1/18.
+ */
+/**
  * Created by Administrator on 2017/10/27.
  */
 /**
@@ -35,11 +38,11 @@ const data = [
 
 ];
 let _value='';
-export default class Comment extends Component {
+export default class MessageBox extends Component {
     constructor(props) {
         super(props);
         this.state = {
-         value:''
+            value:''
 
 
         };
@@ -49,16 +52,6 @@ export default class Comment extends Component {
     }
 
 
-    _goToMessage=()=>{
-        if(Config.usertype=='1'){
-            Actions.messagebox()
-        }else{
-            let num=  Math.ceil(Math.random()*4)-1
-            Actions.login2({num:num})
-        }
-
-    }
-
     render() {
         return (
             <Container style={{backgroundColor:'#fafafa'}}>
@@ -67,14 +60,8 @@ export default class Comment extends Component {
                            barStyle="light-content"
                            translucent={false}
                            hidden={false}/>
-                <TouchableOpacity activeOpacity={0.9} onPress={()=>this._goToMessage()} style={{width:width,height:80,flexDirection:'row',alignItems:'center',backgroundColor:'#fff'}}>
-                    <Image  style={{width:50,height:50,marginLeft:20}} source={require('../img/icon_login1.png')} />
-                    <Text style={{marginLeft:10}}>留言箱</Text>
-                </TouchableOpacity>
-                <View style={{width:width,height:5,backgroundColor:'#f8f8f8'}}>
 
-                </View>
-                <ListScene url={"thetype=1024"} thetype="1024" item={"message"} />
+                <ListScene url={"thetype=1045"} thetype="1045" item={"messagebox"} />
 
 
             </Container>

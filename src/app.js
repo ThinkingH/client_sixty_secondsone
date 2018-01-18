@@ -64,7 +64,8 @@ import TipView from './scene/TipView';
 import TipAll from './scene/TipAll';
 import TipDetails from './scene/TipDetails';
 import SearchMain from './scene/SearchMain';
-import Intro from './scene/Intro'
+import Intro from './scene/Intro';
+import MessageBox from './scene/MessageBox';
 
 const styles = StyleSheet.create({
     container: {
@@ -260,24 +261,31 @@ export default class apps extends Component {
             //sofitellist 代表推送到特辑列表二级页面  sid为特辑列表id    data为特辑数据
             let data=JSON.parse(map.extras);
             Actions.sofitellist({id:data.sid,datas:data.data});
+        }else if(JSON.parse(map.extras).action=="message"){
+            //message 代表推送到消息列表
+            let data=JSON.parse(map.extras);
+            Actions.message();
+        }else if(JSON.parse(map.extras).action=="messagebox"){
+            //messagebox 代表推送到留言箱
+            let data=JSON.parse(map.extras);
+            Actions.messagebox();
         }
         Config.IECEIVESOCKET=2;
     };
+
 // 退出时 清除所有推送消息  JPushModule.clearAllNotifications();
     unInitPush=()=>{
         JPushModule.removeReceiveCustomMsgListener();
        JPushModule.removeReceiveNotificationListener();
     };
+
    render(){
         return(
             <Router
                 createReducer={reducerCreate}
                 getSceneStyle={getSceneStyle}
             >
-
                             <Scene key="root">
-
-
                                 <Scene key="launch" hideNavBar component={Launch}  initial />
                                 <Scene
                                     key="intro"
@@ -404,17 +412,12 @@ export default class apps extends Component {
                                 />
                                 <Scene
                                     key="videodetails"
-
                                   //  backButtonImage={require('./img/icon_noviceclose.png')}
                                     component={VideoDetails}
-
                                     hideNavBar={true}
-
                                     panHandlers={null}
                                     duration={1}
                                 />
-
-
                                 <Scene
                                     titleStyle={[styles.titleStyle]}
                                     key="assortmentsearch"
@@ -429,7 +432,7 @@ export default class apps extends Component {
                                     titleStyle={[styles.titleStyle]}
                                     key="assortmentone"
                                     leftButtonIconStyle={{width:20,height:20}}
-                                 //   backButtonImage={require('./img/icon_noviceclose.png')}
+                                 // backButtonImage={require('./img/icon_noviceclose.png')}
                                     component={AssortmentOne}
                                     hideNavBar={false}
                                     panHandlers={null}
@@ -465,10 +468,8 @@ export default class apps extends Component {
                                     panHandlers={null}
                                     duration={1}
                                 />
-
                                 <Scene
                                     titleStyle={[styles.titleStyle]}
-
                                     leftButtonIconStyle={{width:20,height:20}}
                                     navigationBarStyle={[styles.navigationBarStyle]}
                                     component={MainScene}
@@ -488,6 +489,17 @@ export default class apps extends Component {
                                 />
                                 <Scene
                                     titleStyle={[styles.titleStyle]}
+                                    key="messagebox"
+                                    leftButtonIconStyle={{width:20,height:20}}
+                                    navigationBarStyle={[styles.navigationBarStyle]}
+                                    component={MessageBox}
+                                    hideNavBar={false}
+                                    panHandlers={null}
+                                    duration={1}
+                                />
+
+                                <Scene
+                                    titleStyle={[styles.titleStyle]}
                                     hideNavBar={false}
                                     key="accountinfo"
                                     leftButtonIconStyle={{width:20,height:20}}
@@ -502,7 +514,6 @@ export default class apps extends Component {
                                     panHandlers={null}
                                     duration={1}
                                 />
-
                                 <Scene
                                     titleStyle={[styles.titleStyle]}
                                     key="getinfo"
@@ -511,7 +522,6 @@ export default class apps extends Component {
                                     component={GetInfo}
                                     title="填写头像信息"
                                     panHandlers={null}
-
                                     duration={1}
                                 />
                                 <Scene
@@ -535,7 +545,6 @@ export default class apps extends Component {
                                     // title="登录"
                                     hideNavBar={false}
                                     panHandlers={null}
-
                                     duration={1}
                                 />
                                 <Scene
@@ -547,11 +556,8 @@ export default class apps extends Component {
                                     // title="登录"
                                     hideNavBar={true}
                                     panHandlers={null}
-
                                     duration={1}
                                 />
-
-
                                 {/*下部导航开始*/}
                                 <Tabs
                                 // type={ActionConst.REPLACE}
@@ -579,7 +585,6 @@ export default class apps extends Component {
                                         key="tipview"
                                         hideNavBar
                                         icon_id={6}
-
                                         component={TipView}
                                     />
                                     <Scene
@@ -587,10 +592,8 @@ export default class apps extends Component {
                                         icon={TabIcon}
                                         component={SearchMain}
                                         hideNavBar={true}
-
                                     />
                                     <Scene  key="comment"
-
                                             hideNavBar
                                             icon_id={2}
                                             icon={TabIcon}
@@ -610,7 +613,6 @@ export default class apps extends Component {
                                     {/*/>*/}
                                 </Tabs>
                                 {/*下部导航结束*/}
-
                                 <Scene
                                     titleStyle={[styles.titleStyle]}
                                     key="TabView"
@@ -648,7 +650,6 @@ export default class apps extends Component {
                             panHandlers={null}
                             duration={1}
                         />
-
                         <Scene
                             titleStyle={[styles.titleStyle]}
                             leftButtonIconStyle={{width:20,height:20}}
@@ -658,7 +659,6 @@ export default class apps extends Component {
                             component={ContributeByUser}
                             title="菜谱上传"
                             panHandlers={null}
-
                             onRight={()=>{
                                       Actions.refresh({save:true});
                                      }}
@@ -738,12 +738,9 @@ export default class apps extends Component {
                                     key="inputstep"
                                     hideNavBar
                                     component={InputStep}
-
                                     panHandlers={null}
                                     duration={1}
                                 />
-
-
                              {/*<Scene*/}
                                 {/*key="loginModal"*/}
                                  {/*component={Login}*/}
@@ -768,9 +765,6 @@ export default class apps extends Component {
                                 {/*panHandlers={null}*/}
                                 {/*duration={1}*/}
                             {/*/>*/}
-
-
-
                             </Scene>
 
 

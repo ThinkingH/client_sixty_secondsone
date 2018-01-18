@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ListView ,FlatList,View,Dimensions,Image,InteractionManager,TouchableOpacity,DeviceEventEmitter,PanResponder} from 'react-native';
+import { ListView ,FlatList,View,Dimensions,ActivityIndicator,Platform,Image,InteractionManager,TouchableOpacity,DeviceEventEmitter,PanResponder} from 'react-native';
 import {Actions} from "react-native-router-flux";
 import { Container, Header, Content, Button, Icon, List, Thumbnail ,ListItem, Text,Left,Body,Right,Switch ,Card, CardItem,} from 'native-base';
 import PLVideoView from "../widget/PLVideoView";
@@ -15,8 +15,12 @@ import MessageItem from '../components/MessageItem';
 import CommentItem from '../components/CommentItme';
 import TipItem from '../components/TipItem';
 import SearchItem from '../components/SearchItem';
+import MessageBoxItem from '../components/MessageBoxItem';
 import CollectItem from '../components/CollectItem';
-
+import {PullView} from 'react-native-pull';
+import {LineDotsLoader,PulseLoader,DotsLoader,TextLoader,BubblesLoader,CirclesLoader,BreathingLoader,RippleLoader,LinesLoader,MusicBarLoader,EatBeanLoader
+    ,DoubleCircleLoader,RotationCircleLoader,RotationHoleLoader,CirclesRotationScaleLoader,NineCubesLoader  ,ColorDotsLoader} from 'react-native-indicator';
+import { UltimateListView, UltimateRefreshView } from 'react-native-ultimate-listview'
 const {width, height} = Dimensions.get('window');
 let _pageNo = 1;
 const _pageSize = Config.pageCount;
@@ -89,51 +93,16 @@ export default class ListScene extends Component {
     }
 
     componentDidMount() {
-
         this.getRefresh = DeviceEventEmitter.addListener("getRefresh",this._onRefresh);
-        InteractionManager.runAfterInteractions(() => {
-            this._onRefresh();
-
-        });
     }
 
     componentWillUnmount() {
         this.getRefresh.remove();
     }
 
-    _getMainVideo=()=>{
-        let parpam="thetype=1028";
-        Request('1028',parpam)
-            .then((responseJson) => {
-                this.setState({
-                    mainvideo:responseJson.data,
-                })
-               this.video.setVideoPath(responseJson.data.videourl,responseJson.data.showimg);
-
-            })
-            .catch((error) => {
-
-                Toast.show(error.toString());
-            });
-    }
-
     _onRefresh=()=> {
-        _pageNo = 1;
-        this.setState({
-            refreshing:true,
-        },()=>this._getData(_pageNo));
-
-         // if(this.props.header=='header'){
-         //     this._getMainVideo();
-         // }
-
-
-
-
+        this.listViews.refresh();
     };
-
-
-
 
     _loadMoreData=()=> {
 
@@ -145,7 +114,7 @@ export default class ListScene extends Component {
 
     };
 
-    _getData=(_pageNo)=>{
+    _getData=(_pageNo,resolve)=>{
 
         console.log("this.props.urlnumcolumnsnumcolumnsnumcolumnsnumcolumns",this.state.numcolumns,'numcolumnsnumcolumnsnumcolumns',this.props.item);
         console.log("this.props.url",this.props.url);
@@ -169,7 +138,7 @@ export default class ListScene extends Component {
                             b=this.state.datas.concat(responseJson.data.list);
                         }
 
-
+                resolve();
                 this.setState({
                     datas:b,
                     refreshing:false,
@@ -209,7 +178,7 @@ export default class ListScene extends Component {
         }
     };
 
-    _renderItem = ({item}) => {
+    _renderItem = (item, index, separator) => {
         if(this.props.item=="comment"){
           //  console.log("commentcommentcommentcomment");
             return(
@@ -220,16 +189,16 @@ export default class ListScene extends Component {
                              title={item}
                 />
             )
-        }else if(this.props.item=="video"){
+        }else if(this.props.item == "video"){
            // console.log("videovideovideovideovideo");
             return(
-                <VideoItem key={item.id}
-                           id={item.id}
+                <VideoItem
                            selected={item.coll}
+                           index={index}
                            sign={this.props.sign}
                     // onPressItem={this._onPressItem}
                          thetype={this.props.thetype}
-                           title={item}
+                           item={item}
                 />
             )
         }else if(this.props.item=="contribute"){
@@ -243,7 +212,7 @@ export default class ListScene extends Component {
         }else if(this.props.item=="message"){
             return(
                 <MessageItem key={item.id}
-                             id={item.nowid}
+
                     // onPressItem={this._onPressItem}
                              title={item}
                 />
@@ -259,7 +228,7 @@ export default class ListScene extends Component {
         }else if(this.props.item=="search"){
             return(
                 <SearchItem key={item.id}
-
+                            index={index}
                     // onPressItem={this._onPressItem}
                          data={item}
                 />
@@ -267,10 +236,21 @@ export default class ListScene extends Component {
         }else if(this.props.item=="collect"){
             return(
                 <CollectItem key={item.id}
+                             index={index}
                              selected={item.coll}
                              thetype={this.props.thetype}
                     // onPressItem={this._onPressItem}
                             data={item}
+                />
+            )
+        }else if(this.props.item=="messagebox"){
+            return(
+                <MessageBoxItem key={item.id}
+                             index={index}
+
+                             thetype={this.props.thetype}
+                    // onPressItem={this._onPressItem}
+                             title={item}
                 />
             )
         }
@@ -280,7 +260,7 @@ export default class ListScene extends Component {
                 <VideoItem key={item.id}
                            id={item.id}
                     // onPressItem={this._onPressItem}
-                           title={item}
+                           item={item}
                 />
             )
         }
@@ -341,55 +321,131 @@ export default class ListScene extends Component {
 
     _renderResult=()=>{
         if(this.props.header=='search'){
-            if(this.state.datas.length==0){
-                isshowsearch=false;
                 return(
                     <View style={{width:width,height:height,position:'absolute',backgroundColor:'#fafafa',alignItems:'center',justifyContent:'center'}}>
                         <Thumbnail square style={{width:width/3,height:width/3,marginBottom:50}} source={require('../img/icon_search_result.png')} />
                         <Text style={{fontSize:20,color:'#ccc',marginBottom:50}}>无搜索结果</Text>
                     </View>
                 )
-            }
-
         }
     }
 
     _onScrollEndDrag=()=>{
         dx=dy;
     }
+    onPullRelease=(resolve)=> {
+        this._onRefresh(resolve);
+        console.log('resolveresolveresolveresolve', resolve)
+        setTimeout(() => {
+            resolve();
+        }, 3000);
+    }
+    // _renderLoading=(pulling, pullok, pullrelease)=>{
+    //     console.log(pulling, pullok, pullrelease)
+    //     return(
+    //         <View style={{width:width,height:60,backgroundColor:'#f00',alignItems:'center',justifyContent:'center'}}>
+    //             {/*<Image  style={{width:40,height:40}} source={require('../img/icon_search_result.png')} />*/}
+    //             <ActivityIndicator size="small" color="gray" />
+    //             {pulling ? <Text>下拉刷新2...</Text> : null}
+    //             {pullok ? <Text>松开刷新2......</Text> : null}
+    //             {pullrelease ? <Text>玩命刷新中2......</Text> : null}
+    //         </View>
+    //     )
+    // }
+    _renderLoading=()=>{
+        return(
+            <LineDotsLoader color={'#F5C61E'} />
+        )
+    }
+
+    _renderPaginationFetchingView=()=> {
+        return(
+            <View style={{width:width, justifyContent: 'center', alignItems: 'center', height:90,backgroundColor:'#f8f8f8'}}>
+                <Text style={{color:'#666',fontSize:18}}>6 0 S e c
+                </Text>
+                {this._renderLoading()}
+                {/*<Image ref={(c) => {this.txtPulling = c;}} source={require('../../src/img/icon_account_warn.png')} style={[styles.hide,{width:40,height:40}]}></Image>*/}
+                {/*<Image ref={(c) => {this.txtPullok = c;}} source={require('../../src/img/icon_header.png')} style={[styles.hide,{width:40,height:40}]}></Image>*/}
+
+                {/*<Image ref={(c) => {this.txtPullrelease = c;}} source={require('../../src/img/icon_search_result.png')} style={[styles.hide,{width:40,height:40}]}></Image>*/}
+
+            </View>
+        )
+    }
+    onFetch = async(_pageNo, startFetch, abortFetch) => {
+
+        let parpam=null;
+        parpam=this.props.url+"&pagesize=10&page="+_pageNo;
+        let thetype=this.props.thetype;
+        Request(thetype,parpam)
+            .then((responseJson) => {
+                console.log("this.props.urlthis.props.urlthis.props.url",responseJson);
+                let rowData =responseJson.data.list;
+                startFetch(rowData, 10)
+            })
+            .catch((error) => {
+                abortFetch()
+                console.log(error.toString())
+                // Toast.show(error.toString());
+            });
+
+
+
+    };
+
 
     render() {
         return (
             <View
                 //{...this._panResponder.panHandlers}
-                style={{flex:1,backgroundColor:'#fafafa'}}>
+                style={{flex:1,backgroundColor:'#fff'}}>
 
-                {this._renderResult()}
-                <FlatList
-                    scrollEventThrottle={1}
-                   // onScroll={(e)=>this._onScrollEnd(e)}
-                   // onScrollEndDrag={()=>this._onScrollEndDrag()}
-                    ref={(FlatList)=>this.FlatList=FlatList}
-                    // columnWrapperStyle={{width:width/2}}
-                    numColumns={this.state.numcolumns}
-                    showsVerticalScrollIndicator={false}
-                    data={this.state.datas}
-                    initialNumToRender={4}
-                    extraData={this.state}
-                    keyExtractor={this.state.datas.id}
-                    renderItem={this._renderItem}
-                    ListHeaderComponent={this._header}
-                    ListFooterComponent={this._renderFooter()}
-                    refreshing={this.state.refreshing}
-                    onRefresh={this._onRefresh}
-                    onEndReachedThreshold={0.1}
-                    onEndReached={(info) => {
+                    <UltimateListView
+                        scrollEventThrottle={1}
+                       // onScroll={(e)=>this._onScrollEnd(e)}
+                        // columnWrapperStyle={{width:width/2}}
+                        showsVerticalScrollIndicator={false}
+                        //data={this.state.datas}
+                        initialNumToRender={4}
+                        extraData={this.state}
+                        // keyExtractor={this.state.datas.id}
+                        // renderItem={this._renderItem}
+                        // ListHeaderComponent={this._header}
+                        ListFooterComponent={this._renderFooter()}
+                        // refreshing={this.state.refreshing}
+                        // onRefresh={this._onRefresh}
+                        onEndReachedThreshold={0.1}
+                        onEndReached={(info) => {
                             this._toEnd()
                         } }
-                />
-
-
-
+                        paginationBtnText={'正在载入'}
+                        waitingSpinnerText={'正在载入'}
+                        ref={ref => this.listViews = ref}
+                        key={this.state.layout} // this is important to distinguish different FlatList, default is numColumns
+                        onFetch={this.onFetch}
+                        keyExtractor={(item, index) => `${index} - ${item}`} // this is required when you are using FlatList
+                        refreshableMode="advanced" // basic or advanced
+                        item={this._renderItem} // this takes three params (item, index, separator)
+                        numColumns={this.state.numcolumns} // to use grid layout, simply set gridColumn > 1
+                        // customRefreshView={this._renderPaginationFetchingView()}
+                        customRefreshView={()=>this._renderPaginationFetchingView()}
+                        // ----Extra Config----
+                        pagination={true}
+                        autoPagination={true}
+                        header={this._header}
+                        //paginationFetchingView={this._renderPaginationFetchingView}
+                        // sectionHeaderView={this.renderSectionHeaderView}   //not supported on FlatList
+                        // paginationFetchingView={this._renderPaginationFetchingView}
+                        // paginationAllLoadedView={this._renderPaginationFetchingView}
+                        //  paginationWaitingView={this._renderPaginationFetchingView}
+                         emptyView={this._renderResult}
+                        // separator={this.renderSeparatorView}
+                        // new props on v3.2.0
+                        // arrowImageStyle={{ width: 20, height: 20, resizeMode: 'contain' }}
+                        dateStyle={{ color: 'lightgray' }}
+                        refreshViewStyle={Platform.OS === 'ios' ? { height: 90, top: -90 } : { height: 90 }}
+                        refreshViewHeight={90}
+                    />
             </View>
 
         );

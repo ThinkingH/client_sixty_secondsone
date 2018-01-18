@@ -2,15 +2,17 @@
  * Created by Administrator on 2017/10/20.
  */
 import React, { Component } from 'react';
-import { ListView ,FlatList,View,Dimensions,Image,InteractionManager,DeviceEventEmitter,StatusBar} from 'react-native';
+import { ListView ,FlatList,View,Dimensions,Image,InteractionManager,TouchableOpacity,DeviceEventEmitter,StatusBar} from 'react-native';
 import {Actions} from "react-native-router-flux";
 import Request from '../utils/Fetch';
 import Toast from '@remobile/react-native-toast'
 import { Container, Header, Content, Button, Icon, List, Thumbnail ,ListItem, Text,Left,Body,Right,Switch ,Card, CardItem,} from 'native-base';
 import PLVideoView from "../widget/PLVideoView";
-
+import VideoItem from '../components/VideoItem';
 import Config from '../utils/Config';
 import ListScene from "./ListScene";
+import ShareUtile from '../utils/ShareUtil'
+
 const data = [
     {"name" : "Melody", age: 21,id:1},
     {"name" : "ZZ", age: 22,id:2},
@@ -31,35 +33,145 @@ export default class SofitelList extends Component {
         super(props);
         this.state={
             data:[],
+            viewopacity:'transparent',
+            navibaropacity:0,
+            shareurl:''
         }
     }
 
     componentDidMount() {
-
+              this._getData();
     }
+
+    _getData=()=>{
+
+        let parpam="thetype=1046&imgwidth=500&imgheight=500&pagesize=10&page=1&msgjihe="+this.props.id;
+        Request('1046',parpam)
+            .then((responseJson) => {
+            console.log('3333333333333333333333333',responseJson.data)
+                this.setState({
+                    data:responseJson.data.list,
+                     shareurl:responseJson.data.share
+                })
+            })
+            .catch((error) => {
+                Toast.show(error.toString());
+            });
+    };
+
+    _onScrollEnd=(e)=>{
+        if(e.nativeEvent.contentOffset.y<=width/2){
+            this.viewopacity.setNativeProps({
+                style: {backgroundColor:'rgba(245,198,30,'+e.nativeEvent.contentOffset.y/(width/2)+')'}
+            });
+        }else if(e.nativeEvent.contentOffset.y>width/2){
+            this.viewopacity.setNativeProps({
+                style: {backgroundColor:'rgba(245,198,30,'+e.nativeEvent.contentOffset.y/(width/2)+')'}
+            });
+        }
+
+        if(e.nativeEvent.contentOffset.y<=width/2){
+            this.navibar.setNativeProps({
+                style: {opacity:e.nativeEvent.contentOffset.y/(width/2)}
+            });
+        }else if(e.nativeEvent.contentOffset.y>width/2){
+            this.navibar.setNativeProps({
+                style: {opacity:e.nativeEvent.contentOffset.y/(width/2)}
+            });
+        }
+
+        if(e.nativeEvent.contentOffset.y<=width/2){
+            this.navibara.setNativeProps({
+                style: {opacity:e.nativeEvent.contentOffset.y/(width/2)}
+            });
+        }else if(e.nativeEvent.contentOffset.y>width/2){
+            this.navibara.setNativeProps({
+                style: {opacity:e.nativeEvent.contentOffset.y/(width/2)}
+            });
+        }
+        if(this.state.isplay){
+            let dy=e.nativeEvent.contentOffset.y;
+
+            if(dy>=width){
+                this.videos.pause();
+            }else if (0<dy<width){
+                this.videos.start();
+            }else{
+                console.log(e.nativeEvent.contentOffset.y)
+            }
+        }
+        // console.log("e.nativeEvent.contentOffset",e.nativeEvent.contentOffset)
+        // console.log("e.nativeEventt",e.nativeEvent)
+    }
+
+    _rendersofitelist=()=>{
+        return(
+            this.state.data.map((item,i)=>
+            <VideoItem selected={item.coll} key={i} item={item} index={i}>
+
+            </VideoItem>
+            )
+        )
+    }
+
+    _share=()=>{
+
+
+        let list = [0,2,3];
+        ShareUtile.shareboard("分享描述",
+            this.state.data.showimg,
+            this.state.shareurl,
+            this.props.title,
+            list,(code,message) =>{
+                console.log('wwwwwwwwwwwwwwwwwwwwwwww',message,code)
+                Toast.show(message);
+
+                // this.videos.start();
+            });
+    };
 
     render() {
         return (
         <View style={{flex:1,backgroundColor:'#fafafa'}}>
+            <Content onScroll={(e)=>this._onScrollEnd(e)} showsVerticalScrollIndicator={false}>
 
-            <Header androidStatusBarColor={Config.StatusBarColor} style={{height:0}}>
-            </Header>
-            <StatusBar backgroundColor="transparent"
-                       barStyle="light-content"
-                       translucent={true}
-                       hidden={false}/>
-            <ListScene url={"thetype=1015&imgwidth=500&imgheight=500&msgjihe="+this.props.id} header="sheader" sdata={this.props.datas}  thetype="1015"   item={"video"} />
-            <View style={{position:'absolute',top:0,width:width,height:50,backgroundColor:'rgba(0,0,0,0.4)',flexDirection:'row'}}>
-               <View style={{flex:1,alignItems:'center',justifyContent:'center'}}>
-                   <Image  style={{width:20,height:20}} source={require('../img/icon_close.png')} />
-               </View>
-                <View style={{flex:5,alignItems:'center',justifyContent:'center'}}>
-                   <Text style={{fontSize:16,color:'#fff'}}>{this.props.datas.name}</Text>
+
+                <View style={{elevation:10 ,backgroundColor:'#fff'}}  >
+                    <Image source={{uri:this.props.datas.showimg}} style={{height: width/16*9, width: width}}/>
+                    <View  style={{padding:15}}>
+                        <Text style={{fontSize:10,color:'#c5b061'}}>{this.props.datas.create_datetime}</Text>
+                        <Text style={{marginTop:10,fontSize:14,color:'#666'}}>{this.props.datas.name}</Text>
+                        <Text  note style={{marginTop:10,fontSize:14,color:'#999'}}>{this.props.datas.content}</Text>
+                    </View>
+                    <View style={{width:width,height:1,backgroundColor:'#ccc'}}></View>
                 </View>
-                <View style={{flex:1,alignItems:'center',justifyContent:'center'}}>
-                    <Image  style={{width:20,height:20}} source={require('../img/icon_share.png')} />
+                <View style={{width:width,flexDirection:'row',flexWrap:'wrap'}}>
+
+                    {this._rendersofitelist()}
                 </View>
+
+
+
+
+
+            </Content>
+            <View ref={(viewopacity)=>this.viewopacity=viewopacity}
+                  style={{position:'absolute',top:0,width:width,height:StatusBar.currentHeight,backgroundColor:this.state.viewopacity}}>
             </View>
+            <View ref={(navibar)=>this.navibar=navibar}
+                  style={{position:'absolute',top:StatusBar.currentHeight,width:width,height:50,opacity:this.state.navibaropacity,justifyContent:'center',alignItems:'center',backgroundColor:'rgba(0,0,0,0.5)'}}>
+            </View>
+            <View ref={(navibar)=>this.navibara=navibar}
+                  style={{position:'absolute',top:StatusBar.currentHeight,width:width,height:50,
+                      opacity:this.state.navibaropacity,justifyContent:'center',alignItems:'center',backgroundColor:'transparent'}}>
+                <Text style={{fontSize:16,color:'#fff'}}>{this.props.title}</Text>
+            </View>
+            <TouchableOpacity style={{position:'absolute',left:20,top:StatusBar.currentHeight+15,width:20,height:20}} activeOpacity={0.9} onPress={()=>Actions.popTo('homescene')}>
+                <Image  style={{width:20,height:20}} source={require('../img/newicon_closeback.png')} />
+            </TouchableOpacity>
+            <TouchableOpacity style={{position:'absolute',right:20,top:StatusBar.currentHeight+15,width:20,height:20}} activeOpacity={0.9} onPress={()=>this._share()}>
+                <Image  style={{width:20,height:20}} source={require('../img/newicon_share.png')} />
+            </TouchableOpacity>
         </View>
         );
     }
