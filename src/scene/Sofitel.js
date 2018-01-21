@@ -203,7 +203,7 @@ class MyListItem extends React.PureComponent {
                 </CardItem>
                 <CardItem style={{borderBottomLeftRadius:10,borderBottomRightRadius:10}} button={true} onPress={()=>Actions.sofitellist({id:this.props.data.jiheid,datas:this.props.data})} >
                     <View >
-                        <Text  style={{fontSize:10,color:'#C5B061'}} >{this.props.data.create_date}</Text>
+                        <Text  style={{fontSize:10,color:'#f5c61e'}} >{this.props.data.create_date}</Text>
                         <Text style={{marginTop:5,fontSize:14,color:'#666'}}>{this.props.data.name}</Text>
                         <Text numberOfLines={2} note style={{marginTop:5,fontSize:12}}>{this.props.data.content}</Text>
                     </View>

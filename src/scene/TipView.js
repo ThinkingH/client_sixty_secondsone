@@ -25,11 +25,7 @@ export default class TipView extends Component {
             datalist:[],
         };
     }
-    static navigationOptions = {
-        // tabBarLabel: Config.navs_txt[2],
-        // tabBarLabel: "",
-        tabBarIcon: ({focused,tintColor}) => (<Image  source={focused ?Config.icons_s[2]:Config.icons[2]}/>)
-    };
+
 
 
     componentWillUnmount(){
@@ -96,7 +92,7 @@ export default class TipView extends Component {
                                 <Text style={{marginLeft:5}}>{itema.classname}</Text>
                                 <View style={{flex:1}}></View>
                                 <TouchableOpacity activeOpacity={0.9}
-                                                  onPress={()=>Actions.tipall({tiptype:itema.class})}
+                                                  onPress={()=>Actions.tipall({tiptype:itema.class,title:itema.classname})}
                                 >
                                     <Text style={{marginRight:20,fontSize:14,color:'#ffe55f'}}>查看全部</Text>
                                 </TouchableOpacity>

@@ -1,4 +1,7 @@
 /**
+ * Created by Administrator on 2018/1/18.
+ */
+/**
  * Created by Administrator on 2018/1/12.
  */
 /**
@@ -21,7 +24,7 @@ const styles = StyleSheet.create({
     },
 });
 
-export default class CorrelationItem extends React.PureComponent  {
+export default class CorrelItem extends React.PureComponent  {
     constructor(props) {
         super(props);
         this.state={
@@ -32,10 +35,10 @@ export default class CorrelationItem extends React.PureComponent  {
     _goDetails=()=>{
         if(this.props.thetype=='1022'){
 
-            Actions.videodeta({title:this.props.title.biaoti,nowid:this.props.title.id})
+            Actions.videodetails({title:this.props.title.biaoti,nowid:this.props.title.id})
         }else{
 
-            Actions.videodeta({title:this.props.title.biaoti,nowid:this.props.title.id})
+            Actions.videodetails({title:this.props.title.biaoti,nowid:this.props.title.id})
         }
     };
 

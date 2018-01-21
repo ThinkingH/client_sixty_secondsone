@@ -132,9 +132,9 @@ export default class Intro extends Component {
             <View style={{flex:1}}>
                 <StatusBar backgroundColor="#c5b361"
                              barStyle="light-content"
-                             translucent={false}
-                             hidden={false}/>
-                <AppIntro rightTextColor={'#FFE55F'}
+                             translucent={true}
+                             hidden={true}/>
+                <AppIntro rightTextColor={'#f5c61e'}
                           nextBtnLabel={''}
                           doneBtnLabel={'进入'}
                           onDoneBtnClick={()=>this._goTotabbar()}
@@ -142,15 +142,15 @@ export default class Intro extends Component {
                           showSkipButton={false}
                           activeDotColor={'#f5c61e'}
                           dotColor={'#ccc'}>
-                    <View style={[styles.slide,{ backgroundColor: '#fa931d' }]}>
+                    <View style={[styles.slide,{ backgroundColor: '#fff' }]}>
                         <Image resizeMode={'cover'} style={{ width:width,height:height }} source={require('../img/icon_intro1.png')} />
                     </View>
 
-                    <View style={[styles.slide, { backgroundColor: '#a4b602' }]}>
+                    <View style={[styles.slide, { backgroundColor: '#fff' }]}>
                         <Image resizeMode={'cover'} style={{ width:width,height:height }} source={require('../img/icon_intro2.png')} />
                     </View>
 
-                    <View style={[styles.slide,{ backgroundColor: '#fa931d' }]}>
+                    <View style={[styles.slide,{ backgroundColor: '#fff' }]}>
                         <Image resizeMode={'cover'} style={{width:width,height:height}} source={require('../img/icon_intro3.png')} />
                     </View>
 

@@ -147,10 +147,10 @@ export default class SearchVideo extends React.Component {
     _renderHeader=()=>{
         return(
             <Header  androidStatusBarColor={Config.StatusBarColor} style={{backgroundColor:'#fff',alignItems:'center'}}>
-                <Item  rounded style={{height:40,width:width-60,borderColor:'#C5B361'}}>
+                <Item  rounded style={{height:40,width:width-60,borderColor:'#f5c61e'}}>
                     <Input onChangeText={(value)=>this.setState({value})}
                            placeholderTextColor="#999"
-                           style={{height:40,padding:0,fontSize:14,}}
+                           style={{height:40,padding:0,fontSize:14,textAlignVertical:'center'}}
                            maxLength={6}
                            value={this.state.value}
                            onSubmitEditing={()=>{this._getData(_pageNo);this.saveHistory()}}

@@ -229,7 +229,7 @@ export default class AccountInfo extends Component {
                 <Content showsVerticalScrollIndicator={false}    keyboardShouldPersistTaps="handled" >
                     <View style={{marginLeft:20,width:width-40,height:height,backgroundColor:'#ccc',marginTop:10}}>
                         <View style={{flex:1,alignItems:'center',backgroundColor:'#fff',borderTopRightRadius:10,borderTopLeftRadius:10}}>
-                            <View style={{width:width-80,flexDirection:"row",backgroundColor:'#f00'}}>
+                            <View style={{width:width-80,flexDirection:"row",backgroundColor:'#fff'}}>
                                 <View style={{backgroundColor:'#fff'}}>
                                     <Image  style={{width:width/5,height:width/5,borderRadius:width/10,margin:20,marginLeft:width/24}}
                                                source={imagedate==""?require('../img/icon_unloginbg.png'):imagedate} />

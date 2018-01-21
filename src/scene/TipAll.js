@@ -29,13 +29,13 @@ export default class TipAll extends Component {
 
     componentDidMount () {
 
-        InteractionManager.runAfterInteractions(() => {
+
 
 
                 this._getData();
 
 
-        });
+
     }
 
 

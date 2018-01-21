@@ -7,6 +7,8 @@ import Toast from '@remobile/react-native-toast'
 import { Container, Header,View, Content, Button, Icon, List, Text, ListItem,Left,Right,Body ,Thumbnail,Row} from 'native-base';
 import TabIcon from '../components/TabIcon';
 import { BlurView, VibrancyView } from 'react-native-blur';
+import { UltimateListView, UltimateRefreshView } from 'react-native-ultimate-listview'
+
 const {width, height} = Dimensions.get('window');
 const styles = StyleSheet.create({
     container: {
@@ -22,18 +24,15 @@ let num=0;
 const imgarr=[require('../img/icon_login1.png'),require('../img/icon_login2.png'),require('../img/icon_login3.png'),require('../img/icon_login4.png')]
 export default class Account extends Component {
 
-    static navigationOptions = {
-        //tabBarLabel: Config.navs_txt[3],
-        tabBarIcon: ({focused,tintColor}) => (<Image source={focused ?Config.icons_s[3]:Config.icons[3]}/>)
-    };
+
 
     constructor(props) {
         super(props);
         this.state = {
              arr:[],
             imageheader:null,
-            title:"mzy",
-            name:'我的',
+            title:"",
+            name:'',
             desc:'',
             viewRef:null,
             isshow:true,
@@ -202,7 +201,7 @@ export default class Account extends Component {
                     </View>
                     <Body  >
 
-                    <Text style={{marginBottom:15,color:'#C5B061'}}>我的成果展示</Text>
+                    <Text style={{marginBottom:15,color:'#f5c61e'}}>我的成果展示</Text>
                     <View style={{width:width,height:1,backgroundColor:'#eeeeee',}} ></View>
                     </Body>
                     {this.state.arr.length==0?(
@@ -426,7 +425,10 @@ export default class Account extends Component {
                            barStyle="light-content"
                            translucent={true}
                            hidden={false}/>
+
+
                 {Config.usertype==1?this._renderLogina():this._renderUnLogin()}
+
                 <View ref={(viewopacity)=>this.viewopacity=viewopacity}
                       style={{position:'absolute',top:0,width:width,height:StatusBar.currentHeight,backgroundColor:this.state.viewopacity}}>
                 </View>

@@ -238,7 +238,7 @@ export default class Login2 extends Component {
                     </Item>
                     <Button onPress={()=>this._login()}
                             color={'#fff'} rounded block
-                            style={{height:40,width:width-60,backgroundColor:'#c5b361',marginTop:20}} >
+                            style={{height:40,width:width-60,backgroundColor:'#f5c61e',marginTop:20}} >
                         <Text style={{textAlign:'center'}}>登录</Text>
                     </Button>
                     <Row style={{justifyContent:'center',marginTop:30}}>

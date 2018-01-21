@@ -39,7 +39,8 @@ export default class ListScene extends Component {
             classify:this.props.classify,
             isshowfooter:true,
             mainvideo:[],
-            isshowsearch:true,
+            isshowsearch:false,
+            totalCount:0,
         }
     }
 
@@ -164,15 +165,6 @@ export default class ListScene extends Component {
             return(<ListVideoItem  data={this.state.mainvideo}/>);
         }else if (this.props.header=="sheader"){
             return( <SListHeader datas={this.props.sdata}/>);
-        }
-        else if(this.props.header=='search'){
-            return(
-                isshowsearch?(
-                    <Text  style={{marginLeft:6,marginTop:10,marginBottom:5,color:'#555',fontSize:14}}>搜索结果：{this.state.totalCount?this.state.totalCount:0}条</Text>
-                ):(
-                    null
-                )
-            )
         }else{
             return null;
         }
@@ -316,7 +308,6 @@ export default class ListScene extends Component {
         }
        // console.log("e.nativeEvent.contentOffset",e.nativeEvent.contentOffset)
        // console.log("e.nativeEventt",e.nativeEvent)
-
     }
 
     _renderResult=()=>{
@@ -330,33 +321,12 @@ export default class ListScene extends Component {
         }
     }
 
-    _onScrollEndDrag=()=>{
-        dx=dy;
-    }
-    onPullRelease=(resolve)=> {
-        this._onRefresh(resolve);
-        console.log('resolveresolveresolveresolve', resolve)
-        setTimeout(() => {
-            resolve();
-        }, 3000);
-    }
-    // _renderLoading=(pulling, pullok, pullrelease)=>{
-    //     console.log(pulling, pullok, pullrelease)
-    //     return(
-    //         <View style={{width:width,height:60,backgroundColor:'#f00',alignItems:'center',justifyContent:'center'}}>
-    //             {/*<Image  style={{width:40,height:40}} source={require('../img/icon_search_result.png')} />*/}
-    //             <ActivityIndicator size="small" color="gray" />
-    //             {pulling ? <Text>下拉刷新2...</Text> : null}
-    //             {pullok ? <Text>松开刷新2......</Text> : null}
-    //             {pullrelease ? <Text>玩命刷新中2......</Text> : null}
-    //         </View>
-    //     )
-    // }
+
     _renderLoading=()=>{
         return(
             <LineDotsLoader color={'#F5C61E'} />
         )
-    }
+    };
 
     _renderPaginationFetchingView=()=> {
         return(
@@ -366,21 +336,26 @@ export default class ListScene extends Component {
                 {this._renderLoading()}
                 {/*<Image ref={(c) => {this.txtPulling = c;}} source={require('../../src/img/icon_account_warn.png')} style={[styles.hide,{width:40,height:40}]}></Image>*/}
                 {/*<Image ref={(c) => {this.txtPullok = c;}} source={require('../../src/img/icon_header.png')} style={[styles.hide,{width:40,height:40}]}></Image>*/}
-
                 {/*<Image ref={(c) => {this.txtPullrelease = c;}} source={require('../../src/img/icon_search_result.png')} style={[styles.hide,{width:40,height:40}]}></Image>*/}
-
             </View>
         )
-    }
-    onFetch = async(_pageNo, startFetch, abortFetch) => {
+    };
 
+    onFetch = async(_pageNo=1, startFetch, abortFetch) => {
+        let rowData=new Array();
         let parpam=null;
         parpam=this.props.url+"&pagesize=10&page="+_pageNo;
         let thetype=this.props.thetype;
         Request(thetype,parpam)
             .then((responseJson) => {
                 console.log("this.props.urlthis.props.urlthis.props.url",responseJson);
-                let rowData =responseJson.data.list;
+                 rowData =responseJson.data.list;
+                if(rowData.length==0){
+                    this.setState({
+                        isshowsearch:true,
+                        totalCount:responseJson.data.pagemsg.allcount,
+                    })
+                }
                 startFetch(rowData, 10)
             })
             .catch((error) => {
@@ -388,18 +363,14 @@ export default class ListScene extends Component {
                 console.log(error.toString())
                 // Toast.show(error.toString());
             });
-
-
-
     };
-
 
     render() {
         return (
             <View
                 //{...this._panResponder.panHandlers}
                 style={{flex:1,backgroundColor:'#fff'}}>
-
+                {this.state.isshowsearch?(this._renderResult()):(null)}
                     <UltimateListView
                         scrollEventThrottle={1}
                        // onScroll={(e)=>this._onScrollEnd(e)}
@@ -411,16 +382,16 @@ export default class ListScene extends Component {
                         // keyExtractor={this.state.datas.id}
                         // renderItem={this._renderItem}
                         // ListHeaderComponent={this._header}
-                        ListFooterComponent={this._renderFooter()}
+                        //ListFooterComponent={this._renderFooter()}
                         // refreshing={this.state.refreshing}
                         // onRefresh={this._onRefresh}
                         onEndReachedThreshold={0.1}
                         onEndReached={(info) => {
                             this._toEnd()
                         } }
-                        paginationBtnText={'正在载入'}
-                        waitingSpinnerText={'正在载入'}
-                        ref={ref => this.listViews = ref}
+                       // paginationBtnText={'正在载入1'}
+                        waitingSpinnerText={'正在加载'}
+                        ref={(ref) => this.listViews = ref}
                         key={this.state.layout} // this is important to distinguish different FlatList, default is numColumns
                         onFetch={this.onFetch}
                         keyExtractor={(item, index) => `${index} - ${item}`} // this is required when you are using FlatList
@@ -437,7 +408,7 @@ export default class ListScene extends Component {
                         // sectionHeaderView={this.renderSectionHeaderView}   //not supported on FlatList
                         // paginationFetchingView={this._renderPaginationFetchingView}
                         // paginationAllLoadedView={this._renderPaginationFetchingView}
-                        //  paginationWaitingView={this._renderPaginationFetchingView}
+                          //paginationWaitingView={this._renderPaginationFetchingView}
                          emptyView={this._renderResult}
                         // separator={this.renderSeparatorView}
                         // new props on v3.2.0
@@ -447,11 +418,9 @@ export default class ListScene extends Component {
                         refreshViewHeight={90}
                     />
             </View>
-
         );
     }
 }
-
 
 class SListHeader extends React.PureComponent {
     render() {

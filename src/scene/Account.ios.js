@@ -201,7 +201,7 @@ export default class Account extends Component {
                     </View>
                     <Body  >
 
-                    <Text style={{marginBottom:15,color:'#C5B061'}}>我的成果展示</Text>
+                    <Text style={{marginBottom:15,color:'#f5c61e'}}>我的成果展示</Text>
                     <View style={{width:width,height:1,backgroundColor:'#eeeeee',}} ></View>
                     </Body>
                     {this.state.arr.length==0?(

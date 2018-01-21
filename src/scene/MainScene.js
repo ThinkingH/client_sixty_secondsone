@@ -317,9 +317,7 @@ export default class MainScene extends Component {
                {this._renderLoading()}
                {/*<Image ref={(c) => {this.txtPulling = c;}} source={require('../../src/img/icon_account_warn.png')} style={[styles.hide,{width:40,height:40}]}></Image>*/}
                {/*<Image ref={(c) => {this.txtPullok = c;}} source={require('../../src/img/icon_header.png')} style={[styles.hide,{width:40,height:40}]}></Image>*/}
-
                {/*<Image ref={(c) => {this.txtPullrelease = c;}} source={require('../../src/img/icon_search_result.png')} style={[styles.hide,{width:40,height:40}]}></Image>*/}
-
            </View>
        )
     }
@@ -329,44 +327,41 @@ export default class MainScene extends Component {
                 <LineDotsLoader color={'#F5C61E'} />
             )
     }
-
         onFetch = async(_pageNo, startFetch, abortFetch) => {
             this._getMainVideo();
-
                 let parpam=null;
                 parpam=this.props.url+"&pagesize=10&page="+_pageNo;
+            console.log("_pageNo_pageNo_pageNo_pageNo_pageNo_pageNo_pageNo",_pageNo);
                 let thetype=this.props.thetype;
                 Request(thetype,parpam)
                     .then((responseJson) => {
                         console.log("this.props.urlthis.props.urlthis.props.url",responseJson);
                         let rowData =responseJson.data.list;
-                        startFetch(rowData, 24)
+                        startFetch(rowData, 6)
                     })
                     .catch((error) => {
                         abortFetch()
                         console.log(error.toString())
                         // Toast.show(error.toString());
                     });
-
-
-
         };
 
-
+    _renderPagination=()=>{
+        return(
+            <View style={{width:width,height:50,alignItems:'center',justifyContent:'center'}}>
+                <Text>正在加载中...</Text>
+            </View>
+        )
+    }
     render() {
         return (
             <View
                // {...this._panResponder.panHandlers}
                 style={{flex:1,backgroundColor:'#fff',alignItems:'center'}}>
-
-
                 <UltimateListView
-
                     scrollEventThrottle={1}
                    // onScroll={(e)=>this._onScrollEnd(e)}
-
                     // columnWrapperStyle={{width:width/2}}
-
                     showsVerticalScrollIndicator={false}
                     //data={this.state.datas}
                     initialNumToRender={4}
@@ -377,43 +372,39 @@ export default class MainScene extends Component {
                     //ListFooterComponent={this._renderFooter()}
                     // refreshing={this.state.refreshing}
                     // onRefresh={this._onRefresh}
-                    onEndReachedThreshold={0.1}
-                    onEndReached={(info) => {
-                            this._toEnd()
-                        } }
-                    paginationBtnText={'正在载入'}
-                    waitingSpinnerText={'正在载入'}
+                   // onEndReachedThreshold={50}
+                   // onEndReached={(info) => {
+                   //         this._toEnd()
+                    //    } }
+                    paginationBtnText={'正在载入1'}
+                    waitingSpinnerText={'正在载入2'}
                     ref={ref => this.listView = ref}
                     key={this.state.layout} // this is important to distinguish different FlatList, default is numColumns
                     onFetch={this.onFetch}
                     keyExtractor={(item, index) => `${index} - ${item}`} // this is required when you are using FlatList
                     refreshableMode="advanced" // basic or advanced
-
                     item={this.renderItem} // this takes three params (item, index, separator)
                     numColumns={2} // to use grid layout, simply set gridColumn > 1
                    // customRefreshView={this._renderPaginationFetchingView()}
                     customRefreshView={()=>this._renderPaginationFetchingView()}
                     // ----Extra Config----
-                    pagination={true}
+                   // pagination={true}
                     autoPagination={true}
                     header={this._header}
-                    //paginationFetchingView={this._renderPaginationFetchingView}
+                    paginationFetchingView={this._renderPagination}
                     // sectionHeaderView={this.renderSectionHeaderView}   //not supported on FlatList
-                    // paginationFetchingView={this._renderPaginationFetchingView}
-                    // paginationAllLoadedView={this._renderPaginationFetchingView}
-                   //  paginationWaitingView={this._renderPaginationFetchingView}
+                     //paginationFetchingView={this._renderPaginationFetchingView}
+                     paginationAllLoadedView={this._renderPagination}
+                     paginationWaitingView={this._renderPagination}
                     // emptyView={this.renderEmptyView}
                     // separator={this.renderSeparatorView}
-
                     // new props on v3.2.0
                    // arrowImageStyle={{ width: 20, height: 20, resizeMode: 'contain' }}
                     dateStyle={{ color: 'lightgray' }}
                     refreshViewStyle={Platform.OS === 'ios' ? { height: 90, top: -90 } : { height: 90 }}
                     refreshViewHeight={90}
-
                 />
             </View>
-
         );
     }
 }
@@ -421,13 +412,11 @@ export default class MainScene extends Component {
 class MyListHeader extends React.PureComponent {
     constructor(props){
         super(props);
-
         //this.video=null;
     }
     _onPress = () => {
         this.video.pause();
         Actions.videodetails({title:this.props.data.biaoti,nowid:this.props.data.vid})
-
     };
 
     startVideo=()=>{
@@ -444,8 +433,6 @@ class MyListHeader extends React.PureComponent {
     //     this.video.pause();
     // }
     componentDidMount(){
-
-
         this.zanting= DeviceEventEmitter.addListener("zanting",this._onParse);
         this.startvideo= DeviceEventEmitter.addListener("startvideo",this.startVideo);
         this.mute= DeviceEventEmitter.addListener("mute",this._mute);
@@ -463,11 +450,9 @@ class MyListHeader extends React.PureComponent {
         this.video.pause();
     }
 
-
     render() {
         return (
             <View  style={{width:width,alignItems:'center'}}>
-
                 <PLVideoView
                     // ref={PLVideoView}
                     ref={(video)=>{this.video = video}}
@@ -504,11 +489,10 @@ class MyListHeader extends React.PureComponent {
 
                 </TouchableOpacity>
             </View>
-
-
         )
     }
 }
+
 class SListHeader extends React.PureComponent {
     render() {
         return (

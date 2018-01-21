@@ -1,4 +1,7 @@
 /**
+ * Created by Administrator on 2018/1/18.
+ */
+/**
  * Created by Administrator on 2017/10/13.
  */
 import React, { Component } from 'react';
@@ -16,7 +19,7 @@ import { Container, Header, Content, Button,Form,Item, Icon, List,Badge,Col,
 
 import NetWorkTool from "../utils/NetWorkTool";
 import ShareUtile from '../utils/ShareUtil'
-import CorrelationItem from '../components/CorrelationItem'
+import CorrelItem from '../components/CorrelItem'
 
 const {width, height} = Dimensions.get('window');
 const styles = StyleSheet.create({
@@ -50,7 +53,7 @@ const path = Path()
     .moveTo(0,1)
     .lineTo(width-20,1);
 let  num=  Math.ceil(Math.random()*4)-1
-export default class VideoDetails extends Component {
+export default class VideoDeta extends Component {
     constructor(props) {
         super(props);
         this.state={
@@ -158,7 +161,7 @@ export default class VideoDetails extends Component {
                 this.setState({
                     isplay:true,
                 });
-               // this.videos.start();
+                // this.videos.start();
             });
     };
 
@@ -437,11 +440,11 @@ export default class VideoDetails extends Component {
     _renderCorrelation=()=>{
 
         return(
-           this.state.youlike.map((item,i)=>
+            this.state.youlike.map((item,i)=>
 
-                   <CorrelationItem key={i} title={item}>
+                <CorrelItem key={i} title={item}>
 
-                   </CorrelationItem>
+                </CorrelItem>
 
             )
         )
@@ -580,47 +583,47 @@ export default class VideoDetails extends Component {
                             <Text style={{margin:20,fontSize:16,color:'#000'}}>小贴士视频</Text>
                         )}
                     {this._renderTipVideo()}
-                        <Card style={{borderRadius:10,marginRight:10,marginLeft:10,width:width-20,marginTop:20}}>
-                            <View style={{backgroundColor:'#fff',marginTop:20,marginBottom:10,marginLeft:10}} >
-                                <Text style={[styles.textb,{color:'#000'}]}>材料<Text style={[styles.texts,{color:'#000'}]}>（两人份）</Text></Text>
-                            </View>
-                            {this.state.cailiaoarr.map((item,i)=>
-                                <View key={i} style={{padding:10,paddingBottom:0,width:width-20}}>
-                                    <View style={{flexDirection:'row',width:width-40}}>
-                                        <Text  style={[styles.texts,{color:'#000'}]}>{item.name}</Text>
-                                        <View style={{flex:1}}>
-                                        </View>
-                                        <Text   style={[styles.texts,{color:'#000'}]}>{item.yongliang}</Text>
-                                    </View>
-                                    {i==this.state.cailiaoarr.length-1?(null):(
-                                            <Surface  width={width-40} height={1}>
-                                                <Shape d={path} stroke="#aaa" strokeWidth={1} strokeDash={[3,5]}/>
-                                            </Surface>
-                                        )}
-                                </View>
-                            )}
-                            <View style={{width:width,height:20}}></View>
-                        </Card>
-                     <View style={{marginBottom:20,marginTop:10}}>
-                    <ListItem style={{backgroundColor:'#fff'}} itemDivider>
-                        <Text style={[styles.textb,{color:'#000'}]}>操作步骤</Text>
-                    </ListItem>
-                    {this.state.buzhouarr.map((item,i)=>
-                    <View key={i} style={{marginLeft:20,marginRight:20,paddingTop:15,}}>
-                        <View style={{flexDirection:'row',paddingBottom:15}} key={item.id}>
-                            <Text style={{flex:1,color:'#000',fontWeight:'800'}}>{item.buzhouid}.</Text>
-                            <View style={{flex:20,}}>
-                                <Text note style={[styles.texts,{color:'#000'}]}>{item.buzhoucontent}</Text>
-                            </View>
+                    <Card style={{borderRadius:10,marginRight:10,marginLeft:10,width:width-20,marginTop:20}}>
+                        <View style={{backgroundColor:'#fff',marginTop:20,marginBottom:10,marginLeft:10}} >
+                            <Text style={[styles.textb,{color:'#000'}]}>材料<Text style={[styles.texts,{color:'#000'}]}>（两人份）</Text></Text>
                         </View>
-                        {i==this.state.buzhouarr.length-1?(null):(
-                                <Surface  width={width-40} height={1}>
-                                    <Shape d={path} stroke="#aaa" strokeWidth={1} strokeDash={[3,5]}/>
-                                </Surface>
-                            )}
+                        {this.state.cailiaoarr.map((item,i)=>
+                            <View key={i} style={{padding:10,paddingBottom:0,width:width-20}}>
+                                <View style={{flexDirection:'row',width:width-40}}>
+                                    <Text  style={[styles.texts,{color:'#000'}]}>{item.name}</Text>
+                                    <View style={{flex:1}}>
+                                    </View>
+                                    <Text   style={[styles.texts,{color:'#000'}]}>{item.yongliang}</Text>
+                                </View>
+                                {i==this.state.cailiaoarr.length-1?(null):(
+                                        <Surface  width={width-40} height={1}>
+                                            <Shape d={path} stroke="#aaa" strokeWidth={1} strokeDash={[3,5]}/>
+                                        </Surface>
+                                    )}
+                            </View>
+                        )}
+                        <View style={{width:width,height:20}}></View>
+                    </Card>
+                    <View style={{marginBottom:20,marginTop:10}}>
+                        <ListItem style={{backgroundColor:'#fff'}} itemDivider>
+                            <Text style={[styles.textb,{color:'#000'}]}>操作步骤</Text>
+                        </ListItem>
+                        {this.state.buzhouarr.map((item,i)=>
+                            <View key={i} style={{marginLeft:20,marginRight:20,paddingTop:15,}}>
+                                <View style={{flexDirection:'row',paddingBottom:15}} key={item.id}>
+                                    <Text style={{flex:1,color:'#000',fontWeight:'800'}}>{item.buzhouid}.</Text>
+                                    <View style={{flex:20,}}>
+                                        <Text note style={[styles.texts,{color:'#000'}]}>{item.buzhoucontent}</Text>
+                                    </View>
+                                </View>
+                                {i==this.state.buzhouarr.length-1?(null):(
+                                        <Surface  width={width-40} height={1}>
+                                            <Shape d={path} stroke="#aaa" strokeWidth={1} strokeDash={[3,5]}/>
+                                        </Surface>
+                                    )}
+                            </View>
+                        )}
                     </View>
-                    )}
-                     </View>
                     <View style={{marginLeft:20}}>
                         <Surface  width={width-40} height={1}>
                             <Shape d={path} stroke="#C5B061" strokeWidth={1} strokeDash={[3,5]}/>
@@ -632,10 +635,10 @@ export default class VideoDetails extends Component {
                     <View style={{backgroundColor:'#fff',marginLeft:20,marginRight:17,paddingBottom:15,marginTop:15}} >
                         <Text note style={[styles.texts,{color:'#000'}]}>{this.state.data.tishishuoming}</Text>
                     </View>
-                        <Button rounded={true} block={true} onPress={()=>this._comment()} style={{height:45,marginLeft:30,width:width-60,marginBottom:10,marginTop:10,backgroundColor:'#f5c61e'}} iconLeft >
-                            <Image style={[styles.imagelogo,{marginRight:5}]} source={require('../img/icon_videodetails_comment_s.png')} />
-                            <Text style={{color:'#fff',marginLeft:5}}>欢  迎  留  言</Text>
-                        </Button>
+                    <Button rounded={true} block={true} onPress={()=>this._comment()} style={{height:45,marginLeft:30,width:width-60,marginBottom:10,marginTop:10,backgroundColor:'#f5c61e'}} iconLeft >
+                        <Image style={[styles.imagelogo,{marginRight:5}]} source={require('../img/icon_videodetails_comment_s.png')} />
+                        <Text style={{color:'#fff',marginLeft:5}}>欢  迎  留  言</Text>
+                    </Button>
                     {this.state.data.picpingluncount=="0"?(null):(
                             <View>
                                 <View style={{marginLeft:20,marginBottom:10,marginTop:10}}>
@@ -707,10 +710,10 @@ export default class VideoDetails extends Component {
                 <View ref={(navibar)=>this.navibara=navibar}
                       style={{position:'absolute',top:StatusBar.currentHeight,width:width,height:50,
                       opacity:this.state.navibaropacity,justifyContent:'center',alignItems:'center',backgroundColor:'transparent'}}>
-                    <Text style={{fontSize:16,color:'#fff'}}>{this.props.title}</Text>
+                    <Text style={{fontSize:16,color:'#fff'}}>断开连接回复克鲁斯的给你礼物</Text>
                 </View>
                 <TouchableOpacity style={{position:'absolute',left:20,top:StatusBar.currentHeight+15,width:20,height:20}} activeOpacity={0.9} onPress={()=>Actions.popTo('homescene')}>
-                <Image  style={{width:20,height:20}} source={require('../img/newicon_closeback.png')} />
+                    <Image  style={{width:20,height:20}} source={require('../img/newicon_closeback.png')} />
                 </TouchableOpacity>
                 <TouchableOpacity style={{position:'absolute',right:20,top:StatusBar.currentHeight+15,width:20,height:20}} activeOpacity={0.9} onPress={()=>this._share()}>
                     <Image  style={{width:20,height:20}} source={require('../img/newicon_share.png')} />
