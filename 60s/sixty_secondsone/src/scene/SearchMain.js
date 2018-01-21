@@ -24,25 +24,17 @@ import TabBar from '../components/TabBar';
 
 const {width, height} = Dimensions.get('window');
 
-
 const {Surface, Shape, Path} = ART;
 const path = Path()
     .moveTo(0,1)
     .lineTo(width-20,1);
 class SearchMain extends Component {
-    static navigationOptions = {
-        tabBarLabel: Config.navs_txt[1],
-        tabBarIcon: ({focused,tintColor}) => (<Image source={focused ?Config.icons_s[1]:Config.icons[1]}/>)
-    }
-
     constructor(props) {
         super(props);
         this.state={
             data:[],
         }
-
     }
-
 
     componentDidMount(){
         this._getData();
@@ -51,7 +43,6 @@ class SearchMain extends Component {
         // });
     };
     componentWillUnmount() {
-
 
     }
 
@@ -77,28 +68,20 @@ class SearchMain extends Component {
                            translucent={true}
                            hidden={false}/>
                 <View style={{width:width,height:Config.STATUSBARHEIGHT,backgroundColor:Config.StatusBarColor}}>
-
                 </View>
-
-
                     <ImageBackground    style={{width:width,height:50,flexDirection:'row'}} source={require('../img/icon_homebg.png')} >
-
-
                         <View style={{width:width,height:50,position:'absolute',alignItems:'center',justifyContent:'center',backgroundColor:'transparent'}}>
                             <Text style={{color:'#fff',backgroundColor:'transparent'}}>查找</Text>
                         </View>
                     </ImageBackground>
                 <View style={{width:width,height:width/1.28/850*130/5*4,backgroundColor:'transparent'}}>
-
                 </View>
-
                     <Content showsVerticalScrollIndicator={false} >
                     <View style={{padding:20}}>
-                        <Text style={{marginBottom:10,fontSize:14,color:'#C5B061'}}>人气分类</Text>
+                        <Text style={{marginBottom:10,fontSize:14,color:'#f5c61e'}}>人气分类</Text>
                         <Surface  width={width-40} height={1}>
                             <Shape d={path} stroke="#C5B061" strokeWidth={1} strokeDash={[3,5]}/>
                         </Surface>
-
                             {this.state.data.map((item,i)=>
                                 <TouchableOpacity key={i}
                                                   onPress={()=> Actions.searchvideo({value:item.name,isassort:true})}
@@ -108,29 +91,23 @@ class SearchMain extends Component {
                                         <View style={{width:width/4.5,height:width/4.5,borderRadius:10,backgroundColor:'#ccc'}}>
                                             <Image style={{width:width/4.5,height:width/4.5,borderRadius:10}}
                                                        source={{uri:item.showimg}} />
-
                                         </View>
                                         <View style={{flex:1,justifyContent:'center',marginLeft:10}}>
                                             <Text>{item.name}</Text>
                                             <Text style={{fontSize:14,color:'#ccc'}} numberOfLines={2}>{item.content}</Text>
-
                                         </View>
                                     </View>
                                     <Surface  width={width-40} height={1}>
                                         <Shape d={path} stroke="#ccc" strokeWidth={1} strokeDash={[3,5]}/>
                                     </Surface>
-
                                 </TouchableOpacity>
                             )}
-
-
                     </View>
                     </Content>
                 <TouchableOpacity style={{position:'absolute',left:(width-width/1.28)/2,top:width/472*65-width/1.28/850*130/3+Config.STATUSBARHEIGHT}} activeOpacity={1}
                                   onPress={()=>Actions.TabView()}>
                     <Image  style={{width:width/1.28,height:width/1.28/850*130}} source={require('../img/newicon_seachbar.png')} />
                 </TouchableOpacity>
-
             </Container>
         );
     }

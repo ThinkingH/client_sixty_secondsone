@@ -622,7 +622,7 @@ export default class ContributeByUser extends Component {
                                 null
                             ):(
                                 <TouchableOpacity activeOpacity={0.9} onPress={()=>Actions.deletemater({callbackstep:this._getStep,step:step})}>
-                                    <Text style={{marginRight:15,marginTop:20,color:'#C5B361',fontSize:14}}>步骤删除</Text>
+                                    <Text style={{marginRight:15,marginTop:20,color:'#f5c61e',fontSize:14}}>步骤删除</Text>
                                 </TouchableOpacity>
 
                             )}
@@ -675,7 +675,7 @@ export default class ContributeByUser extends Component {
                 <View style={{padding:15,}}>
                     <Text>写完以后才能投稿</Text>
                 </View>
-                <Button block={true} style={{width:width/1.1,height:40,backgroundColor:'#c5b361',marginLeft:(width-width/1.1)/2,marginTop:20}}
+                <Button block={true} style={{width:width/1.1,height:40,backgroundColor:'#f5c61e',marginLeft:(width-width/1.1)/2,marginTop:20}}
                         textStyle={{fontSize:16}}
                         color="#fff"
                         onPress={()=>{this._isUpload()}}

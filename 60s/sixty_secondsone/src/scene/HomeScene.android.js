@@ -33,17 +33,12 @@ let imgurla=[];
 let img=[require('../../src/img/icon_message.png'),require('../../src/img/icon_qq.png'),
     require('../../src/img/icon_videodetails_collect_s.png'),require('../../src/img/icon_videodetails_comment_s.png'),
     require('../../src/img/icon_wb.png'),require('../../src/img/icon_message.png'),
-    require('../../src/img/icon_message.png'),require('../../src/img/icon_wx.png'),]
+    require('../../src/img/icon_message.png')]
 let wordarr=[];
 let keywordarr=[];
 let aaa=['dvdf','dvdf','dvdf','dvdf','dvdf','dvdf','dvdf','dvdf'];
 class HomeScene extends Component {
-    static navigationOptions = {
-        // tabBarLabel: Config.navs_txt[0],
-        tabBarIcon: ({focused,tintColor}) => (<Image source={focused ?Config.icons_s[0]:Config.icons[0]}/>),
-        hideTabBar:true
 
-    };
 
     constructor(props) {
         super(props);
@@ -223,11 +218,11 @@ class HomeScene extends Component {
                 imgurla={img}       //本地图
                 imageStyle={{width:25,height:25,backgroundColor:'transparent'}}
                 textva={aaa}
-                activeTextColor={"#c5b061"}
+                activeTextColor={"#f5c61e"}
                 backgroundColor={"#FFFFFF"}
                 textStyle={{fontSize:12,fontWeight:'normal',marginTop:7}}
                 inactiveTextColor={"#313131"}
-                underlineStyle={{backgroundColor:"#c5b061",height:2}}
+                underlineStyle={{backgroundColor:"#f5c61e",height:2}}
             />
         )
     };
@@ -236,7 +231,7 @@ class HomeScene extends Component {
         return(
             <View style={styles.tabs} >
                 <View style={[styles.tab]}>
-                    <Text style={{fontSize:14,color:'#c5b061'}} >
+                    <Text style={{fontSize:14,color:'#f5c61e'}} >
                        最新
                     </Text>
                 </View>
@@ -289,6 +284,29 @@ class HomeScene extends Component {
 
 
     render(){
+        const content = this.state.data.length > 0 ?(<ScrollableTabView ref={(ScrollableTabView)=>this.ScrollableTabView=ScrollableTabView}
+                                                                        initialPage={0}
+                                                                        onChangeTab={(obj) => {this._onChangeTab(obj)}}
+                                                                        scrollWithoutAnimation={true}
+                                                                        style={{marginTop:10}}
+                                                                        renderTabBar={() =>this.renderTabBar()}>
+                {this.state.data.map((item,i)=>{
+                    if(i==0){
+                        return(
+                            <MainScene load={this.props.load}  header={"header"} key={i}  url={"thetype=1034&searchstr="+item.keyword} tabLabel={item.word}   thetype="1034" item={"video"} />
+                        )
+                    }else if(i==1){
+                        return(
+                            <Sofitel key={i}  tabLabel={item.word}  />
+                        )
+                    }else if(i>1&&i<this.state.data.length){
+                        return(
+                            <ListScene load={this.props.load} key={i}  url={"thetype=1034&classify2="+item.keyword} tabLabel={item.word}   thetype="1034" item={"video"} />
+                        )
+                    }
+                })}
+            </ScrollableTabView>) : <View/>;
+
         return (
             <Container>
                 <StatusBar backgroundColor="transparent"
@@ -325,45 +343,7 @@ class HomeScene extends Component {
                     {/*}}>*/}
                         {/*<Text>replay</Text>*/}
                     {/*</Button>*/}
-                    {this.state.isshowtab?(<ScrollableTabView ref={(ScrollableTabView)=>this.ScrollableTabView=ScrollableTabView}
-                                                              initialPage={this.state.numpage}
-                                                              onChangeTab={(obj) => {this._onChangeTab(obj)}}
-                                                              scrollWithoutAnimation={true}
-                                                              style={{flex:1,width:width,marginTop:10}}
-                                                              renderTabBar={() =>this.renderTabBar()}>
-
-
-                                {this.state.data.map((item,i)=>{
-                                    if(i==0){
-                                        return(
-                                            <MainScene load={this.props.load}  header={"header"} key={i}  url={"thetype=1034&searchstr="+item.keyword} tabLabel={item.word}   thetype="1034" item={"video"} />
-                                        )
-                                    }else if(i==1){
-                                        return(
-                                            <Sofitel key={i}  tabLabel={item.word}  />
-                                        )
-                                    }else if(i>1&&i<this.state.data.length){
-                                        return(
-                                            <ListScene load={this.props.load} key={i}  url={"thetype=1034&classify2="+item.keyword} tabLabel={item.word}   thetype="1034" item={"video"} />
-                                        )
-                                    }
-                                })}
-
-
-                            {/*<ListScene url={"thetype=1015&classify2=融合菜"} tabLabel="融合菜" thetype="1015" item={"video"} />*/}
-                            {/*<ListScene url={"thetype=1015&classify2=甜品"} tabLabel="甜品" thetype="1015" item={"video"}/>*/}
-                            {/*<ListScene url={"thetype=1015&classify2=特色菜"} tabLabel="特色菜" thetype="1015" item={"video"}/>*/}
-                            {/*<ListScene url={"thetype=1015&classify2=饮品"}  tabLabel="饮品" thetype="1015" item={"video"}/>*/}
-                            {/*<ListScene url={"thetype=1015&classify2=其他"} tabLabel="其他" thetype="1015" item={"video"}/>*/}
-
-                        </ScrollableTabView>):(
-                        <View style={{flex:1,}}>
-                            {this._renderTab()}
-                            <View style={{flex:1,alignItems:'center',justifyContent:'center',backgroundColor:'rgba(0,0,0,0.2)'}}>
-                                <ActivityIndicator size = 'small' />
-                            </View>
-                        </View>
-                        )}
+                    {content}
                 </View>
             </Container>
         );

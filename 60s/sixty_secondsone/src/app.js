@@ -66,6 +66,7 @@ import TipDetails from './scene/TipDetails';
 import SearchMain from './scene/SearchMain';
 import Intro from './scene/Intro';
 import MessageBox from './scene/MessageBox';
+import VideoDeta from './scene/VideoDeta';
 
 const styles = StyleSheet.create({
     container: {
@@ -418,6 +419,16 @@ export default class apps extends Component {
                                     panHandlers={null}
                                     duration={1}
                                 />
+
+                                <Scene
+                                    key="videodeta"
+                                    //  backButtonImage={require('./img/icon_noviceclose.png')}
+                                    component={VideoDeta}
+                                    hideNavBar={true}
+                                    panHandlers={null}
+                                    duration={1}
+                                />
+
                                 <Scene
                                     titleStyle={[styles.titleStyle]}
                                     key="assortmentsearch"
@@ -564,12 +575,12 @@ export default class apps extends Component {
                                     key="tabbar"
                                     duration={0}
                                     tabBarPosition={"bottom"}
-                                    tabBarStyle={{
-                                       // position:'absolute',right:0,left:0,bottom:this.state.tabBarHight
-                                    }}
-                                    tabBarComponent={NavigationComponent}
+                                    tabBarStyle={{backgroundColor:'#fff'}}
+                                   // tabBarComponent={NavigationComponent}
                                     hideNavBar
+                                    showLabel={false}
                                     wrap={false}
+                                    animationEnabled={false}
                                     tabs={true}
                                     hideTabBar={this.state.ishide}
                                     swipeEnabled={false}
@@ -580,28 +591,33 @@ export default class apps extends Component {
                                         component={HomeScene}
                                         icon_id={0}
                                         hideNavBar
+
                                         icon={TabIcon} />
                                     <Scene
                                         key="tipview"
                                         hideNavBar
-                                        icon_id={6}
+                                        icon_id={1}
+
+                                        icon={TabIcon}
                                         component={TipView}
                                     />
                                     <Scene
                                         key="searchmain"
                                         icon={TabIcon}
+                                        icon_id={2}
+
                                         component={SearchMain}
                                         hideNavBar={true}
                                     />
                                     <Scene  key="comment"
                                             hideNavBar
-                                            icon_id={2}
+                                            icon_id={3}
                                             icon={TabIcon}
                                             component={BaseScene}
                                     />
                                     <Scene  key="account"
                                             hideNavBar
-                                            icon_id={3}
+                                            icon_id={4}
                                             icon={TabIcon}
                                             component={Account}
                                     />

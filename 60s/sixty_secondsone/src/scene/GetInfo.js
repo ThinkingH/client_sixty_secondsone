@@ -147,7 +147,7 @@ export default class GetInfo extends Component {
     iscanclick=()=>{
         if(imgdata!=''&&username!=""&&username!=null){
             this.setState({
-                buttonbg:'#c5b361',
+                buttonbg:'#f5c61e',
                 disable:false,
             })
         }else{

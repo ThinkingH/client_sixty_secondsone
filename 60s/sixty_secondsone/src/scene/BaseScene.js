@@ -17,11 +17,7 @@ export default class BaseScene extends Component {
             collectnum:0,
         };
     }
-    static navigationOptions = {
-       // tabBarLabel: Config.navs_txt[2],
-       // tabBarLabel: "",
-       tabBarIcon: ({focused,tintColor}) => (<Image  source={focused ?Config.icons_s[2]:Config.icons[2]}/>)
-    };
+
 
     componentWillUnmount(){
         this.getCollect.remove();
@@ -66,18 +62,14 @@ export default class BaseScene extends Component {
                     style={{height:50,backgroundColor:'#fff',alignItems:'center',
                        }}>
                     <ImageBackground    style={{position:'absolute',top:0,width:width,height:50,flexDirection:'row'}} source={require('../img/icon_homebg.png')} >
-
-
                         <View style={{width:width,height:50,position:'absolute',alignItems:'center',justifyContent:'center',backgroundColor:'transparent'}}>
                             <Text style={{color:'#fff',backgroundColor:'transparent'}}>收藏</Text>
                         </View>
                     </ImageBackground>
-
                 </View>
                 {Config.usertype=="1"?( this.state.collectnum==0?(
                             <View  style={{flex:1,justifyContent:'center',alignItems:'center',backgroundColor:'#fafafa'}} >
-                            <Thumbnail square  style={{width:width/1.7,height:width/1.7,marginRight:25}} source={require('../img/icon_collect_show.png')} />
-                            <Text style={{marginTop:20}}>您还没有收藏任何菜谱哦,快去收藏吧~</Text>
+                            <Image resizeMode={'cover'}  style={{width:width/1.1,height:width/1.1/1080*1590}} source={require('../img/icon_collect_show.png')} />
                             </View>
                         ):(
                             <View style={{flex:1}}>
@@ -86,8 +78,7 @@ export default class BaseScene extends Component {
                             )
                     ):(
                         <View style={{flex:1,justifyContent:'center',alignItems:'center',backgroundColor:'#f0f2f1'}}>
-                        <Thumbnail square  style={{width:width/1.7,height:width/1.7,marginRight:25}} source={require('../img/icon_collect_show.png')} />
-                        <Text style={{marginTop:20}}>您还没有收藏任何菜谱哦,快去收藏吧~</Text>
+                        <Image resizeMode={'cover'}  style={{width:width/1.1,height:width/1.1/1080*1590}} source={require('../img/icon_collect_show.png')} />
                         </View>
                     )}
             </Container>

@@ -94,11 +94,14 @@ export default class Comment extends Component {
     _getValue=(value)=>{
         _value=value;
         this.setState({value});
+        console.log('eeeeeeeeeeeeeeeeeeeeeeeeee')
         if(_value!==""&&_value!=null){
+            console.log('aaaaaaaaaaaaaaaaaaaa')
             this.setState({
                 disabled:false
             })
         }else{
+            console.log('wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww')
             this.setState({
                 disabled:true,
                 toItem:null,
@@ -145,9 +148,9 @@ export default class Comment extends Component {
                             onChangeText={(value)=>this._getValue(value)}
                     />
                     {Platform.OS=='ios'?(
-                        <Button disabled={this.state.disabled} onPress={()=>this._sendMsg()} style={{backgroundColor:this.state.disabled?'#ccc':'#C5B361',height:30,marginTop:10,marginRight:15}} ><Text >发送</Text></Button>
+                        <Button disabled={this.state.disabled} onPress={()=>this._sendMsg()} style={{backgroundColor:this.state.disabled?'#ccc':'#F5C61E',height:30,marginTop:10,marginRight:15}} ><Text >发送</Text></Button>
                     ):(
-                        <Button disabled={this.state.disabled} onPress={()=>this._sendMsg()} style={{backgroundColor:this.state.disabled?'#ccc':'#C5B361',height:30,marginTop:10,marginRight:15}} small={true} ><Text>发送</Text></Button>
+                        <Button disabled={this.state.disabled} onPress={()=>this._sendMsg()} style={{backgroundColor:this.state.disabled?'#ccc':'#F5C61E',height:30,marginTop:10,marginRight:15}} small={true} ><Text>发送</Text></Button>
                     )}
                 </Footer>
                 <Spinnera loadvalue="提交评论中..." modalVisible={this.state.isvisiable} />

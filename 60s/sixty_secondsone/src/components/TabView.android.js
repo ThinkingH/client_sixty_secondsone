@@ -165,7 +165,7 @@ export default class TabView extends React.Component {
     _renderHeader=()=>{
         return(
             <View   style={{backgroundColor:'#fff',alignItems:'center',justifyContent:'center',flexDirection:'row',width:width,height:60}}>
-                <Item  rounded style={{height:40,width:width-60,borderColor:'#C5B361'}}>
+                <Item  rounded style={{height:40,width:width-60,borderColor:'#f5c61e'}}>
                     <Input onChangeText={(value)=>this.setState({value})}
                            placeholderTextColor="#999"
                            style={{height:40,padding:0,fontSize:14,}}
@@ -219,7 +219,7 @@ export default class TabView extends React.Component {
                          hidden={false}/>
           <Content  showsVerticalScrollIndicator={false} keyboardShouldPersistTaps="handled" >
              <View style={{paddingLeft:20,paddingRight:20,backgroundColor:'#fff'}}>
-                 <Text style={{marginBottom:10,fontSize:16,color:'#C5B061',marginTop:20}}>别人在搜</Text>
+                 <Text style={{marginBottom:10,fontSize:16,color:'#f5c61e',marginTop:20}}>别人在搜</Text>
                  <Surface  width={width-40} height={1}>
                      <Shape d={path} stroke="#C5B061" strokeWidth={1} strokeDash={[3,5]}/>
                  </Surface>
