@@ -237,7 +237,7 @@ export default class TabView extends React.Component {
                                  </View>
                                  <View style={{flex:1}}></View>
                                  <Text style={{color:'#ccc',fontSize:14}}>{item.count}件</Text>
-                                 <Image style={{width:20,height:20,marginLeft:10}} source={require('../img/icon_close.png')} />
+                                 <Image style={{width:20,height:20,marginLeft:10}} source={require('../img/icon_searchforother.png')} />
                              </View>
                              <Surface  width={width-40} height={1}>
                                  <Shape d={path} stroke="#ccc" strokeWidth={1} strokeDash={[3,5]}/>

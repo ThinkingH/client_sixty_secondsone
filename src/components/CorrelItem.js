@@ -62,10 +62,10 @@ export default class CorrelItem extends React.PureComponent  {
                 </TouchableOpacity>
                 <View style={{paddingLeft:15,marginBottom:5,marginTop:5}}>
                     <Text numberOfLines={1} style={{height:20, fontWeight:'100',fontFamily:'MSYH',lineHeight:20,fontSize:14,color:'#666'}} >{this.props.title.biaoti}</Text>
-                    <Text numberOfLines={1} style={{height:15, letterSpacing:5,lineHeight:15,fontSize:10,color:'#aaa'}} >{this.props.title.biaoti}</Text>
+                    <Text numberOfLines={1} style={{height:15, letterSpacing:5,lineHeight:15,fontSize:10,color:'#aaa'}} >{this.props.title.biaotichild}</Text>
                     <TouchableOpacity activeOpacity={1} style={{flexDirection:'row',alignItems:'center',height:15,}}>
-                        <Image source={{uri:this.props.title.showimg}} style={{height:10, width:10,borderRadius:5}}/>
-                        <Text numberOfLines={1} style={{ letterSpacing:5,lineHeight:15,fontSize:10,marginLeft:5,color:'#f5c61e',fontFamily:'MSYH'}} >{this.props.title.biaoti}</Text>
+                        <Image source={require('../img/icon_maketime.png')} style={{height:10, width:10,borderRadius:5}}/>
+                        <Text numberOfLines={1} style={{ letterSpacing:5,lineHeight:15,fontSize:10,marginLeft:5,color:'#f5c61e',fontFamily:'MSYH'}} >{this.props.title.maketime}</Text>
                     </TouchableOpacity>
                 </View>
             </TouchableOpacity>

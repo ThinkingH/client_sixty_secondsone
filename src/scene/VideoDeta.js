@@ -665,7 +665,7 @@ export default class VideoDeta extends Component {
                         )}
                     {this.state.youlike.length==0?(null):(
                             <View style={{width:width,flexDirection:'row',justifyContent:'space-between',flexWrap:'wrap',padding:20}}>
-                                <View style={{backgroundColor:'#fff',marginTop:20,marginLeft:20,width:width}} >
+                                <View style={{backgroundColor:'#fff',marginTop:20,marginBottom:20,width:width}} >
                                     <Text style={[styles.textb,{color:'#000',}]}>相关美食</Text>
                                 </View>
                                 {this._renderCorrelation()}

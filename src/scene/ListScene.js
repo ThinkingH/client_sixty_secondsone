@@ -105,57 +105,8 @@ export default class ListScene extends Component {
         this.listViews.refresh();
     };
 
-    _loadMoreData=()=> {
 
-        this.setState({
-            isLoadingMore:true,
-        });
-        _pageNo = _pageNo+1;
-        this._getData(_pageNo);
 
-    };
-
-    _getData=(_pageNo,resolve)=>{
-
-        console.log("this.props.urlnumcolumnsnumcolumnsnumcolumnsnumcolumns",this.state.numcolumns,'numcolumnsnumcolumnsnumcolumns',this.props.item);
-        console.log("this.props.url",this.props.url);
-        let parpam=null;
-        parpam=this.props.url+"&pagesize=10&page="+_pageNo;
-        let thetype=this.props.thetype;
-        Request(thetype,parpam)
-            .then((responseJson) => {
-                console.log("this.props.urlthis.props.urlthis.props.url",responseJson);
-                if(responseJson.data.pagemsg.sumpage=="1"){
-                    this.setState({
-                        isshowfooter:false,
-                    })
-                }
-                        let b=new Array();
-                        if(this.state.refreshing){
-                            console.log('bbbbbbbbbbbbbbbbbbbbbbbbbbbbb')
-                            b=responseJson.data.list
-                        }else{
-                            console.log('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa')
-                            b=this.state.datas.concat(responseJson.data.list);
-                        }
-
-                resolve();
-                this.setState({
-                    datas:b,
-                    refreshing:false,
-                    isLoadingMore:false,
-                    totalCount:responseJson.data.pagemsg.allcount,
-                });
-            })
-            .catch((error) => {
-            this.setState({
-                refreshing:false,
-                isLoadingMore:false,
-            })
-                console.log(error.toString())
-                // Toast.show(error.toString());
-            });
-    };
 
 
 
@@ -321,7 +272,13 @@ export default class ListScene extends Component {
         }
     }
 
-
+    renderEmptyView=()=>{
+        return(
+            <View style={{width:width,height:100,alignItems:'center',justifyContent:'center'}}>
+                <Text style={{color:'#f00',fontSize:20}}>我是空布局的时候的替代品</Text>
+            </View>
+        )
+    }
     _renderLoading=()=>{
         return(
             <LineDotsLoader color={'#F5C61E'} />
@@ -342,7 +299,7 @@ export default class ListScene extends Component {
     };
 
     onFetch = async(_pageNo=1, startFetch, abortFetch) => {
-        let rowData=new Array();
+        let rowData=[];
         let parpam=null;
         parpam=this.props.url+"&pagesize=10&page="+_pageNo;
         let thetype=this.props.thetype;
@@ -350,13 +307,8 @@ export default class ListScene extends Component {
             .then((responseJson) => {
                 console.log("this.props.urlthis.props.urlthis.props.url",responseJson);
                  rowData =responseJson.data.list;
-                if(rowData.length==0){
-                    this.setState({
-                        isshowsearch:true,
-                        totalCount:responseJson.data.pagemsg.allcount,
-                    })
-                }
-                startFetch(rowData, 10)
+
+                startFetch(rowData, 6)
             })
             .catch((error) => {
                 abortFetch()
@@ -370,7 +322,7 @@ export default class ListScene extends Component {
             <View
                 //{...this._panResponder.panHandlers}
                 style={{flex:1,backgroundColor:'#fff'}}>
-                {this.state.isshowsearch?(this._renderResult()):(null)}
+
                     <UltimateListView
                         scrollEventThrottle={1}
                        // onScroll={(e)=>this._onScrollEnd(e)}
@@ -386,11 +338,9 @@ export default class ListScene extends Component {
                         // refreshing={this.state.refreshing}
                         // onRefresh={this._onRefresh}
                         onEndReachedThreshold={0.1}
-                        onEndReached={(info) => {
-                            this._toEnd()
-                        } }
+
                        // paginationBtnText={'正在载入1'}
-                        waitingSpinnerText={'正在加载'}
+                        //waitingSpinnerText={'正在加载22222'}
                         ref={(ref) => this.listViews = ref}
                         key={this.state.layout} // this is important to distinguish different FlatList, default is numColumns
                         onFetch={this.onFetch}
@@ -404,12 +354,11 @@ export default class ListScene extends Component {
                         pagination={true}
                         autoPagination={true}
                         header={this._header}
-                        //paginationFetchingView={this._renderPaginationFetchingView}
                         // sectionHeaderView={this.renderSectionHeaderView}   //not supported on FlatList
-                        // paginationFetchingView={this._renderPaginationFetchingView}
-                        // paginationAllLoadedView={this._renderPaginationFetchingView}
-                          //paginationWaitingView={this._renderPaginationFetchingView}
-                         emptyView={this._renderResult}
+                         //paginationFetchingView={this._renderResult}
+                         //paginationAllLoadedView={this._renderResult}
+                         // paginationWaitingView={this._renderResult}
+                        emptyView={this.renderEmptyView}
                         // separator={this.renderSeparatorView}
                         // new props on v3.2.0
                         // arrowImageStyle={{ width: 20, height: 20, resizeMode: 'contain' }}

@@ -337,7 +337,7 @@ export default class MainScene extends Component {
                     .then((responseJson) => {
                         console.log("this.props.urlthis.props.urlthis.props.url",responseJson);
                         let rowData =responseJson.data.list;
-                        startFetch(rowData, 6)
+                            startFetch(rowData, 6)
                     })
                     .catch((error) => {
                         abortFetch()
@@ -350,6 +350,22 @@ export default class MainScene extends Component {
         return(
             <View style={{width:width,height:50,alignItems:'center',justifyContent:'center'}}>
                 <Text>正在加载中...</Text>
+            </View>
+        )
+    }
+
+    renderEmptyView=()=>{
+        return(
+            <View style={{width:width,height:100,alignItems:'center',justifyContent:'center'}}>
+                <Text style={{color:'#f00',fontSize:20}}>我是空布局的时候的替代品</Text>
+            </View>
+        )
+    }
+
+    _renderPagin=()=>{
+        return(
+            <View style={{width:width,height:50,alignItems:'center',justifyContent:'center'}}>
+                <Text>没有更多了</Text>
             </View>
         )
     }
@@ -394,9 +410,9 @@ export default class MainScene extends Component {
                     paginationFetchingView={this._renderPagination}
                     // sectionHeaderView={this.renderSectionHeaderView}   //not supported on FlatList
                      //paginationFetchingView={this._renderPaginationFetchingView}
-                     paginationAllLoadedView={this._renderPagination}
+                     paginationAllLoadedView={this._renderPagin}
                      paginationWaitingView={this._renderPagination}
-                    // emptyView={this.renderEmptyView}
+                     emptyView={this.renderEmptyView}
                     // separator={this.renderSeparatorView}
                     // new props on v3.2.0
                    // arrowImageStyle={{ width: 20, height: 20, resizeMode: 'contain' }}

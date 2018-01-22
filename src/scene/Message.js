@@ -51,7 +51,7 @@ export default class Comment extends Component {
 
     _goToMessage=()=>{
         if(Config.usertype=='1'){
-            Actions.messagebox()
+            Actions.messagebox({title:'留言箱'})
         }else{
             let num=  Math.ceil(Math.random()*4)-1
             Actions.login2({num:num})
@@ -68,7 +68,7 @@ export default class Comment extends Component {
                            translucent={false}
                            hidden={false}/>
                 <TouchableOpacity activeOpacity={0.9} onPress={()=>this._goToMessage()} style={{width:width,height:80,flexDirection:'row',alignItems:'center',backgroundColor:'#fff'}}>
-                    <Image  style={{width:50,height:50,marginLeft:20}} source={require('../img/icon_login1.png')} />
+                    <Image  style={{width:50,height:50,marginLeft:20}} source={require('../img/icon_messagebox.png')} />
                     <Text style={{marginLeft:10}}>留言箱</Text>
                 </TouchableOpacity>
                 <View style={{width:width,height:5,backgroundColor:'#f8f8f8'}}>

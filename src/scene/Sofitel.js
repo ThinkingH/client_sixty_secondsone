@@ -97,7 +97,8 @@ export default class Sofitel extends Component {
             .then((responseJson) => {
                 console.log("this.props.urlthis.props.urlthis.props.url",responseJson);
                 let rowData =responseJson.data.list;
-                startFetch(rowData, 24)
+                    startFetch(rowData, 6)
+
             })
             .catch((error) => {
                 abortFetch()
@@ -128,6 +129,14 @@ export default class Sofitel extends Component {
     _renderLoading=()=>{
         return(
             <LineDotsLoader color={'#F5C61E'} />
+        )
+    }
+
+    renderEmptyView=()=>{
+        return(
+            <View style={{width:width,height:100,alignItems:'center',justifyContent:'center'}}>
+                <Text style={{color:'#f00',fontSize:20}}>我是空布局的时候的替代品</Text>
+            </View>
         )
     }
 
@@ -177,7 +186,7 @@ export default class Sofitel extends Component {
                     // paginationFetchingView={this._renderPaginationFetchingView}
                     // paginationAllLoadedView={this._renderPaginationFetchingView}
                     //  paginationWaitingView={this._renderPaginationFetchingView}
-                    // emptyView={this.renderEmptyView}
+                     emptyView={this.renderEmptyView}
                     // separator={this.renderSeparatorView}
 
                     // new props on v3.2.0
