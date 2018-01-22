@@ -35,15 +35,16 @@ export default class SearchVideo extends React.Component {
             refreshing: false,
             isassort:this.props.isassort,
             parpam:null,
+            isshowmzy:false
         };
      //this._getHistory();
     }
     componentDidMount() {
         this._getHistory()
         this._onRefresh();
-
-
     }
+
+
     _onRefresh=()=> {
         _pageNo=1;
         this._getData(_pageNo);
@@ -65,6 +66,7 @@ export default class SearchVideo extends React.Component {
          }else{
            this.setState({parpam:"thetype=1034&searchstr="+this.state.value},()=>{
                DeviceEventEmitter.emit('getRefresh','搜索结果');
+
            });
              // this.setState({parpam:"thetype=1015&searchstr="+this.state.value},()=>{})   setstate（{}）回调 也可以
 
@@ -176,6 +178,8 @@ export default class SearchVideo extends React.Component {
                       <View style={{flex:1,marginTop:15}}>
                           <ListScene url={this.state.parpam} thetype="1034" header={'search'} item={"search"} />
                       </View>
+                {this.state.isshowmzy?(<View style={{width:width,height:10}}></View>):(null)}
+
 
 
 

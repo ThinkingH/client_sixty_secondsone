@@ -51,7 +51,7 @@ export default class TipItem extends React.PureComponent  {
                         {this.state.data.biaoti}
                         </Text>
                     <Text numberOfLines={1} style={{height:15, letterSpacing:5,lineHeight:15,fontSize:10,color:'#aaa'}} >
-                        {this.state.data.biaoti}
+                        {this.state.data.biaotichild}
                         </Text>
 
                 </View>

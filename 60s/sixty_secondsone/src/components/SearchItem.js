@@ -41,6 +41,16 @@ export default class SearchItem extends React.PureComponent  {
       }
     };
 
+    componentWillReceiveProps(nextProps){
+        console.log('22222222222222222222222222',nextProps)
+        let data=nextProps.data;
+        this.setState({
+            data:data
+        })
+
+    }
+
+
     render() {
         return (
                     <TouchableOpacity  onPress={()=>this._isVideo()}   activeOpacity={0.9}   style={{marginLeft:this.props.index%2==0?15:0,marginRight:this.props.index%2==1?0:5,marginTop:10}} >
@@ -51,7 +61,7 @@ export default class SearchItem extends React.PureComponent  {
                         </View>
                         <View style={{paddingLeft:15,marginBottom:10,marginTop:5}}>
                             <Text numberOfLines={1} style={{height:20, fontWeight:'100',lineHeight:20,fontSize:14,color:'#666'}} >{this.state.data.biaoti}</Text>
-                            <Text numberOfLines={1} style={{height:15, letterSpacing:5,lineHeight:15,fontSize:10,color:'#aaa'}} >{this.state.data.biaoti}</Text>
+                            <Text numberOfLines={1} style={{height:15, letterSpacing:5,lineHeight:15,fontSize:10,color:'#aaa'}} >{this.state.data.biaotichild}</Text>
                         </View>
                     </TouchableOpacity>
         )

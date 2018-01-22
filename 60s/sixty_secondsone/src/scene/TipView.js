@@ -115,7 +115,7 @@ export default class TipView extends Component {
 
                                                 <View style={{marginLeft:10,marginTop:10,justifyContent:'center'}}>
                                                     <Text numberOfLines={1} style={{color:'#000'}}>{item.biaoti}</Text>
-                                                    <Text style={{color:'#595959',fontSize:14}}>{item.videosavename}</Text>
+                                                    <Text style={{color:'#595959',fontSize:14}}>{item.biaotichild}</Text>
                                                 </View>
                                             </View>
 

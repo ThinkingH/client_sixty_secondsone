@@ -302,7 +302,7 @@ export default class Login2 extends Component {
                            barStyle="light-content"
                            translucent={true}
                            hidden={false}/>
-                     <Content >
+                     <Content keyboardShouldPersistTaps="handled"  >
                     <Body style={{flex:1,alignItems:'center'}}>
                     <ImageBackground   style={{width:width,height:width,justifyContent:'flex-end',alignItems:'center'}}
                                        source={imgarr[num]} >
@@ -335,25 +335,28 @@ export default class Login2 extends Component {
 
 
 
-                    <Button onPress={()=>this._login()}
-                            color={'#fff'} rounded block
-                            style={{height:60,width:60,backgroundColor:'#c5b361',marginTop:10,marginLeft:(width-60)/2}} >
-                        <Text style={{textAlign:'center'}}>登录</Text>
-                    </Button>
+
+                    <TouchableOpacity activeOpacity={0.9}
+                        onPress={()=>{this._login()}}
+                    >
+
+                            <Thumbnail    style={{width:width/8,height:width/8,marginTop:15}} source={require('../img/icon_loginbtn.png')} />
+
+                    </TouchableOpacity>
 
 
 
-                    <Text  style={{marginTop:10,color:'#8c8c8c',fontSize:12,}}>用其他方式登录60SEC</Text>
-                    <Row style={{padding:15,}}>
-                        <Left>
+                    <Text  style={{marginTop:15,color:'#8c8c8c',fontSize:12,}}>用其他方式登录60SEC</Text>
+                    <Row style={{padding:15,justifyContent:'center'}}>
+
                             <TouchableNativeFeedback
                                 onPress={()=>{this._checklogin(2)}}
                                 background={TouchableNativeFeedback.Ripple("#ccc", true)}>
-                                <View style={{marginLeft:width/6}}>
+                                <View style={{marginRight:width/8}}>
                                     <Thumbnail    style={{width:width/10,height:width/10}} source={require('../img/icon_wx.png')} />
                                 </View>
                             </TouchableNativeFeedback>
-                        </Left>
+
 
                         {/*<Body>*/}
                         {/*<TouchableNativeFeedback*/}
@@ -364,16 +367,16 @@ export default class Login2 extends Component {
                         {/*</View>*/}
                         {/*</TouchableNativeFeedback>*/}
                         {/*</Body>*/}
-                        <Right>
+
                             <TouchableNativeFeedback
                                 onPress={()=>{this._checklogin(0)}}
                                 background={TouchableNativeFeedback.Ripple("#ccc", true)}>
-                                <View  style={{marginRight:width/6}}>
+                                <View  style={{marginLeft:width/8}}>
                                     <Thumbnail   square style={{width:width/10,height:width/10}} source={require('../img/icon_qq.png')} />
                                 </View>
                             </TouchableNativeFeedback>
 
-                        </Right>
+
 
 
 

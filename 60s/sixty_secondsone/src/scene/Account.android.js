@@ -352,7 +352,7 @@ export default class Account extends Component {
     _renderLogina=()=>{
         return (
             <Container  style={{backgroundColor:'#f5f5f5'}}>
-                <Content onScroll={(e)=>this._onScrollEnd(e)}   showsVerticalScrollIndicator={false}
+                <Content onScroll={(e)=>this._onScrollEnd(e)}  keyboardShouldPersistTaps="handled"  showsVerticalScrollIndicator={false}
                         //  onScroll={Animated.event([{nativeEvent:{contentOffset:{y:this.state.imgscale}}}])}
                           refreshControl={
                             <RefreshControl
