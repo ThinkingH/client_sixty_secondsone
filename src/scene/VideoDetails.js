@@ -545,18 +545,18 @@ export default class VideoDetails extends Component {
         return (
             <ScrollView contentContainerStyle={{paddingLeft:20,paddingRight:10}} showsHorizontalScrollIndicator={false} horizontal={true} >
                 {this.state.tipsarr.map((item,i)=>
-                    <View  style={{width:width/1.5,marginRight:10}}  key={i}>
+                    <View  style={{width:width/1.7,marginRight:10}}  key={i}>
                         <TouchableOpacity activeOpacity={0.8}
                                           style={{flex:1}}
                                           onPress={()=>{Actions.tipdetails({data:item});this.videos.pause();}}
                         >
-                            <View style={{width:width/1.5,height:width/1.5,borderRadius:10,backgroundColor:'#ccc'}}>
-                                <Image square style={{width:width/1.5,height:width/1.5,borderRadius:10}} source={{uri:item.showimg}} />
+                            <View style={{width:width/1.7,height:width/1.7,borderRadius:10,backgroundColor:'#ccc'}}>
+                                <Image square style={{width:width/1.7,height:width/1.7,borderRadius:10}} source={{uri:item.showimg}} />
                             </View>
                             <View style={{marginTop:10}}>
                                 <View style={{marginLeft:10,marginTop:10,justifyContent:'center'}}>
                                     <Text numberOfLines={1} style={{color:'#000'}}>{item.biaoti}</Text>
-                                    <Text style={{color:'#595959',fontSize:14}}>{item.videosavename}</Text>
+                                    <Text numberOfLines={1} style={{color:'#595959',fontSize:14}}>{item.jieshao}</Text>
                                 </View>
                             </View>
                         </TouchableOpacity>
@@ -577,7 +577,7 @@ export default class VideoDetails extends Component {
                     {this._renderVideo()}
                     {this._renderViderDetails()}
                     {this.state.tipsarr.length==0?(null):(
-                            <Text style={{margin:20,fontSize:16,color:'#000'}}>小贴士视频</Text>
+                            <Text style={{margin:20,fontSize:16,color:'#000'}}>小窍门视频</Text>
                         )}
                     {this._renderTipVideo()}
                         <Card style={{borderRadius:10,marginRight:10,marginLeft:10,width:width-20,marginTop:20}}>
@@ -633,7 +633,7 @@ export default class VideoDetails extends Component {
                         <Text note style={[styles.texts,{color:'#000'}]}>{this.state.data.tishishuoming}</Text>
                     </View>
                         <Button rounded={true} block={true} onPress={()=>this._comment()} style={{height:45,marginLeft:30,width:width-60,marginBottom:10,marginTop:10,backgroundColor:'#f5c61e'}} iconLeft >
-                            <Image style={[styles.imagelogo,{marginRight:5}]} source={require('../img/icon_videodetails_comment_s.png')} />
+                            <Image style={[styles.imagelogo,{marginRight:5}]} source={require('../img/icon_commentbtn.png')} />
                             <Text style={{color:'#fff',marginLeft:5}}>欢  迎  留  言</Text>
                         </Button>
                     {this.state.data.picpingluncount=="0"?(null):(
@@ -652,17 +652,21 @@ export default class VideoDetails extends Component {
                                         ):(null)}
                                 </ListItem>
                                 {this._renderContributeList()}
-                                <View style={{width:width,height:1,backgroundColor:'#dfdfdf',marginTop:15}}>
+                                <View style={{marginLeft:20,marginTop:15,marginBottom:10}}>
+                                    <Surface  width={width-40} height={1}>
+                                        <Shape d={path} stroke="#C5B061" strokeWidth={1} strokeDash={[3,5]}/>
+                                    </Surface>
                                 </View>
-                                <Button onPress={()=>this._listItemPress(1)} style={{height:45,marginBottom:10,marginTop:10}} transparent={true} full iconLeft >
-                                    <Image style={[styles.imagelogo]} source={require('../img/icon_videodetails_contribute_s.png')} />
-                                    <Text style={{color:'#f5c61e',marginLeft:5}}>我要投稿</Text>
+
+                                <Button rounded={true} block={true} onPress={()=>this._listItemPress(1)} style={{height:45,marginLeft:30,width:width-60,marginBottom:10,marginTop:10,backgroundColor:'#f5c61e'}} iconLeft >
+                                    <Image style={[styles.imagelogo,{marginRight:5}]} source={require('../img/icon_conbutebtn.png')} />
+                                    <Text style={{color:'#fff',marginLeft:5}}>我  要  投  稿</Text>
                                 </Button>
                             </View>
                         )}
                     {this.state.youlike.length==0?(null):(
                             <View style={{width:width,flexDirection:'row',justifyContent:'space-between',flexWrap:'wrap',padding:20}}>
-                                <View style={{backgroundColor:'#fff',marginTop:20,marginBottom:20,width:width}} >
+                                <View style={{backgroundColor:'#fff',marginBottom:20,width:width}} >
                                     <Text style={[styles.textb,{color:'#000',}]}>相关美食</Text>
                                 </View>
                                 {this._renderCorrelation()}

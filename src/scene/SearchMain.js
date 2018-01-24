@@ -71,7 +71,7 @@ class SearchMain extends Component {
                 </View>
                     <ImageBackground    style={{width:width,height:50,flexDirection:'row'}} source={require('../img/icon_homebg.png')} >
                         <View style={{width:width,height:50,position:'absolute',alignItems:'center',justifyContent:'center',backgroundColor:'transparent'}}>
-                            <Text style={{color:'#fff',backgroundColor:'transparent'}}>查找</Text>
+                            <Text style={{color:'#fff',backgroundColor:'transparent',marginBottom:width/1.28/850*130/6}}>查找</Text>
                         </View>
                     </ImageBackground>
                 <View style={{width:width,height:width/1.28/850*130/5*4,backgroundColor:'transparent'}}>

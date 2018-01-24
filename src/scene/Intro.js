@@ -43,7 +43,8 @@ export default class Intro extends Component {
     constructor(props) {
         super(props);
         this.state={
-            isshow:false
+            isshowbtn:false,
+            dotindex:0,
         };
 
 
@@ -98,36 +99,21 @@ export default class Intro extends Component {
         Actions.tabbar({type: ActionConst.RESET});
     }
 
-    render() {
-        const pageArray = [{
+    goTo=(index, total)=>{
+        if(index==2){
+            this.setState({
+                isshowbtn:true,
+                dotindex:index
+            })
+        }else{
+            this.setState({
+                isshowbtn:false,
+                dotindex:index,
+            })
+        }
+    }
 
-            img: require('../img/noob.png'),
-            imgStyle: {
-                height: height,
-                width: width,
-            },
-            backgroundColor: '#fff',
-            fontColor: '#fff',
-            level: 10,
-        }, {
-            img: require('../img/noob.png'),
-            imgStyle: {
-                height: height,
-                width: width,
-            },
-            backgroundColor: '#fff',
-            fontColor: '#fff',
-            level: 10,
-        }, {
-            img: require('../img/noob.png'),
-            imgStyle: {
-                height: height,
-                width: width,
-            },
-            backgroundColor: '#fff',
-            fontColor: '#fff',
-            level: 10,
-        }];
+    render() {
         return (
             <View style={{flex:1}}>
                 <StatusBar backgroundColor="#c5b361"
@@ -135,11 +121,13 @@ export default class Intro extends Component {
                              translucent={true}
                              hidden={true}/>
                 <AppIntro rightTextColor={'#f5c61e'}
-                          nextBtnLabel={''}
-                          doneBtnLabel={'进入'}
                           onDoneBtnClick={()=>this._goTotabbar()}
-                          showDoneButton={true}
+                          showDoneButton={false}
+                          onSlideChange={(index, total) => {this.goTo(index, total)}}
                           showSkipButton={false}
+                          showDots={false}
+                          dotindex={this.state.dotindex}
+                          isshowbtn={this.state.isshowbtn}
                           activeDotColor={'#f5c61e'}
                           dotColor={'#ccc'}>
                     <View style={[styles.slide,{ backgroundColor: '#fff' }]}>

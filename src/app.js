@@ -84,7 +84,7 @@ const styles = StyleSheet.create({
         fontSize:18
     },
     navigationBarStyle:{
-        backgroundColor:'#fefefe'
+        backgroundColor:'#fefefe',
     }
 });
 let isExit=0;
@@ -242,7 +242,7 @@ export default class apps extends Component {
 
         JPushModule.addReceiveOpenNotificationListener((map) => {
 
-            console.log(map);
+            console.log('map.................................',map);
 
             this._getActive(map);
 
@@ -250,25 +250,24 @@ export default class apps extends Component {
     };
     _getActive=(map)=>{
         console.log(map);
+        let data='';
         if(JSON.parse(map.extras).action=="shouye"){
            //shouye 代表推送到首页列表   classify 代表推送到哪个分类  对应0 1 2 3....等索引
             Actions.tabbar({num:JSON.parse(map.extras).classify});
         }
         else if(JSON.parse(map.extras).action=="details"){
             //details 代表推送到视频详情页
-            let data=JSON.parse(map.extras);
+             data=JSON.parse(map.extras).value;
             Actions.videodetails({title:data.vtitle,nowid:data.vid});
         }else if(JSON.parse(map.extras).action=="sofitellist"){
             //sofitellist 代表推送到特辑列表二级页面  sid为特辑列表id    data为特辑数据
-            let data=JSON.parse(map.extras);
+             data=JSON.parse(map.extras).value;
             Actions.sofitellist({id:data.sid,datas:data.data});
         }else if(JSON.parse(map.extras).action=="message"){
             //message 代表推送到消息列表
-            let data=JSON.parse(map.extras);
             Actions.message();
         }else if(JSON.parse(map.extras).action=="messagebox"){
             //messagebox 代表推送到留言箱
-            let data=JSON.parse(map.extras);
             Actions.messagebox();
         }
         Config.IECEIVESOCKET=2;
@@ -301,6 +300,8 @@ export default class apps extends Component {
                                     key="comment"
                                     component={Comment}
                                     duration={1}  hideNavBar={false}
+                                    backButtonImage={require('./img/icon_yellowclose.png')}
+                                    leftButtonIconStyle={{width:20,height:20}}
                                 />
                                 <Scene
                                     navigationBarStyle={[styles.navigationBarStyle]}
@@ -310,6 +311,8 @@ export default class apps extends Component {
                                     title="投稿"
                                     panHandlers={null}
                                     duration={1}
+                                    backButtonImage={require('./img/icon_yellowclose.png')}
+                                    leftButtonIconStyle={{width:20,height:20}}
                                 />
                                 <Scene
                                     navigationBarStyle={[styles.navigationBarStyle]}
@@ -320,6 +323,8 @@ export default class apps extends Component {
                                     title="投稿"
                                     panHandlers={null}
                                     duration={1}
+                                    backButtonImage={require('./img/icon_yellowclose.png')}
+                                    leftButtonIconStyle={{width:20,height:20}}
                                 />
 
                                 <Scene
@@ -330,6 +335,8 @@ export default class apps extends Component {
                                     title="投稿"
                                     panHandlers={null}
                                     duration={1}
+                                    backButtonImage={require('./img/icon_yellowclose.png')}
+                                    leftButtonIconStyle={{width:20,height:20}}
                                 />
                                 <Scene
                                     navigationBarStyle={[styles.navigationBarStyle]}
@@ -340,6 +347,8 @@ export default class apps extends Component {
                                     title="法律权益"
                                     panHandlers={null}
                                     duration={1}
+                                    backButtonImage={require('./img/icon_yellowclose.png')}
+                                    leftButtonIconStyle={{width:20,height:20}}
                                 />
                                 <Scene
                                     titleStyle={[styles.titleStyle]}
@@ -347,7 +356,7 @@ export default class apps extends Component {
                                     title="设置"
                                     navigationBarStyle={[styles.navigationBarStyle]}
                                     leftButtonIconStyle={{width:20,height:20}}
-                                   // backButtonImage={require('./img/icon_noviceclose.png')}
+                                    backButtonImage={require('./img/icon_yellowclose.png')}
                                     component={Setting}
                                     hideNavBar={false}
                                     panHandlers={null}
@@ -359,8 +368,8 @@ export default class apps extends Component {
                                     titleStyle={[styles.titleStyle]}
                                     key="contributelist"
                                     title="投稿列表"
+                                    backButtonImage={require('./img/icon_yellowclose.png')}
                                     leftButtonIconStyle={{width:20,height:20}}
-                                   // backButtonImage={require('./img/icon_noviceclose.png')}
                                     component={ContributeList}
                                     hideNavBar={false}
                                     panHandlers={null}
@@ -371,8 +380,8 @@ export default class apps extends Component {
                                     titleStyle={[styles.titleStyle]}
                                     key="contributedetails"
                                     title="投稿详情页"
+                                    backButtonImage={require('./img/icon_yellowclose.png')}
                                     leftButtonIconStyle={{width:20,height:20}}
-                                    //  backButtonImage={require('./img/icon_noviceclose.png')}
                                     component={ContributeDetails}
                                     hideNavBar={false}
                                     panHandlers={null}
@@ -382,8 +391,8 @@ export default class apps extends Component {
                                     titleStyle={[styles.titleStyle]}
                                     key="basescene"
                                     navigationBarStyle={[styles.navigationBarStyle]}
+                                    backButtonImage={require('./img/icon_yellowclose.png')}
                                     leftButtonIconStyle={{width:20,height:20}}
-                                  //  backButtonImage={require('./img/icon_noviceclose.png')}
                                     component={BaseScene}
                                     hideNavBar={false}
                                     panHandlers={null}
@@ -398,14 +407,16 @@ export default class apps extends Component {
                                     component={FeedBack}
                                     hideNavBar={false}
                                     panHandlers={null}
+                                    backButtonImage={require('./img/icon_yellowclose.png')}
+
                                     duration={1}
                                 />
                                 <Scene
                                     titleStyle={[styles.titleStyle]}
                                     key="sofitellist"
                                     navigationBarStyle={[styles.navigationBarStyle]}
+                                    backButtonImage={require('./img/icon_yellowclose.png')}
                                     leftButtonIconStyle={{width:20,height:20}}
-                                 //   backButtonImage={require('./img/icon_noviceclose.png')}
                                     component={SofitelList}
                                     hideNavBar={true}
                                     panHandlers={null}
@@ -413,7 +424,7 @@ export default class apps extends Component {
                                 />
                                 <Scene
                                     key="videodetails"
-                                  //  backButtonImage={require('./img/icon_noviceclose.png')}
+
                                     component={VideoDetails}
                                     hideNavBar={true}
                                     panHandlers={null}
@@ -432,6 +443,7 @@ export default class apps extends Component {
                                 <Scene
                                     titleStyle={[styles.titleStyle]}
                                     key="assortmentsearch"
+                                    backButtonImage={require('./img/icon_yellowclose.png')}
                                     leftButtonIconStyle={{width:20,height:20}}
                                     navigationBarStyle={[styles.navigationBarStyle]}
                                     component={AssortmentSearch}
@@ -442,8 +454,8 @@ export default class apps extends Component {
                                 <Scene
                                     titleStyle={[styles.titleStyle]}
                                     key="assortmentone"
+                                    backButtonImage={require('./img/icon_yellowclose.png')}
                                     leftButtonIconStyle={{width:20,height:20}}
-                                 // backButtonImage={require('./img/icon_noviceclose.png')}
                                     component={AssortmentOne}
                                     hideNavBar={false}
                                     panHandlers={null}
@@ -452,6 +464,7 @@ export default class apps extends Component {
                                 <Scene
                                     titleStyle={[styles.titleStyle]}
                                     key="searchvideo"
+                                    backButtonImage={require('./img/icon_yellowclose.png')}
                                     leftButtonIconStyle={{width:20,height:20}}
                                     navigationBarStyle={[styles.navigationBarStyle]}
                                     component={SearchVideo}
@@ -462,6 +475,7 @@ export default class apps extends Component {
                                 <Scene
                                     titleStyle={[styles.titleStyle]}
                                     key="assortmenttwo"
+                                    backButtonImage={require('./img/icon_yellowclose.png')}
                                     leftButtonIconStyle={{width:20,height:20}}
                                     navigationBarStyle={[styles.navigationBarStyle]}
                                     component={AssortmentTwo}
@@ -472,6 +486,7 @@ export default class apps extends Component {
                                 <Scene
                                     titleStyle={[styles.titleStyle]}
                                     key="assortmentthree"
+                                    backButtonImage={require('./img/icon_yellowclose.png')}
                                     leftButtonIconStyle={{width:20,height:20}}
                                     navigationBarStyle={[styles.navigationBarStyle]}
                                     component={AssortmentThree}
@@ -481,6 +496,7 @@ export default class apps extends Component {
                                 />
                                 <Scene
                                     titleStyle={[styles.titleStyle]}
+                                    backButtonImage={require('./img/icon_yellowclose.png')}
                                     leftButtonIconStyle={{width:20,height:20}}
                                     navigationBarStyle={[styles.navigationBarStyle]}
                                     component={MainScene}
@@ -491,6 +507,7 @@ export default class apps extends Component {
                                 <Scene
                                     titleStyle={[styles.titleStyle]}
                                     key="message"
+                                    backButtonImage={require('./img/icon_yellowclose.png')}
                                     leftButtonIconStyle={{width:20,height:20}}
                                     navigationBarStyle={[styles.navigationBarStyle]}
                                     component={Message}
@@ -501,6 +518,7 @@ export default class apps extends Component {
                                 <Scene
                                     titleStyle={[styles.titleStyle]}
                                     key="messagebox"
+                                    backButtonImage={require('./img/icon_yellowclose.png')}
                                     leftButtonIconStyle={{width:20,height:20}}
                                     navigationBarStyle={[styles.navigationBarStyle]}
                                     component={MessageBox}
@@ -513,8 +531,8 @@ export default class apps extends Component {
                                     titleStyle={[styles.titleStyle]}
                                     hideNavBar={false}
                                     key="accountinfo"
+                                    backButtonImage={require('./img/icon_yellowclose.png')}
                                     leftButtonIconStyle={{width:20,height:20}}
-                                    //backButtonImage={require('./img/icon_noviceclose.png')}
                                     component={AccountInfo}
                                     navigationBarStyle={[styles.navigationBarStyle]}
                                     title="修改资料"
@@ -528,6 +546,7 @@ export default class apps extends Component {
                                 <Scene
                                     titleStyle={[styles.titleStyle]}
                                     key="getinfo"
+                                    backButtonImage={require('./img/icon_yellowclose.png')}
                                     leftButtonIconStyle={{width:20,height:20}}
                                     navigationBarStyle={[styles.navigationBarStyle]}
                                     component={GetInfo}
@@ -538,6 +557,7 @@ export default class apps extends Component {
                                 <Scene
                                     titleStyle={[styles.titleStyle]}
                                     key="login2"
+                                    backButtonImage={require('./img/icon_yellowclose.png')}
                                     leftButtonIconStyle={{width:20,height:20}}
                                     navigationBarStyle={[styles.navigationBarStyle]}
                                     component={Login2}
@@ -550,6 +570,7 @@ export default class apps extends Component {
                                 <Scene
                                     titleStyle={[styles.titleStyle]}
                                     key="tipall"
+                                    backButtonImage={require('./img/icon_yellowclose.png')}
                                     leftButtonIconStyle={{width:20,height:20}}
                                     navigationBarStyle={[styles.navigationBarStyle]}
                                     component={TipAll}
@@ -561,6 +582,7 @@ export default class apps extends Component {
                                 <Scene
                                     titleStyle={[styles.titleStyle]}
                                     key="tipdetails"
+                                    backButtonImage={require('./img/icon_yellowclose.png')}
                                     leftButtonIconStyle={{width:20,height:20}}
                                     navigationBarStyle={[styles.navigationBarStyle]}
                                     component={TipDetails}
@@ -632,6 +654,7 @@ export default class apps extends Component {
                                 <Scene
                                     titleStyle={[styles.titleStyle]}
                                     key="TabView"
+                                    backButtonImage={require('./img/icon_yellowclose.png')}
                                     leftButtonIconStyle={{width:20,height:20}}
                                     navigationBarStyle={[styles.navigationBarStyle]}
                                     component={TabView}
@@ -644,6 +667,8 @@ export default class apps extends Component {
                             key="listscence"
                             hideNavBar
                             component={ListScence}
+                            backButtonImage={require('./img/icon_yellowclose.png')}
+                            leftButtonIconStyle={{width:20,height:20}}
                             title="ListScence"
                             panHandlers={null}
                             duration={1}
@@ -652,22 +677,27 @@ export default class apps extends Component {
                             navigationBarStyle={[styles.navigationBarStyle]}
                             key="main"
                             component={Main}
+                            backButtonImage={require('./img/icon_yellowclose.png')}
+                            leftButtonIconStyle={{width:20,height:20}}
                             hideNavBar={false}
                             panHandlers={null}
                             duration={1}
                         />
                         <Scene
                             titleStyle={[styles.titleStyle]}
+                            backButtonImage={require('./img/icon_yellowclose.png')}
                             leftButtonIconStyle={{width:20,height:20}}
                             navigationBarStyle={[styles.navigationBarStyle]}
                             key="dietarycontribute"
                             hideNavBar={false}
+
                             component={DietaryContribute}
                             panHandlers={null}
                             duration={1}
                         />
                         <Scene
                             titleStyle={[styles.titleStyle]}
+                            backButtonImage={require('./img/icon_yellowclose.png')}
                             leftButtonIconStyle={{width:20,height:20}}
                             navigationBarStyle={[styles.navigationBarStyle]}
                             key="contributebyuser"
@@ -683,6 +713,7 @@ export default class apps extends Component {
                         />
                                 <Scene
                                     titleStyle={[styles.titleStyle]}
+                                    backButtonImage={require('./img/icon_yellowclose.png')}
                                     leftButtonIconStyle={{width:20,height:20}}
                                     navigationBarStyle={[styles.navigationBarStyle]}
                                     key="inputtitle"
@@ -694,6 +725,7 @@ export default class apps extends Component {
                                 />
                                 <Scene
                                     titleStyle={[styles.titleStyle]}
+                                    backButtonImage={require('./img/icon_yellowclose.png')}
                                     leftButtonIconStyle={{width:20,height:20}}
                                     navigationBarStyle={[styles.navigationBarStyle]}
                                     key="inputdesc"
@@ -705,6 +737,7 @@ export default class apps extends Component {
                                 />
                                 <Scene
                                     titleStyle={[styles.titleStyle]}
+                                    backButtonImage={require('./img/icon_yellowclose.png')}
                                     leftButtonIconStyle={{width:20,height:20}}
                                     navigationBarStyle={[styles.navigationBarStyle]}
                                     key="inputtime"
@@ -716,6 +749,7 @@ export default class apps extends Component {
                                 />
                                 <Scene
                                     titleStyle={[styles.titleStyle]}
+                                    backButtonImage={require('./img/icon_yellowclose.png')}
                                     leftButtonIconStyle={{width:20,height:20}}
                                     navigationBarStyle={[styles.navigationBarStyle]}
                                     key="inputpoint"
@@ -727,6 +761,7 @@ export default class apps extends Component {
                                 />
                                 <Scene
                                     titleStyle={[styles.titleStyle]}
+                                    backButtonImage={require('./img/icon_yellowclose.png')}
                                     leftButtonIconStyle={{width:20,height:20}}
                                     navigationBarStyle={[styles.navigationBarStyle]}
                                     key="inputmaterials"
@@ -738,6 +773,7 @@ export default class apps extends Component {
                                 />
                                 <Scene
                                     titleStyle={[styles.titleStyle]}
+                                    backButtonImage={require('./img/icon_yellowclose.png')}
                                     leftButtonIconStyle={{width:20,height:20}}
                                     navigationBarStyle={[styles.navigationBarStyle]}
                                     key="deletemater"
@@ -749,6 +785,7 @@ export default class apps extends Component {
                                 />
                                 <Scene
                                     titleStyle={[styles.titleStyle]}
+                                    backButtonImage={require('./img/icon_yellowclose.png')}
                                     leftButtonIconStyle={{width:20,height:20}}
                                     navigationBarStyle={[styles.navigationBarStyle]}
                                     key="inputstep"

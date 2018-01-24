@@ -324,9 +324,8 @@ class HomeScene extends Component {
                         ref="header" style={{height:80,backgroundColor:'#fff',alignItems:'center'
                        }}>
 
-                        <ImageBackground   style={{position:'absolute',top:0,width:width,height:50,flexDirection:'row'}} source={require('../img/icon_homebg.png')} >
-
-
+                        <ImageBackground   style={{position:'absolute',top:0,width:width,height:50,justifyContent:'center',alignItems:'center'}} source={require('../img/icon_homebg.png')}>
+                            <Text style={{color:'#fff',backgroundColor:'transparent',marginBottom:width/1.28/850*130/6}}>60Sec</Text>
                         </ImageBackground>
                         <TouchableOpacity style={{position:'absolute',top:width/472*65-width/1.28/850*130/3}} activeOpacity={1}
                                           onPress={()=>Actions.TabView()}>

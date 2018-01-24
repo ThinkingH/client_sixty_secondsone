@@ -168,7 +168,7 @@ export default class TabView extends React.Component {
                 <Item  rounded style={{height:40,width:width-60,borderColor:'#f5c61e'}}>
                     <Input onChangeText={(value)=>this.setState({value})}
                            placeholderTextColor="#999"
-                           style={{height:40,padding:0,fontSize:14,}}
+                           style={{height:40,padding:0,fontSize:14,marginBottom:5,textAlignVertical:'center'}}
                            maxLength={6}
                            value={this.state.value}
                            onSubmitEditing={()=>this.saveHistory()}
@@ -237,7 +237,7 @@ export default class TabView extends React.Component {
                                  </View>
                                  <View style={{flex:1}}></View>
                                  <Text style={{color:'#ccc',fontSize:14}}>{item.count}件</Text>
-                                 <Image style={{width:20,height:20,marginLeft:10}} source={require('../img/icon_searchforother.png')} />
+                                 <Image style={{width:15,height:15,marginLeft:10}} source={require('../img/icon_searchforother.png')} />
                              </View>
                              <Surface  width={width-40} height={1}>
                                  <Shape d={path} stroke="#ccc" strokeWidth={1} strokeDash={[3,5]}/>

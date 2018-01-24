@@ -97,6 +97,7 @@ export default class MainScene extends Component {
     componentDidMount() {
 
         this.getMainRefresh = DeviceEventEmitter.addListener("getMainRefresh",this._getDatamain);
+        this.getMainvideoRefresh = DeviceEventEmitter.addListener("getMainvideoRefresh",this._getMainVideo);
         InteractionManager.runAfterInteractions(() => {
           //  this._onRefresh();
             this._getMainVideo();
@@ -106,6 +107,7 @@ export default class MainScene extends Component {
 
     componentWillUnmount() {
         this.getMainRefresh.remove();
+        this.getMainvideoRefresh.remove();
     }
 
     _getDatamain=()=>{
@@ -259,15 +261,11 @@ export default class MainScene extends Component {
         //
         //
         // }
-
         /*
         if(dy>=width){
-
             // Config.tabBarHight=dy-dx;
             // console.log("该执行导航栏沉浸式了该执行导航栏沉浸式了")
             DeviceEventEmitter.emit("zanting","暂停视频")
-
-
         }else if (0<dy<width){
             // Config.tabBarHight=dx-dy;
             // //  DeviceEventEmitter.emit("changeTab","隐藏tab")
@@ -356,8 +354,8 @@ export default class MainScene extends Component {
 
     renderEmptyView=()=>{
         return(
-            <View style={{width:width,height:100,alignItems:'center',justifyContent:'center'}}>
-                <Text style={{color:'#f00',fontSize:20}}>我是空布局的时候的替代品</Text>
+            <View style={{width:width,height:height/2,alignItems:'center',justifyContent:'flex-end',backgroundColor:'#fff'}}>
+                <Thumbnail square style={{width:width/2,height:width/2}} source={require('../img/icon_replaceimg.png')} />
             </View>
         )
     }
@@ -365,7 +363,7 @@ export default class MainScene extends Component {
     _renderPagin=()=>{
         return(
             <View style={{width:width,height:50,alignItems:'center',justifyContent:'center'}}>
-                <Text>没有更多了</Text>
+
             </View>
         )
     }
@@ -453,6 +451,7 @@ class MyListHeader extends React.PureComponent {
         this.startvideo= DeviceEventEmitter.addListener("startvideo",this.startVideo);
         this.mute= DeviceEventEmitter.addListener("mute",this._mute);
         console.log(this.props.num)
+
     };
     componentWillUnmount() {
         console.log('componentWillUnmountcomponentWillUnmountcomponentWillUnmounts视频废了',)
@@ -476,7 +475,7 @@ class MyListHeader extends React.PureComponent {
                     source={
                              {
                                  url:this.props.data.videourl,//this.props.data.videourl,
-                                 looping:true,
+                                 looping:false,
                                  headers: {
                                      'refer': 'myRefer'
                                  },
@@ -489,6 +488,7 @@ class MyListHeader extends React.PureComponent {
                             // console.log("JS"+e.duration);
                          }}
                     onCompletion={()=>{
+                             DeviceEventEmitter.emit('getMainvideoRefresh','刷新首页视频')
                              console.log("JS onCompletion");
                          }}
                     onVideoError={(e)=>{

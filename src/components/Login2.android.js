@@ -340,7 +340,7 @@ export default class Login2 extends Component {
                         onPress={()=>{this._login()}}
                     >
 
-                            <Thumbnail    style={{width:width/8,height:width/8,marginTop:15}} source={require('../img/icon_loginbtn.png')} />
+                            <Thumbnail    style={{width:width/6,height:width/6,marginTop:15}} source={require('../img/icon_loginbtn.png')} />
 
                     </TouchableOpacity>
 
