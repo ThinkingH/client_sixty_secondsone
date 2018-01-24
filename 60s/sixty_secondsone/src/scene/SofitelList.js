@@ -132,20 +132,20 @@ export default class SofitelList extends Component {
 
     render() {
         return (
-        <View style={{flex:1,backgroundColor:'#fafafa'}}>
+        <View style={{flex:1,backgroundColor:'#fff'}}>
             <Content onScroll={(e)=>this._onScrollEnd(e)} showsVerticalScrollIndicator={false}>
 
 
-                <View style={{elevation:10 ,backgroundColor:'#fff'}}  >
+                <View style={{backgroundColor:'#fff'}}  >
                     <Image source={{uri:this.props.datas.showimg}} style={{height: width/16*9, width: width}}/>
                     <View  style={{padding:15}}>
                         <Text style={{fontSize:10,color:'#f5c61e'}}>{this.props.datas.create_datetime}</Text>
                         <Text style={{marginTop:10,fontSize:14,color:'#666'}}>{this.props.datas.name}</Text>
                         <Text  note style={{marginTop:10,fontSize:14,color:'#999'}}>{this.props.datas.content}</Text>
                     </View>
-                    <View style={{width:width,height:1,backgroundColor:'#ccc'}}></View>
+
                 </View>
-                <View style={{width:width,flexDirection:'row',flexWrap:'wrap'}}>
+                <View style={{width:width,flexDirection:'row',flexWrap:'wrap',backgroundColor:'#fff'}}>
 
                     {this._rendersofitelist()}
                 </View>

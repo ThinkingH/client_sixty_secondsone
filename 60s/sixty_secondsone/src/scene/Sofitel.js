@@ -124,21 +124,37 @@ export default class Sofitel extends Component {
 
             </View>
         )
-    }
+    };
 
     _renderLoading=()=>{
         return(
             <LineDotsLoader color={'#F5C61E'} />
         )
-    }
+    };
 
     renderEmptyView=()=>{
         return(
-            <View style={{width:width,height:100,alignItems:'center',justifyContent:'center'}}>
-                <Text style={{color:'#f00',fontSize:20}}>我是空布局的时候的替代品</Text>
+            <View style={{width:width,height:height/2,alignItems:'center',justifyContent:'flex-end',backgroundColor:'#fff'}}>
+                <Thumbnail square style={{width:width/2,height:width/2}} source={require('../img/icon_replaceimg.png')} />
             </View>
         )
     }
+
+    _renderPagination=()=>{
+        return(
+            <View style={{width:width,height:50,alignItems:'center',justifyContent:'center'}}>
+                <Text>正在加载中...</Text>
+            </View>
+        )
+    };
+
+    _renderPagin=()=>{
+        return(
+            <View style={{width:width,height:50,alignItems:'center',justifyContent:'center'}}>
+
+            </View>
+        )
+    };
 
     render() {
         return (
@@ -181,11 +197,11 @@ export default class Sofitel extends Component {
                     pagination={true}
                     autoPagination={true}
                    // header={this._header}
-                    //paginationFetchingView={this._renderPaginationFetchingView}
+                    paginationFetchingView={this._renderPagination}
                     // sectionHeaderView={this.renderSectionHeaderView}   //not supported on FlatList
-                    // paginationFetchingView={this._renderPaginationFetchingView}
-                    // paginationAllLoadedView={this._renderPaginationFetchingView}
-                    //  paginationWaitingView={this._renderPaginationFetchingView}
+                    //paginationFetchingView={this._renderPaginationFetchingView}
+                    paginationAllLoadedView={this._renderPagin}
+                    paginationWaitingView={this._renderPagination}
                      emptyView={this.renderEmptyView}
                     // separator={this.renderSeparatorView}
 

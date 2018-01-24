@@ -59,6 +59,7 @@ export default class AccountInfo extends Component {
             inputcolor:'#000',
             aaaaa:0,
         };
+        imagedate=this.props.image?{uri:this.props.image}:'';
         UIManager.setLayoutAnimationEnabledExperimental(true)
     }
 
@@ -230,8 +231,8 @@ export default class AccountInfo extends Component {
                     <View style={{marginLeft:20,width:width-40,height:height,backgroundColor:'#ccc',marginTop:10}}>
                         <View style={{flex:1,alignItems:'center',backgroundColor:'#fff',borderTopRightRadius:10,borderTopLeftRadius:10}}>
                             <View style={{width:width-80,flexDirection:"row",backgroundColor:'#fff'}}>
-                                <View style={{backgroundColor:'#fff'}}>
-                                    <Image  style={{width:width/5,height:width/5,borderRadius:width/10,margin:20,marginLeft:width/24}}
+                                <View style={{backgroundColor:'#ccc',width:width/5,height:width/5,borderRadius:width/10,margin:20,marginLeft:width/24}}>
+                                    <Image  style={{width:width/5,height:width/5,borderRadius:width/10}}
                                                source={imagedate==""?require('../img/icon_unloginbg.png'):imagedate} />
                                 </View>
                                 <View style={{flex:1,backgroundColor:'#fff',alignItems:'center',justifyContent:'center'}}>
@@ -248,7 +249,7 @@ export default class AccountInfo extends Component {
                                             <Image source={require('../img/newicon_account_edit.png')} style={{height:15, width:15}}/>
                                         </View>
                                        <View style={{height:1,width:width-50,backgroundColor:'#ccc'}}></View>
-                                        <View style={{flexDirection:'row',alignItems:'center'}}>
+                                        <View style={{flexDirection:'row',alignItems:'center',marginTop:10}}>
                                             <Image source={require('../img/newicon_account_address.png')} style={{height:15, width:15}}/>
                                             <View style={{flex:1}}></View>
                                             <Input

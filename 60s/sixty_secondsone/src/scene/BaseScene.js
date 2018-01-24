@@ -68,7 +68,7 @@ export default class BaseScene extends Component {
                     </ImageBackground>
                 </View>
                 {Config.usertype=="1"?( this.state.collectnum==0?(
-                            <View  style={{flex:1,justifyContent:'center',alignItems:'center',backgroundColor:'#fafafa'}} >
+                            <View  style={{flex:1,justifyContent:'center',alignItems:'center',backgroundColor:'#efeff1'}} >
                             <Image resizeMode={'cover'}  style={{width:width/1.1,height:width/1.1/1080*1590}} source={require('../img/icon_collect_show.png')} />
                             </View>
                         ):(
@@ -77,7 +77,7 @@ export default class BaseScene extends Component {
                             </View>
                             )
                     ):(
-                        <View style={{flex:1,justifyContent:'center',alignItems:'center',backgroundColor:'#f0f2f1'}}>
+                        <View style={{flex:1,justifyContent:'center',alignItems:'center',backgroundColor:'#efeff1'}}>
                         <Image resizeMode={'cover'}  style={{width:width/1.1,height:width/1.1/1080*1590}} source={require('../img/icon_collect_show.png')} />
                         </View>
                     )}

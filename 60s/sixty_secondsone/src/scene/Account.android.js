@@ -59,14 +59,14 @@ export default class Account extends Component {
     _onFresh=()=>{
         this._getInfo();
         this._getContributeList()
-    }
+    };
 
     _updatelogin=()=>{
         this.setState({
             name:this.props.aaname,
         });
         if(Config.usertype==1){
-            this._getInfo();
+            this._onFresh();
         }
     };
 
@@ -100,7 +100,7 @@ export default class Account extends Component {
     _getInfo=()=>{
         this.setState({
             isRefreshing:true,
-        })
+        });
         let parpam="thetype=1038";
         Request('1038',parpam)
             .then((responseJson) => {
@@ -116,13 +116,12 @@ export default class Account extends Component {
             .catch((error) => {
                 this.setState({
                     isRefreshing:false,
-                })
+                });
                 Toast.show(error.toString());
             });
     };
 
     _getInf=()=>{
-
         let parpam="thetype=1031";
         Request('1031',parpam)
             .then((responseJson) => {
@@ -167,7 +166,7 @@ export default class Account extends Component {
 							tintColor="#000"
 							colors={['#000', '#000', '#000']}
 							progressBackgroundColor="white"/>
-                         } >
+                         }>
                     <Body style={{alignItems:'center',height:width/750*300+45,}}>
                     <Thumbnail square  style={{width:width,height:width/750*300}} source={require('../img/icon_account_bg.png')} ></Thumbnail>
                     <Animated.Image    style={[{position:'absolute',top:width/750*300-40,width:80,height:80,borderRadius:40,borderWidth:2,borderColor:'#fff'},
@@ -182,10 +181,8 @@ export default class Account extends Component {
                     {/*{this.state.isshow?(*/}
                             {/*<Image    style={{position:'absolute',top:width/750*300-40,width:80,height:80,borderRadius:40,borderWidth:2,borderColor:'#fff'}}*/}
                                       {/*source={require('../img/icon_logobg.png')}*/}
-
                             {/*/>*/}
                         {/*):(null)}*/}
-
                     </Body>
                     <Body >
                     <Text style={{marginBottom:20,paddingLeft:20,paddingRight:20}}>{this.state.name}</Text>
@@ -199,8 +196,7 @@ export default class Account extends Component {
                     </Body>
                     <View style={{width:width,height:1,backgroundColor:'#eeeeee',marginTop:20,marginBottom:15}} >
                     </View>
-                    <Body  >
-
+                    <Body>
                     <Text style={{marginBottom:15,color:'#f5c61e'}}>我的成果展示</Text>
                     <View style={{width:width,height:1,backgroundColor:'#eeeeee',}} ></View>
                     </Body>

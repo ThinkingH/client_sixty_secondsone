@@ -118,7 +118,7 @@ export default class Comment extends Component {
 
     render() {
         return (
-            <Container style={{backgroundColor:'#fafafa'}}>
+            <Container style={{backgroundColor:'#ccc'}}>
                 <StatusBar backgroundColor={Config.StatusBarColor}
                            barStyle="light-content"
                            translucent={false}

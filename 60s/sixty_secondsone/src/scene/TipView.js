@@ -22,7 +22,7 @@ export default class TipView extends Component {
         super(props);
         this.state = {
             data:[],
-            datalist:[],
+
         };
     }
 
@@ -45,7 +45,7 @@ export default class TipView extends Component {
             .then((responseJson) => {
                 this.setState({
                     data:responseJson.data.list,
-                    datalist:responseJson.data.list
+
                 })
             })
             .catch((error) => {
@@ -71,7 +71,7 @@ export default class TipView extends Component {
 
 
                     <View style={{width:width,height:50,position:'absolute',alignItems:'center',justifyContent:'center',backgroundColor:'transparent'}}>
-                        <Text style={{color:'#fff',backgroundColor:'transparent'}}>小窍门</Text>
+                        <Text style={{color:'#fff',backgroundColor:'transparent',marginBottom:width/1.28/850*130/6}}>小窍门</Text>
                     </View>
                 </ImageBackground>
                 <View style={{width:width,height:width/1.28/850*130/5*4,backgroundColor:'transparent'}}>
@@ -115,7 +115,7 @@ export default class TipView extends Component {
 
                                                 <View style={{marginLeft:10,marginTop:10,justifyContent:'center'}}>
                                                     <Text numberOfLines={1} style={{color:'#000'}}>{item.biaoti}</Text>
-                                                    <Text style={{color:'#595959',fontSize:14}}>{item.biaotichild}</Text>
+                                                    <Text numberOfLines={1} style={{color:'#595959',fontSize:14}}>{item.jieshao}</Text>
                                                 </View>
                                             </View>
 

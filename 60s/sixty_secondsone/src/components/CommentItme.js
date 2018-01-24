@@ -5,10 +5,16 @@
  * Created by Administrator on 2017/10/24.
  */
 import React from 'react';
-import { View,  StyleSheet,} from 'react-native';
+import { View,  StyleSheet,Dimensions,ART} from 'react-native';
 import {   Item,  Thumbnail , Text,Col,ListItem,Row,Button} from 'native-base';
 import { Actions } from 'react-native-router-flux';
 import DateFormateUtils from "../utils/DateFormateUtils";
+const {width, height} = Dimensions.get('window');
+
+const {Surface, Shape, Path} = ART;
+const path = Path()
+    .moveTo(0,1)
+    .lineTo(width-20,1);
 
 export default class CommentItme extends React.PureComponent {
     constructor(props){
@@ -17,14 +23,18 @@ export default class CommentItme extends React.PureComponent {
 
     renderSubItem=(item,i,fuc)=>{
         return(
-            <Item key={i} style={{paddingTop:20,paddingLeft:20,paddingRight:20,margin:0,alignItems:"flex-start"}}>
+            <View >
+                <Surface  width={width-70-width/9} height={1}>
+                    <Shape d={path} stroke="#ccc" strokeWidth={1} strokeDash={[3,5]}/>
+                </Surface>
+            <Item key={i} style={{paddingTop:20,margin:0,alignItems:"flex-start",borderColor:'#fff'}}>
                 <View style={{marginRight:10}}>
-                    <Thumbnail source={{uri:item.touxiang}} />
+                    <Thumbnail style={{width:width/9,height:width/9}} source={{uri:item.touxiang}} />
                 </View>
                 <Col style={{padding:0,margin:0}}>
                     <Text>{item.nickname}</Text>
-                    <Text style={{fontSize:12, color:"#999999",marginTop:5}}>{DateFormateUtils.getDateDiff(item.create_datetime)}</Text>
-                    <Text style={{marginTop:5}}>{item.content}</Text>
+                    <Text style={{fontSize:10, color:"#999999",marginTop:5}}>{DateFormateUtils.getDateDiff(item.create_datetime)}</Text>
+                    <Text style={{marginTop:10,marginRight:15,fontSize:12}}>{item.content}</Text>
                     <Button transparent style={{alignSelf:"flex-end"}} onPress={()=>{
                         fuc&&fuc(item)
                     }}>
@@ -32,6 +42,7 @@ export default class CommentItme extends React.PureComponent {
                     </Button>
                 </Col>
             </Item>
+            </View>
         )
     }
 
@@ -40,12 +51,12 @@ export default class CommentItme extends React.PureComponent {
         return (
             <Item style={{paddingTop:20,paddingLeft:20,paddingRight:20,margin:0,alignItems:"flex-start"}}>
                 <View style={{marginRight:10}}>
-                    <Thumbnail source={{uri:this.props.title.touxiang}} />
+                    <Thumbnail style={{width:width/9,height:width/9}} source={{uri:this.props.title.touxiang}} />
                 </View>
                 <Col style={{padding:0,margin:0}}>
                     <Text>{this.props.title.nickname}</Text>
-                    <Text style={{fontSize:12, color:"#999999",marginTop:5}}>{DateFormateUtils.getDateDiff(this.props.title.create_datetime)}</Text>
-                    <Text style={{marginTop:5}}>{this.props.title.content}</Text>
+                    <Text style={{fontSize:10, color:"#999999",marginTop:5}}>{DateFormateUtils.getDateDiff(this.props.title.create_datetime)}</Text>
+                    <Text style={{marginTop:10,marginRight:15,fontSize:12}}>{this.props.title.content}</Text>
                     <Button transparent style={{alignSelf:"flex-end"}} onPress={()=>{
                         this.props.callBack&&this.props.callBack(this.props.title)
                     }}>

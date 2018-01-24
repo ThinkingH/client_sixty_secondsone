@@ -55,12 +55,12 @@ export default class TipAll extends Component {
 
     render() {
         return (
-            <Container style={{backgroundColor:'#fafafa'}}>
+            <Container style={{backgroundColor:'#fff'}}>
 
 
-                <StatusBar backgroundColor="transparent"
+                <StatusBar backgroundColor={Config.StatusBarColor}
                            barStyle="light-content"
-                           translucent={true}
+                           translucent={false}
                            hidden={false}/>
                 <View style={{padding:10,flex:1}}>
                     <ListScene url={"thetype=1036&typex=2&searchstr="+this.props.tiptype} thetype="1036"  item={"tip"}/>

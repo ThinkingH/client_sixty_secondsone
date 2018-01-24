@@ -173,13 +173,13 @@ class Launch extends React.Component {
 
   render () {
     return (
-        <View>
+        <View style={{flex:1,justifyContent:'center',alignItems:'center'}}>
             <StatusBar backgroundColor="transparent"
                        barStyle="dark-content"
                        translucent={true}
                        hidden={true}/>
-            <Image source={require('./../img/icon_splash.png')} style={{width:width, height:height}}
-                   resizeMode="stretch"/>
+            <Image source={require('./../img/icon_sixtylogo.png')} style={{width:width/2, height:width/2/493*553}}
+                  />
         </View>
     );
   }

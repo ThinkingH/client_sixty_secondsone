@@ -50,7 +50,7 @@ export default class SearchVideo extends React.Component {
         this._getData(_pageNo);
     };
 
-    _getData=async(_pageNo)=>{
+    _getData=(_pageNo)=>{
         let txt=this.state.value;
         if (txt.length==0){
             Toast.show("搜索内容不能为空");
@@ -58,11 +58,13 @@ export default class SearchVideo extends React.Component {
         }
          if(this.state.isassort){
             console.log("ssssssssssssss",this.state.value)
-             await  this.setState({
+             this.setState({
                  parpam:"thetype=1034&classify3="+this.state.value,
                  isassort:false
+             },()=>{
+                 DeviceEventEmitter.emit('getRefresh','搜索结果');
              });
-             DeviceEventEmitter.emit('getRefresh','搜索结果');
+
          }else{
            this.setState({parpam:"thetype=1034&searchstr="+this.state.value},()=>{
                DeviceEventEmitter.emit('getRefresh','搜索结果');
@@ -149,10 +151,10 @@ export default class SearchVideo extends React.Component {
     _renderHeader=()=>{
         return(
             <Header  androidStatusBarColor={Config.StatusBarColor} style={{backgroundColor:'#fff',alignItems:'center'}}>
-                <Item  rounded style={{height:40,width:width-60,borderColor:'#f5c61e'}}>
+                <Item  rounded style={{height:40,width:width-60,borderColor:'#f5c61e',backgroundColor:'#fff'}}>
                     <Input onChangeText={(value)=>this.setState({value})}
                            placeholderTextColor="#999"
-                           style={{height:40,padding:0,fontSize:14,textAlignVertical:'center'}}
+                           style={{height:40,padding:0,fontSize:14,textAlignVertical:'center',marginBottom:5}}
                            maxLength={6}
                            value={this.state.value}
                            onSubmitEditing={()=>{this._getData(_pageNo);this.saveHistory()}}
@@ -169,21 +171,13 @@ export default class SearchVideo extends React.Component {
 
     render() {
         return (
-            <Container style={{backgroundColor:'#fafafa'}} >
+            <Container style={{backgroundColor:'#fff'}} >
                 <StatusBar backgroundColor="transparent"
                            barStyle="light-content"
                            translucent={false}
                            hidden={false}/>
                 {this._renderHeader()}
-                      <View style={{flex:1,marginTop:15}}>
-                          <ListScene url={this.state.parpam} thetype="1034" header={'search'} item={"search"} />
-                      </View>
-                {this.state.isshowmzy?(<View style={{width:width,height:10}}></View>):(null)}
-
-
-
-
-
+                 <ListScene url={this.state.parpam} thetype="1034" header={'search'} item={"search"} />
             </Container>
         );
     }

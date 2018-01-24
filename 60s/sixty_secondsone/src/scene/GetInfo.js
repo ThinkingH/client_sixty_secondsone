@@ -2,7 +2,7 @@
  * Created by Administrator on 2017/10/19.
  */
 import React, { Component } from 'react';
-import { ListView,Dimensions, Image ,TouchableNativeFeedback,DeviceEventEmitter,Platform,TouchableOpacity} from 'react-native';
+import { ListView,Dimensions, Image ,TouchableNativeFeedback,DeviceEventEmitter,StatusBar,Platform,TouchableOpacity} from 'react-native';
 import {Actions} from "react-native-router-flux";
 import { Container, Header,View, Content, Button,
     Icon,Form,Item,Label,Input, List, ListItem,
@@ -169,11 +169,10 @@ export default class GetInfo extends Component {
     render() {
         return (
             <Container  style={{backgroundColor:'#fff'}}>
-                {Platform.OS=='ios'?(null):(
-                    <Header style={{height:0}} androidStatusBarColor={Config.StatusBarColor}>
-
-                    </Header>
-                )}
+                <StatusBar backgroundColor={Config.StatusBarColor}
+                           barStyle="light-content"
+                           translucent={false}
+                           hidden={false}/>
                 <Content keyboardShouldPersistTaps="handled"  showsVerticalScrollIndicator={false}>
                     <Text note style={{fontSize:14,marginLeft:17,marginTop:30,color:'#666'}}>个人头像（必填）</Text>
                     <Body style={{height:80}} >

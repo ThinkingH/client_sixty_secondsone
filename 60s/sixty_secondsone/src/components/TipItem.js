@@ -51,12 +51,12 @@ export default class TipItem extends React.PureComponent  {
                         {this.state.data.biaoti}
                         </Text>
                     <Text numberOfLines={1} style={{height:15, letterSpacing:5,lineHeight:15,fontSize:10,color:'#aaa'}} >
-                        {this.state.data.biaotichild}
+                        {this.state.data.jieshao}
                         </Text>
 
                 </View>
                 <View style={{height:(width-30)/2,width:(width-30)/2,position:'absolute',alignItems:'center',justifyContent:'center'}}>
-                    <Thumbnail square style={{width:width/10,height:width/10}} source={require('../img/icon_videodetails_time.png')} />
+                    <Thumbnail square style={{width:width/10,height:width/10}} source={require('../img/icon_tipstop.png')} />
                 </View>
             </TouchableOpacity>
 
