@@ -89,12 +89,12 @@ export default class TipView extends Component {
                     {this.state.data.map((itema,ia)=>
                         <View style={{paddingLeft:20}}  key={ia} >
                             <View style={{width:width-20,height:40,justifyContent:'center',alignItems:"center",flexDirection:'row'}}>
-                                <Text style={{marginLeft:5}}>{itema.classname}</Text>
+                                <Text style={{marginLeft:5,fontSize:18}}>{itema.classname}</Text>
                                 <View style={{flex:1}}></View>
                                 <TouchableOpacity activeOpacity={0.9}
                                                   onPress={()=>Actions.tipall({tiptype:itema.class,title:itema.classname})}
                                 >
-                                    <Text style={{marginRight:20,fontSize:14,color:'#ffe55f'}}>查看全部</Text>
+                                    <Text style={{marginRight:20,color:'#F5C61E'}}>查看全部</Text>
                                 </TouchableOpacity>
 
 
@@ -111,13 +111,13 @@ export default class TipView extends Component {
                                             </View>
 
 
-                                            <View style={{marginTop:10}}>
+
 
                                                 <View style={{marginLeft:10,marginTop:10,justifyContent:'center'}}>
                                                     <Text numberOfLines={1} style={{color:'#000'}}>{item.biaoti}</Text>
-                                                    <Text numberOfLines={1} style={{color:'#595959',fontSize:14}}>{item.jieshao}</Text>
+                                                    <Text numberOfLines={1} style={{color:'#999',fontSize:14}}>{item.jieshao}</Text>
                                                 </View>
-                                            </View>
+
 
                                         </TouchableOpacity>
                                     </View>

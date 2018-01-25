@@ -73,7 +73,7 @@ export default class AccountInfo extends Component {
                 isvisiable:true,
             });
             this._saveInfo();
-            if(imagedate!=''){
+            if(imgdata!=''){
                 this.setState({
                     isvisiable:true,
                 });
@@ -99,6 +99,7 @@ export default class AccountInfo extends Component {
                 })
                 Actions.pop({ refresh: { isaccountinfo: true }});
                 imagedate='';
+                imgdata='';
             })
             .catch((error) => {
                 Toast.show(error.toString());
@@ -142,6 +143,7 @@ export default class AccountInfo extends Component {
                 isvisiable:false
             })
             imagedate='';
+            imgdata='';
            // Actions.pop();
         }) .catch((error) => {
             console.log("error",error)
@@ -149,7 +151,6 @@ export default class AccountInfo extends Component {
             this.setState({
                 isvisiable:false
             });
-
         })
     };
 

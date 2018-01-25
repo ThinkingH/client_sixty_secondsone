@@ -25,6 +25,7 @@ const aa=["1"];
 let _pageNo = 1;
 let isdisable=false;
 const _pageSize = Config.pageCount;
+let parpam='';
 export default class SearchVideo extends React.Component {
 
     constructor(props) {
@@ -34,13 +35,14 @@ export default class SearchVideo extends React.Component {
             his:[],
             refreshing: false,
             isassort:this.props.isassort,
-            parpam:null,
+            parpam:"thetype=1034&classify3="+this.props.value?this.props.value:"",
             isshowmzy:false
         };
      //this._getHistory();
+
     }
     componentDidMount() {
-        this._getHistory()
+        this._getHistory();
         this._onRefresh();
     }
 
@@ -62,11 +64,13 @@ export default class SearchVideo extends React.Component {
                  parpam:"thetype=1034&classify3="+this.state.value,
                  isassort:false
              },()=>{
+                console.log('sssssqwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww',this.state.parpam)
                  DeviceEventEmitter.emit('getRefresh','搜索结果');
              });
 
          }else{
            this.setState({parpam:"thetype=1034&searchstr="+this.state.value},()=>{
+               console.log('aaaaaaaaaaaaaaaaaaaaaaaaaaaawwwwwwww',this.state.parpam)
                DeviceEventEmitter.emit('getRefresh','搜索结果');
 
            });
@@ -177,6 +181,7 @@ export default class SearchVideo extends React.Component {
                            translucent={false}
                            hidden={false}/>
                 {this._renderHeader()}
+
                  <ListScene url={this.state.parpam} thetype="1034" header={'search'} item={"search"} />
             </Container>
         );

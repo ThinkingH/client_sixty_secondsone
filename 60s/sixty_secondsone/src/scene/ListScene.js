@@ -102,7 +102,7 @@ export default class ListScene extends Component {
     }
 
     _onRefresh=()=> {
-        this.listViews.refresh();
+        this.listViews&&this.listViews.refresh();
     };
 
 
@@ -340,6 +340,7 @@ export default class ListScene extends Component {
                 style={{flex:1,backgroundColor:'#fff'}}>
 
                     <UltimateListView
+                        ref={(ref) => this.listViews = ref}
                         scrollEventThrottle={1}
                        // onScroll={(e)=>this._onScrollEnd(e)}
                         // columnWrapperStyle={{width:width/2}}
@@ -357,7 +358,7 @@ export default class ListScene extends Component {
 
                        // paginationBtnText={'正在载入1'}
                         //waitingSpinnerText={'正在加载22222'}
-                        ref={(ref) => this.listViews = ref}
+
                         key={this.state.layout} // this is important to distinguish different FlatList, default is numColumns
                         onFetch={this.onFetch}
                         keyExtractor={(item, index) => `${index} - ${item}`} // this is required when you are using FlatList

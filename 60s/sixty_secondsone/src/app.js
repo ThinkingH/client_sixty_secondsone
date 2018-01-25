@@ -64,7 +64,7 @@ import TipView from './scene/TipView';
 import TipAll from './scene/TipAll';
 import TipDetails from './scene/TipDetails';
 import SearchMain from './scene/SearchMain';
-import Intro from './scene/Intro';
+import Intro from './scene/Intro.android';
 import MessageBox from './scene/MessageBox';
 import VideoDeta from './scene/VideoDeta';
 
@@ -522,6 +522,7 @@ export default class apps extends Component {
                                     leftButtonIconStyle={{width:20,height:20}}
                                     navigationBarStyle={[styles.navigationBarStyle]}
                                     component={MessageBox}
+                                    title="留言箱"
                                     hideNavBar={false}
                                     panHandlers={null}
                                     duration={1}

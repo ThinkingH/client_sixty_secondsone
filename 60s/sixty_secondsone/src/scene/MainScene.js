@@ -374,7 +374,7 @@ export default class MainScene extends Component {
                 style={{flex:1,backgroundColor:'#fff',alignItems:'center'}}>
                 <UltimateListView
                     scrollEventThrottle={1}
-                   // onScroll={(e)=>this._onScrollEnd(e)}
+                    onScroll={(e)=>this._onScrollEnd(e)}
                     // columnWrapperStyle={{width:width/2}}
                     showsVerticalScrollIndicator={false}
                     //data={this.state.datas}

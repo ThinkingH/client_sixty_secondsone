@@ -35,7 +35,7 @@ export default class TipItem extends React.PureComponent  {
             <TouchableOpacity
                 onPress={()=>{Actions.tipdetails({data:this.state.data})}}
                 activeOpacity={0.9}
-                style={{marginRight:2.5,marginLeft:2.5}} >
+                style={{marginRight:2.5,marginLeft:2.5,width:(width-30)/2}} >
                 <View
                     style={{width:(width-30)/2}}
 

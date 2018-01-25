@@ -59,7 +59,7 @@ export default class BaseScene extends Component {
                 <View style={{width:width,height:Config.STATUSBARHEIGHT,backgroundColor:Config.StatusBarColor}}>
                 </View>
                 <View  //androidStatusBarColor='#f00'
-                    style={{height:50,backgroundColor:'#fff',alignItems:'center',
+                    style={{height:50,backgroundColor:'#efeff1',alignItems:'center',
                        }}>
                     <ImageBackground    style={{position:'absolute',top:0,width:width,height:50,flexDirection:'row'}} source={require('../img/icon_homebg.png')} >
                         <View style={{width:width,height:50,position:'absolute',alignItems:'center',justifyContent:'center',backgroundColor:'transparent'}}>
@@ -69,7 +69,7 @@ export default class BaseScene extends Component {
                 </View>
                 {Config.usertype=="1"?( this.state.collectnum==0?(
                             <View  style={{flex:1,justifyContent:'center',alignItems:'center',backgroundColor:'#efeff1'}} >
-                            <Image resizeMode={'cover'}  style={{width:width/1.1,height:width/1.1/1080*1590}} source={require('../img/icon_collect_show.png')} />
+                            <Image resizeMode={'cover'}  style={{width:width/1.1,height:width/1.1/1080*1590,backgroundColor:'#efeff1'}} source={require('../img/icon_collect_show.png')} />
                             </View>
                         ):(
                             <View style={{flex:1}}>
@@ -78,7 +78,7 @@ export default class BaseScene extends Component {
                             )
                     ):(
                         <View style={{flex:1,justifyContent:'center',alignItems:'center',backgroundColor:'#efeff1'}}>
-                        <Image resizeMode={'cover'}  style={{width:width/1.1,height:width/1.1/1080*1590}} source={require('../img/icon_collect_show.png')} />
+                        <Image resizeMode={'cover'}  style={{width:width/1.1,height:width/1.1/1080*1590,backgroundColor:'#efeff1'}} source={require('../img/icon_collect_show.png')} />
                         </View>
                     )}
             </Container>

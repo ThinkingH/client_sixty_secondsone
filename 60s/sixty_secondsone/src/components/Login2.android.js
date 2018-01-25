@@ -181,12 +181,11 @@ export default class Login2 extends Component {
         let parpam="thetype=1002"+'&phone='+this.state.phone+'&vcode='+this.state.code;
         Request('1002',parpam)
             .then((responseJson) => {
-                console.log(responseJson)
+                console.log(responseJson);
                 if(responseJson.sucerr=='100'){
                     let userid=responseJson.data.userid;
                     let userkey=responseJson.data.userkey;
                     if(responseJson.data.firstlogin=="no"){
-
                         Config.userid=userid;
                         Config.userkey=userkey;
                         Config.usertype="1";

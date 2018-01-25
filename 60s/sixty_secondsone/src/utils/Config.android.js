@@ -15,8 +15,8 @@ const styles = StyleSheet.create({
 });
 
 export default class Config{
-     static versionName="V1.0.0";
-     static version=100;
+     static versionName="V1.1.0";
+     static version=110;
      static ISHIDE=false;
      static loadingTxtStyle={color:"#757575",fontSize:14,};
      static loadingTxt="正在加载中...";

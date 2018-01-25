@@ -26,9 +26,9 @@ const styles = StyleSheet.create({
     },
     tabs: {
         flexDirection: 'row',
-        justifyContent: 'space-around',
-        paddingLeft:10,
-        paddingRight:10,
+        justifyContent: 'center',
+        paddingLeft:15,
+        paddingRight:15,
 
     },
 });
@@ -202,7 +202,7 @@ const ScrollableTabBar = createReactClass({
                 scrollsToTop={false}
             >
                 <Animated.View
-                    style={[styles.tabs,{width:90}, {width: this.state._containerWidth, }, this.props.tabsContainerStyle, ]}
+                    style={[styles.tabs, {width: this.state._containerWidth, }, this.props.tabsContainerStyle, ]}
                     ref={'tabContainer'}
                     onLayout={this.onTabContainerLayout}
                 >

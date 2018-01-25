@@ -153,7 +153,7 @@ export default class Setting extends Component {
                         <ListItem onPress={()=>this._checkUpdate()}>
                             <Text style={[styles.textcolor]}>检测版本</Text>
                            <View style={{flex:1}}></View>
-                                <Text style={[styles.textcolor]}>1.0</Text>
+                                <Text style={[styles.textcolor]}>{Config.versionName}</Text>
 
                         </ListItem>
                         <ListItem onPress={()=>Actions.law()}>
