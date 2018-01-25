@@ -151,7 +151,7 @@ export default class VideoDeta extends Component {
         });
         this.videos.pause();
         let list = [0,2,3];
-        ShareUtile.shareboard("分享描述",
+        ShareUtile.shareboard(this.state.data.jieshao,
             this.state.data.showimg,
             this.state.data.share,
             this.props.title,
@@ -379,8 +379,8 @@ export default class VideoDeta extends Component {
             <View style={{paddingLeft:20,paddingRight:20}}>
                 <Text numberOfLines={2} style={{fontSize:18,color:'#212121',marginTop:20}}>{this.props.title}</Text>
                 <Row style={{alignItems:'center',marginTop:10}}>
-                    <Thumbnail square style={{width:14,height:14}} source={require('../img/icon_videodetails_time.png')} />
-                    <Text style={[styles.texts,{marginLeft:5,color:'#f5c61e'}]}>制作时间：{this.state.data.maketime}</Text>
+                    <Thumbnail square style={{width:14,height:14}} source={require('../img/icon_maketime.png')} />
+                    <Text style={[styles.texts,{marginLeft:5,color:'#c79b1e'}]}>制作时间：{this.state.data.maketime}</Text>
                 </Row>
                 <Body style={{marginBottom:20,marginTop:20}}>
                 <Text note style={[styles.texts,{lineHeight:20,color:'#000'}]}>{this.state.data.jieshao}</Text>
@@ -714,7 +714,7 @@ export default class VideoDeta extends Component {
                 <View ref={(navibar)=>this.navibara=navibar}
                       style={{position:'absolute',top:StatusBar.currentHeight,width:width,height:50,
                       opacity:this.state.navibaropacity,justifyContent:'center',alignItems:'center',backgroundColor:'transparent'}}>
-                    <Text style={{fontSize:16,color:'#fff'}}>断开连接回复克鲁斯的给你礼物</Text>
+                    <Text style={{fontSize:16,color:'#fff'}}>{this.props.title}</Text>
                 </View>
                 <TouchableOpacity style={{position:'absolute',left:20,top:StatusBar.currentHeight+15,width:20,height:20}} activeOpacity={0.9} onPress={()=>Actions.popTo('homescene')}>
                     <Image  style={{width:20,height:20}} source={require('../img/newicon_closeback.png')} />
