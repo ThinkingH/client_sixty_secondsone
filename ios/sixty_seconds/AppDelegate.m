@@ -29,14 +29,31 @@
 @end
  */
 
+static NSString *appKey = @"d1b2b47af477612cd4d12048";//填写appkey
+static NSString *channel = nil;//填写channel  一般为nil
+static BOOL isProduction = NO;//填写isProdurion  平时测试时为false ，生产时填写true
+
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
   //----------jiguang--------------
-
-  [JPUSHService setupWithOption:launchOptions appKey:@"a1703c14b186a68a66ef86c1"
-                        channel:nil apsForProduction:nil];
+  if ([[UIDevice currentDevice].systemVersion floatValue] >= 8.0) {
+    //可以添加自定义categories
+    [JPUSHService registerForRemoteNotificationTypes:(UIUserNotificationTypeBadge |
+                                                      UIUserNotificationTypeSound |
+                                                      UIUserNotificationTypeAlert)
+                                          categories:nil];
+  } else {
+    //iOS 8以前 categories 必须为nil
+    [JPUSHService registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge |
+                                                      UIRemoteNotificationTypeSound |
+                                                      UIRemoteNotificationTypeAlert)
+                                          categories:nil];
+    
+  }
+  [JPUSHService setupWithOption:launchOptions appKey:appKey
+                        channel:channel apsForProduction:isProduction];
   //----------jiguang--------------
 
   
@@ -44,7 +61,7 @@
   
   /* Umeng init */
   [MobClick setScenarioType:E_UM_GAME|E_UM_DPLUS];
-  [RNUMConfigure initWithAppkey:@"5a37c14bf43e484f70000449" channel:@"App Store"];
+  [RNUMConfigure initWithAppkey:@"5a5d9f24f43e4831b90000dc" channel:@"App Store"];
   
   /* Share init */
   [self setupUSharePlatforms];   // required: setting platforms on demand
@@ -53,7 +70,8 @@
   NSURL *jsCodeLocation;
 
   jsCodeLocation = [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index.ios" fallbackResource:nil];
-
+//  jsCodeLocation = [[NSBundle mainBundle] URLForResource:@"main" withExtension:@"jsbundle"];
+  
   RCTRootView *rootView = [[RCTRootView alloc] initWithBundleURL:jsCodeLocation
                                                       moduleName:@"sixty_seconds"
                                                initialProperties:nil
@@ -93,7 +111,7 @@
    设置微信的appKey和appSecret
    [微信平台从U-Share 4/5升级说明]http://dev.umeng.com/social/ios/%E8%BF%9B%E9%98%B6%E6%96%87%E6%A1%A3#1_1
    */
-  [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_WechatSession appKey:@"wxdc1e388c3822c80b" appSecret:@"3baf1193c85774b3fd9d18447d76cab0" redirectURL:nil];
+  [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_WechatSession appKey:@"wx99a63c20cce7c723" appSecret:@"66de16631ce1fcc54644290f752343ca" redirectURL:nil];
   /*
    * 移除相应平台的分享，如微信收藏
    */
@@ -104,7 +122,8 @@
    100424468.no permission of union id
    [QQ/QZone平台集成说明]http://dev.umeng.com/social/ios/%E8%BF%9B%E9%98%B6%E6%96%87%E6%A1%A3#1_3
    */
-  [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_QQ appKey:@"vX0lE3ZDTHqiC3VQ"/*设置QQ平台的appID*/  appSecret:nil redirectURL:nil];
+  /*设置QQ平台的appID*/
+  [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_QQ appKey:@"1106499354" appSecret:@"vX0lE3ZDTHqiC3VQ" redirectURL:nil];
   
   /*
    设置新浪的appKey和appSecret
@@ -165,13 +184,18 @@
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)   (UIBackgroundFetchResult))completionHandler {
   [[NSNotificationCenter defaultCenter] postNotificationName:kJPFDidReceiveRemoteNotification object:userInfo];
 }
+//程序在运行时收到通知，点击通知栏进入app
 - (void)jpushNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification:(UNNotification *)notification withCompletionHandler:(void (^)(NSInteger))completionHandler {
   NSDictionary * userInfo = notification.request.content.userInfo;
   if([notification.request.trigger isKindOfClass:[UNPushNotificationTrigger class]]) {
     [JPUSHService handleRemoteNotification:userInfo];
     [[NSNotificationCenter defaultCenter] postNotificationName:kJPFDidReceiveRemoteNotification object:userInfo];
   }
-  completionHandler(UNNotificationPresentationOptionAlert); }
+  completionHandler(UNNotificationPresentationOptionAlert);
+  [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
+  [JPUSHService setBadge:0];
+}
+//程序在后台时收到通知，点击通知栏进入app
 - (void)jpushNotificationCenter:(UNUserNotificationCenter *)center didReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(void (^)())completionHandler {
   NSDictionary * userInfo = response.notification.request.content.userInfo;
   if([response.notification.request.trigger isKindOfClass:[UNPushNotificationTrigger class]]) {
@@ -179,6 +203,20 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:kJPFOpenNotification object:userInfo];
   }
   completionHandler();
+  [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
+  [JPUSHService setBadge:0];
 }
+
+//点击App图标，使App从后台恢复至前台
+- (void)applicationWillEnterForeground:(UIApplication *)application {
+  [application setApplicationIconBadgeNumber:0];
+  [application cancelAllLocalNotifications];
+}
+//按Home键使App进入后台
+- (void)applicationDidEnterBackground:(UIApplication *)application{
+  [application setApplicationIconBadgeNumber:0];
+  [application cancelAllLocalNotifications];
+}
+
 
 @end
