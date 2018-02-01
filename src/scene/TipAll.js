@@ -59,7 +59,7 @@ export default class TipAll extends Component {
 
 
                 <StatusBar backgroundColor={Config.StatusBarColor}
-                           barStyle="light-content"
+                           barStyle="dark-content"
                            translucent={false}
                            hidden={false}/>
                 <View style={{padding:10,flex:1}}>

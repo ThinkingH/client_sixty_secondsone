@@ -1,4 +1,4 @@
-  import React, { Component } from 'react';
+import React, { Component } from 'react';
 import {View,requireNativeComponent} from "react-native";
 import PropTypes from 'prop-types';
 const RCT_VIDEO_REF = 'PLVideoView';

@@ -32,14 +32,14 @@ export default class Law extends Component {
             backButtonEnabled: false,
             forwardButtonEnabled: false,
             scalesPageToFit: true,
-            url: 'http://114.215.222.75:8005/sixtyxieyi.html',
+            url: Config.BaseURL + 'sixtyxieyi.html',
         };
     }
 
     componentDidMount() {
         InteractionManager.runAfterInteractions(() => {
             this.setState({
-                url: 'http://114.215.222.75:8005/sixtyxieyi.html',
+                url: Config.BaseURL + 'sixtyxieyi.html',
             });
         });
 

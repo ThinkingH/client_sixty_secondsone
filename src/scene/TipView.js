@@ -114,8 +114,8 @@ export default class TipView extends Component {
 
 
                                                 <View style={{marginLeft:10,marginTop:10,justifyContent:'center'}}>
-                                                    <Text numberOfLines={1} style={{color:'#000'}}>{item.biaoti}</Text>
-                                                    <Text numberOfLines={1} style={{color:'#999',fontSize:14}}>{item.jieshao}</Text>
+                                                    <Text numberOfLines={1} style={{height:20, fontWeight:'100',lineHeight:20,fontSize:14,color:'#000'}}>{item.biaoti}</Text>
+                                                    <Text numberOfLines={1} style={{height:15, letterSpacing:1,lineHeight:15,color:'#999',fontSize:14}}>{item.jieshao}</Text>
                                                 </View>
 
 

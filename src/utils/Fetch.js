@@ -4,7 +4,7 @@
 /**
  * Created by aj on 2016/12/7.
  */
-import Storage from '../utils/Storage';
+// import Storage from '../utils/Storage';
 import Config from './Config';
 import {Platform} from "react-native";
 import MD5 from "react-native-md5";
@@ -14,7 +14,8 @@ import NetWorkTool from "../utils/NetWorkTool";
 let  system=Platform.OS.toUpperCase()
 
 
-let url="http://114.215.222.75:8005/sixty/interface/sixtyinit.php";  // 正式
+// let url="http://114.215.222.75:8005/sixty/interface/sixtyinit.php";  // 正式
+let url=Config.BaseURL+"sixty/interface/sixtyinit.php";
 
 export default function request(thetype,param = "") {
     return new Promise((resolve, reject) => {

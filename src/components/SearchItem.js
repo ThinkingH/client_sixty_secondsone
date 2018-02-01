@@ -59,7 +59,7 @@ export default class SearchItem extends React.PureComponent  {
                         </View>
                         <View style={{paddingLeft:15,marginBottom:10,marginTop:5,width:(width-30)/2-2.5}}>
                             <Text numberOfLines={1} style={{height:20, fontWeight:'100',lineHeight:20,fontSize:14,color:'#666'}} >{this.state.data.biaoti}</Text>
-                            <Text numberOfLines={1} style={{height:15, letterSpacing:5,lineHeight:15,fontSize:10,color:'#aaa'}} >{this.state.data.jieshao}</Text>
+                            <Text numberOfLines={1} style={{height:15, letterSpacing:0,lineHeight:15,fontSize:10,color:'#aaa'}} >{this.state.data.jieshao}</Text>
                         </View>
                     </TouchableOpacity>
         )

@@ -120,8 +120,8 @@ export default class Setting extends Component {
         return (
             <Container style={{backgroundColor:'#fff'}}>
                 <StatusBar backgroundColor={Config.StatusBarColor}
-                           barStyle="light-content"
-                           translucent={false}
+                           barStyle="dark-content"
+                           translucent={true}
                            hidden={false}/>
                 <Content>
                     <List>

@@ -64,7 +64,7 @@ export default class Comment extends Component {
             <Container style={{backgroundColor:'#fafafa'}}>
 
                 <StatusBar backgroundColor={Config.StatusBarColor}
-                           barStyle="light-content"
+                           barStyle="dark-content"
                            translucent={false}
                            hidden={false}/>
                 <TouchableOpacity activeOpacity={0.9} onPress={()=>this._goToMessage()} style={{width:width,height:80,flexDirection:'row',alignItems:'center',backgroundColor:'#fff'}}>

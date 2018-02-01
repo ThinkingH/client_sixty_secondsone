@@ -12,18 +12,21 @@ const propTypes = {
 const icons=[require('./../img/nav_home_n.png'),require('./../img/nav_tips_n.png'),require('./../img/nav_seach_n.png'),require('./../img/nav_fav_n.png'),require('./../img/nav_account_n.png')];
 const icons_s=[require('./../img/nav_home_s.png'),require('./../img/nav_tips_s.png'),require('./../img/nav_seach_s.png'),require('./../img/nav_fav_s.png'),require('./../img/nav_account_s.png')];
 
-const name=["60Sec",'小窍门',"搜索","收藏","我的"]
+const name=["60Sec","小窍门","搜索","收藏","我的"]
 const styles = StyleSheet.create({
-    container: { flex: 1, backgroundColor: 'transparent', justifyContent: 'flex-end',
+    container: {
+        flex: 1,
+        backgroundColor: 'transparent',
+        justifyContent: 'center',
         alignItems: 'center',
     },
 });
 
 const TabIcon = (props) => (
     <View style={styles.container}>
-        <Image style={{width:20,height:20,marginBottom:5}} source={props.focused ?icons_s[props.icon_id]:icons[props.icon_id]}/>
+        <Image style={{width:20,height:20,marginTop:5,marginBottom:5}} source={props.focused ?icons_s[props.icon_id]:icons[props.icon_id]}/>
 
-        {props.focused?(<Text style={{color:'#F5C61E',fontSize:10}}>{name[props.icon_id]}</Text>):(<Text style={{fontSize:10}}>{name[props.icon_id]}</Text>)}
+        {props.focused?(<Text style={{color:'#F5C61E',fontSize:10}}>{name[props.icon_id]}</Text>):(<Text style={{fontSize:10,color:'#A2A2A2'}}>{name[props.icon_id]}</Text>)}
     </View>
 );
 

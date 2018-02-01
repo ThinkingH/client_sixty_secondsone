@@ -205,7 +205,7 @@ export default class ContributeByUser extends Component {
         let md5 = MD5.hex_md5('100'+system+'100'+""+'1020'+timestamp + Config.md5key);
 
         RNFetchBlob.fetch('POST',
-            "http://114.215.222.75:8005/sixty/interface/sixtyinit.php",
+            Config.BaseURL + "sixty/interface/sixtyinit.php",
             {
                 'Content-Type' : 'multipart/form-data',
             },

@@ -67,6 +67,7 @@ import SearchMain from './scene/SearchMain';
 import Intro from './scene/Intro';
 import MessageBox from './scene/MessageBox';
 import VideoDeta from './scene/VideoDeta';
+import Request from "./utils/Fetch";
 
 const styles = StyleSheet.create({
     container: {
@@ -84,7 +85,7 @@ const styles = StyleSheet.create({
         fontSize:18
     },
     navigationBarStyle:{
-        backgroundColor:'#fefefe',
+        backgroundColor:Platform.OS === 'ios' ? '#fff' : '#efefef',
     }
 });
 let isExit=0;
@@ -198,12 +199,24 @@ export default class apps extends Component {
 
         this.changeTab = DeviceEventEmitter.addListener("changeTab",this._changeTab);
 
+        this._getConfigInfo();
     }
     componentWillUnmount() {
         this.changeTab.remove();
         this.isshare.remove();
         this.unInitPush();
     }
+    //获取一些配置信息，如iOS上线时隐藏第三方登录、分享功能等
+    _getConfigInfo=()=>{
+        let parpam="thetype=1047";
+        Request('1047',parpam)
+            .then((responseJson) => {
+                Config.isDebug = responseJson.data[0].flag;
+            })
+            .catch((error) => {
+                Toast.show(error.toString());
+            });
+    };
 
     _isshare=()=>{
 
@@ -456,6 +469,7 @@ export default class apps extends Component {
                                     key="assortmentone"
                                     backButtonImage={require('./img/icon_yellowclose.png')}
                                     leftButtonIconStyle={{width:20,height:20}}
+                                    navigationBarStyle={[styles.navigationBarStyle]}
                                     component={AssortmentOne}
                                     hideNavBar={false}
                                     panHandlers={null}
@@ -619,7 +633,6 @@ export default class apps extends Component {
                                         key="tipview"
                                         hideNavBar
                                         icon_id={1}
-
                                         icon={TabIcon}
                                         component={TipView}
                                     />
@@ -627,7 +640,6 @@ export default class apps extends Component {
                                         key="searchmain"
                                         icon={TabIcon}
                                         icon_id={2}
-
                                         component={SearchMain}
                                         hideNavBar={true}
                                     />

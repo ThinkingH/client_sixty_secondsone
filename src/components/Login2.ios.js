@@ -1,5 +1,13 @@
 import React,{Component} from 'react';
-import { StyleSheet,Dimensions,DeviceEventEmitter,TouchableOpacity} from "react-native";
+import {
+    StyleSheet,
+    Dimensions,
+    DeviceEventEmitter,
+    TouchableOpacity,
+    StatusBar,
+    Image,
+    ImageBackground
+} from "react-native";
 import {Actions} from "react-native-router-flux";
 import Request from '../utils/Fetch';
 import Storage  from '../utils/Storage';
@@ -9,6 +17,7 @@ import { Container, Header, Content, Item, Input,Thumbnail,Button ,Text,Left,Rig
 import ShareUtile from '../utils/ShareUtil'
 import Spinnera from '../components/Spinner';
 const {width, height} = Dimensions.get('window');
+const imgarr=[require('../img/icon_login1.png'),require('../img/icon_login2.png'),require('../img/icon_login3.png'),require('../img/icon_login4.png')]
 const styles = StyleSheet.create({
     container: {
         flex: 1,
@@ -20,7 +29,7 @@ const styles = StyleSheet.create({
         width:width/7,height:width/7,marginTop:15
     }
 });
-let _this;
+
 export default class Login2 extends Component {
     constructor(props) {
         super(props);
@@ -32,11 +41,9 @@ export default class Login2 extends Component {
             timerTitle:'获取验证码',
             isvisiable:false,
         };
-
-        _this=this;
     };
     componentWillMount() {
-
+        num=this.props.num
     }
 
     componentDidMount(){
@@ -103,7 +110,7 @@ export default class Login2 extends Component {
         });
         ShareUtile.auth(platform,(code,result,message) =>{
             this.setState({result:message});
-            if (code == 0){
+            if (code == 200){
                 this.setState({
                     isvisiable:false,
                 })
@@ -129,7 +136,7 @@ export default class Login2 extends Component {
         } else if(platform==1){  //微博
             parpam="thetype=1027"+'&qqid='+result.openid+'&nickname='+result.name+'&headimgurl='+result.iconurl;
         }else if(platform==2){  //微信
-            parpam="thetype=1026"+'&qqid='+result.uid+'&nickname='+result.screen_name+'&headimgurl='+result.iconurl;
+            parpam="thetype=1026"+'&qqid='+result.uid+'&nickname='+result.name+'&headimgurl='+result.iconurl;
         }
 
 
@@ -203,78 +210,83 @@ export default class Login2 extends Component {
             });
     };
 
-    render(){
-        return (
-            <Container>
-                <Content keyboardShouldPersistTaps="handled"  style={{paddingRight:30,paddingLeft:30,backgroundColor:'#fff'}}>
-                    <Body>
-                    <Thumbnail  style={{width:width/2,height:(width/2)/277*100,marginTop:35}} source={require('../img/icon_login_logo.png')} />
-                    </Body>
-                    <Item rounded style={{marginTop:35}}>
-                        <Input onChangeText={(phone)=>this.setState({phone})}
-                               placeholderTextColor="#999"
-                               style={{height:40,padding:0}}
-                               maxLength={11}
-                               placeholder='  手机账号'/>
-                    </Item>
-                    <Item rounded style={{marginTop:20}}>
-                        <Row>
-                            <Input onChangeText={(code)=>this.setState({code})}
-                                   placeholderTextColor="#999"
-                                   style={{height:40,padding:0}}
-                                   maxLength={6}
-                                   placeholder='  验证码'/>
-                            <Button style={{backgroundColor:'#959595'}}
-                                    rounded
-                                    onPress={()=>this._getData()}><Text style={{color:'#fff'}}>{this.state.timerTitle}</Text>
-                            </Button>
-                        </Row>
-                    </Item>
-                    <Button onPress={()=>this._login()}
-                            color={'#fff'} rounded block
-                            style={{height:40,width:width-60,backgroundColor:'#c5b361',marginTop:20}} >
-                        <Text style={{textAlign:'center'}}>登录</Text>
-                    </Button>
-                    <Row style={{justifyContent:'center',marginTop:30}}>
-                        <View style={{height:1,flex:1,backgroundColor:'#ccc',marginTop:10}}>
-                        </View>
-                        <Text style={{marginRight:3,marginLeft:3,color:'#ccc'}}>第三方登录</Text>
-                        <View style={{height:1,flex:1,backgroundColor:'#ccc',marginTop:10}}>
+    _renderNewLogin=()=>{
+        return(
+            <Container style={{backgroundColor:'#fafafa'}}>
+                <StatusBar backgroundColor="transparent"
+                           barStyle="light-content"
+                           translucent={true}
+                           hidden={false}/>
+                <Content keyboardShouldPersistTaps="handled"  >
+                    <Body style={{flex:1,alignItems:'center'}}>
+                    <ImageBackground  style={{width:width,height:width,justifyContent:'flex-end',alignItems:'center'}}
+                                       source={imgarr[num]} >
+                        <Item rounded style={{width:width-60,backgroundColor:'#fff',elevation:1,alignItems:'center'}} >
 
-                        </View>
-                    </Row>
-                    <Row style={{padding:15,marginTop:20}}>
-                        <Left>
-                            <TouchableOpacity
-                                onPress={()=>{this._checklogin(2)}}
-                                >
-                                <View style={{marginLeft:width/6}}>
-                                    <Thumbnail    style={{width:width/8,height:width/8}} source={require('../img/icon_wx.png')} />
-                                </View>
-                            </TouchableOpacity>
-                        </Left>
-                        {/*<Body>*/}
-                        {/*<TouchableNativeFeedback*/}
-                        {/*onPress={()=>{this._checklogin(1)}}*/}
-                        {/*background={TouchableNativeFeedback.Ripple("#ccc", true)}>*/}
-                        {/*<View >*/}
-                        {/*<Thumbnail   square style={{width:width/8,height:width/8,marginRight:20}} source={require('../img/icon_wb.png')} />*/}
-                        {/*</View>*/}
-                        {/*</TouchableNativeFeedback>*/}
-                        {/*</Body>*/}
-                        <Right>
-                            <TouchableOpacity
-                                onPress={()=>{this._checklogin(0)}}
-                                >
-                                <View  style={{marginRight:width/6}}>
-                                    <Thumbnail   square style={{width:width/8,height:width/8}} source={require('../img/icon_qq.png')} />
-                                </View>
-                            </TouchableOpacity>
-                        </Right>
-                    </Row>
+                            <Input onChangeText={(phone)=>this.setState({phone})}
+                                   placeholderTextColor="#999"
+                                   style={{height:40,padding:0,fontSize:14}}
+                                   maxLength={11}
+                                   placeholder='  请输入手机账号'/>
+                            <Button style={{height:40}}  transparent={true}
+                                    rounded
+                                    onPress={()=>this._getData()}><Text style={{color:'#999'}}>{this.state.timerTitle}</Text>
+                            </Button>
+                        </Item>
+                    </ImageBackground>
+                    <Item  rounded style={{marginTop:10,width:width-60,elevation:1}}>
+                        <Input onChangeText={(code)=>this.setState({code})}
+                               placeholderTextColor="#999"
+                               style={{height:40,padding:0,fontSize:14,}}
+                               maxLength={6}
+                               placeholder='  请输入验证码'/>
+
+                    </Item>
+
+                    <TouchableOpacity activeOpacity={0.9} onPress={()=>{this._login()}}>
+                        <Thumbnail    style={{width:width/6,height:width/6,marginTop:15}} source={require('../img/icon_loginbtn.png')} />
+                    </TouchableOpacity>
+
+                    {Config.isDebug === "2" ? (null) : this._renderShieldThirdParty()}
+
+                    </Body>
                 </Content>
+                <TouchableOpacity activeOpacity={0.9} onPress={()=>{Actions.pop()}} style={{width:20,height:20,position:'absolute',top:Config.STATUSBARHEIGHT+10,left:20}}>
+                    <Image style={{width:20,height:20}} source={require('../img/icon_close.png')} />
+                </TouchableOpacity>
                 <Spinnera loadvalue="第三方登陆中..." modalVisible={this.state.isvisiable} />
             </Container>
+        )
+    }
+//屏蔽第三方登录
+    _renderShieldThirdParty=()=>{
+        return(
+            <Body>
+                <Text style={{marginTop:15,color:'#8c8c8c',fontSize:12,}}>用其他方式登录60SEC</Text>
+                <Row style={{padding:15,justifyContent:'center'}}>
+                    <Left>
+                        <TouchableOpacity onPress={()=>{this._checklogin(2)}}>
+                            <View style={{marginLeft:width/6}}>
+                                <Image style={{width:width/8,height:width/8}} source={require('../img/icon_wx.png')} />
+                            </View>
+                        </TouchableOpacity>
+                    </Left>
+                    <Right>
+                        <TouchableOpacity onPress={()=>{this._checklogin(0)}}>
+                            <View  style={{marginRight:width/6}}>
+                                <Image square style={{width:width/8,height:width/8}} source={require('../img/icon_qq.png')} />
+                            </View>
+                        </TouchableOpacity>
+                    </Right>
+                </Row>
+            </Body>
+        );
+    }
+
+
+    render(){
+        return(
+            this._renderNewLogin()
         );
     }
 }
