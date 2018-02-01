@@ -5,9 +5,13 @@ import Config from '../utils/Config';
 import Request from '../utils/Fetch';
 import Toast from '@remobile/react-native-toast'
 import { Container, Header,View, Content, Button, Icon, List, Text, ListItem,Left,Right,Body ,Thumbnail,Row} from 'native-base';
-import TabIcon from '../components/TabIcon';
+// import TabIcon from '../components/TabIcon';
 import { BlurView, VibrancyView } from 'react-native-blur';
 const {width, height} = Dimensions.get('window');
+
+let num=0;
+const imgarr=[require('../img/icon_login1.png'),require('../img/icon_login2.png'),require('../img/icon_login3.png'),require('../img/icon_login4.png')];
+
 const styles = StyleSheet.create({
     container: {
         flex: 1,
@@ -20,18 +24,13 @@ const styles = StyleSheet.create({
 });
 export default class Account extends Component {
 
-    static navigationOptions = {
-        //tabBarLabel: Config.navs_txt[3],
-        tabBarIcon: ({focused,tintColor}) => (<Image source={focused ?Config.icons_s[3]:Config.icons[3]}/>)
-    };
-
     constructor(props) {
         super(props);
         this.state = {
             arr:[],
             imageheader:'',
-            title:"mzy",
-            name:'我的',
+            title:'',
+            name:'',
             desc:'',
             viewRef:null,
             isshow:true,
@@ -43,6 +42,7 @@ export default class Account extends Component {
             address:'',
             sex:1,
         };
+        num = Math.ceil(Math.random()*4)-1
     }
 
     componentDidMount(){
@@ -143,8 +143,8 @@ export default class Account extends Component {
             <Content style={{backgroundColor:'#fafafa'}}>
                 <Body style={{flex:1}}>
                 <ImageBackground   style={{width:width,height:width,justifyContent:'flex-end',alignItems:'center'}}
-                                   source={require('../img/noob.png')} >
-                    <Button  rounded block onPress={()=>Actions.login2()}  style={{backgroundColor:'#f5c61e',width:width-60,height:40,marginLeft:30}}>
+                                   source={imgarr[num]}>
+                    <Button  rounded block onPress={()=>Actions.login2({num:num})}  style={{backgroundColor:'#f5c61e',width:width-60,height:40,marginLeft:30}}>
                         <Text style={{fontSize:16,color:'#fff'}} >用  户  登  录</Text>
                     </Button>
                 </ImageBackground>
@@ -237,12 +237,11 @@ export default class Account extends Component {
                     <View style={{width:width-40,height:40,flexDirection:'row'}}>
                         <TouchableOpacity activeOpacity={0.9} style={{flex:1,alignItems:'center',justifyContent:'center'}}>
                             <Text style={{fontSize:14,color:'#f5c61e'}}>我的成果展示</Text>
-                            <View style={{width:(width-40)/2,height:1,backgroundColor:'#f5c61e',position:'absolute',bottom:0}}>
-                            </View>
+                            {/*<View style={{width:(width-40)/2,height:1,backgroundColor:'#f5c61e',position:'absolute',bottom:0}} />*/}
                         </TouchableOpacity>
-                        <TouchableOpacity activeOpacity={0.9} onPress={()=>{this._exchange()}} style={{flex:1,alignItems:'center',justifyContent:'center'}}>
-                            <Text style={{fontSize:14}}>我的上传食谱</Text>
-                        </TouchableOpacity>
+                        {/*<TouchableOpacity activeOpacity={0.9} onPress={()=>{this._exchange()}} style={{flex:1,alignItems:'center',justifyContent:'center'}}>*/}
+                            {/*<Text style={{fontSize:14}}>我的上传食谱</Text>*/}
+                        {/*</TouchableOpacity>*/}
                     </View>
                     {this._renderContributeList()}
                 </View>
@@ -363,13 +362,8 @@ export default class Account extends Component {
                                  progressBackgroundColor="white"/>
                          } >
 
-
-
-
                     <Image source={{uri:this.state.imageheader}} style={styles.absolute}>
-                        <VibrancyView blurType="light" style={{flex:1}}>
-
-                        </VibrancyView>
+                        <VibrancyView blurType="light" style={{flex:1}} />
                     </Image>
                     {/*<ImageBackground   style={{position:'absolute',top:0,width:width,height:width,alignItems:'center'}}*/}
                     {/*source={require('../img/icon_contribute_modalpic.png')} >*/}
@@ -393,7 +387,7 @@ export default class Account extends Component {
                             <View style={{width:width-40,height:1,backgroundColor:'#ccc'}}>
 
                             </View>
-                            <View style={{alignItems:'center',height:50}}>
+                            <View style={{alignItems:'center',height:50,justifyContent:'center'}}>
                                 <Text style={{fontSize:12}}>{this.state.desc}</Text>
                             </View>
 
@@ -422,25 +416,25 @@ export default class Account extends Component {
                            hidden={false}/>
                 {Config.usertype==1?this._renderLogina():this._renderUnLogin()}
                 <View ref={(viewopacity)=>this.viewopacity=viewopacity}
-                      style={{position:'absolute',top:0,width:width,height:StatusBar.currentHeight,backgroundColor:this.state.viewopacity}}>
+                      style={{position:'absolute',top:0,width:width,height:Config.STATUSBARHEIGHT,backgroundColor:this.state.viewopacity}}>
                 </View>
                 <View ref={(navibar)=>this.navibar=navibar}
-                      style={{position:'absolute',top:StatusBar.currentHeight,width:width,height:50,opacity:this.state.navibaropacity,justifyContent:'center',alignItems:'center',backgroundColor:'rgba(0,0,0,0.5)'}}>
+                      style={{position:'absolute',top:Config.STATUSBARHEIGHT,width:width,height:44,opacity:this.state.navibaropacity,justifyContent:'center',alignItems:'center',backgroundColor:'rgba(0,0,0,0.5)'}}>
                 </View>
                 <View ref={(navibar)=>this.navibara=navibar}
-                      style={{position:'absolute',top:StatusBar.currentHeight,width:width,height:50,
+                      style={{position:'absolute',top:Config.STATUSBARHEIGHT,width:width,height:44,
                           opacity:this.state.navibaropacity,justifyContent:'center',alignItems:'center',backgroundColor:'transparent'}}>
                     <Text style={{fontSize:16,color:'#fff'}}>{this.state.name}</Text>
                 </View>
-                <View  style={{position:'absolute',top:Config.STATUSBARHEIGHT,height:50,width:width,alignItems:'flex-end',justifyContent:'center'}}>
+                <View  style={{position:'absolute',top:Config.STATUSBARHEIGHT,height:44,width:width,alignItems:'flex-end',justifyContent:'center'}}>
                     <View style={{flexDirection:'row',marginRight:20}}>
                         <Button style={{marginRight:30}} transparent    onPress={()=> Actions.message({title:'消息'})}>
-                            <Thumbnail  style={{width:20,height:20}} source={require('../img/newicon_warn.png')} />
+                            <Image style={{width:20,height:20}} source={require('../img/newicon_warn.png')} />
                         </Button>
                         <Button transparent
                                 onPress={()=> Actions.setting()}
                         >
-                            <Thumbnail   style={{width:20,height:20}} source={require('../img/newicon_setting.png')} />
+                            <Image   style={{width:20,height:20}} source={require('../img/newicon_setting.png')} />
                         </Button>
                         {Config.IECEIVESOCKET==1?(
                             <View style={{position:'absolute',top:13,right:45,width:16,height:16,borderRadius:8,backgroundColor:'#f00',alignItems:'center',justifyContent:'center'}}>

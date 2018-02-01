@@ -133,7 +133,7 @@ export default class VideoItem extends React.PureComponent  {
                     </TouchableOpacity>
                     <View style={{paddingLeft:15,marginBottom:5,marginTop:5,width:(width-30)/2-2.5}}>
                         <Text numberOfLines={1} style={{height:20, fontWeight:'100',lineHeight:20,fontSize:14,color:'#666'}} >{this.props.item.biaoti}</Text>
-                         <Text numberOfLines={1} style={{height:15, letterSpacing:5,lineHeight:15,fontSize:10,color:'#aaa'}} >{this.props.item.jieshao}</Text>
+                         <Text numberOfLines={1} style={{height:15, letterSpacing:0,lineHeight:15,fontSize:10,color:'#aaa'}} >{this.props.item.jieshao}</Text>
                         <TouchableOpacity activeOpacity={1} style={{flexDirection:'row',alignItems:'center',height:15,}}>
                             <Image source={require('../img/icon_maketime.png')} style={{height:10, width:10,borderRadius:5}}/>
                             <Text numberOfLines={1} style={{ letterSpacing:1,lineHeight:15,fontSize:10,marginLeft:5,color:'#c79b1e'}} >{this.props.item.maketime}</Text>

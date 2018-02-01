@@ -266,14 +266,27 @@ export default class TipDetails extends Component {
             return;
         }
         this.videos.setVideoPath(videoarr[num].videourl,videoarr[num].showimg);
-              if(num<videoarr.length-1){
-                  this.setState({
-                      biaoti:videoarr[num+1].biaoti,
-                      isshow:false,
-                      movevalue:width/2,
-                      imageurl:videoarr[num+1].showimg,
-                  });
-              }
+
+        //⬇️点击下一个视频当前视频不刷新问题iOS
+        if (Platform.OS === 'ios'){
+            if (num < videoarr.length){
+                this.setState({
+                    vurl:videoarr[num].videourl,
+                    vimage:videoarr[num].showimg,
+                });
+            }
+        }
+        //⬆️点击下一个视频当前视频不刷新问题iOS
+
+        if(num<videoarr.length-1){
+            this.setState({
+                biaoti:videoarr[num+1].biaoti,
+                isshow:false,
+                movevalue:width/2,
+                imageurl:videoarr[num+1].showimg,
+            });
+        }
+
         this._autoHide();
         num++;
         if(num==videoarr.length){
@@ -391,8 +404,10 @@ export default class TipDetails extends Component {
                                        maximumValue={60}
                                        minimumValue={0}
                                        value={this.state.value}
-                                       minimumTrackTintColor ="#696969"
-                                       maximumTrackTintColor ="#f3c720"
+                                       minimumTrackTintColor = {Platform.OS === 'ios' ? "#f3c720" : "#696969"}
+                                       maximumTrackTintColor = {Platform.OS === 'ios' ? "#696969" : "#f3c720"}
+                                       // minimumTrackTintColor = {"#696969"}
+                                       // maximumTrackTintColor = {"#f3c720"}
                                        thumbTintColor="#f3c720"
                                        onSlidingComplete={(value)=>{
                                       let t=Math.floor(value);

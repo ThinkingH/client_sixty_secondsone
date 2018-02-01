@@ -188,7 +188,7 @@ export default class MainScene extends Component {
     renderItem = (item, index, separator) => {
         if (this.props.item === 'video') {
             return (
-                <VideoItem selected={item.coll} item={item} index={index}  />
+                <VideoItem selected={item.coll} item={item} index={index} />
             )
         }
     }

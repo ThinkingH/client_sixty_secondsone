@@ -75,6 +75,7 @@ export default class VideoDetails extends Component {
             viewopacity:'transparent',
             navibaropacity:0,
             tipsarr:[],
+            fromWhere:this.props.fromWhere,//记录是从哪一页跳转进详情页
         };
 
         NetWorkTool.checkNetworkState((isConnected)=>{
@@ -276,7 +277,9 @@ export default class VideoDetails extends Component {
             isplay:true,
             value:0
         });
-        // this.videos.start();
+        if (Platform.OS === 'ios'){
+            this.videos.start();
+        }
     };
 
     _onPressSeekTo=(value)=>{
@@ -703,20 +706,20 @@ export default class VideoDetails extends Component {
                     </FooterTab>
                 </Footer>
                 <View ref={(viewopacity)=>this.viewopacity=viewopacity}
-                      style={{position:'absolute',top:0,width:width,height:StatusBar.currentHeight,backgroundColor:this.state.viewopacity}}>
+                      style={{position:'absolute',top:0,width:width,height:Config.STATUSBARHEIGHT,backgroundColor:this.state.viewopacity}}>
                 </View>
                 <View ref={(navibar)=>this.navibar=navibar}
-                      style={{position:'absolute',top:StatusBar.currentHeight,width:width,height:50,opacity:this.state.navibaropacity,justifyContent:'center',alignItems:'center',backgroundColor:'rgba(0,0,0,0.5)'}}>
+                      style={{position:'absolute',top:Config.STATUSBARHEIGHT,width:width,height:50,opacity:this.state.navibaropacity,justifyContent:'center',alignItems:'center',backgroundColor:'rgba(0,0,0,0.5)'}}>
                 </View>
                 <View ref={(navibar)=>this.navibara=navibar}
-                      style={{position:'absolute',top:StatusBar.currentHeight,width:width,height:50,
+                      style={{position:'absolute',top:Config.STATUSBARHEIGHT,width:width,height:50,
                       opacity:this.state.navibaropacity,justifyContent:'center',alignItems:'center',backgroundColor:'transparent'}}>
                     <Text style={{fontSize:16,color:'#fff'}}>{this.props.title}</Text>
                 </View>
-                <TouchableOpacity style={{position:'absolute',left:20,top:StatusBar.currentHeight+15,width:20,height:20}} activeOpacity={0.9} onPress={()=>Actions.pop()}>
-                <Image  style={{width:20,height:20}} source={require('../img/newicon_closeback.png')} />
+                <TouchableOpacity style={{position:'absolute',left:20,top:Config.STATUSBARHEIGHT+15,width:20,height:20}} activeOpacity={0.9} onPress={()=>Actions.pop()}>{/*'homescene'*/}
+                    <Image  style={{width:20,height:20}} source={require('../img/newicon_closeback.png')} />
                 </TouchableOpacity>
-                <TouchableOpacity style={{position:'absolute',right:20,top:StatusBar.currentHeight+15,width:20,height:20}} activeOpacity={0.9} onPress={()=>this._share()}>
+                <TouchableOpacity style={{position:'absolute',right:20,top:Config.STATUSBARHEIGHT+15,width:20,height:20,}} activeOpacity={0.9} onPress={()=>this._share()}>
                     <Image  style={{width:20,height:20}} source={require('../img/newicon_share.png')} />
                 </TouchableOpacity>
             </Container>

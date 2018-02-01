@@ -120,7 +120,7 @@ export default class Comment extends Component {
         return (
             <Container style={{backgroundColor:'#ccc'}}>
                 <StatusBar backgroundColor={Config.StatusBarColor}
-                           barStyle="light-content"
+                           barStyle="dark-content"
                            translucent={false}
                            hidden={false}/>
 

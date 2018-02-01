@@ -204,6 +204,7 @@ export default class ListScene extends Component {
                            id={item.id}
                     // onPressItem={this._onPressItem}
                            item={item}
+
                 />
             )
         }

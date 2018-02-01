@@ -59,7 +59,7 @@ export default class GetInfo extends Component {
         let system=Platform.OS.toUpperCase()
         let md5 = MD5.hex_md5('100'+system+'100'+""+'1010'+timestamp + Config.md5key);
         RNFetchBlob.fetch('POST',
-            "http://114.215.222.75:8005/sixty/interface/sixtyinit.php?",
+            Config.BaseURL + "sixty/interface/sixtyinit.php?",
             {
                 'Content-Type' : 'multipart/form-data',
             },

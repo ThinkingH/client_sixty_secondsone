@@ -2,7 +2,10 @@
  * Created by Administrator on 2017/10/20.
  */
 import React, { Component } from 'react';
-import { ListView ,FlatList,View,Dimensions,Image,InteractionManager,TouchableOpacity,DeviceEventEmitter,StatusBar} from 'react-native';
+import {
+    ListView, FlatList, View, Dimensions, Image, InteractionManager, TouchableOpacity, DeviceEventEmitter,
+    StatusBar, Platform
+} from 'react-native';
 import {Actions} from "react-native-router-flux";
 import Request from '../utils/Fetch';
 import Toast from '@remobile/react-native-toast'
@@ -150,26 +153,28 @@ export default class SofitelList extends Component {
                     {this._rendersofitelist()}
                 </View>
 
-
-
-
-
             </Content>
             <View ref={(viewopacity)=>this.viewopacity=viewopacity}
-                  style={{position:'absolute',top:0,width:width,height:StatusBar.currentHeight,backgroundColor:this.state.viewopacity}}>
+                  style={{position:'absolute',top:0,width:width,height:Config.STATUSBARHEIGHT,backgroundColor:this.state.viewopacity}}>
             </View>
             <View ref={(navibar)=>this.navibar=navibar}
-                  style={{position:'absolute',top:StatusBar.currentHeight,width:width,height:50,opacity:this.state.navibaropacity,justifyContent:'center',alignItems:'center',backgroundColor:'rgba(0,0,0,0.5)'}}>
+                  style={{position:'absolute',top:Config.STATUSBARHEIGHT,width:width,height:50,opacity:this.state.navibaropacity,justifyContent:'center',alignItems:'center',backgroundColor:'rgba(0,0,0,0.5)'}}>
             </View>
             <View ref={(navibar)=>this.navibara=navibar}
-                  style={{position:'absolute',top:StatusBar.currentHeight,width:width,height:50,
+                  style={{position:'absolute',top:Config.STATUSBARHEIGHT,width:width,height:50,
                       opacity:this.state.navibaropacity,justifyContent:'center',alignItems:'center',backgroundColor:'transparent'}}>
                 <Text style={{fontSize:16,color:'#fff'}}>{this.props.title}</Text>
             </View>
-            <TouchableOpacity style={{position:'absolute',left:20,top:StatusBar.currentHeight+15,width:20,height:20}} activeOpacity={0.9} onPress={()=>Actions.popTo('homescene')}>
+            {/*<TouchableOpacity style={{position:'absolute',left:20,top:StatusBar.currentHeight+15,width:20,height:20}} activeOpacity={0.9} onPress={()=>Actions.popTo('homescene')}>*/}
+                {/*<Image  style={{width:20,height:20}} source={require('../img/newicon_closeback.png')} />*/}
+            {/*</TouchableOpacity>*/}
+            {/*<TouchableOpacity style={{position:'absolute',right:20,top:StatusBar.currentHeight+15,width:20,height:20}} activeOpacity={0.9} onPress={()=>this._share()}>*/}
+                {/*<Image  style={{width:20,height:20}} source={require('../img/newicon_share.png')} />*/}
+            {/*</TouchableOpacity>*/}
+            <TouchableOpacity style={{position:'absolute',left:20,top:Config.STATUSBARHEIGHT+15,width:20,height:20}} activeOpacity={0.9} onPress={()=>Actions.pop()}>
                 <Image  style={{width:20,height:20}} source={require('../img/newicon_closeback.png')} />
             </TouchableOpacity>
-            <TouchableOpacity style={{position:'absolute',right:20,top:StatusBar.currentHeight+15,width:20,height:20}} activeOpacity={0.9} onPress={()=>this._share()}>
+            <TouchableOpacity style={{position:'absolute',right:20,top:Config.STATUSBARHEIGHT+15,width:20,height:20,}} activeOpacity={0.9} onPress={()=>this._share()}>
                 <Image  style={{width:20,height:20}} source={require('../img/newicon_share.png')} />
             </TouchableOpacity>
         </View>

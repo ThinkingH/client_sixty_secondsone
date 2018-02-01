@@ -1,22 +1,31 @@
 /**
  * Created by aj on 2016/12/18.
  */
-import {View, StyleSheet, ListView, Image,TouchableOpacity,BackAndroid,PixelRatio,Platform,StatusBar} from "react-native";
-import MD5 from "react-native-md5";
-import JPushModule from 'jpush-react-native';
-import Request from '../utils/Fetch';
+import {
+    View, StyleSheet, ListView, Image, TouchableOpacity, BackAndroid, PixelRatio, Platform, StatusBar,
+    Dimensions
+} from "react-native";
+// import MD5 from "react-native-md5";
+// import JPushModule from 'jpush-react-native';
+// import Request from '../utils/Fetch';
+
+const {width, height} = Dimensions.get('window');
+const isiPhoneX = width == 375 && height == 812 ? true : false;
+
 const styles = StyleSheet.create({
     horizontal_layout:{
         flex:1,
         flexDirection:"row",
-    },container: {
-        flex: 1,backgroundColor: '#efeff4',
+    },
+    container: {
+        flex: 1,
+        backgroundColor: '#efeff4',
     },
 });
 
 export default class Config{
-     static versionName="V1.0.0";
-     static version=100;
+     static versionName="V1.1.0";
+     static version=110;
      static ISHIDE=false;
      static loadingTxtStyle={color:"#757575",fontSize:14,};
      static loadingTxt="正在加载中...";
@@ -30,7 +39,10 @@ export default class Config{
      static IECEIVESOCKET=2;
      static ISCOLLECT=1;
      static ISJPUSH=true;
-    static STATUSBARHEIGHT=Platform.OS == 'ios' ? 20 : StatusBar.currentHeight;
+     // static STATUSBARHEIGHT=Platform.OS == 'ios' ? 20 : StatusBar.currentHeight;
+     static STATUSBARHEIGHT = isiPhoneX ? 44 : 20;
+     static BaseURL = "http://api.60video.net/";
+     static isDebug = "0";//初始值为0，2为隐藏（屏蔽），其余为显示
      static initJpush=()=>{
 
         }

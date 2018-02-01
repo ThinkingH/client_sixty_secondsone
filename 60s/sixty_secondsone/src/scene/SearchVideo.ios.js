@@ -25,6 +25,7 @@ const aa=["1"];
 let _pageNo = 1;
 let isdisable=false;
 const _pageSize = Config.pageCount;
+let parpam='';
 export default class SearchVideo extends React.Component {
 
     constructor(props) {
@@ -34,7 +35,8 @@ export default class SearchVideo extends React.Component {
             his:[],
             refreshing: false,
             isassort:this.props.isassort,
-            parpam:null,
+            parpam:"thetype=1034&classify3="+this.props.value?this.props.value:"",
+            isshowmzy:false
         };
         //this._getHistory();
     }
@@ -49,7 +51,7 @@ export default class SearchVideo extends React.Component {
         this._getData(_pageNo);
     };
 
-    _getData=async(_pageNo)=>{
+    _getData=(_pageNo)=>{
         let txt=this.state.value;
         if (txt.length==0){
             Toast.show("搜索内容不能为空");
@@ -57,9 +59,12 @@ export default class SearchVideo extends React.Component {
         }
         if(this.state.isassort){
             console.log("ssssssssssssss",this.state.value)
-            await  this.setState({
+            this.setState({
                 parpam:"thetype=1034&classify3="+this.state.value,
                 isassort:false
+            },()=>{
+                console.log('sssssqwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww',this.state.parpam)
+                DeviceEventEmitter.emit('getRefresh','搜索结果');
             });
 
         }else{
@@ -145,22 +150,40 @@ export default class SearchVideo extends React.Component {
     };
 
     _renderHeader=()=>{
+        // return(
+        //     <Header style={{backgroundColor:'#fff',alignItems:'center'}}>
+        //         <Item  rounded style={{height:40,width:width-60,borderColor:'#f5c61e',backgroundColor:'#fff'}}>
+        //             <Input onChangeText={(value)=>this.setState({value})}
+        //                    placeholderTextColor="#999"
+        //                    style={{height:40,padding:0,fontSize:14,textAlignVertical:'center',marginBottom:5}}
+        //                    maxLength={6}
+        //                    value={this.state.value}
+        //                    onSubmitEditing={()=>{this._getData(_pageNo);this.saveHistory()}}
+        //                    returnKeyLabel="搜索"
+        //                    placeholder='  请输入菜名'/>
+        //         </Item>
+        //         <TouchableOpacity activeOpacity={0.9} onPress={()=>Actions.pop()}>
+        //             <Image style={{width:25,height:25,marginLeft:10}} source={require('../img/icon_tipclose.png')}/>
+        //         </TouchableOpacity>
+        //     </Header>
+        // )
+
         return(
-            <Header  androidStatusBarColor={Config.StatusBarColor} style={{backgroundColor:'#fff',alignItems:'center'}}>
+            <View   style={{backgroundColor:'#fff',alignItems:'center',justifyContent:'center',flexDirection:'row',width:width,height:60}}>
                 <Item  rounded style={{height:40,width:width-60,borderColor:'#f5c61e'}}>
                     <Input onChangeText={(value)=>this.setState({value})}
                            placeholderTextColor="#999"
-                           style={{height:40,padding:0,fontSize:14,}}
+                           style={{height:40,padding:0,fontSize:14,marginBottom:5,textAlignVertical:'center'}}
                            maxLength={6}
                            value={this.state.value}
                            onSubmitEditing={()=>{this._getData(_pageNo);this.saveHistory()}}
                            returnKeyLabel="搜索"
-                           placeholder='  请输入验证码'/>
+                           placeholder='  请输入菜名'/>
                 </Item>
                 <TouchableOpacity activeOpacity={0.9} onPress={()=>Actions.pop()}>
                     <Image style={{width:25,height:25,marginLeft:10}} source={require('../img/icon_tipclose.png')}/>
                 </TouchableOpacity>
-            </Header>
+            </View>
         )
     };
 
@@ -168,18 +191,14 @@ export default class SearchVideo extends React.Component {
     render() {
         return (
             <Container style={{backgroundColor:'#fafafa'}} >
+                <View style={{width:width,height:Config.STATUSBARHEIGHT,backgroundColor:Config.StatusBarColor}} />
+                {this._renderHeader()}
                 <StatusBar backgroundColor="transparent"
                            barStyle="light-content"
                            translucent={false}
                            hidden={false}/>
-                {this._renderHeader()}
-                <View style={{flex:1,paddingLeft:12.5,marginTop:15}}>
-                    <ListScene url={this.state.parpam} thetype="1034" header={'search'} item={"search"} />
-                </View>
 
-
-
-
+                <ListScene url={this.state.parpam} thetype="1034" header={'search'} item={"search"} />
             </Container>
         );
     }

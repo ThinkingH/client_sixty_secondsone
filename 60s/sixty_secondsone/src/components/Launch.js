@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, Button,StatusBar,Image,Dimensions,NetInfo,Linking ,Alert} from 'react-native';
+import { View, Text, StyleSheet, Button,StatusBar,Image,Dimensions,NetInfo,Linking ,Alert,Platform} from 'react-native';
 import { Actions,ActionConst } from 'react-native-router-flux';
 import Storage  from '../utils/Storage';
 import Config from '../utils/Config';
@@ -82,7 +82,6 @@ class Launch extends React.Component {
             }else{
                 this.checkUpdate();
             }
-
         });
 
         Storage.getValueForKey("usertype").then((value) => {
@@ -101,9 +100,16 @@ class Launch extends React.Component {
     };
 
     _update=()=>{
-        Linking.canOpenURL(downapkurl).then(supported => {
+        let appURL = '';
+        if (Platform.OS === 'ios'){
+            appURL = 'https://itunes.apple.com/us/app/60秒/id1335916922?l=zh&ls=1&mt=8';
+        }
+        else {
+            appURL = 'http://imtt.dd.qq.com/16891/03AD43D6C4EF3BC9E616997EA01C3614.apk';
+        }
+        Linking.canOpenURL(appURL).then(supported => {
             if (supported) {
-                Linking.openURL(downapkurl);
+                Linking.openURL(appURL);
             } else {
                 console.log('无法打开该URI: ' + ttt);
             }
@@ -149,6 +155,7 @@ class Launch extends React.Component {
                      [
                          {text: '去更新', onPress: () => {
                              this._update();
+                             Actions.tabbar({type: ActionConst.RESET});
                          }},
                          {text: '取消', onPress: () => {
                              this._getUpdateTime();

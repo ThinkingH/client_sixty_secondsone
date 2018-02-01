@@ -49,8 +49,8 @@ export default class AssortmentOne extends React.Component {
     render() {
         return (
             <Container style={{backgroundColor:'#eee'}} >
-                <StatusBar backgroundColor={Config.StatusBarColor}
-                           barStyle="light-content"
+                <StatusBar backgroundColor="transparent"
+                           barStyle="dark-content"
                            translucent={false}
                            hidden={false}/>
                 <Content style={{backgroundColor:'#eee'}}>
@@ -72,6 +72,7 @@ export default class AssortmentOne extends React.Component {
                     </List>
                     <View style={{width:width,height:1,backgroundColor:'#ccc'}}></View>
                 </Content>
+
             </Container>
         );
     }

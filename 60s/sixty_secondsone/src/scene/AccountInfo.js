@@ -60,7 +60,9 @@ export default class AccountInfo extends Component {
             aaaaa:0,
         };
         imagedate=this.props.image?{uri:this.props.image}:'';
-        UIManager.setLayoutAnimationEnabledExperimental(true)
+        if (Platform.OS === 'android'){
+            UIManager.setLayoutAnimationEnabledExperimental(true)
+        }
     }
 
     componentWillUpdate () {
@@ -115,8 +117,7 @@ export default class AccountInfo extends Component {
         let timestamp = Math.floor(Date.parse(new Date())/1000);
         let system=Platform.OS.toUpperCase();
         let md5 = MD5.hex_md5('100'+system+'100'+""+'1010'+timestamp + Config.md5key);
-        RNFetchBlob.fetch('POST',
-            "http://114.215.222.75:8005/sixty/interface/sixtyinit.php",
+        RNFetchBlob.fetch('POST',Config.BaseURL + "sixty/interface/sixtyinit.php",
             { Authorization : "Bearer access-token",
                 otherHeader : "foo",
                 'Content-Type' : 'multipart/form-data',
@@ -224,9 +225,9 @@ export default class AccountInfo extends Component {
     render() {
         return (
             <Container  style={{backgroundColor:'#ccc'}}>
-                <StatusBar backgroundColor={Config.StatusBarColor}
-                           barStyle="light-content"
-                           translucent={false}
+                <StatusBar backgroundColor="transparent"
+                           barStyle="dark-content"
+                           translucent={true}
                            hidden={false}/>
                 <Content showsVerticalScrollIndicator={false}    keyboardShouldPersistTaps="handled" >
                     <View style={{marginLeft:20,width:width-40,height:height,backgroundColor:'#ccc',marginTop:10}}>
@@ -238,32 +239,32 @@ export default class AccountInfo extends Component {
                                 </View>
                                 <View style={{flex:1,backgroundColor:'#fff',alignItems:'center',justifyContent:'center'}}>
 
-                                        <View style={{flexDirection:'row',alignItems:'center'}}>
-                                            <Text style={{fontSize:16}} >昵称</Text>
-                                            <Input
-                                                style={{padding:0,height:20,fontSize:14,margin:0,textAlign:'right',width:null,flex:1}}
-                                                maxLength={5}
-                                                placeholderTextColor={'#bbbbbb'}
-                                                placeholder={"您的名字"}
-                                                onChangeText={(name)=>this.setState({name})}
-                                                value={this.state.name}/>
-                                            <Image source={require('../img/newicon_account_edit.png')} style={{height:15, width:15}}/>
-                                        </View>
-                                       <View style={{height:1,width:width-50,backgroundColor:'#ccc'}}></View>
-                                        <View style={{flexDirection:'row',alignItems:'center',marginTop:10}}>
-                                            <Image source={require('../img/newicon_account_address.png')} style={{height:15, width:15}}/>
-                                            <View style={{flex:1}}></View>
-                                            <Input
-                                                style={{padding:0,height:20,fontSize:14,margin:0,textAlign:'right',width:null,flex:1}}
-                                                maxLength={8}
-                                                multiline={false}
-                                                placeholderTextColor={'#bbbbbb'}
-                                                placeholder={"位置"}
-                                                onChangeText={(address)=>this.setState({address})}
-                                                value={this.state.address}/>
-                                            <Image source={require('../img/newicon_account_edit.png')} style={{height:15, width:15}}/>
-                                        </View>
-                                   <View style={{height:1,width:width-50,backgroundColor:'#ccc'}}></View>
+                                    <View style={{flexDirection:'row',alignItems:'center'}}>
+                                        <Text style={{fontSize:16}} >昵称</Text>
+                                        <Input
+                                            style={{padding:0,height:20,fontSize:14,margin:0,textAlign:'right',width:null,flex:1}}
+                                            maxLength={5}
+                                            placeholderTextColor={'#bbbbbb'}
+                                            placeholder={"您的名字"}
+                                            onChangeText={(name)=>this.setState({name})}
+                                            value={this.state.name}/>
+                                        <Image source={require('../img/newicon_account_edit.png')} style={{height:15, width:15}}/>
+                                    </View>
+                                    <View style={{height:1,width:Platform.OS === 'ios'? width-180 : width - 50,backgroundColor:'#ccc'}}></View>
+                                    <View style={{flexDirection:'row',alignItems:'center',marginTop:10}}>
+                                        <Image source={require('../img/newicon_account_address.png')} style={{height:15, width:15}}/>
+                                        <View style={{flex:1}}></View>
+                                    <Input
+                                        style={{padding:0,height:20,fontSize:14,margin:0,textAlign:'right',width:null,flex:1}}
+                                        maxLength={8}
+                                        multiline={false}
+                                        placeholderTextColor={'#bbbbbb'}
+                                        placeholder={"位置"}
+                                        onChangeText={(address)=>this.setState({address})}
+                                        value={this.state.address}/>
+                                    <Image source={require('../img/newicon_account_edit.png')} style={{height:15, width:15}}/>
+                                    </View>
+                                   <View style={{height:1,width:Platform.OS === 'ios'? width-180 : width - 50,backgroundColor:'#ccc'}}></View>
                                 </View>
                                 <TouchableOpacity activeOpacity={0.9} onPress={()=>{this.openPicker(true)}}
                                                   style={{width:width/12,height:width/12,position:'absolute',left:5,top:width/10+20-width/24}}>
