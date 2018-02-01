@@ -394,7 +394,7 @@ export default class Account extends Component {
                         <View style={{width:width-40,height:1,backgroundColor:'#ccc'}}>
 
                         </View>
-                        <View style={{alignItems:'center',height:50}}>
+                        <View style={{alignItems:'center',height:50,justifyContent:'center'}}>
                             <Text style={{fontSize:12}}>{this.state.desc}</Text>
                         </View>
 

@@ -17,6 +17,7 @@ const styles = StyleSheet.create({
   },
 });
 let isfirst=null;
+let downapkurl='http://p05sfdtdh.bkt.clouddn.com/60Sec.apk';
 const {width, height} = Dimensions.get('window');
 class Launch extends React.Component {
 
@@ -34,10 +35,8 @@ class Launch extends React.Component {
     }
 
     componentWillUnmount () {
-
         NetWorkTool.removeEventListener(NetWorkTool.TAG_NETWORK_CHANGE,this.handleMethod);
     }
-
 
     componentDidMount() {
 
@@ -97,30 +96,25 @@ class Launch extends React.Component {
         }).catch((error) => {
             //this.registerTempUser();
         });
-
-
-
        // Actions.tabbar({type: ActionConst.RESET});
 
     };
 
     _update=()=>{
-        Linking.canOpenURL('http://imtt.dd.qq.com/16891/03AD43D6C4EF3BC9E616997EA01C3614.apk').then(supported => {
+        Linking.canOpenURL(downapkurl).then(supported => {
             if (supported) {
-                Linking.openURL('http://imtt.dd.qq.com/16891/03AD43D6C4EF3BC9E616997EA01C3614.apk');
+                Linking.openURL(downapkurl);
             } else {
                 console.log('无法打开该URI: ' + ttt);
             }
         });
-
-    }
+    };
 
     _getUpdateTime=()=>{
         let uptime=new Date();//获取取消更新的时间
         let timestamp1 = Date.parse(uptime);
         Storage.saveWithKeyValue("uptime",timestamp1);
-
-    }
+    };
 
     _getInterval=()=>{
         console.log('aaaaaaa')
@@ -139,6 +133,7 @@ class Launch extends React.Component {
         let parpam="thetype=1009";
         Request('1009',parpam)
             .then((responseJson) => {
+                downapkurl=responseJson.data.apk_url;
                 //如果请求成功就走下面的方法 n
              if(Config.version==responseJson.data.version){
                  console.log('dddddddddddddddddd')
@@ -147,7 +142,6 @@ class Launch extends React.Component {
                  }else{
                      Actions.intro({type: ActionConst.RESET});
                  }
-
              }else if(Config.version<responseJson.data.version){
                  Alert.alert(
                      '',

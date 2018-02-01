@@ -713,7 +713,7 @@ export default class VideoDetails extends Component {
                       opacity:this.state.navibaropacity,justifyContent:'center',alignItems:'center',backgroundColor:'transparent'}}>
                     <Text style={{fontSize:16,color:'#fff'}}>{this.props.title}</Text>
                 </View>
-                <TouchableOpacity style={{position:'absolute',left:20,top:StatusBar.currentHeight+15,width:20,height:20}} activeOpacity={0.9} onPress={()=>Actions.popTo('homescene')}>
+                <TouchableOpacity style={{position:'absolute',left:20,top:StatusBar.currentHeight+15,width:20,height:20}} activeOpacity={0.9} onPress={()=>Actions.pop()}>
                 <Image  style={{width:20,height:20}} source={require('../img/newicon_closeback.png')} />
                 </TouchableOpacity>
                 <TouchableOpacity style={{position:'absolute',right:20,top:StatusBar.currentHeight+15,width:20,height:20}} activeOpacity={0.9} onPress={()=>this._share()}>

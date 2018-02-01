@@ -221,17 +221,21 @@ export default class MainScene extends Component {
         }
 
     };
-    toggleNavBar = () => {
-        this.setState({ hideTabBar: true }, () =>
-            Actions.refresh({ hideTabBar: this.state.hideTabBar })
-        );
-    };
+
 
     _onScrollEnd=(e)=>{
         dy=e.nativeEvent.contentOffset.y;
         console.log("dy:",dy,"dx:",dx);
-        console.log('this.FlatListthis.FlatListthis.FlatListthis.FlatList',this.FlatList);
-
+        console.log('this.FlatListthis.FlatListthis.FlatListthis.FlatList',this.listView);
+           if(dy-dx>10){
+               DeviceEventEmitter.emit("changeHeaderu","隐藏")
+           }else if(dx-dy>10){
+               DeviceEventEmitter.emit("changeHeaderd","显示")
+           }
+  setTimeout(()=>{
+      dx=dy;
+      console.log("dy111:",dy,"dx11111:",dx);
+  },1000)
          /*if(dy>dx) {
              if (dx - dy > -60) {
                  Config.tabBarHight = dx - dy;

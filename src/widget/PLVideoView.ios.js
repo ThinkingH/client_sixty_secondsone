@@ -79,29 +79,29 @@ class PLVideoView extends Component{
             pasuse:true
         })
         //this.setNativeProps({ pasuse: true })
-    }
+    };
 
     start=()=>{
         this.setState({
             pasuse:false
         })
-    }
+    };
 
     seekTo=(millSecond)=>{
          this.seek(millSecond*1000);
-    }
+    };
 
     setVideoPath=(url,imgurl)=>{
         this.setNativeProps({ "url":url,"imageurl":imgurl })
-    }
+    };
 
     mute=()=>{
         this.setNativeProps({ muted: true })
-    }
+    };
 
     unmute=()=>{
         this.setNativeProps({ muted: false })
-    }
+    };
 
 
     //----------------------------------------------------------
