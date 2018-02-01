@@ -64,7 +64,7 @@ import TipView from './scene/TipView';
 import TipAll from './scene/TipAll';
 import TipDetails from './scene/TipDetails';
 import SearchMain from './scene/SearchMain';
-import Intro from './scene/Intro.android';
+import Intro from './scene/Intro';
 import MessageBox from './scene/MessageBox';
 import VideoDeta from './scene/VideoDeta';
 
@@ -605,7 +605,7 @@ export default class apps extends Component {
                                     wrap={false}
                                     animationEnabled={false}
                                     tabs={true}
-                                    hideTabBar={this.state.ishide}
+
                                     swipeEnabled={false}
                                     lazy={true}
                                 >
@@ -614,7 +614,6 @@ export default class apps extends Component {
                                         component={HomeScene}
                                         icon_id={0}
                                         hideNavBar
-
                                         icon={TabIcon} />
                                     <Scene
                                         key="tipview"
@@ -795,30 +794,7 @@ export default class apps extends Component {
                                     panHandlers={null}
                                     duration={1}
                                 />
-                             {/*<Scene*/}
-                                {/*key="loginModal"*/}
-                                 {/*component={Login}*/}
-                                 {/*title="Login"*/}
-                                {/*onExit={() => console.log('onExit')}*/}
-                                {/*leftTitle="Cancel"*/}
-                                 {/*onLeft={Actions.pop}*/}
-                             {/*/>*/}
 
-                             {/*<Scene   key="loginModal2"*/}
-                                 {/*component={Login2}*/}
-                                {/*title="登录"*/}
-                                 {/*panHandlers={null}*/}
-                                {/*rightTitle=" "*/}
-                                {/*duration={1}*/}
-                            {/*/>*/}
-                            {/*<Scene*/}
-                                {/*key="loginModal3"*/}
-                                {/*hideNavBar*/}
-                                {/*component={Login3}*/}
-                                {/*title="Login3"*/}
-                                {/*panHandlers={null}*/}
-                                {/*duration={1}*/}
-                            {/*/>*/}
                             </Scene>
 
 

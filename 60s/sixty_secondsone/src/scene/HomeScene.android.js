@@ -52,6 +52,7 @@ class HomeScene extends Component {
             tabheight:0,
             data:[],
             margintop:0,
+            hideTabBar:false
         }
 
     }
@@ -164,11 +165,11 @@ class HomeScene extends Component {
     };
 
     _changeHeaderu=()=>{
-         this.animatedPlay()
+        this.toggleNavBar()
     };
 
     _changeHeaderd=()=>{
-        
+        this.toggleNavBara()
     };
 
     _onChangeTab=(index)=>{
@@ -272,20 +273,29 @@ class HomeScene extends Component {
     _rightView=()=>{
         return(
             <View style={{width:width/5,height:width/5,backgroundColor:'#f00'}}>
-
             </View>
         )
-    }
+    };
 
     onScrollback=(e)=>{
-        console.log('滑动的回调...........',e.nativeEvent.contentOffset.y)
-    }
+        console.log('滑动的回调...........',e)
+    };
 
-
+    toggleNavBar = () => {
+        this.setState({ hideTabBar: true }, () =>
+            Actions.refresh({ hideTabBar: true })
+        );
+    };
+    toggleNavBara = () => {
+        this.setState({ hideTabBar: false }, () =>
+            Actions.refresh({ hideTabBar: false })
+        );
+    };
 
     render(){
         const content = this.state.data.length > 0 ?(<ScrollableTabView ref={(ScrollableTabView)=>this.ScrollableTabView=ScrollableTabView}
                                                                         initialPage={0}
+                                                                        onScroll={(e)=>this.onScrollback(e)}
                                                                         onChangeTab={(obj) => {this._onChangeTab(obj)}}
                                                                         scrollWithoutAnimation={true}
                                                                         style={{marginTop:10}}
@@ -306,7 +316,6 @@ class HomeScene extends Component {
                     }
                 })}
             </ScrollableTabView>) : <View/>;
-
         return (
             <Container>
                 <StatusBar backgroundColor="transparent"
@@ -316,14 +325,10 @@ class HomeScene extends Component {
                 <View style={{width:width,height:Config.STATUSBARHEIGHT,backgroundColor:Config.StatusBarColor}}>
 
                 </View>
-
-
-
                 <View  style={{flex:1,backgroundColor:'#fff',marginTop:this.state.margintop}} >
                     <View  //androidStatusBarColor='#f00'
                         ref="header" style={{height:80,backgroundColor:'#fff',alignItems:'center'
                        }}>
-
                         <ImageBackground   style={{position:'absolute',top:0,width:width,height:50,justifyContent:'center',alignItems:'center'}} source={require('../img/icon_homebg.png')}>
                             <Text style={{color:'#fff',backgroundColor:'transparent',marginBottom:width/1.28/850*130/6}}>60Sec</Text>
                         </ImageBackground>
@@ -333,12 +338,12 @@ class HomeScene extends Component {
                         </TouchableOpacity>
                     </View>
                     {/*<Button onPress={()=>{*/}
-                        {/*this.animatedPlay();*/}
+                        {/*this.toggleNavBar();*/}
                     {/*}}>*/}
                         {/*<Text>play</Text>*/}
                     {/*</Button>*/}
                     {/*<Button onPress={()=>{*/}
-                        {/*this.animatedReplay()*/}
+                        {/*this.toggleNavBara();*/}
                     {/*}}>*/}
                         {/*<Text>replay</Text>*/}
                     {/*</Button>*/}

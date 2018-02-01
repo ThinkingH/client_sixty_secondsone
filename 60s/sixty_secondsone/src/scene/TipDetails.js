@@ -272,12 +272,8 @@ export default class TipDetails extends Component {
                       isshow:false,
                       movevalue:width/2,
                       imageurl:videoarr[num+1].showimg,
-
                   });
               }
-
-
-
         this._autoHide();
         num++;
         if(num==videoarr.length){
@@ -364,11 +360,7 @@ export default class TipDetails extends Component {
                             console.log("JS progress = "+progress+"::time::"+Math.floor(progress/1000));
                             }}
                        />
-
-
-
                    </View>
-
                <TouchableOpacity activeOpacity={1}
                                  style={{width:width,height:height,position:'absolute'}}
                                  onPress={()=>{this._isShowSetting()}}
@@ -380,11 +372,9 @@ export default class TipDetails extends Component {
                                    <Image style={{width:20,height:20}} source={require('../img/icon_tipclose.png')}/>
                                    </TouchableOpacity>
                                    <View style={{flex:1}}></View>
-
                                    <TouchableOpacity activeOpacity={0.9} onPress={()=>this._isMute()}>
                                        <Image style={{width:25,height:25}} source={this.state.ismute?require('../img/icon_tipmute.png'):require('../img/icon_tipunmute.png')}/>
                                    </TouchableOpacity>
-
                                </View>
                                <View style={{width:width,height:width,alignItems:'center',justifyContent:'center'}}>
                                    <TouchableOpacity
@@ -394,12 +384,6 @@ export default class TipDetails extends Component {
                                        <Image style={{width:width/7,height:width/7}} source={this.state.isplay?require('../img/icon_tipplay.png'):require('../img/icon_tipstop.png')}/>
                                    </TouchableOpacity>
                                </View>
-
-
-
-
-
-
                                <View style={{flexDirection:'row',alignItems:'center',padding:20,position:'absolute',bottom:0}}>
                                    <Text style={{color:'#f5c61e'}}>{this._timeToStr(this.state.time)}</Text>
                                    <Slider
