@@ -3,7 +3,7 @@
  */
 import React, { Component } from 'react';
 import {
-    ListView, FlatList, View, Dimensions, Image, InteractionManager, DeviceEventEmitter,
+    ListView, FlatList, View, Dimensions, Image, InteractionManager, DeviceEventEmitter,Animated,
     Platform,StatusBar
 } from 'react-native';
 import {Actions} from "react-native-router-flux";
@@ -31,6 +31,9 @@ const data = [
 
 ];
 const {width, height} = Dimensions.get('window');
+const scrollY = new Animated.Value(0);
+const scrollY2 = new Animated.Value(0);
+const AnimatedFlatList = Animated.createAnimatedComponent(UltimateListView);
 let _pageNo = 1;
 export default class Sofitel extends Component {
     constructor(props) {
@@ -38,6 +41,20 @@ export default class Sofitel extends Component {
         this.state={
             data:[],
             refreshing:false,
+            scrollY,
+            scrollY2, // 加这个是为了让每个List持有自己的偏移量
+            translateY: Animated.diffClamp(
+                Animated.add(
+                    scrollY.interpolate({
+                        inputRange: [0, 1],
+                        outputRange: [0, 1],
+                        extrapolateLeft: 'clamp',
+                    }),
+                    scrollY2,
+                ),
+                0,
+                1,
+            ),
         }
     }
 
@@ -156,15 +173,29 @@ export default class Sofitel extends Component {
         )
     };
 
+    _onScrollEnd(e){
+
+
+        // 回调
+        if (this.props.onScroll) {
+            this.props.onScroll(e)
+        }
+    }
+
     render() {
+        let Y=this.state.scrollY
         return (
             <View style={{flex:1,backgroundColor:'#fff'}}>
 
-                <UltimateListView
+                <AnimatedFlatList
 
                     scrollEventThrottle={1}
                    // onScroll={(e)=>this._onScrollEnd(e)}
-
+                    onScroll={Animated.event(
+                        [{ nativeEvent: { contentOffset: { y: Y } } }],
+                        { listener: this._onScrollEnd.bind(this) }
+                        //{ useNativeDriver: true }
+                    )}
                     // columnWrapperStyle={{width:width/2}}
 
                     showsVerticalScrollIndicator={false}

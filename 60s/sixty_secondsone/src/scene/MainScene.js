@@ -2,7 +2,7 @@
  * Created by Administrator on 2017/11/20.
  */
 import React, { Component } from 'react';
-import { ListView ,Platform,FlatList,View,Dimensions,Image,InteractionManager,TouchableOpacity,DeviceEventEmitter,PanResponder} from 'react-native';
+import { ListView ,Platform,FlatList,View,Dimensions,Image,Easing,Animated,InteractionManager,TouchableOpacity,DeviceEventEmitter,PanResponder} from 'react-native';
 import {Actions} from "react-native-router-flux";
 import { Container, Header, Content, Button, Icon, List, Thumbnail ,ListItem, Text,Left,Body,Right,Switch ,Card, CardItem,} from 'native-base';
 import PLVideoView from "../widget/PLVideoView";
@@ -26,6 +26,9 @@ const _pageSize = Config.pageCount;
 const aa=["1"];
 let dy=0;
 let dx=0;
+const scrollY = new Animated.Value(0);
+const scrollY2 = new Animated.Value(0);
+const AnimatedFlatList = Animated.createAnimatedComponent(UltimateListView);
 export default class MainScene extends Component {
     constructor(props) {
         super(props);
@@ -37,7 +40,21 @@ export default class MainScene extends Component {
             classify:this.props.classify,
             isshowfooter:true,
             mainvideo:[],
-            hideTabBar: false
+            hideTabBar: false,
+            scrollY,
+            scrollY2, // 加这个是为了让每个List持有自己的偏移量
+            translateY: Animated.diffClamp(
+                Animated.add(
+                    scrollY.interpolate({
+                        inputRange: [0, 1],
+                        outputRange: [0, 1],
+                        extrapolateLeft: 'clamp',
+                    }),
+                    scrollY2,
+                ),
+                0,
+                1,
+            ),
         }
     }
 
@@ -223,7 +240,12 @@ export default class MainScene extends Component {
     };
 
 
-    _onScrollEnd=(e)=>{
+    _onScrollEnd(e){
+        dy=e.nativeEvent.contentOffset.y;
+        // 回调
+        if (this.props.onScroll) {
+            this.props.onScroll(e)
+        }
   //       dy=e.nativeEvent.contentOffset.y;
   //       console.log("dy:",dy,"dx:",dx);
   //       console.log('this.FlatListthis.FlatListthis.FlatListthis.FlatList',this.listView);
@@ -372,13 +394,19 @@ export default class MainScene extends Component {
         )
     }
     render() {
+        let Y=this.state.scrollY
         return (
             <View
                // {...this._panResponder.panHandlers}
                 style={{flex:1,backgroundColor:'#fff',alignItems:'center'}}>
-                <UltimateListView
+                <AnimatedFlatList
                     scrollEventThrottle={1}
-                    onScroll={(e)=>this._onScrollEnd(e)}
+
+                    onScroll={Animated.event(
+                        [{ nativeEvent: { contentOffset: { y: Y } } }],
+                        { listener: this._onScrollEnd.bind(this) }
+                        //{ useNativeDriver: true }
+                    )}
                     // columnWrapperStyle={{width:width/2}}
                     showsVerticalScrollIndicator={false}
                     //data={this.state.datas}

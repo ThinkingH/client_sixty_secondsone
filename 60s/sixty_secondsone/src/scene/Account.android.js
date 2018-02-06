@@ -88,7 +88,7 @@ export default class Account extends Component {
         let parpam="thetype=1019&typeid=2";
         Request('1019',parpam)
             .then((responseJson) => {
-                console.log("投稿的获取",responseJson.data.list)
+                console.log("投稿的获取",responseJson.data.list);
                 this.setState({
                     arr:responseJson.data.list
                 })

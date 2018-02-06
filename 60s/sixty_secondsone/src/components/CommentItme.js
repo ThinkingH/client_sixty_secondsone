@@ -29,7 +29,7 @@ export default class CommentItme extends React.PureComponent {
                 </Surface>
             <Item key={i} style={{paddingTop:20,margin:0,alignItems:"flex-start",borderColor:'#fff'}}>
                 <View style={{marginRight:10}}>
-                    <Thumbnail style={{width:width/9,height:width/9}} source={{uri:item.touxiang}} />
+                    <Thumbnail square={true} style={{width:width/9,height:width/9,borderRadius:width/18}} source={{uri:item.touxiang}} />
                 </View>
                 <Col style={{padding:0,margin:0}}>
                     <Text>{item.nickname}</Text>
@@ -44,14 +44,13 @@ export default class CommentItme extends React.PureComponent {
             </Item>
             </View>
         )
-    }
+    };
 
     render() {
-
         return (
             <Item style={{paddingTop:20,paddingLeft:20,paddingRight:20,margin:0,alignItems:"flex-start"}}>
                 <View style={{marginRight:10}}>
-                    <Thumbnail style={{width:width/9,height:width/9}} source={{uri:this.props.title.touxiang}} />
+                    <Thumbnail square={true} style={{width:width/9,height:width/9,borderRadius:width/18}} source={{uri:this.props.title.touxiang}} />
                 </View>
                 <Col style={{padding:0,margin:0}}>
                     <Text>{this.props.title.nickname}</Text>

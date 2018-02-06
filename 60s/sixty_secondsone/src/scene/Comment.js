@@ -2,7 +2,7 @@
  * Created by Administrator on 2017/10/11.
  */
 import React, { Component } from 'react';
-import { StyleSheet,Platform,StatusBar, InteractionManager,TouchableNativeFeedback,View,Image,DeviceEventEmitter} from "react-native";
+import { StyleSheet,Platform,StatusBar, InteractionManager,Keyboard,View,Image,DeviceEventEmitter,KeyboardAvoidingView} from "react-native";
 import { Container, Header,Footer, Content, List, ListItem, Text, Left, Right, Switch, Body, Thumbnail, Item, Col, Input, Button } from 'native-base';
 import {Actions} from "react-native-router-flux";
 import Config from '../utils/Config';
@@ -10,6 +10,7 @@ import Request from '../utils/Fetch';
 import Toast from '@remobile/react-native-toast'
 import ListScene from "./ListScene";
 import Spinnera from '../components/Spinner';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 const styles = StyleSheet.create({
     container: {
         flex: 1,backgroundColor: '#efeff4',
@@ -22,6 +23,8 @@ let _value='';
 export default class Comment extends Component {
     constructor(props) {
         super(props);
+        this.keyboardDidShowListener = null;
+        this.keyboardDidHideListener = null;
         this.state = {
             isopen:true,
             value:"",
@@ -30,14 +33,45 @@ export default class Comment extends Component {
             isvisiable:false,
             placeholder:"我有话要说..",
             toItem:null,
+            kbheight:0,
+            KeyboardShown: false
         };
     }
-    componentDidMount() {
-
+    componentWillMount() {
+        //监听键盘弹出事件
+        this.keyboardDidShowListener = Keyboard.addListener('keyboardDidShow',
+            this.keyboardDidShowHandler.bind(this));
+        //监听键盘隐藏事件
+        this.keyboardDidHideListener = Keyboard.addListener('keyboardDidHide',
+            this.keyboardDidHideHandler.bind(this));
     }
 
     componentWillUnmount () {
+//卸载键盘弹出事件监听
+        if(this.keyboardDidShowListener != null) {
+            this.keyboardDidShowListener.remove();
+        }
+        //卸载键盘隐藏事件监听
+        if(this.keyboardDidHideListener != null) {
+            this.keyboardDidHideListener.remove();
+        }
+    }
 
+    //键盘弹出事件响应
+    keyboardDidShowHandler(event) {
+        this.setState({KeyboardShown: true,kbheight:event.endCoordinates.height});
+        console.log(event.endCoordinates.height);
+    }
+
+    //键盘隐藏事件响应
+    keyboardDidHideHandler(event) {
+        this.setState({KeyboardShown: false,kbheight:0});
+    }
+
+    //强制隐藏键盘
+    dissmissKeyboard() {
+        Keyboard.dismiss();
+        console.log("输入框当前焦点状态：" + this.refs.bottomInput.isFocused());
     }
 
     _sendMsg=()=>{
@@ -89,6 +123,7 @@ export default class Comment extends Component {
         }else{
             Actions.login2();
         }
+        
     };
 
     _getValue=(value)=>{
@@ -140,19 +175,35 @@ export default class Comment extends Component {
 
                     <ListScene url={"thetype=1042&nowid="+this.props.nowid} thetype="1042" item={"comment"} itemCallBack={this.feedBack}/>
 
-                <Footer style={{backgroundColor:'#eee',justifyContent:'center',alignItems:'center',height:50,}}>
-                    <Input  multiline={true}
-                            style={{backgroundColor:'#fff',height:30,borderRadius:4,borderWidth:1,borderColor:'#666',fontSize:12,padding:0,marginLeft:15,marginRight:15,lineHeight:14}}
-                            value={this.state.value}
-                            placeholder={this.state.placeholder}
-                            onChangeText={(value)=>this._getValue(value)}
-                    />
-                    {Platform.OS=='ios'?(
+
+                {Platform.OS=='ios'?(
+                    <View style={{marginBottom:this.state.kbheight}} >
+                    <Footer style={{backgroundColor:'#eee',justifyContent:'center',alignItems:'center',height:50,}}>
+                        <Input ref="bottomInput"  multiline={true}
+                                style={{backgroundColor:'#fff',height:30,borderRadius:4,borderWidth:1,borderColor:'#666',fontSize:12,padding:0,marginLeft:15,marginRight:15,lineHeight:14}}
+                                value={this.state.value}
+                                placeholder={this.state.placeholder}
+                                onChangeText={(value)=>this._getValue(value)}
+                        />
+
                         <Button disabled={this.state.disabled} onPress={()=>this._sendMsg()} style={{backgroundColor:this.state.disabled?'#ccc':'#F5C61E',height:30,marginTop:10,marginRight:15}} ><Text >发送</Text></Button>
-                    ):(
-                        <Button disabled={this.state.disabled} onPress={()=>this._sendMsg()} style={{backgroundColor:this.state.disabled?'#ccc':'#F5C61E',height:30,marginTop:10,marginRight:15}} small={true} ><Text>发送</Text></Button>
-                    )}
-                </Footer>
+                    </Footer>
+                    </View>
+
+                ):(
+
+                    <Footer style={{backgroundColor:'#eee',justifyContent:'center',alignItems:'center',height:50,}}>
+                        <Input  multiline={true}
+                                style={{backgroundColor:'#fff',height:30,borderRadius:4,borderWidth:1,borderColor:'#666',fontSize:12,padding:0,marginLeft:15,marginRight:15,lineHeight:14}}
+                                value={this.state.value}
+                                placeholder={this.state.placeholder}
+                                onChangeText={(value)=>this._getValue(value)}
+                        />
+
+                            <Button disabled={this.state.disabled} onPress={()=>this._sendMsg()} style={{backgroundColor:this.state.disabled?'#ccc':'#F5C61E',height:30,marginTop:10,marginRight:15}} small={true} ><Text>发送</Text></Button>
+
+                    </Footer>
+                )}
                 <Spinnera loadvalue="提交评论中..." modalVisible={this.state.isvisiable} />
             </Container>
         );
