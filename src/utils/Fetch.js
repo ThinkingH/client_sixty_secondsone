@@ -5,17 +5,17 @@
  * Created by aj on 2016/12/7.
  */
 // import Storage from '../utils/Storage';
-import Config from './Config';
+
 import {Platform} from "react-native";
 import MD5 from "react-native-md5";
 import Toast from '@remobile/react-native-toast'
 import NetWorkTool from "../utils/NetWorkTool";
-
+import Config from './Config';
 let  system=Platform.OS.toUpperCase()
 
 
 // let url="http://114.215.222.75:8005/sixty/interface/sixtyinit.php";  // 正式
-let url=Config.BaseURL+"sixty/interface/sixtyinit.php";
+
 
 export default function request(thetype,param = "") {
     return new Promise((resolve, reject) => {
@@ -23,6 +23,7 @@ export default function request(thetype,param = "") {
         let md5 = MD5.hex_md5('100'+system+'100'+""+thetype+timestamp + Config.md5key);
         let temParam= 'version=100&sysversion=100&system='+system+"&md5key="+md5+"&nowtime="+timestamp+'&usertype='+Config.usertype+'&userid='+Config.userid+'&userkey='+Config.userkey;
         let params=temParam+'&'+param;
+        let url=Config.BaseURL+"sixty/interface/sixtyinit.php";
         console.log(url+'?'+params);
         NetWorkTool.checkNetworkState((isConnected)=>{
             fetch(url,{

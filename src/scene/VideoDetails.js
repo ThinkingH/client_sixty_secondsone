@@ -119,6 +119,7 @@ export default class VideoDetails extends Component {
     componentWillUnmount () {
         console.log("VideoDetails ====>componentWillUnmount")
         this.videos.relese();
+        DeviceEventEmitter.emit('replay');
         //  this.onCompletion.remove();
         NetWorkTool.removeEventListener(NetWorkTool.TAG_NETWORK_CHANGE,this.handleMethod);
     }

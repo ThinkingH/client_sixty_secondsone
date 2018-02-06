@@ -16,7 +16,7 @@ import ContributeItem from '../components/ContributeItem'
 import VideoItem from '../components/VideoItem';
 import MessageItem from '../components/MessageItem';
 import CommentItem from '../components/CommentItme';
-import {PullView,PullList} from 'react-native-pull';
+
 import {LineDotsLoader,PulseLoader,DotsLoader,TextLoader,BubblesLoader,CirclesLoader,BreathingLoader,RippleLoader,LinesLoader,MusicBarLoader,EatBeanLoader
 ,DoubleCircleLoader,RotationCircleLoader,RotationHoleLoader,CirclesRotationScaleLoader,NineCubesLoader  ,ColorDotsLoader} from 'react-native-indicator';
 import { UltimateListView, UltimateRefreshView } from 'react-native-ultimate-listview'
@@ -224,18 +224,18 @@ export default class MainScene extends Component {
 
 
     _onScrollEnd=(e)=>{
-        dy=e.nativeEvent.contentOffset.y;
-        console.log("dy:",dy,"dx:",dx);
-        console.log('this.FlatListthis.FlatListthis.FlatListthis.FlatList',this.listView);
-           if(dy-dx>10){
-               DeviceEventEmitter.emit("changeHeaderu","隐藏")
-           }else if(dx-dy>10){
-               DeviceEventEmitter.emit("changeHeaderd","显示")
-           }
-  setTimeout(()=>{
-      dx=dy;
-      console.log("dy111:",dy,"dx11111:",dx);
-  },1000)
+  //       dy=e.nativeEvent.contentOffset.y;
+  //       console.log("dy:",dy,"dx:",dx);
+  //       console.log('this.FlatListthis.FlatListthis.FlatListthis.FlatList',this.listView);
+  //          if(dy-dx>10){
+  //              DeviceEventEmitter.emit("changeHeaderu","隐藏")
+  //          }else if(dx-dy>10){
+  //              DeviceEventEmitter.emit("changeHeaderd","显示")
+  //          }
+  // setTimeout(()=>{
+  //     dx=dy;
+  //     console.log("dy111:",dy,"dx11111:",dx);
+  // },1000)
          /*if(dy>dx) {
              if (dx - dy > -60) {
                  Config.tabBarHight = dx - dy;
@@ -243,7 +243,7 @@ export default class MainScene extends Component {
                  Config.tabBarHight = -60
              }
          }*/
-        Config.tabBarHight=dy;
+       // Config.tabBarHight=dy;
         //DeviceEventEmitter.emit("changeHeaderu","暂停视频")
         //
         //
@@ -265,7 +265,7 @@ export default class MainScene extends Component {
         //
         //
         // }
-        /*
+
         if(dy>=width){
             // Config.tabBarHight=dy-dx;
             // console.log("该执行导航栏沉浸式了该执行导航栏沉浸式了")
@@ -280,7 +280,7 @@ export default class MainScene extends Component {
             //  Config.tabBarHight=-56;
         }else{
             console.log(e.nativeEvent.contentOffset.y)
-        }*/
+        }
         // console.log("e.nativeEvent.contentOffset",e.nativeEvent.contentOffset)
         // console.log("e.nativeEventt",e.nativeEvent)
 
@@ -452,6 +452,7 @@ class MyListHeader extends React.PureComponent {
     // }
     componentDidMount(){
         this.zanting= DeviceEventEmitter.addListener("zanting",this._onParse);
+       // this.replay= DeviceEventEmitter.addListener("replay",this._onParse);
         this.startvideo= DeviceEventEmitter.addListener("startvideo",this.startVideo);
         this.mute= DeviceEventEmitter.addListener("mute",this._mute);
         console.log(this.props.num)
@@ -462,12 +463,23 @@ class MyListHeader extends React.PureComponent {
         this.zanting.remove();
         this.startvideo.remove();
         this.mute.remove();
-        this.video.pause();
+        //this.video.pause();
+      //  this.replay.remove();
   }
     _onParse=()=>{
-        console.log('zantingle暂停了：','this.video.pause();')
+        console.log('销毁首页视频：','this.video.relese();')
         this.video.pause();
     }
+    _replay=()=>{
+        console.log('重播首页视频：','this.video._replay();')
+        //this.video.setVideoPath(this.props.data.videourl,this.props.data.showimg);
+        // this.setState({
+        //     isshowloop:false,
+        //     isplay:true,
+        //     value:0
+        // });
+        // this.videos.start();
+    };
 
     render() {
         return (

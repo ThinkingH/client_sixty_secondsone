@@ -168,7 +168,8 @@ class Launch extends React.Component {
             })
             .catch((error) => {
                 Actions.tabbar({type: ActionConst.RESET});
-                Toast.show(error.toString());
+
+              Toast.show(error.toString());
             });
     };
 

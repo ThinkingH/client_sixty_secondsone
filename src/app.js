@@ -198,8 +198,10 @@ export default class apps extends Component {
         this.isshare = DeviceEventEmitter.addListener("isshare",this._isshare);
 
         this.changeTab = DeviceEventEmitter.addListener("changeTab",this._changeTab);
+         if(Platform.OS==='ios'){
+             this._getConfigInfo();
+         }
 
-        this._getConfigInfo();
     }
     componentWillUnmount() {
         this.changeTab.remove();
