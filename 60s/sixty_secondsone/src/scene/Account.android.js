@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Image,ListView,StyleSheet,Dimensions,ImageBackground,findNodeHandle,TouchableOpacity,InteractionManager,DeviceEventEmitter,TouchableNativeFeedback,RefreshControl,Animated,StatusBar } from 'react-native';
+import { Image,ListView,StyleSheet,Dimensions,Modal,ImageBackground,findNodeHandle,TouchableOpacity,InteractionManager,DeviceEventEmitter,TouchableNativeFeedback,RefreshControl,Animated,StatusBar } from 'react-native';
 import {Actions} from "react-native-router-flux";
 import Config from '../utils/Config';
 import Request from '../utils/Fetch';
@@ -43,6 +43,7 @@ export default class Account extends Component {
             navibaropacity:0,
             address:'',
             sex:1,
+            isshowVip:false
         };
         num=  Math.ceil(Math.random()*4)-1
     }
@@ -414,6 +415,32 @@ export default class Account extends Component {
         )
     }
 
+    showVIP=()=>{
+        return (
+            <Modal animationType={'slide'}
+                   transparent={true}
+                   onRequestClose={() => { this.setState({isshowVip: false});}}
+                   visible={this.state.isshowVip}
+            >
+                <TouchableOpacity  activeOpacity={1} onPress={()=> { this.setState({ isshowVip:false})}} style={{flex:1,alignItems:'center',justifyContent:'center',backgroundColor:'rgba(0,0,0,0.5)'}}>
+                   <View style={{width:width/1.5,alignItems:'center',justifyContent:'center',backgroundColor:'#fff'}}>
+                       <Text style={{margin:15}}>点击确认后您将发送指令到10660197对业务订购，资费8元/月，不含通信费。使用北京信游星空文化传媒股份有限公司美食文化业务进行扣费，稍后您将收到一条二次确认短信，请回复“Y”进行确认，您将每月获取我们的视频观看权。客服电话：400-6501-208。</Text>
+                       <View style={{flexDirection:'row',alignItems:'center',justifyContent:'center',marginBottom:15}}>
+                           <Button style={{marginRight:30,backgroundColor:'#ccc',height:40,width:width/6}}     onPress={()=>{this.setState({ isshowVip:false})} }>
+                               <Text>取消</Text>
+                           </Button>
+                           <Button style={{marginLeft:30,backgroundColor:'#f5c61e',height:40,width:width/6}} onPress={()=>{this.setState({ isshowVip:false})} }>
+                              <Text>确定</Text>
+                           </Button>
+                       </View>
+
+                   </View>
+                </TouchableOpacity>
+            </Modal>
+        )
+}
+
+
     render() {
         return (
             <Container  style={{backgroundColor:'#f5f5f5'}}>
@@ -452,6 +479,15 @@ export default class Account extends Component {
                                 </View>):(null) }
                     </View>
                 </View>
+
+
+                        <Button  transparent style={{position:'absolute',top:Config.STATUSBARHEIGHT,marginLeft:10,height:50,width:80}}    onPress={()=>{this.setState({isshowVip:true})} }>
+                            <Text style={{color:'#fff'}}>订购</Text>
+                        </Button>
+
+
+
+                {this.state.isshowVip?(this.showVIP()):(null)}
             </Container>
         );
     }

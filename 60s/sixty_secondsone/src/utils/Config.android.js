@@ -33,35 +33,27 @@ export default class Config{
      static STATUSBARHEIGHT=Platform.OS == 'ios' ? 20 : StatusBar.currentHeight;
      static BaseURL = "http://api.60video.net/";
 
-
-
      static initJpush=()=>{
         JPushModule.initPush();
         JPushModule.debug=false;
-        }
+        };
 
     static createJiGuangId=()=>{
         let timestamp = Math.floor(Date.parse(new Date())/1000);
         let system=Platform.OS.toUpperCase();
         let md5 = MD5.hex_md5('100'+system+'100'+""+'1010'+timestamp + Config.md5key);
-
         //let md5=MD5.hex_md5(Config.userid+Config.userkey+Config.md5key);
         //注册别名
         console.log(md5);
         JPushModule.setAlias(md5,()=>{},()=>{});
-
         let parpam="thetype=1003&jiguangid="+md5;
         Request('1003',parpam)
             .then((responseJson) => {
-
             })
             .catch((error) => {
                 Toast.show(error.toString());
             });
-
-
-    }
-
+    };
     // static setStatusBar=(isshow,bgcolor)=>{
     //
     //     StatusBar.setBackgroundColor(bgcolor)

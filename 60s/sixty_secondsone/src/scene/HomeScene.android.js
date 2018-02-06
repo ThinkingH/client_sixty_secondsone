@@ -151,7 +151,7 @@ class HomeScene extends Component {
                 for(let i=0;i<responseJson.data.length;i++){
                     keywordarr.push(responseJson.data[i].keyword);
                 }
-                console.log('aaaaaaaaaa',imgurla);
+                //console.log('aaaaaaaaaa',imgurla);
                 this.setState({
                     data:responseJson.data,
                     imgurlarr:imgurla,
@@ -160,6 +160,7 @@ class HomeScene extends Component {
 
             })
             .catch((error) => {
+
                 Toast.show(error.toString());
             });
     };
