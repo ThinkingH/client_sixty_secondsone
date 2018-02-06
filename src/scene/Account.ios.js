@@ -50,10 +50,11 @@ export default class Account extends Component {
 
         this.getInfo = DeviceEventEmitter.addListener("getinfo",this._updatelogin);
         this.onFresh = DeviceEventEmitter.addListener("onFresh",this._onFresh);
+        if(Config.usertype==1){
+            this._onFresh();
+        }
         InteractionManager.runAfterInteractions(() => {
-            if(Config.usertype==1){
-                this._onFresh();
-            }
+
         });
     };
     _onFresh=()=>{

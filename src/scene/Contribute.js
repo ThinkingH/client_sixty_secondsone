@@ -197,7 +197,7 @@ export default  class Contribute extends Component {
         return(
             <Container>
                 <StatusBar backgroundColor={Config.StatusBarColor}
-                           barStyle="light-content"
+                           barStyle="dark-content"
                            translucent={false}
                            hidden={false}/>
                 <Content  keyboardShouldPersistTaps="handled" style={{backgroundColor:'#f1f1f2'}}>

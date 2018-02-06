@@ -9,7 +9,7 @@ import Toast from '@remobile/react-native-toast'
 import { Container, Header, Title, Content,Thumbnail, Footer, FooterTab, Button, Left, Right, Body, Icon, Text ,Tab, Tabs,ScrollableTab,Item, Input,Row  } from 'native-base';
 import {
     StyleSheet, Image, Dimensions, View, Alert, ScrollView, DeviceEventEmitter, TouchableOpacity,
-    TouchableNativeFeedback, Animated, StatusBar, Platform,ImageBackground
+    TouchableNativeFeedback, Animated, StatusBar, Platform,Easing,ImageBackground
 } from "react-native";
 import Config from "../utils/Config";
 import Storage  from '../utils/Storage';
@@ -26,7 +26,11 @@ let img=[require('../../src/img/icon_message.png'),require('../../src/img/icon_q
 let wordarr=[];
 let keywordarr=[];
 let aaa=['dvdf','dvdf','dvdf','dvdf','dvdf','dvdf','dvdf','dvdf'];
-
+const scrollY = new Animated.Value(0);
+const scrollY2 = new Animated.Value(0);
+const AnimatedListComponent = Animated.createAnimatedComponent(MainScene);
+const AnimatedListMain = Animated.createAnimatedComponent(Sofitel);
+const AnimatedListLS = Animated.createAnimatedComponent(ListScene);
 class HomeScene extends BaseScene {
     constructor(props) {
         super(props);
@@ -34,13 +38,29 @@ class HomeScene extends BaseScene {
         this.state={
             //  numpage:this.props.num?this.props.num:0
              data:[],
-            translateValue: new Animated.ValueXY({x:0, y:0}), // 二维坐标
+
             numpage:this.props.num?this.props.num:0,
             // data:[],
             lock:true,
             imgurlarr:imgurl,
             isshowtab:true,
             tabheight:0,
+            scrollY,
+            scrollY2, // 加这个是为了让每个List持有自己的偏移量
+            translateY: Animated.diffClamp(
+                Animated.add(
+                    scrollY.interpolate({
+                        inputRange: [0, 1],
+                        outputRange: [0, 1],
+                        extrapolateLeft: 'clamp',
+                    }),
+                    scrollY2,
+                ),
+                0,
+                1,
+            ),
+            timingTranslateY: new Animated.Value(0),
+
         }
 
     }
@@ -50,6 +70,20 @@ class HomeScene extends BaseScene {
         this.changeHeaderu= DeviceEventEmitter.addListener("changeHeaderu",this._changeHeaderu);
         console.log(this.props.num);
         this._getDataa();
+
+
+        const toValue = this.state.translateY.interpolate({
+            inputRange: [0, 1],
+            outputRange: [0, -width/1.28/850*130/3-80],
+            extrapolateLeft: 'clamp',
+        })
+        console.log(toValue)
+        Animated.timing(this.state.timingTranslateY, {
+            toValue: toValue,
+            duration: 25,
+            easing: Easing.linear,
+            // useNativeDriver: true
+        }).start();
     };
 
 
@@ -101,26 +135,7 @@ class HomeScene extends BaseScene {
     };
 
 
-    _changeHeaderu=()=>{
-        if(Config.tabBarHight<60){
-            this.state.translateValue.setValue({x:0, y:-Config.tabBarHight});
-            // this.state.translateValue.setValue({x:0, y:-60});
 
-        }else{
-            this.state.translateValue.setValue({x:0, y:-60});
-        }
-
-
-    }
-    _changeHeaderd=()=>{
-        if(Config.tabBarHight<60){
-            this.state.translateValue.setValue({x:0, y:Config.tabBarHight-60});
-            // this.state.translateValue.setValue({x:0, y:0});
-
-        }else{
-            this.state.translateValue.setValue({x:0, y:60});
-        }
-    }
 
     _onChangeTab=(index)=>{
         if(index.i==0){
@@ -180,7 +195,15 @@ class HomeScene extends BaseScene {
         )
     };
 
+    _onScroll(info) {
+        console.log(info.nativeEvent.contentOffset.y)
+    }
+
+
+
     render(){
+        let scrollY = this.state.scrollY
+        const translateY = this.state.timingTranslateY
         const content = this.state.data.length > 0 ?(<ScrollableTabView ref={(ScrollableTabView)=>this.ScrollableTabView=ScrollableTabView}
                                                                         initialPage={0}
                                                                         onChangeTab={(obj) => {this._onChangeTab(obj)}}
@@ -190,16 +213,29 @@ class HomeScene extends BaseScene {
             {this.state.data.map((item,i)=>{
                 if(i==0){
                     return(
-                        <MainScene load={this.props.load}  header={"header"} key={i}  url={"thetype=1034&searchstr="+item.keyword} tabLabel={item.word}   thetype="1034" item={"video"} />
-                    )
+                        <AnimatedListComponent load={this.props.load}  header={"header"} key={i}
+                                               onScroll={Animated.event(
+                                                   [{ nativeEvent: { contentOffset: { y: scrollY } } }],
+                                                   { listener: this._onScroll.bind(this) },
+                                               )}     url={"thetype=1034&searchstr="+item.keyword} tabLabel={item.word}   thetype="1034" item={"video"} />
+                           )
                 }else if(i==1){
                     return(
-                        <Sofitel key={i}  tabLabel={item.word}  />
+                        <AnimatedListMain key={i}  onScroll={Animated.event(
+                            [{ nativeEvent: { contentOffset: { y: scrollY } } }],
+                            { listener: this._onScroll.bind(this) },
+                            // { useNativeDriver: true },
+                        )} tabLabel={item.word}  />
                     )
                 }else if(i>1&&i<this.state.data.length){
                     return(
-                        <ListScene load={this.props.load}
+                        <AnimatedListLS load={this.props.load}
                                    key={i}
+                                   onScroll={Animated.event(
+                                       [{ nativeEvent: { contentOffset: { y: scrollY } } }],
+                                       { listener: this._onScroll.bind(this) },
+                                       // { useNativeDriver: true },
+                                   )}
                                    url={"thetype=1034&classify2="+item.keyword}
                                    tabLabel={item.word}
                                    thetype="1034" item={"video"}
@@ -216,10 +252,10 @@ class HomeScene extends BaseScene {
                            barStyle="light-content"
                            translucent={true}
                            hidden={false}/>
-                <View style={{width:width,height:Config.STATUSBARHEIGHT,backgroundColor:Config.StatusBarColor}} />
+                <Animated.View style={{width:width,height:Config.STATUSBARHEIGHT,backgroundColor:Config.StatusBarColor,transform: [{ translateY}]}} />
 
-                <View  style={{flex:1,backgroundColor:'#fff',marginTop:this.state.margintop}} >
-                    <View ref="header" style={{height:80,backgroundColor:'#fff',alignItems:'center'}}>
+
+                    <Animated.View ref="header" style={{height:80,backgroundColor:'#fff',alignItems:'center',transform: [{ translateY}]}}>
 
                         <ImageBackground   style={{position:'absolute',top:0,width:width,height:50,flexDirection:'row'}} source={require('../img/icon_homebg.png')}>
                             <View style={{width:width,height:50,position:'absolute',alignItems:'center',justifyContent:'center',backgroundColor:'transparent'}}>
@@ -231,11 +267,13 @@ class HomeScene extends BaseScene {
                                           onPress={()=>Actions.TabView()}>
                             <Image  style={{width:width/1.28,height:width/1.28/850*130}} source={require('../img/newicon_seachbar.png')} />
                         </TouchableOpacity>
-                    </View>
+                    </Animated.View>
+                    <Animated.View style={{flex:1,marginBottom:-64,transform: [{ translateY}]}}>
                     {content}
-                </View>
+                    </Animated.View>
+
             </Container>
-        );
+        )
         // return (
         //     <Container>
         //         <StatusBar backgroundColor="transparent"

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ListView ,FlatList,View,Dimensions,ActivityIndicator,Platform,Image,InteractionManager,TouchableOpacity,DeviceEventEmitter,PanResponder} from 'react-native';
+import { ListView ,FlatList,View,Dimensions,Animated,Platform,Image,InteractionManager,TouchableOpacity,DeviceEventEmitter,PanResponder} from 'react-native';
 import {Actions} from "react-native-router-flux";
 import { Container, Header, Content, Button, Icon, List, Thumbnail ,ListItem, Text,Left,Body,Right,Switch ,Card, CardItem,} from 'native-base';
 import PLVideoView from "../widget/PLVideoView";
@@ -28,6 +28,9 @@ const aa=["1"];
 let dy=4;
 let dx=0;
 let isshowsearch=true;
+const scrollY = new Animated.Value(0);
+const scrollY2 = new Animated.Value(0);
+const AnimatedFlatList = Animated.createAnimatedComponent(UltimateListView);
 export default class ListScene extends Component {
     constructor(props) {
         super(props);
@@ -41,6 +44,20 @@ export default class ListScene extends Component {
             mainvideo:[],
             isshowsearch:false,
             totalCount:0,
+            scrollY,
+            scrollY2, // 加这个是为了让每个List持有自己的偏移量
+            translateY: Animated.diffClamp(
+                Animated.add(
+                    scrollY.interpolate({
+                        inputRange: [0, 1],
+                        outputRange: [0, 1],
+                        extrapolateLeft: 'clamp',
+                    }),
+                    scrollY2,
+                ),
+                0,
+                1,
+            ),
         }
     }
 
@@ -238,29 +255,7 @@ export default class ListScene extends Component {
         }
 
     };
-    _onScrollEnd=(e)=>{
-        dy=e.nativeEvent.contentOffset.y;
-        console.log("dy:",dy,"dx:",dx)
-        if(dy-dx>5){
 
-            Config.tabBarHight=dy-dx;
-            console.log("该执行导航栏沉浸式了该执行导航栏沉浸式了")
-            DeviceEventEmitter.emit("changeHeaderu","隐藏header")
-
-        }else if (dx-dy>5){
-            Config.tabBarHight=dx-dy;
-            //  DeviceEventEmitter.emit("changeTab","隐藏tab")
-            // alert("该执行导航栏沉浸式了")
-            DeviceEventEmitter.emit("changeHeaderd","隐藏header")
-            console.log("该执行tab沉浸式了该执行tab沉浸式了")
-            // alert("该执行tab沉浸式了")
-            //  Config.tabBarHight=-56;
-        }else{
-            console.log(e.nativeEvent.contentOffset.y)
-        }
-       // console.log("e.nativeEvent.contentOffset",e.nativeEvent.contentOffset)
-       // console.log("e.nativeEventt",e.nativeEvent)
-    }
 
     _renderResult=()=>{
         if(this.props.header=='search'){
@@ -334,15 +329,30 @@ export default class ListScene extends Component {
         )
     }
 
+    _onScrollEnd(e){
+
+
+        // 回调
+        if (this.props.onScroll) {
+            this.props.onScroll(e)
+        }
+    }
+
     render() {
+        let Y=this.state.scrollY
         return (
             <View
                 //{...this._panResponder.panHandlers}
                 style={{flex:1,backgroundColor:'#fff'}}>
 
-                    <UltimateListView
+                    <AnimatedFlatList
                         ref={(ref) => this.listViews = ref}
                         scrollEventThrottle={1}
+                        onScroll={Animated.event(
+                            [{ nativeEvent: { contentOffset: { y: Y } } }],
+                            { listener: this._onScrollEnd.bind(this) }
+                            //{ useNativeDriver: true }
+                        )}
                        // onScroll={(e)=>this._onScrollEnd(e)}
                         // columnWrapperStyle={{width:width/2}}
                         showsVerticalScrollIndicator={false}
