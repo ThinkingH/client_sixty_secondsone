@@ -1179,7 +1179,7 @@
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
 					13B07F861A680F5B00A75B9A = {
-						DevelopmentTeam = SJLTTZG9N6;
+						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.Push = {
 								enabled = 0;
@@ -1820,9 +1820,10 @@
 			baseConfigurationReference = 90F3D943ACE4E632B7F6BDD9 /* Pods-sixty_seconds.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
-				DEVELOPMENT_TEAM = SJLTTZG9N6;
+				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/UMComponents/UMShare/UMSocialUI",
@@ -1861,8 +1862,9 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.anjie.sixty;
+				PRODUCT_BUNDLE_IDENTIFIER = com.anjie.sixtyseconds;
 				PRODUCT_NAME = sixty_seconds;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -1872,8 +1874,9 @@
 			baseConfigurationReference = A074116D89C0A65AE01090F7 /* Pods-sixty_seconds.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = SJLTTZG9N6;
+				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/UMComponents/UMShare/UMSocialUI",
@@ -1912,8 +1915,9 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.anjie.sixty;
+				PRODUCT_BUNDLE_IDENTIFIER = com.anjie.sixtyseconds;
 				PRODUCT_NAME = sixty_seconds;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
