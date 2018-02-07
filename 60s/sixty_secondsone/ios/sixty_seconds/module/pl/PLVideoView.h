@@ -15,7 +15,7 @@
 
 @property (nonatomic, assign) int reconnectCount;
 //@property(nonatomic,strong) NSTimer *timer;
-@property(nonatomic,assign) bool loop;
+@property(nonatomic,assign) BOOL loop;
 //@property(nonatomic,assign) bool autoPlay;
 
 
