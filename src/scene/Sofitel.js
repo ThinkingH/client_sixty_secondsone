@@ -187,7 +187,7 @@ export default class Sofitel extends Component {
         return (
             <View style={{flex:1,backgroundColor:'#fff'}}>
 
-                <AnimatedFlatList
+                <UltimateListView
 
                     scrollEventThrottle={1}
                    // onScroll={(e)=>this._onScrollEnd(e)}

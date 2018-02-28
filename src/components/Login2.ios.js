@@ -43,7 +43,7 @@ export default class Login2 extends Component {
         };
     };
     componentWillMount() {
-        num=this.props.num
+        num=this.props.num?this.props.num:Math.cell(Math.random()*4)-1
     }
 
     componentDidMount(){
@@ -185,11 +185,12 @@ export default class Login2 extends Component {
         let parpam="thetype=1002"+'&phone='+this.state.phone+'&vcode='+this.state.code;
         Request('1002',parpam)
             .then((responseJson) => {
-                console.log(responseJson)
-                if(responseJson.sucerr=='100'){
+                console.log('11111',responseJson,'222',responseJson.sucerr)
+                if(responseJson.sucerr =='100'){
                     let userid=responseJson.data.userid;
                     let userkey=responseJson.data.userkey;
                     if(responseJson.data.firstlogin=="no"){
+                        console.log('11111111111111')
                         Config.userid=userid;
                         Config.userkey=userkey;
                         Config.usertype="1";
@@ -199,14 +200,17 @@ export default class Login2 extends Component {
                         DeviceEventEmitter.emit("getinfo","刷新个人信息")
                         Actions.pop();
                     }else {
-                        Actions.getinfo({type:'replace',userid:userid,userkey:userkey});
+
+
+                        Actions.getinfo({userid:userid,userkey:userkey});
                     }
                 }else{
                     Toast.show('验证码错误')
                 }
             })
             .catch((error) => {
-                // Toast.show(error.toString());
+
+                 Toast.show(error.toString());
             });
     };
 

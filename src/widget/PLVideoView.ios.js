@@ -88,7 +88,7 @@ class PLVideoView extends Component{
     };
 
     seekTo=(millSecond)=>{
-         this.seek(millSecond*1000);
+         this.seek(millSecond);
     };
 
     setVideoPath=(url,imgurl)=>{

@@ -86,7 +86,7 @@ export default class VideoItem extends React.PureComponent  {
                 Toast.show(responseJson.msg)
             })
             .catch((error) => {
-                Toast.show(error.toString());
+                //Toast.show(error.toString());
             });
     };
 

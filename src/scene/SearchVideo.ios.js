@@ -39,10 +39,16 @@ export default class SearchVideo extends React.Component {
             isshowmzy:false
         };
         //this._getHistory();
+
+    }
+    componentWillMount() {
+        this._onRefresh();
+
+
     }
     componentDidMount() {
         this._getHistory()
-        this._onRefresh();
+
 
 
     }

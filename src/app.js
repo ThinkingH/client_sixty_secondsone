@@ -258,25 +258,27 @@ export default class apps extends Component {
         JPushModule.addReceiveOpenNotificationListener((map) => {
 
             console.log('map.................................',map);
-
-            this._getActive(map);
-
+            if(Platform.OS=='ios'){
+                this._getActiveIos(map);
+            }else{
+                this._getActiveAndroid(map);
+            }
         })
     };
-    _getActive=(map)=>{
+    _getActiveAndroid=(map)=>{
         console.log(map);
         let data='';
         if(JSON.parse(map.extras).action=="shouye"){
-           //shouye 代表推送到首页列表   classify 代表推送到哪个分类  对应0 1 2 3....等索引
+            //shouye 代表推送到首页列表   classify 代表推送到哪个分类  对应0 1 2 3....等索引
             Actions.tabbar({num:JSON.parse(map.extras).classify});
         }
         else if(JSON.parse(map.extras).action=="details"){
             //details 代表推送到视频详情页
-             data=JSON.parse(map.extras).value;
+            data=JSON.parse(map.extras).value;
             Actions.videodetails({title:data.vtitle,nowid:data.vid});
         }else if(JSON.parse(map.extras).action=="sofitellist"){
             //sofitellist 代表推送到特辑列表二级页面  sid为特辑列表id    data为特辑数据
-             data=JSON.parse(map.extras).value;
+            data=JSON.parse(map.extras).value;
             Actions.sofitellist({id:data.sid,datas:data.data});
         }else if(JSON.parse(map.extras).action=="message"){
             //message 代表推送到消息列表
@@ -287,6 +289,31 @@ export default class apps extends Component {
         }
         Config.IECEIVESOCKET=2;
     };
+
+    _getActiveIos=(map)=>{
+        console.log(map);
+        let data='';
+        if(JSON.parse(map).action=="shouye"){
+            //shouye 代表推送到首页列表   classify 代表推送到哪个分类  对应0 1 2 3....等索引
+            Actions.tabbar({num:JSON.parse(map).classify});
+        }
+        else if(JSON.parse(map).action=="details"){
+            //details 代表推送到视频详情页
+            data=JSON.parse(map).value;
+            Actions.videodetails({title:data.vtitle,nowid:data.vid});
+        }else if(JSON.parse(map).action=="sofitellist"){
+            //sofitellist 代表推送到特辑列表二级页面  sid为特辑列表id    data为特辑数据
+            data=JSON.parse(map).value;
+            Actions.sofitellist({id:data.sid,datas:data.data});
+        }else if(JSON.parse(map).action=="message"){
+            //message 代表推送到消息列表
+            Actions.message();
+        }else if(JSON.parse(map).action=="messagebox"){
+            //messagebox 代表推送到留言箱
+            Actions.messagebox();
+        }
+        Config.IECEIVESOCKET=2;
+    }
 
 // 退出时 清除所有推送消息  JPushModule.clearAllNotifications();
     unInitPush=()=>{
@@ -617,6 +644,7 @@ export default class apps extends Component {
                                     tabBarStyle={{backgroundColor:'#fff'}}
                                    // tabBarComponent={NavigationComponent}
                                     hideNavBar
+
                                     showLabel={false}
                                     wrap={false}
                                     animationEnabled={false}
