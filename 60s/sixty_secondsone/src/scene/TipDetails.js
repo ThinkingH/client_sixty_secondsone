@@ -173,6 +173,15 @@ export default class TipDetails extends Component {
     _replay=()=>{
         this.videos.setVideoPath(videoarr[num-1].videourl,videoarr[num-1].showimg);
         this._autoHide();
+        this.setState({
+            isshowreplay:false
+        })
+        if(Platform.OS=='ios'){
+            this.setState({
+                vurl:videoarr[num-1].videourl,
+                vimage:videoarr[num-1].showimg
+            })
+        }
     };
 
     _onPressSeekTo=(value)=>{

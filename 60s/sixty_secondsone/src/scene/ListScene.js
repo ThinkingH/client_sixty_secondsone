@@ -345,7 +345,7 @@ export default class ListScene extends Component {
                 //{...this._panResponder.panHandlers}
                 style={{flex:1,backgroundColor:'#fff'}}>
 
-                    <AnimatedFlatList
+                    <UltimateListView
                         ref={(ref) => this.listViews = ref}
                         scrollEventThrottle={1}
                         onScroll={Animated.event(

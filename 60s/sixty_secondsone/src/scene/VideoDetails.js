@@ -291,7 +291,7 @@ export default class VideoDetails extends Component {
         this.setState({
             time:Math.floor(value/60*this.state.totalTime)
         });
-        this.videos.seekTo(newpoint);
+        this.videos.seekTo(value/60);
     }
 
     _timeToStr=(time)=> {

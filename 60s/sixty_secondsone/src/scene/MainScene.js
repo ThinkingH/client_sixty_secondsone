@@ -399,7 +399,7 @@ export default class MainScene extends Component {
             <View
                // {...this._panResponder.panHandlers}
                 style={{flex:1,backgroundColor:'#fff',alignItems:'center'}}>
-                <AnimatedFlatList
+                <UltimateListView
                     scrollEventThrottle={1}
 
                     onScroll={Animated.event(

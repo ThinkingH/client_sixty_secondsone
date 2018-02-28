@@ -18,7 +18,7 @@ const checkNetworkState = (callback) =>{
 }
 
 const getNetInfo=(callback)=>{
-    NetInfo.fetch().done(
+    NetInfo.getConnectionInfo().done(
         (connectionInfo)=> {
         callback(connectionInfo) ;
     })

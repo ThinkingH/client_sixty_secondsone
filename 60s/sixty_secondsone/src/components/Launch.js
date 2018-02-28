@@ -67,13 +67,13 @@ class Launch extends React.Component {
         Storage.getValueForKey("isfirst").then((value) => {
             console.log("userid :", value);
             isfirst=value
-
         });
 
         Storage.getValueForKey("userkey").then((value) => {
             console.log("userkey :", value);
             Config.userkey = value;
         });
+
         Storage.getValueForKey("uptime").then((value) => {
             console.log("uptime :", value);
             if(value!=null){

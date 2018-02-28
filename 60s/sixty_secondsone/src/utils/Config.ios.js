@@ -5,9 +5,9 @@ import {
     View, StyleSheet, ListView, Image, TouchableOpacity, BackAndroid, PixelRatio, Platform, StatusBar,
     Dimensions
 } from "react-native";
-// import MD5 from "react-native-md5";
-// import JPushModule from 'jpush-react-native';
-// import Request from '../utils/Fetch';
+import MD5 from "react-native-md5";
+import Request from "./Fetch";
+import JPushModule from "jpush-react-native/index";
 
 const {width, height} = Dimensions.get('window');
 const isiPhoneX = width == 375 && height == 812 ? true : false;
@@ -24,8 +24,8 @@ const styles = StyleSheet.create({
 });
 
 export default class Config{
-     static versionName="V1.1.0";
-     static version=110;
+     static versionName="V1.1.2";
+     static version=112;
      static ISHIDE=false;
      static loadingTxtStyle={color:"#757575",fontSize:14,};
      static loadingTxt="正在加载中...";
@@ -44,14 +44,26 @@ export default class Config{
      static BaseURL = "http://api.60video.net/";
      static isDebug = "0";//初始值为0，2为隐藏（屏蔽），其余为显示
      static initJpush=()=>{
-
+         // JPushModule.initPush();
+         // JPushModule.debug=false;
         }
 
     static createJiGuangId=()=>{
-
-
-
-    }
+        let timestamp = Math.floor(Date.parse(new Date())/1000);
+        let system=Platform.OS.toUpperCase();
+        let md5 = MD5.hex_md5('100'+system+'100'+""+'1010'+timestamp + Config.md5key);
+        //let md5=MD5.hex_md5(Config.userid+Config.userkey+Config.md5key);
+        //注册别名
+        console.log(md5);
+        JPushModule.setAlias(md5,()=>{},()=>{});
+        let parpam="thetype=1003&jiguangid="+md5;
+        Request('1003',parpam)
+            .then((responseJson) => {
+            })
+            .catch((error) => {
+                Toast.show(error.toString());
+            });
+    };
 }
 
 

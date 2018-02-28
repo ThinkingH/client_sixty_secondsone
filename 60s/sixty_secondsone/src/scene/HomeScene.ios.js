@@ -74,7 +74,7 @@ class HomeScene extends BaseScene {
 
         const toValue = this.state.translateY.interpolate({
             inputRange: [0, 1],
-            outputRange: [0, -width/1.28/850*130/3-80],
+            outputRange: [0, -width/1.28/850*130/3-63],
             extrapolateLeft: 'clamp',
         })
         console.log(toValue)
@@ -247,15 +247,15 @@ class HomeScene extends BaseScene {
         </ScrollableTabView>) : <View/>;
 
         return (
-            <Container>
+            <Container style={{marginBottom:-84}}>
                 <StatusBar backgroundColor="transparent"
                            barStyle="light-content"
-                           translucent={true}
+                           translucent={false}
                            hidden={false}/>
-                <Animated.View style={{width:width,height:Config.STATUSBARHEIGHT,backgroundColor:Config.StatusBarColor,transform: [{ translateY}]}} />
 
 
-                    <Animated.View ref="header" style={{height:80,backgroundColor:'#fff',alignItems:'center',transform: [{ translateY}]}}>
+
+                    <Animated.View ref="header" style={{height:80,marginTop:20,backgroundColor:'#fff',alignItems:'center',transform: [{ translateY}]}}>
 
                         <ImageBackground   style={{position:'absolute',top:0,width:width,height:50,flexDirection:'row'}} source={require('../img/icon_homebg.png')}>
                             <View style={{width:width,height:50,position:'absolute',alignItems:'center',justifyContent:'center',backgroundColor:'transparent'}}>
@@ -268,10 +268,10 @@ class HomeScene extends BaseScene {
                             <Image  style={{width:width/1.28,height:width/1.28/850*130}} source={require('../img/newicon_seachbar.png')} />
                         </TouchableOpacity>
                     </Animated.View>
-                    <Animated.View style={{flex:1,marginBottom:-64,transform: [{ translateY}]}}>
+                    <Animated.View style={{flex:1,marginBottom:0,transform: [{ translateY}]}}>
                     {content}
                     </Animated.View>
-
+                <View style={{width:width,height:Config.STATUSBARHEIGHT,position:'absolute',top:0,backgroundColor:Config.StatusBarColor}} />
             </Container>
         )
         // return (
