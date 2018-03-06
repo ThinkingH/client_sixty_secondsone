@@ -8,7 +8,7 @@ import {
     Image,
     ImageBackground
 } from "react-native";
-import {Actions} from "react-native-router-flux";
+import {Actions,ActionConst} from "react-native-router-flux";
 import Request from '../utils/Fetch';
 import Storage  from '../utils/Storage';
 import Config from '../utils/Config';
@@ -16,6 +16,7 @@ import Toast from '@remobile/react-native-toast'
 import { Container, Header, Content, Item, Input,Thumbnail,Button ,Text,Left,Right,Body,Row,View} from 'native-base';
 import ShareUtile from '../utils/ShareUtil'
 import Spinnera from '../components/Spinner';
+
 const {width, height} = Dimensions.get('window');
 const imgarr=[require('../img/icon_login1.png'),require('../img/icon_login2.png'),require('../img/icon_login3.png'),require('../img/icon_login4.png')]
 const styles = StyleSheet.create({
@@ -29,6 +30,7 @@ const styles = StyleSheet.create({
         width:width/7,height:width/7,marginTop:15
     }
 });
+let num=0;
 
 export default class Login2 extends Component {
     constructor(props) {
@@ -41,9 +43,10 @@ export default class Login2 extends Component {
             timerTitle:'获取验证码',
             isvisiable:false,
         };
+        num=this.props.num?this.props.num:1
     };
     componentWillMount() {
-        num=this.props.num?this.props.num:Math.cell(Math.random()*4)-1
+
     }
 
     componentDidMount(){
@@ -202,7 +205,7 @@ export default class Login2 extends Component {
                     }else {
 
 
-                        Actions.getinfo({userid:userid,userkey:userkey});
+                        Actions.getinfo({type: ActionConst.RESET,userid:userid,userkey:userkey});
                     }
                 }else{
                     Toast.show('验证码错误')
@@ -225,39 +228,37 @@ export default class Login2 extends Component {
                     <Body style={{flex:1,alignItems:'center'}}>
                     <ImageBackground  style={{width:width,height:width,justifyContent:'flex-end',alignItems:'center'}}
                                        source={imgarr[num]} >
-                        <Item rounded style={{width:width-60,backgroundColor:'#fff',elevation:1,alignItems:'center'}} >
+                        <Item rounded style={{width:width-60,paddingLeft:10,backgroundColor:'#fff',elevation:1,alignItems:'center'}} >
 
                             <Input onChangeText={(phone)=>this.setState({phone})}
                                    placeholderTextColor="#999"
-                                   style={{height:40,padding:0,fontSize:14}}
+                                   style={{height:40,padding:0,fontSize:14,width:width-80}}
                                    maxLength={11}
-                                   placeholder='  请输入手机账号'/>
+                                   placeholder='请输入手机账号'/>
                             <Button style={{height:40}}  transparent={true}
                                     rounded
                                     onPress={()=>this._getData()}><Text style={{color:'#999'}}>{this.state.timerTitle}</Text>
                             </Button>
                         </Item>
                     </ImageBackground>
-                    <Item  rounded style={{marginTop:10,width:width-60,elevation:1}}>
+                    <Item  rounded style={{marginTop:10,width:width-60,elevation:1,paddingLeft:10,}}>
                         <Input onChangeText={(code)=>this.setState({code})}
                                placeholderTextColor="#999"
-                               style={{height:40,padding:0,fontSize:14,}}
+                               style={{height:40,padding:0,fontSize:14,width:width-80}}
                                maxLength={6}
-                               placeholder='  请输入验证码'/>
+                               placeholder='请输入验证码'/>
 
                     </Item>
 
                     <TouchableOpacity activeOpacity={0.9} onPress={()=>{this._login()}}>
                         <Thumbnail    style={{width:width/6,height:width/6,marginTop:15}} source={require('../img/icon_loginbtn.png')} />
                     </TouchableOpacity>
-
-                    {Config.isDebug === "2" ? (null) : this._renderShieldThirdParty()}
-
                     </Body>
                 </Content>
                 <TouchableOpacity activeOpacity={0.9} onPress={()=>{Actions.pop()}} style={{width:20,height:20,position:'absolute',top:Config.STATUSBARHEIGHT+10,left:20}}>
                     <Image style={{width:20,height:20}} source={require('../img/icon_close.png')} />
                 </TouchableOpacity>
+                {Config.isDebug === "2" ? (null) : this._renderShieldThirdParty()}
                 <Spinnera loadvalue="第三方登陆中..." modalVisible={this.state.isvisiable} />
             </Container>
         )
@@ -265,7 +266,7 @@ export default class Login2 extends Component {
 //屏蔽第三方登录
     _renderShieldThirdParty=()=>{
         return(
-            <Body>
+            <Body style={{position:'absolute',bottom:20}}>
                 <Text style={{marginTop:15,color:'#8c8c8c',fontSize:12,}}>用其他方式登录60SEC</Text>
                 <Row style={{padding:15,justifyContent:'center'}}>
                     <Left>

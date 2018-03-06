@@ -1,5 +1,5 @@
 import React ,{Component} from 'react';
-import { StyleSheet, Text, View,DeviceEventEmitter,Platform ,LayoutAnimation,AppState,BackHandler} from 'react-native';
+import { StyleSheet, Text, View,DeviceEventEmitter,Platform ,LayoutAnimation,AppState,BackHandler,NativeAppEventEmitter} from 'react-native';
 import Launch from './components/Launch';
 import Login3 from './components/Login3';
 
@@ -181,8 +181,35 @@ export default class apps extends Component {
 
     }
     componentDidMount(){
+
+        //alert('fff打开推送打开推送打开推送。。。')
+        this.subscription = NativeAppEventEmitter.addListener(
+            'OpenNotification',
+            (notification) => {
+                console.log('打开推送',notification);
+                setTimeout(()=>{
+                    alert('fff')
+                },5000)
+
+            }
+        )
+
+        this.subscription = NativeAppEventEmitter.addListener(
+            'ReceiveNotification',
+            (notification) => {
+                console.log('-------------------收到推送----------------');
+                console.log(notification);
+                alert('-------------------收到推送----------------');
+                setTimeout(()=>{
+                    alert('fff发发发')
+                },5000)
+            }
+        );
+
+
+
         Storage.getValueForKey("jpush").then((value) => {
-            console.log('valuevaluevaluevaluevalue:',value)
+            console.log('valuevaluevaluevaluevalue111111111:',value)
             if(value==true||value==null){
                 this.initPush();
                 Config.ISJPUSH=1;
@@ -207,6 +234,7 @@ export default class apps extends Component {
         this.changeTab.remove();
         this.isshare.remove();
         this.unInitPush();
+        this.subscription.remove();
     }
     //获取一些配置信息，如iOS上线时隐藏第三方登录、分享功能等
     _getConfigInfo=()=>{
@@ -242,28 +270,58 @@ export default class apps extends Component {
 
     initPush=()=>{
 
-        JPushModule.notifyJSDidLoad((resultCode) => {
-                if (resultCode === 0) {}
-              });
-        JPushModule.addReceiveCustomMsgListener((message) => {
-           // this.setState({pushMsg: message});
-        });
-        JPushModule.addReceiveNotificationListener((message) => {
+        //-----------jpush  ios start
+        if (Platform.OS === 'ios') {
+            // this.subscription = NativeAppEventEmitter.addListener(
+            //     'OpenNotification',
+            //     (notification) => {
+            //         console.log('打开推送',notification);
+            //         setTimeout(()=>{
+            //             alert('fff')
+            //         },5000)
+            //
+            //     }
+            // )
+            //
+            // this.subscription = NativeAppEventEmitter.addListener(
+            //     'ReceiveNotification',
+            //     (notification) => {
+            //         console.log('-------------------收到推送----------------');
+            //         console.log(notification);
+            //         alert('hehehehhehehehhehehehehehheh');
+            //         setTimeout(()=>{
+            //             alert('fff')
+            //         },5000)
+            //     }
+            // );
+        }
 
-            Config.IECEIVESOCKET=1;
 
-            console.log("receive notification: " + message.toString());
-        });
 
-        JPushModule.addReceiveOpenNotificationListener((map) => {
 
-            console.log('map.................................',map);
-            if(Platform.OS=='ios'){
-                this._getActiveIos(map);
-            }else{
-                this._getActiveAndroid(map);
-            }
-        })
+
+        // JPushModule.notifyJSDidLoad((resultCode) => {
+        //         if (resultCode === 0) {}
+        //       });
+        // JPushModule.addReceiveCustomMsgListener((message) => {
+        //    // this.setState({pushMsg: message});
+        // });
+        // JPushModule.addReceiveNotificationListener((message) => {
+        //
+        //     Config.IECEIVESOCKET=1;
+        //
+        //     console.log("receive notification: " + message.toString());
+        // });
+        //
+        // JPushModule.addReceiveOpenNotificationListener((map) => {
+        //     // alert(JSON.parse(map))
+        //     console.log('map.................................',map);
+        //     if(Platform.OS=='ios'){
+        //         this._getActiveIos(map);
+        //     }else{
+        //         this._getActiveAndroid(map);
+        //     }
+        // })
     };
     _getActiveAndroid=(map)=>{
         console.log(map);
@@ -293,22 +351,22 @@ export default class apps extends Component {
     _getActiveIos=(map)=>{
         console.log(map);
         let data='';
-        if(JSON.parse(map).action=="shouye"){
+        if(map.action=="shouye"){
             //shouye 代表推送到首页列表   classify 代表推送到哪个分类  对应0 1 2 3....等索引
             Actions.tabbar({num:JSON.parse(map).classify});
         }
-        else if(JSON.parse(map).action=="details"){
+        else if(map.action=="details"){
             //details 代表推送到视频详情页
-            data=JSON.parse(map).value;
+            data=map.value;
             Actions.videodetails({title:data.vtitle,nowid:data.vid});
-        }else if(JSON.parse(map).action=="sofitellist"){
+        }else if(map.action=="sofitellist"){
             //sofitellist 代表推送到特辑列表二级页面  sid为特辑列表id    data为特辑数据
-            data=JSON.parse(map).value;
+            data=map.value;
             Actions.sofitellist({id:data.sid,datas:data.data});
-        }else if(JSON.parse(map).action=="message"){
+        }else if(map.action=="message"){
             //message 代表推送到消息列表
             Actions.message();
-        }else if(JSON.parse(map).action=="messagebox"){
+        }else if(map.action=="messagebox"){
             //messagebox 代表推送到留言箱
             Actions.messagebox();
         }

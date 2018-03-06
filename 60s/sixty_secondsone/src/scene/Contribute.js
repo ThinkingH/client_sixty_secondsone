@@ -127,7 +127,7 @@ export default  class Contribute extends Component {
             compressImageMaxWidth: 1280,
             compressImageMaxHeight: 1920
         }).then(image => {
-            console.log('received base64 image');
+
             imagedate={uri: `data:${image.mime};base64,` + image.data, width: 400, height: 400};
             imgdata=image.data;
             this.setState({
@@ -135,8 +135,14 @@ export default  class Contribute extends Component {
                 imgdata: image.data,
             });
             this._isContribute();
-        }).catch(e =>console.log(e));
+        }).catch(e => {}
+
+        );
+
+
     };
+
+
 
     openCamera = (cropit) => {
         this.setState({

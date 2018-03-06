@@ -37,7 +37,7 @@ export default class GetInfo extends Component {
 
     _saveInfo=()=>{
         let parpam="thetype=1007"+'&nickname='+this.state.name+'&describes='+this.state.desc;
-        console.log(this.state.name)
+        console.log(this.state.name);
         Request('1007',parpam)
             .then((responseJson) => {
                 console.log(responseJson);
@@ -67,7 +67,7 @@ export default class GetInfo extends Component {
                 { name : 'version', data : '100'},
                 { name : 'thetype', data : '1010'},
                 { name : 'sysversion', data : '100'},
-                { name : 'system', data : 'ANDROID'},
+                { name : 'system', data : system+''},
                 { name : 'houzhui', data : 'png'},
                 { name : 'nowtime', data : timestamp+""},
                 { name : 'md5key', data : md5},
@@ -81,6 +81,7 @@ export default class GetInfo extends Component {
             this.setState({
                 isvisiable:false,
             })
+
                  Toast.show(responseJson.msg)
         }) .catch((error) => {
             this.setState({
@@ -108,7 +109,9 @@ export default class GetInfo extends Component {
                 imgdata: image.data,
             });
             this.iscanclick();
-        }).catch(e => alert(e));
+        }).catch(e => {}
+
+         );
 
 
     };

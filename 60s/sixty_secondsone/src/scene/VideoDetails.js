@@ -384,7 +384,7 @@ export default class VideoDetails extends Component {
                     <Text style={[styles.texts,{marginLeft:5,color:'#c79b1e'}]}>制作时间：{this.state.data.maketime}</Text>
                 </Row>
                 <Body style={{marginBottom:20,marginTop:20}}>
-                <Text note style={[styles.texts,{lineHeight:20,color:'#000'}]}>{this.state.data.jieshao}</Text>
+                <Text note style={[styles.texts,{lineHeight:20,color:'#aaa'}]}>{this.state.data.jieshao}</Text>
                 </Body>
                 <Surface  width={width-40} height={1}>
                     <Shape d={path} stroke="#C5B061" strokeWidth={1} strokeDash={[3,5]}/>
@@ -549,18 +549,18 @@ export default class VideoDetails extends Component {
         return (
             <ScrollView contentContainerStyle={{paddingLeft:20,paddingRight:10}} showsHorizontalScrollIndicator={false} horizontal={true} >
                 {this.state.tipsarr.map((item,i)=>
-                    <View  style={{width:width/1.7,marginRight:10}}  key={i}>
+                    <View  style={{width:width/2.7,marginRight:10}}  key={i}>
                         <TouchableOpacity activeOpacity={0.8}
                                           style={{flex:1}}
                                           onPress={()=>{Actions.tipdetails({data:item});this.videos.pause();}}
                         >
-                            <View style={{width:width/1.7,height:width/1.7,borderRadius:10,backgroundColor:'#ccc'}}>
-                                <Image square style={{width:width/1.7,height:width/1.7,borderRadius:10}} source={{uri:item.showimg}} />
+                            <View style={{width:width/2.7,height:width/2.7,borderRadius:10,backgroundColor:'#ccc'}}>
+                                <Image square style={{width:width/2.7,height:width/2.7,borderRadius:10}} source={{uri:item.showimg}} />
                             </View>
                             <View style={{marginTop:10}}>
                                 <View style={{marginLeft:10,marginTop:10,justifyContent:'center'}}>
                                     <Text numberOfLines={1} style={{color:'#000'}}>{item.biaoti}</Text>
-                                    <Text numberOfLines={1} style={{color:'#595959',fontSize:14}}>{item.jieshao}</Text>
+                                    <Text numberOfLines={1} style={{color:'#595959',fontSize:12}}>{item.jieshao}</Text>
                                 </View>
                             </View>
                         </TouchableOpacity>
@@ -634,7 +634,7 @@ export default class VideoDetails extends Component {
                         <Text style={[styles.textb,{color:'#000',}]}>贴心提示</Text>
                     </View>
                     <View style={{backgroundColor:'#fff',marginLeft:20,marginRight:17,paddingBottom:15,marginTop:15}} >
-                        <Text note style={[styles.texts,{color:'#000'}]}>{this.state.data.tishishuoming}</Text>
+                        <Text note style={[styles.texts,{color:'#aaa',lineHeight:20}]}>{this.state.data.tishishuoming}</Text>
                     </View>
                         <Button rounded={true} block={true} onPress={()=>this._comment()} style={{height:45,marginLeft:30,width:width-60,marginBottom:10,marginTop:10,backgroundColor:'#f5c61e'}} iconLeft >
                             <Image style={[styles.imagelogo,{marginRight:5}]} source={require('../img/icon_commentbtn.png')} />

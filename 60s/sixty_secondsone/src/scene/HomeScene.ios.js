@@ -74,7 +74,7 @@ class HomeScene extends BaseScene {
 
         const toValue = this.state.translateY.interpolate({
             inputRange: [0, 1],
-            outputRange: [0, -width/1.28/850*130/3-63],
+            outputRange: [0, -width/1.28/850*130/3-70],
             extrapolateLeft: 'clamp',
         })
         console.log(toValue)
@@ -186,11 +186,11 @@ class HomeScene extends BaseScene {
                     imgurla={img}       //本地图
                     imageStyle={{width:25,height:25}}
                     textva={aaa}
-                    activeTextColor={"#c5b061"}
+                    activeTextColor={"#f5c61e"}
                     backgroundColor={"#FFFFFF"}
                     textStyle={{fontSize:12,fontWeight:'normal',marginTop:7}}
                     inactiveTextColor={"#313131"}
-                    underlineStyle={{backgroundColor:"#c5b061",height:2}}
+                    underlineStyle={{backgroundColor:"#f5c61e",height:2}}
             />
         )
     };
@@ -259,7 +259,7 @@ class HomeScene extends BaseScene {
 
                         <ImageBackground   style={{position:'absolute',top:0,width:width,height:50,flexDirection:'row'}} source={require('../img/icon_homebg.png')}>
                             <View style={{width:width,height:50,position:'absolute',alignItems:'center',justifyContent:'center',backgroundColor:'transparent'}}>
-                                <Text style={{color:'#fff',backgroundColor:'transparent',marginBottom:width/1.28/850*130/6}}>60Sec</Text>
+                                <Text style={{color:'#fff',fontSize:18,backgroundColor:'transparent',marginBottom:width/1.28/850*130/6}}>60Sec</Text>
                             </View>
                         </ImageBackground>
 
