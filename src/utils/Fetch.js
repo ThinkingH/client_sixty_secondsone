@@ -26,30 +26,36 @@ export default function request(thetype,param = "") {
         let url=Config.BaseURL+"sixty/interface/sixtyinit.php";
         console.log(url+'?'+params);
         NetWorkTool.checkNetworkState((isConnected)=>{
-            fetch(url,{
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded',
-                },body: encodeURI(params),
-            })
-                .then((response) => {
-                    console.log("response11111111111111",response);
-                    return response.json();
-                })
-                .then((jsonData) => {
-                    console.log("jsonData",jsonData);
-                    if(jsonData.code=="100"){
 
-                        resolve(jsonData);
-                    }else{
-                        reject(jsonData.msg);
-                    }
+            if(isConnected){
+                fetch(url,{
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },body: encodeURI(params),
                 })
-                .catch((error) => {
-                    reject(error.toString());
-                });
-            if(!isConnected){
-                Toast.show(NetWorkTool.NOT_NETWORK);
+                    .then((response) => {
+                        console.log("response11111111111111",response);
+                        return response.json();
+                    })
+                    .then((jsonData) => {
+                        console.log("jsonData",jsonData);
+                        if(jsonData.code=="100"){
+                            resolve(jsonData);
+                        }else{
+                            reject(jsonData.msg);
+                        }
+                    })
+                    .catch((error) => {
+                        reject(error.toString());
+                    });
+                console.log('1111111111111111111111111',isConnected+'')
+               // alert(isConnected+'')
+              //  Toast.show(NetWorkTool.NOT_NETWORK);
+            }else{
+               // alert(isConnected+'')
+                //Toast.show(NetWorkTool.NOT_NETWORK);
+                console.log('22222222222222222',isConnected+'')
             }
         });
 

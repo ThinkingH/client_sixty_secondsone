@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
     }
 });
 
-
+let num=0;
 const imgarr=[require('../img/icon_login1.png'),require('../img/icon_login2.png'),require('../img/icon_login3.png'),require('../img/icon_login4.png')]
 let _this;
 export default class Login2 extends Component {

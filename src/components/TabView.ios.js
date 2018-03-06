@@ -155,15 +155,15 @@ export default class TabView extends React.Component {
     _renderHeader=()=>{
         return(
             <View   style={{backgroundColor:'#fff',alignItems:'center',justifyContent:'center',flexDirection:'row',width:width,height:60}}>
-                <Item  rounded style={{height:40,width:width-60,borderColor:'#f5c61e'}}>
+                <Item  rounded style={{height:40,width:width-60,paddingLeft:10,borderColor:'#f5c61e'}}>
                     <Input onChangeText={(value)=>this.setState({value})}
                            placeholderTextColor="#999"
-                           style={{height:40,padding:0,fontSize:14,marginBottom:5,textAlignVertical:'center'}}
+                           style={{height:40,padding:0,width:width-80,fontSize:14,marginBottom:5,textAlignVertical:'center'}}
                            maxLength={6}
                            value={this.state.value}
                            onSubmitEditing={()=>this.saveHistory()}
                            returnKeyLabel="搜索"
-                           placeholder='  请输入菜名'/>
+                           placeholder='请输入菜名'/>
                 </Item>
                 <TouchableOpacity activeOpacity={0.9} onPress={()=>Actions.pop()}>
                     <Image style={{width:25,height:25,marginLeft:10}} source={require('../img/icon_tipclose.png')}/>

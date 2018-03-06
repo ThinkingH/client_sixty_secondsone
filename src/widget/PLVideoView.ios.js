@@ -62,7 +62,7 @@ class PLVideoView extends Component{
     }
 
     _onProg(event){
-        console.log(event.nativeEvent)
+       // console.log(event.nativeEvent)
         this.props.onProgress&&this.props.onProgress(event.nativeEvent.currentTime*1000);
     }
 

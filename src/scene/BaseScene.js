@@ -63,7 +63,7 @@ export default class BaseScene extends Component {
                        }}>
                     <ImageBackground    style={{position:'absolute',top:0,width:width,height:50,flexDirection:'row'}} source={require('../img/icon_homebg.png')} >
                         <View style={{width:width,height:50,position:'absolute',alignItems:'center',justifyContent:'center',backgroundColor:'transparent'}}>
-                            <Text style={{color:'#fff',backgroundColor:'transparent'}}>收藏</Text>
+                            <Text style={{color:'#fff',fontSize:18,backgroundColor:'transparent'}}>收藏</Text>
                         </View>
                     </ImageBackground>
                 </View>

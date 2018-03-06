@@ -71,7 +71,7 @@ export default class TipView extends Component {
 
 
                     <View style={{width:width,height:50,position:'absolute',alignItems:'center',justifyContent:'center',backgroundColor:'transparent'}}>
-                        <Text style={{color:'#fff',backgroundColor:'transparent',marginBottom:width/1.28/850*130/6}}>小窍门</Text>
+                        <Text style={{color:'#fff',fontSize:18,backgroundColor:'transparent',marginBottom:width/1.28/850*130/6}}>小窍门</Text>
                     </View>
                 </ImageBackground>
                 <View style={{width:width,height:width/1.28/850*130/5*4,backgroundColor:'transparent'}}>
@@ -101,13 +101,13 @@ export default class TipView extends Component {
                             </View>
                             <ScrollView showsHorizontalScrollIndicator={false} horizontal={true} >
                                 {itema.listvideo.map((item,i)=>
-                                    <View  style={{width:width/2,marginRight:15}}  key={i}>
+                                    <View  style={{width:width/2.7,marginRight:15}}  key={i}>
                                         <TouchableOpacity activeOpacity={0.8}
                                                           style={{flex:1}}
                                                           onPress={()=>Actions.tipdetails({data:item})}
                                         >
-                                            <View style={{width:width/2,height:width/2,borderRadius:10,backgroundColor:'#ccc'}}>
-                                                <Image square style={{width:width/2,height:width/2,borderRadius:10}} source={{uri:item.showimg}} />
+                                            <View style={{width:width/2.7,height:width/2.7,borderRadius:10,backgroundColor:'#ccc'}}>
+                                                <Image square style={{width:width/2.7,height:width/2.7,borderRadius:10}} source={{uri:item.showimg}} />
                                             </View>
 
 
@@ -115,7 +115,7 @@ export default class TipView extends Component {
 
                                                 <View style={{marginLeft:10,marginTop:10,justifyContent:'center'}}>
                                                     <Text numberOfLines={1} style={{height:20, fontWeight:'100',lineHeight:20,fontSize:14,color:'#000'}}>{item.biaoti}</Text>
-                                                    <Text numberOfLines={1} style={{height:15, letterSpacing:1,lineHeight:15,color:'#999',fontSize:14}}>{item.jieshao}</Text>
+                                                    <Text numberOfLines={1} style={{height:15, letterSpacing:1,lineHeight:15,color:'#999',fontSize:12}}>{item.jieshao}</Text>
                                                 </View>
 
 

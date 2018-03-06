@@ -442,8 +442,8 @@ export default class TipDetails extends Component {
                        <Image style={{width:50,height:50,borderRadius:10}} source={{uri:this.state.imageurl}}/>
                    </View>
                    <View style={{flex:1,justifyContent:'center'}}>
-                       <Text style={{color:'#ccc',fontSize:12,marginLeft:10}}>下一个视频</Text>
-                       <Text style={{color:'#fff',fontSize:14,marginLeft:10}}>{this.state.biaoti}</Text>
+                       <Text style={{color:'#ccc',fontSize:12,marginLeft:10,marginBottom:3}}>下一个视频</Text>
+                       <Text style={{color:'#fff',fontSize:14,marginLeft:10,marginTop:3}}>{this.state.biaoti}</Text>
                    </View>
                </TouchableOpacity>
                {this.state.isshowreplay?(

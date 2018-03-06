@@ -144,7 +144,7 @@ export default class SofitelList extends Component {
                     <View  style={{padding:15}}>
                         <Text style={{fontSize:10,color:'#c79b1e'}}>{this.props.datas.create_date}</Text>
                         <Text style={{marginTop:10,fontSize:14,color:'#666'}}>{this.props.datas.name}</Text>
-                        <Text  note style={{marginTop:10,fontSize:14,color:'#999'}}>{this.props.datas.content}</Text>
+                        <Text  note style={{marginTop:10,fontSize:12,color:'#999'}}>{this.props.datas.content}</Text>
                     </View>
 
                 </View>

@@ -2,7 +2,10 @@
  * Created by Administrator on 2017/11/20.
  */
 import React, { Component } from 'react';
-import { ListView ,Platform,FlatList,View,Dimensions,Image,Easing,Animated,InteractionManager,TouchableOpacity,DeviceEventEmitter,PanResponder} from 'react-native';
+import {
+    ListView, Platform, FlatList, View, Dimensions, Image, Easing, Animated, InteractionManager, TouchableOpacity,
+    DeviceEventEmitter, PanResponder, Alert,NetInfo
+} from 'react-native';
 import {Actions} from "react-native-router-flux";
 import { Container, Header, Content, Button, Icon, List, Thumbnail ,ListItem, Text,Left,Body,Right,Switch ,Card, CardItem,} from 'native-base';
 import PLVideoView from "../widget/PLVideoView";
@@ -20,6 +23,8 @@ import CommentItem from '../components/CommentItme';
 import {LineDotsLoader,PulseLoader,DotsLoader,TextLoader,BubblesLoader,CirclesLoader,BreathingLoader,RippleLoader,LinesLoader,MusicBarLoader,EatBeanLoader
 ,DoubleCircleLoader,RotationCircleLoader,RotationHoleLoader,CirclesRotationScaleLoader,NineCubesLoader  ,ColorDotsLoader} from 'react-native-indicator';
 import { UltimateListView, UltimateRefreshView } from 'react-native-ultimate-listview'
+
+import NetWorkTool from "../utils/NetWorkTool";
 const {width, height} = Dimensions.get('window');
 let _pageNo = 1;
 const _pageSize = Config.pageCount;
@@ -56,7 +61,39 @@ export default class MainScene extends Component {
                 1,
             ),
         }
+        NetWorkTool.checkNetworkState((isConnected)=>{
+            console.log(isConnected);
+            if(!isConnected){
+                Toast.show(NetWorkTool.NOT_NETWORK);
+            }
+        });
     }
+
+    handleMethod=(isConnected)=>{
+
+        NetWorkTool.getNetInfo((info)=>{
+            if(info=="WIFE"){
+                this._getMainVideo();
+            }else if(info=="MOBILE"){
+
+                Alert.alert(
+                    '',
+                    "已切换为手机流量，是否继续播放",
+                    [
+                        {text: '否', onPress: () => {
+                                this.videos.pause();
+                            }},
+                        {text: '是', onPress: () => {
+                                this.videos.start();
+                            }},
+                    ],
+                    // { cancelable: false }
+                );
+            }
+            console.log(info);
+        });
+        console.log('test', (isConnected ? 'online' : 'offline'));
+    };
 
     componentWillMount() {
         this._panResponder = PanResponder.create({
@@ -115,9 +152,10 @@ export default class MainScene extends Component {
 
         this.getMainRefresh = DeviceEventEmitter.addListener("getMainRefresh",this._getDatamain);
         this.getMainvideoRefresh = DeviceEventEmitter.addListener("getMainvideoRefresh",this._getMainVideo);
+        NetWorkTool.addEventListener(NetWorkTool.TAG_NETWORK_CHANGE,this.handleMethod);
         InteractionManager.runAfterInteractions(() => {
           //  this._onRefresh();
-            this._getMainVideo();
+
            // this._getData(_pageNo);
         });
     }
@@ -125,6 +163,7 @@ export default class MainScene extends Component {
     componentWillUnmount() {
         this.getMainRefresh.remove();
         this.getMainvideoRefresh.remove();
+        NetWorkTool.removeEventListener(NetWorkTool.TAG_NETWORK_CHANGE,this.handleMethod);
     }
 
     _getDatamain=()=>{
