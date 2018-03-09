@@ -207,7 +207,7 @@ export default class Account extends Component {
                     </Body>
                     {this.state.arr.length==0?(
                         <Body style={{height:100,width:width,backgroundColor:'#fafafa'}}>
-                        <Text note style={{marginTop:30}}>暂无投稿,快去投稿吧！</Text>
+                        <Text note style={{marginTop:30}}>暂无成果展示</Text>
                         </Body>
                     ):(
                         <Row style={{ flexWrap: 'wrap'}}>

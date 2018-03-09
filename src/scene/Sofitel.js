@@ -253,7 +253,7 @@ export default class Sofitel extends Component {
 class MyListItem extends React.PureComponent {
     render() {
         return (
-            <Card   style={{marginLeft:5,marginRight:5,borderRadius:10}} >
+            <Card   style={{marginLeft:5,marginRight:5,borderRadius:10,marginTop:4}} >
                 <CardItem style={{backgroundColor:'#ccc',borderTopLeftRadius:10,borderTopRightRadius:10}}  onPress={()=>Actions.sofitellist({id:this.props.data.jiheid,datas:this.props.data,title:this.props.data.name})} button={true}  cardBody>
                     <Image source={{uri:this.props.data.showimg}} style={{height: width/16*9, width: null,flex:1,borderTopLeftRadius:10,borderTopRightRadius:10}}/>
                 </CardItem>

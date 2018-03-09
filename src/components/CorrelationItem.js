@@ -34,7 +34,6 @@ export default class CorrelationItem extends React.PureComponent  {
 
             Actions.videodeta({title:this.props.title.biaoti,nowid:this.props.title.id})
         }else{
-
             Actions.videodeta({title:this.props.title.biaoti,nowid:this.props.title.id})
         }
     };
@@ -43,14 +42,14 @@ export default class CorrelationItem extends React.PureComponent  {
         //  console.log('this.props.selected..........................',this.state.iscollect)
         return (
 
-            <TouchableOpacity  onPress={()=>{ DeviceEventEmitter.emit("zanting","让视频暂停");
+            <TouchableOpacity  onPress={()=>{ DeviceEventEmitter.emit("stopvideo","让视频暂停");
 
                           this._goDetails();
 
                         }} activeOpacity={1}   style={{width:(width-50)/2}} >
                 <TouchableOpacity style={{width:(width-50)/2}}
                                   activeOpacity={0.9}
-                                  onPress={()=>{ DeviceEventEmitter.emit("zanting","让视频暂停");this._goDetails();}}
+                                  onPress={()=>{ DeviceEventEmitter.emit("stopvideo","让视频暂停");this._goDetails();}}
                 >
                     <View style={{backgroundColor:'#ccc',borderRadius:10}}>
                         <Image source={{uri:this.props.title.showimg}} style={{height: (width-50)/2, width:(width-50)/2,borderRadius:10}}/>
@@ -59,7 +58,7 @@ export default class CorrelationItem extends React.PureComponent  {
                 </TouchableOpacity>
                 <View style={{paddingLeft:15,marginBottom:5,marginTop:5}}>
                     <Text numberOfLines={1} style={{height:20, fontWeight:'100',lineHeight:20,fontSize:14,color:'#666'}} >{this.props.title.biaoti}</Text>
-                    <Text numberOfLines={1} style={{height:15, lineHeight:15,fontSize:10,color:'#aaa'}} >{this.props.title.jieshao}</Text>
+                    <Text numberOfLines={1} style={{height:15, lineHeight:15,fontSize:12,color:'#aaa'}} >{this.props.title.jieshao}</Text>
                     {/*<TouchableOpacity activeOpacity={1} style={{flexDirection:'row',alignItems:'center',height:15,}}>*/}
                         {/*<Image source={require('../img/icon_maketime.png')} style={{height:10, width:10,borderRadius:5}}/>*/}
                         {/*<Text numberOfLines={1} style={{ letterSpacing:5,lineHeight:15,fontSize:10,marginLeft:5,color:'#f5c61e'}} >{this.props.title.maketime}</Text>*/}

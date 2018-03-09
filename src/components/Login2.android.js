@@ -1,6 +1,6 @@
 import React,{Component} from 'react';
 import { StyleSheet,Dimensions,DeviceEventEmitter,Image,TouchableOpacity,TouchableNativeFeedback,ImageBackground,StatusBar} from "react-native";
-import {Actions} from "react-native-router-flux";
+import {Actions,ActionConst} from "react-native-router-flux";
 import Request from '../utils/Fetch';
 import Storage  from '../utils/Storage';
 import Config from '../utils/Config';
@@ -88,7 +88,6 @@ export default class Login2 extends Component {
             return
         }
 
-
         let parpam="thetype=1001"+'&phone='+this.state.phone;
         Request('1001',parpam)
             .then((responseJson) => {
@@ -111,8 +110,6 @@ export default class Login2 extends Component {
                     isvisiable:false,
                 })
                    this._loginWay(platform,result);
-
-
                 console.log(result);
             }else{
                 this.setState({
@@ -190,13 +187,14 @@ export default class Login2 extends Component {
                         Config.userid=userid;
                         Config.userkey=userkey;
                         Config.usertype="1";
+                        Config.createJiGuangId();
                         Storage.saveWithKeyValue("userid",userid);
                         Storage.saveWithKeyValue("userkey",userkey);
                         Storage.saveWithKeyValue("usertype","1");
                         DeviceEventEmitter.emit("getinfo","刷新个人信息")
                         Actions.pop();
                     }else {
-                        Actions.getinfo({type:'replace',userid:userid,userkey:userkey});
+                        Actions.getinfo({type:ActionConst.RESET,userid:userid,userkey:userkey});
                     }
                 }else{
                     Toast.show('验证码错误')

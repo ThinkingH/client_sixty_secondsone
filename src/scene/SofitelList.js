@@ -142,7 +142,7 @@ export default class SofitelList extends Component {
                 <View style={{backgroundColor:'#fff'}}  >
                     <Image source={{uri:this.props.datas.showimg}} style={{height: width/16*9, width: width}}/>
                     <View  style={{padding:15}}>
-                        <Text style={{fontSize:10,color:'#c79b1e'}}>{this.props.datas.create_date}</Text>
+                        <Text style={{fontSize:10,color:'#f5c61e'}}>{this.props.datas.create_date}</Text>
                         <Text style={{marginTop:10,fontSize:14,color:'#666'}}>{this.props.datas.name}</Text>
                         <Text  note style={{marginTop:10,fontSize:12,color:'#999'}}>{this.props.datas.content}</Text>
                     </View>

@@ -123,17 +123,22 @@ export default class VideoDeta extends Component {
         console.log("VideoDetails ====>componentWillUnmount")
         this.videos.relese();
         //  this.onCompletion.remove();
+        this.stopvideoa.remove();
         NetWorkTool.removeEventListener(NetWorkTool.TAG_NETWORK_CHANGE,this.handleMethod);
     }
 
     componentDidMount () {
         this._getData();
+        this.stopvideoa= DeviceEventEmitter.addListener("stopvideoa",this._stopa);
         // this.onCompletion = DeviceEventEmitter.addListener("onCompletion",this._onCompletion);
         InteractionManager.runAfterInteractions(() => {
             this._getData();
 
         });
 
+    }
+    _stopa=()=>{
+        this.videos.pause();
     }
 
     componentWillReceiveProps(nextProps){
@@ -349,13 +354,13 @@ export default class VideoDeta extends Component {
         return(
             <ScrollView showsHorizontalScrollIndicator={false} horizontal={true} >
                 {this.state.dataa.map((item,i)=>
-                    <View onPress={()=>this._listItemPress(2)} style={{width:width/2,marginLeft:15}}  key={item.id}>
+                    <View onPress={()=>this._listItemPress(2)} style={{width:width/2.7,marginLeft:15}}  key={item.id}>
                         <TouchableOpacity activeOpacity={1}
                                           style={{flex:1}}
                                           onPress={()=>this._listItemPress(2)}
                         >
-                            <View style={{backgroundColor:'#ccc',width:width/2,height:width/2,borderRadius:10}}>
-                                <Image square style={{width:width/2,height:width/2,borderRadius:10}} source={{uri:item.showimg}} />
+                            <View style={{backgroundColor:'#ccc',width:width/2.7,height:width/2.7,borderRadius:10}}>
+                                <Image square style={{width:width/2.7,height:width/2.7,borderRadius:10}} source={{uri:item.showimg}} />
                             </View>
 
 
@@ -366,10 +371,10 @@ export default class VideoDeta extends Component {
 
                                 <View style={{marginLeft:10,marginTop:10,justifyContent:'center'}}>
                                     <Text numberOfLines={1} style={{color:'#000'}}>{item.nickname}</Text>
-                                    <Text style={{color:'#595959',fontSize:14}}>9:25</Text>
+                                    <Text style={{color:'#595959',fontSize:12}}>9:25</Text>
                                 </View>
                             </View>
-                            <Text numberOfLines={2} style={{marginTop:10,color:'#000',fontSize:14}}>{item.content}</Text>
+                            <Text numberOfLines={2} style={{marginTop:10,color:'#000',fontSize:14,marginLeft:5}}>{item.content}</Text>
                         </TouchableOpacity>
                     </View>
                 )}

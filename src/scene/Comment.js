@@ -2,7 +2,10 @@
  * Created by Administrator on 2017/10/11.
  */
 import React, { Component } from 'react';
-import { StyleSheet,Platform,StatusBar, InteractionManager,Keyboard,View,Image,DeviceEventEmitter,KeyboardAvoidingView} from "react-native";
+import {
+    StyleSheet, Platform, StatusBar, TextInput,Dimensions, InteractionManager, Keyboard, View, Image, DeviceEventEmitter,
+    KeyboardAvoidingView
+} from "react-native";
 import { Container, Header,Footer, Content, List, ListItem, Text, Left, Right, Switch, Body, Thumbnail, Item, Col, Input, Button } from 'native-base';
 import {Actions} from "react-native-router-flux";
 import Config from '../utils/Config';
@@ -11,6 +14,7 @@ import Toast from '@remobile/react-native-toast'
 import ListScene from "./ListScene";
 import Spinnera from '../components/Spinner';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+const {width, height} = Dimensions.get('window');
 const styles = StyleSheet.create({
     container: {
         flex: 1,backgroundColor: '#efeff4',
@@ -145,6 +149,13 @@ export default class Comment extends Component {
     };
 
     feedBack=(item)=>{
+        if(Platform.OS=='ios'){
+            this.refs['bottomInput'].focus();
+        }else{
+            this.refs['input'].focus();
+        }
+
+
         this.setState({
             value:"@"+item.nickname+":",
             toItem:item,
@@ -179,8 +190,8 @@ export default class Comment extends Component {
                 {Platform.OS=='ios'?(
                     <View style={{marginBottom:this.state.kbheight}} >
                     <Footer style={{backgroundColor:'#eee',justifyContent:'center',alignItems:'center',height:50,}}>
-                        <Input ref="bottomInput"  multiline={true}
-                                style={{backgroundColor:'#fff',height:30,borderRadius:4,borderWidth:1,borderColor:'#666',fontSize:12,padding:0,marginLeft:15,marginRight:15,lineHeight:14}}
+                        <TextInput ref="bottomInput"  multiline={true}
+                                style={{backgroundColor:'#fff',width:width-100,height:30,borderRadius:4,borderWidth:1,borderColor:'#666',fontSize:12,padding:0,marginLeft:15,marginRight:15,lineHeight:14}}
                                 value={this.state.value}
                                 placeholder={this.state.placeholder}
                                 onChangeText={(value)=>this._getValue(value)}
@@ -193,8 +204,8 @@ export default class Comment extends Component {
                 ):(
 
                     <Footer style={{backgroundColor:'#eee',justifyContent:'center',alignItems:'center',height:50,}}>
-                        <Input  multiline={true}
-                                style={{backgroundColor:'#fff',height:30,borderRadius:4,borderWidth:1,borderColor:'#666',fontSize:12,padding:0,marginLeft:15,marginRight:15,lineHeight:14}}
+                        <TextInput ref='input'  multiline={true}
+                                style={{backgroundColor:'#fff',width:width-100,height:30,borderRadius:4,borderWidth:1,borderColor:'#666',fontSize:12,padding:0,marginLeft:15,marginRight:15,lineHeight:14}}
                                 value={this.state.value}
                                 placeholder={this.state.placeholder}
                                 onChangeText={(value)=>this._getValue(value)}

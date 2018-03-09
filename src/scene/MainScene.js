@@ -40,6 +40,7 @@ export default class MainScene extends Component {
         this.state={
             numcolumns:this.props.item=="video"?2:1,
             datas:[],
+            isshowstopll:false,//是否显示流量播放视频的提示
             refreshing: false,
             isLoadingMore:false,
             classify:this.props.classify,
@@ -61,12 +62,12 @@ export default class MainScene extends Component {
                 1,
             ),
         }
-        NetWorkTool.checkNetworkState((isConnected)=>{
-            console.log(isConnected);
-            if(!isConnected){
-                Toast.show(NetWorkTool.NOT_NETWORK);
-            }
+        NetWorkTool.getNetInfo((info)=>{
+            Config.ISPLAYLL=info.type;
+
+
         });
+
     }
 
     handleMethod=(isConnected)=>{
@@ -74,6 +75,8 @@ export default class MainScene extends Component {
         NetWorkTool.getNetInfo((info)=>{
             if(info=="WIFE"){
                 this._getMainVideo();
+                console.log('222222222222222222222222222222dfewv')
+                DeviceEventEmitter.emit('startvideo')
             }else if(info=="MOBILE"){
 
                 Alert.alert(
@@ -90,10 +93,12 @@ export default class MainScene extends Component {
                     // { cancelable: false }
                 );
             }
-            console.log(info);
+            console.log('22222222222221111111111111111',info);
         });
         console.log('test', (isConnected ? 'online' : 'offline'));
     };
+
+
 
     componentWillMount() {
         this._panResponder = PanResponder.create({
@@ -152,7 +157,11 @@ export default class MainScene extends Component {
 
         this.getMainRefresh = DeviceEventEmitter.addListener("getMainRefresh",this._getDatamain);
         this.getMainvideoRefresh = DeviceEventEmitter.addListener("getMainvideoRefresh",this._getMainVideo);
-        NetWorkTool.addEventListener(NetWorkTool.TAG_NETWORK_CHANGE,this.handleMethod);
+
+
+
+
+
         InteractionManager.runAfterInteractions(() => {
           //  this._onRefresh();
 
@@ -391,7 +400,20 @@ export default class MainScene extends Component {
             )
     }
         onFetch = async(_pageNo, startFetch, abortFetch) => {
-            this._getMainVideo();
+            if(Config.ISSHOWL==1){
+                if(Config.ISPLAYLL=='wifi'){
+                    this._getMainVideo();
+
+                }else if(Config.ISPLAYLL=='cellular'){
+                    this.props.isShowLL(Config.ISPLAYLL);
+                }
+            }else if(Config.ISSHOWL==2){
+                this._getMainVideo();
+            }else if(Config.ISSHOWL==3){
+                this._getMainVideo();
+            }
+
+
                 let parpam=null;
                 parpam=this.props.url+"&pagesize=10&page="+_pageNo;
             console.log("_pageNo_pageNo_pageNo_pageNo_pageNo_pageNo_pageNo",_pageNo);
@@ -489,6 +511,7 @@ export default class MainScene extends Component {
                     refreshViewStyle={Platform.OS === 'ios' ? { height: 90, top: -90 } : { height: 90 }}
                     refreshViewHeight={90}
                 />
+
             </View>
         );
     }
@@ -505,11 +528,11 @@ class MyListHeader extends React.PureComponent {
     };
 
     startVideo=()=>{
-        console.log('开始了：','this.video.start();')
+       // console.log('开始了：','this.video.start();')
         this.video.start();
     }
     _mute=()=>{
-        console.log('静音了：','this.video.unmute();')
+       // console.log('静音了：','this.video.unmute();')
         this.video.mute();
     }
     // componentWillUnmount() {
