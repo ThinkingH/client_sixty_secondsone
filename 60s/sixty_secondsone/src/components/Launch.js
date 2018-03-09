@@ -39,7 +39,11 @@ class Launch extends React.Component {
     }
 
     componentDidMount() {
+        NetWorkTool.getNetInfo((info)=>{
+            Config.ISPLAYLL=info.type;
 
+
+        });
         // setTimeout(() => {
         //     Actions.tabbar({type: ActionConst.RESET});
         // }, 3000);
@@ -164,6 +168,13 @@ class Launch extends React.Component {
                      ],
                      // { cancelable: false }
                  );
+             }else if(Config.version>responseJson.data.version){
+                 console.log('dddddddddddddddddd')
+                 if(isfirst=='1'){
+                     Actions.tabbar({type: ActionConst.RESET});
+                 }else{
+                     Actions.intro({type: ActionConst.RESET});
+                 }
              }
             })
             .catch((error) => {

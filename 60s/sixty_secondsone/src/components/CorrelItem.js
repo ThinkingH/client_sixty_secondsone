@@ -46,14 +46,14 @@ export default class CorrelItem extends React.PureComponent  {
         //  console.log('this.props.selected..........................',this.state.iscollect)
         return (
 
-            <TouchableOpacity  onPress={()=>{ DeviceEventEmitter.emit("zanting","让视频暂停");
+            <TouchableOpacity  onPress={()=>{ DeviceEventEmitter.emit("stopvideoa","让视频暂停");
 
                           this._goDetails();
 
                         }} activeOpacity={1}   style={{width:(width-50)/2}} >
                 <TouchableOpacity style={{width:(width-50)/2}}
                                   activeOpacity={0.9}
-                                  onPress={()=>{ DeviceEventEmitter.emit("zanting","让视频暂停");this._goDetails();}}
+                                  onPress={()=>{ DeviceEventEmitter.emit("stopvideoa","让视频暂停");this._goDetails();}}
                 >
                     <View style={{backgroundColor:'#ccc',borderRadius:10}}>
                         <Image source={{uri:this.props.title.showimg}} style={{height: (width-50)/2, width:(width-50)/2,borderRadius:10}}/>

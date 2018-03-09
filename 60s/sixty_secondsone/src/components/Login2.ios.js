@@ -197,15 +197,17 @@ export default class Login2 extends Component {
                         Config.userid=userid;
                         Config.userkey=userkey;
                         Config.usertype="1";
+                        Config.createJiGuangId();
                         Storage.saveWithKeyValue("userid",userid);
                         Storage.saveWithKeyValue("userkey",userkey);
                         Storage.saveWithKeyValue("usertype","1");
                         DeviceEventEmitter.emit("getinfo","刷新个人信息")
                         Actions.pop();
                     }else {
+                       // Actions.pop();
 
+                        Actions.getinfo({type:ActionConst.RESET,userid:userid,userkey:userkey});
 
-                        Actions.getinfo({type: ActionConst.RESET,userid:userid,userkey:userkey});
                     }
                 }else{
                     Toast.show('验证码错误')

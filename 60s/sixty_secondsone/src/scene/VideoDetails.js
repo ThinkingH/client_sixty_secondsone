@@ -78,12 +78,7 @@ export default class VideoDetails extends Component {
             fromWhere:this.props.fromWhere,//记录是从哪一页跳转进详情页
         };
 
-        NetWorkTool.checkNetworkState((isConnected)=>{
-            console.log(isConnected);
-            if(!isConnected){
-                Toast.show(NetWorkTool.NOT_NETWORK);
-            }
-        });
+
     }
 
     handleMethod=(isConnected)=>{
@@ -121,17 +116,23 @@ export default class VideoDetails extends Component {
         this.videos.relese();
         DeviceEventEmitter.emit('replay');
         //  this.onCompletion.remove();
+        this.stopvideo.remove();
         NetWorkTool.removeEventListener(NetWorkTool.TAG_NETWORK_CHANGE,this.handleMethod);
     }
 
     componentDidMount () {
         this._getData();
+        this.stopvideo= DeviceEventEmitter.addListener("stopvideo",this._stop);
+
         // this.onCompletion = DeviceEventEmitter.addListener("onCompletion",this._onCompletion);
         InteractionManager.runAfterInteractions(() => {
-            this._getData();
+          //  this._getData();
 
         });
 
+    }
+    _stop=()=>{
+        this.videos.pause();
     }
 
     componentWillReceiveProps(nextProps){
@@ -347,13 +348,13 @@ export default class VideoDetails extends Component {
         return(
             <ScrollView showsHorizontalScrollIndicator={false} horizontal={true} >
                 {this.state.dataa.map((item,i)=>
-                    <View onPress={()=>this._listItemPress(2)} style={{width:width/2,marginLeft:15}}  key={item.id}>
+                    <View onPress={()=>this._listItemPress(2)} style={{width:width/2.7,marginLeft:15}}  key={item.id}>
                         <TouchableOpacity activeOpacity={1}
                                           style={{flex:1}}
                                           onPress={()=>this._listItemPress(2)}
                         >
-                            <View style={{backgroundColor:'#ccc',width:width/2,height:width/2,borderRadius:10}}>
-                                <Image square style={{width:width/2,height:width/2,borderRadius:10}} source={{uri:item.showimg}} />
+                            <View style={{backgroundColor:'#ccc',width:width/2.7,height:width/2.7,borderRadius:10}}>
+                                <Image square style={{width:width/2.7,height:width/2.7,borderRadius:10}} source={{uri:item.showimg}} />
                             </View>
 
 
@@ -364,10 +365,10 @@ export default class VideoDetails extends Component {
 
                                 <View style={{marginLeft:10,marginTop:10,justifyContent:'center'}}>
                                     <Text numberOfLines={1} style={{color:'#000'}}>{item.nickname}</Text>
-                                    <Text style={{color:'#595959',fontSize:14}}>9:25</Text>
+                                    <Text style={{color:'#595959',fontSize:12}}>9:25</Text>
                                 </View>
                             </View>
-                            <Text numberOfLines={2} style={{marginTop:10,color:'#000',fontSize:14}}>{item.content}</Text>
+                            <Text numberOfLines={2} style={{marginTop:10,color:'#000',fontSize:14,marginLeft:5}}>{item.content}</Text>
                         </TouchableOpacity>
                     </View>
                 )}
@@ -381,10 +382,10 @@ export default class VideoDetails extends Component {
                 <Text numberOfLines={2} style={{fontSize:18,color:'#212121',marginTop:20}}>{this.props.title}</Text>
                 <Row style={{alignItems:'center',marginTop:10}}>
                     <Thumbnail square style={{width:14,height:14}} source={require('../img/icon_maketime.png')} />
-                    <Text style={[styles.texts,{marginLeft:5,color:'#c79b1e'}]}>制作时间：{this.state.data.maketime}</Text>
+                    <Text style={[styles.texts,{marginLeft:5,color:'#f5c61e'}]}>制作时间：{this.state.data.maketime}</Text>
                 </Row>
                 <Body style={{marginBottom:20,marginTop:20}}>
-                <Text note style={[styles.texts,{lineHeight:20,color:'#aaa'}]}>{this.state.data.jieshao}</Text>
+                <Text note style={[styles.texts,{lineHeight:20,color:'#000'}]}>{this.state.data.jieshao}</Text>
                 </Body>
                 <Surface  width={width-40} height={1}>
                     <Shape d={path} stroke="#C5B061" strokeWidth={1} strokeDash={[3,5]}/>
@@ -558,9 +559,9 @@ export default class VideoDetails extends Component {
                                 <Image square style={{width:width/2.7,height:width/2.7,borderRadius:10}} source={{uri:item.showimg}} />
                             </View>
                             <View style={{marginTop:10}}>
-                                <View style={{marginLeft:10,marginTop:10,justifyContent:'center'}}>
+                                <View style={{marginLeft:10,marginTop:5,justifyContent:'center'}}>
                                     <Text numberOfLines={1} style={{color:'#000'}}>{item.biaoti}</Text>
-                                    <Text numberOfLines={1} style={{color:'#595959',fontSize:12}}>{item.jieshao}</Text>
+                                    <Text numberOfLines={1} style={{color:'#595959',fontSize:12,marginTop:3}}>{item.jieshao}</Text>
                                 </View>
                             </View>
                         </TouchableOpacity>
@@ -634,7 +635,7 @@ export default class VideoDetails extends Component {
                         <Text style={[styles.textb,{color:'#000',}]}>贴心提示</Text>
                     </View>
                     <View style={{backgroundColor:'#fff',marginLeft:20,marginRight:17,paddingBottom:15,marginTop:15}} >
-                        <Text note style={[styles.texts,{color:'#aaa',lineHeight:20}]}>{this.state.data.tishishuoming}</Text>
+                        <Text note style={[styles.texts,{color:'#000'}]}>{this.state.data.tishishuoming}</Text>
                     </View>
                         <Button rounded={true} block={true} onPress={()=>this._comment()} style={{height:45,marginLeft:30,width:width-60,marginBottom:10,marginTop:10,backgroundColor:'#f5c61e'}} iconLeft >
                             <Image style={[styles.imagelogo,{marginRight:5}]} source={require('../img/icon_commentbtn.png')} />

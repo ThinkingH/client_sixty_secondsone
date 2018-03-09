@@ -51,10 +51,10 @@ export default function request(thetype,param = "") {
                     });
                 console.log('1111111111111111111111111',isConnected+'')
                // alert(isConnected+'')
-              //  Toast.show(NetWorkTool.NOT_NETWORK);
+               //Toast.show(NetWorkTool.NOT_NETWORK);
             }else{
                // alert(isConnected+'')
-                //Toast.show(NetWorkTool.NOT_NETWORK);
+               // Toast.show(NetWorkTool.NOT_NETWORK);
                 console.log('22222222222222222',isConnected+'')
             }
         });

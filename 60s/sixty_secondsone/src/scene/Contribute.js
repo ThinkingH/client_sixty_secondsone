@@ -49,6 +49,7 @@ export default  class Contribute extends Component {
             disabled:true,
             btncolor:'#cfcfcf',
             isvisiable:false,
+            isshows:false,
         }
     }
 
@@ -116,8 +117,8 @@ export default  class Contribute extends Component {
 
     openPicker = (cropit) => {
         this.setState({
-            modalVisible: false,
-        });
+            isshows:false
+        })
         ImagePicker.openPicker({
             width: 400,
             height: 400,
@@ -134,7 +135,7 @@ export default  class Contribute extends Component {
                 img: {uri: `data:${image.mime};base64,` + image.data, width: 400, height: 400},
                 imgdata: image.data,
             });
-            this._isContribute();
+            this.iscanclick();
         }).catch(e => {}
 
         );
@@ -146,8 +147,8 @@ export default  class Contribute extends Component {
 
     openCamera = (cropit) => {
         this.setState({
-            modalVisible: false,
-        });
+            isshows:false
+        })
         ImagePicker.openCamera({
             width: 400,
             height: 400,
@@ -170,7 +171,7 @@ export default  class Contribute extends Component {
 
     _showModal=()=>{
         this.setState({
-            modalVisible:true
+            isshows:true
         })
     };
 
@@ -211,7 +212,7 @@ export default  class Contribute extends Component {
 
                 {this._renderTextInput()}
 
-                {this._renderModal()}
+                {this.state.isshows?(this._renderModal()):(null)}
 
                     <Spinnera loadvalue="投稿中..." modalVisible={this.state.isvisiable} />
 
@@ -223,15 +224,11 @@ export default  class Contribute extends Component {
 
     _renderModal=()=>{
         return(
-            <Modal animationType={'slide'}
-                   transparent={true}
-                   onRequestClose={() => { this.setState({modalVisible: false});}}
-                   visible={this.state.modalVisible}
-            >
-                <TouchableOpacity  activeOpacity={1} onPress={()=> { this.setState({ modalVisible:false})}} style={{flex:1,alignItems:'center',justifyContent:'flex-end',backgroundColor:'rgba(0,0,0,0.5)'}}>
+            <TouchableOpacity activeOpacity={1} onPress={()=>this.setState({ isshows:false})} style={{position:'absolute',width:width,height:height,backgroundColor:'rgba(0,0,0,0.5)',justifyContent:'flex-end'}}>
+                <TouchableOpacity  activeOpacity={1} onPress={()=> { this.setState({ isshows:false})}} style={{flex:1,alignItems:'center',justifyContent:'flex-end',backgroundColor:'rgba(0,0,0,0.5)'}}>
                     <TouchableOpacity activeOpacity={1} style={{width:width-20,height:height/2,marginBottom:10,flexDirection:'row',backgroundColor:'#fff',borderRadius:5}}>
                         <View style={{alignItems:'center'}}>
-                            <TouchableOpacity onPress={()=>this.openPicker(true)} style={{width:width/6,height:width/6/133*114,marginLeft:30,marginTop:30}}>
+                            <TouchableOpacity onPress={()=>{this.openPicker(true)}} style={{width:width/6,height:width/6/133*114,marginLeft:30,marginTop:30}}>
                                 <Image  style={{width:width/6,height:width/6/133*114}} source={require("../img/icon_contribute_modalpic.png")}>
                                 </Image>
                             </TouchableOpacity>
@@ -246,12 +243,12 @@ export default  class Contribute extends Component {
                         </View>
                         <View style={{position:'absolute',bottom:41,width:width,height:1,backgroundColor:'#ddd'}}>
                         </View>
-                        <TouchableOpacity  onPress={()=>this.setState({modalVisible: false})} style={{position:'absolute',bottom:0,width:width,height:40,alignItems:'center',justifyContent:'center'}}>
+                        <TouchableOpacity  onPress={()=>this.setState({isshows: false})} style={{position:'absolute',bottom:0,width:width,height:40,alignItems:'center',justifyContent:'center'}}>
                             <Text>取消</Text>
                         </TouchableOpacity>
                     </TouchableOpacity>
                 </TouchableOpacity>
-            </Modal>
+            </TouchableOpacity>
         )
     }
 

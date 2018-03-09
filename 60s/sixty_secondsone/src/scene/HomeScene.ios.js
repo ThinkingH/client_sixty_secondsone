@@ -15,6 +15,7 @@ import Config from "../utils/Config";
 import Storage  from '../utils/Storage';
 import TabBar from '../components/TabBar';
 import ScrollableTabView from 'react-native-scrollable-tab-view';
+import NetWorkTool from "../utils/NetWorkTool";
 
 const {width, height} = Dimensions.get('window');
 let imgurla=[];
@@ -26,6 +27,7 @@ let img=[require('../../src/img/icon_message.png'),require('../../src/img/icon_q
 let wordarr=[];
 let keywordarr=[];
 let aaa=['dvdf','dvdf','dvdf','dvdf','dvdf','dvdf','dvdf','dvdf'];
+let inf='';
 const scrollY = new Animated.Value(0);
 const scrollY2 = new Animated.Value(0);
 const AnimatedListComponent = Animated.createAnimatedComponent(MainScene);
@@ -43,6 +45,7 @@ class HomeScene extends BaseScene {
             // data:[],
             lock:true,
             imgurlarr:imgurl,
+            isshowstopll:false,//是否显示流量播放视频的提示
             isshowtab:true,
             tabheight:0,
             scrollY,
@@ -62,15 +65,45 @@ class HomeScene extends BaseScene {
             timingTranslateY: new Animated.Value(0),
 
         }
+        NetWorkTool.getNetInfo((info)=>{
+            Config.ISPLAYLL=info.type;
+            if(info.type=='cellular'){
+                this.setState({
+                    isshowstopll:true
+                })
+            }
+            inf=info
+        });
+    }
 
+    handleMethodios=(isConnected)=>{
+        NetWorkTool.getNetInfo((info)=>{
+
+            Config.ISPLAYLL=info.type;
+            if(info.type=="wifi"){
+                DeviceEventEmitter.emit('getMainvideoRefresh')
+            }else if(info.type=="cellular"){
+
+                this.setState({
+                    isshowstopll:true
+                })
+            }
+
+        });
+        console.log('test', (isConnected ? 'online' : 'offline'));
     }
 
     componentDidMount(){
+
         this.changeHeaderd= DeviceEventEmitter.addListener("changeHeaderd",this._changeHeaderd);
         this.changeHeaderu= DeviceEventEmitter.addListener("changeHeaderu",this._changeHeaderu);
         console.log(this.props.num);
         this._getDataa();
-
+        if(Platform.OS==='ios'){
+            NetWorkTool.addEventListener(NetWorkTool.TAG_NETWORK_CHANGE,this.handleMethodios);
+        }else{
+            NetWorkTool.addEventListener(NetWorkTool.TAG_NETWORK_CHANGE,this.handleMethod);
+        }
 
         const toValue = this.state.translateY.interpolate({
             inputRange: [0, 1],
@@ -127,15 +160,11 @@ class HomeScene extends BaseScene {
                     imgurlarr:imgurla,
                     isshowtab:true
                 });
-
             })
             .catch((error) => {
                 Toast.show(error.toString());
             });
     };
-
-
-
 
     _onChangeTab=(index)=>{
         if(index.i==0){
@@ -144,6 +173,7 @@ class HomeScene extends BaseScene {
             DeviceEventEmitter.emit("zanting","暂停视频")
         }
     }
+
     _goT=()=>{
 
         Storage.saveWithKeyValue("timevalue",'');
@@ -196,9 +226,23 @@ class HomeScene extends BaseScene {
     };
 
     _onScroll(info) {
-        console.log(info.nativeEvent.contentOffset.y)
+        //console.log(info.nativeEvent.contentOffset.y)
     }
 
+    _goOnPlay=()=>{
+        Config.ISSHOWL=2
+        this.setState({isshowstopll:false});
+        DeviceEventEmitter.emit('getMainvideoRefresh')
+    }
+
+    _stopPlay=(info)=>{
+
+        if(info==='cellular'){
+            this.setState({isshowstopll:true});
+        }
+
+
+    }
 
 
     render(){
@@ -214,6 +258,7 @@ class HomeScene extends BaseScene {
                 if(i==0){
                     return(
                         <AnimatedListComponent load={this.props.load}  header={"header"} key={i}
+                                               isShowLL={this._stopPlay}
                                                onScroll={Animated.event(
                                                    [{ nativeEvent: { contentOffset: { y: scrollY } } }],
                                                    { listener: this._onScroll.bind(this) },
@@ -240,7 +285,6 @@ class HomeScene extends BaseScene {
                                    tabLabel={item.word}
                                    thetype="1034" item={"video"}
                                    />
-
                     )
                 }
             })}
@@ -252,17 +296,12 @@ class HomeScene extends BaseScene {
                            barStyle="light-content"
                            translucent={false}
                            hidden={false}/>
-
-
-
                     <Animated.View ref="header" style={{height:80,marginTop:20,backgroundColor:'#fff',alignItems:'center',transform: [{ translateY}]}}>
-
                         <ImageBackground   style={{position:'absolute',top:0,width:width,height:50,flexDirection:'row'}} source={require('../img/icon_homebg.png')}>
                             <View style={{width:width,height:50,position:'absolute',alignItems:'center',justifyContent:'center',backgroundColor:'transparent'}}>
                                 <Text style={{color:'#fff',fontSize:18,backgroundColor:'transparent',marginBottom:width/1.28/850*130/6}}>60Sec</Text>
                             </View>
                         </ImageBackground>
-
                         <TouchableOpacity style={{position:'absolute',top:width/472*65-width/1.28/850*130/3}} activeOpacity={1}
                                           onPress={()=>Actions.TabView()}>
                             <Image  style={{width:width/1.28,height:width/1.28/850*130}} source={require('../img/newicon_seachbar.png')} />
@@ -271,6 +310,32 @@ class HomeScene extends BaseScene {
                     <Animated.View style={{flex:1,marginBottom:0,transform: [{ translateY}]}}>
                     {content}
                     </Animated.View>
+                {this.state.isshowstopll?(
+                    <View style={{position:'absolute',width:width,height:height,alignItems:'center',justifyContent:'center',backgroundColor:'rgba(0,0,0,0.5)'}}>
+                        <View style={{width:width/1.3,height:200,backgroundColor:'#fff'}}>
+                            <View style={{flex:2.5,padding:20,alignItems:'center',justifyContent:'center'}}>
+                                <Text style={{lineHeight:30,}}>当前为非WIFI环境，是否用</Text>
+                                <Text style={{lineHeight:30,}}>流量观看视频?</Text>
+                            </View>
+                            <View style={{flex:1,flexDirection:'row'}}>
+                                <TouchableOpacity activeOpacity={1}
+                                                  style={{flex:1,alignItems:'center',justifyContent:'center'}}
+                                                  onPress={()=>{this.setState({isshowstopll:false})}}
+                                >
+                                    <Text>暂停播放</Text>
+                                </TouchableOpacity>
+                                <TouchableOpacity activeOpacity={1}
+                                                  style={{flex:1,alignItems:'center',justifyContent:'center',backgroundColor:'#f5c61e'}}
+                                                  onPress={()=>{this._goOnPlay()}}
+                                >
+                                    <Text>继续观看</Text>
+                                </TouchableOpacity>
+                            </View>
+                        </View>
+                    </View>
+                ):(
+                    null
+                )}
                 <View style={{width:width,height:Config.STATUSBARHEIGHT,position:'absolute',top:0,backgroundColor:Config.StatusBarColor}} />
             </Container>
         )

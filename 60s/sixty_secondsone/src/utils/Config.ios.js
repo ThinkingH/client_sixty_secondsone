@@ -24,8 +24,8 @@ const styles = StyleSheet.create({
 });
 
 export default class Config{
-     static versionName="V1.1.2";
-     static version=112;
+     static versionName="V1.1.4";
+     static version=114;
      static ISHIDE=false;
      static loadingTxtStyle={color:"#757575",fontSize:14,};
      static loadingTxt="正在加载中...";
@@ -38,7 +38,9 @@ export default class Config{
      static StatusBarColor='#f5c61e';
      static IECEIVESOCKET=2;
      static ISCOLLECT=1;
+    static ISSHOWL=1;
      static ISJPUSH=true;
+    static ISPLAYLL='';//是否为流量状态
      // static STATUSBARHEIGHT=Platform.OS == 'ios' ? 20 : StatusBar.currentHeight;
      static STATUSBARHEIGHT = isiPhoneX ? 44 : 20;
      static BaseURL = "http://api.60video.net/";
@@ -59,6 +61,7 @@ export default class Config{
         let parpam="thetype=1003&jiguangid="+md5;
         Request('1003',parpam)
             .then((responseJson) => {
+                console.log('12346442324354665432',responseJson)
             })
             .catch((error) => {
                 Toast.show(error.toString());

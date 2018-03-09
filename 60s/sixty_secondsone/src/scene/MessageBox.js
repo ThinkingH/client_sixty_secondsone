@@ -57,7 +57,7 @@ export default class MessageBox extends Component {
             <Container style={{backgroundColor:'#fafafa'}}>
 
                 <StatusBar backgroundColor={Config.StatusBarColor}
-                           barStyle="light-content"
+                           barStyle="dark-content"
                            translucent={false}
                            hidden={false}/>
 

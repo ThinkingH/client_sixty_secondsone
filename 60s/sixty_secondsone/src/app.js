@@ -181,33 +181,6 @@ export default class apps extends Component {
 
     }
     componentDidMount(){
-
-        //alert('fff打开推送打开推送打开推送。。。')
-        this.subscription = NativeAppEventEmitter.addListener(
-            'OpenNotification',
-            (notification) => {
-                console.log('打开推送',notification);
-                setTimeout(()=>{
-                    alert('fff')
-                },5000)
-
-            }
-        )
-
-        this.subscription = NativeAppEventEmitter.addListener(
-            'ReceiveNotification',
-            (notification) => {
-                console.log('-------------------收到推送----------------');
-                console.log(notification);
-                alert('-------------------收到推送----------------');
-                setTimeout(()=>{
-                    alert('fff发发发')
-                },5000)
-            }
-        );
-
-
-
         Storage.getValueForKey("jpush").then((value) => {
             console.log('valuevaluevaluevaluevalue111111111:',value)
             if(value==true||value==null){
@@ -220,15 +193,11 @@ export default class apps extends Component {
             }
 
         });
-
-
         this.isshare = DeviceEventEmitter.addListener("isshare",this._isshare);
-
         this.changeTab = DeviceEventEmitter.addListener("changeTab",this._changeTab);
          if(Platform.OS==='ios'){
              this._getConfigInfo();
          }
-
     }
     componentWillUnmount() {
         this.changeTab.remove();
@@ -249,7 +218,6 @@ export default class apps extends Component {
     };
 
     _isshare=()=>{
-
         this.setState({
             isshare:!this.state.isshare,
         })
@@ -270,58 +238,28 @@ export default class apps extends Component {
 
     initPush=()=>{
 
-        //-----------jpush  ios start
-        if (Platform.OS === 'ios') {
-            // this.subscription = NativeAppEventEmitter.addListener(
-            //     'OpenNotification',
-            //     (notification) => {
-            //         console.log('打开推送',notification);
-            //         setTimeout(()=>{
-            //             alert('fff')
-            //         },5000)
-            //
-            //     }
-            // )
-            //
-            // this.subscription = NativeAppEventEmitter.addListener(
-            //     'ReceiveNotification',
-            //     (notification) => {
-            //         console.log('-------------------收到推送----------------');
-            //         console.log(notification);
-            //         alert('hehehehhehehehhehehehehehheh');
-            //         setTimeout(()=>{
-            //             alert('fff')
-            //         },5000)
-            //     }
-            // );
-        }
+        JPushModule.notifyJSDidLoad((resultCode) => {
+                if (resultCode === 0) {}
+              });
+        JPushModule.addReceiveCustomMsgListener((message) => {
+           // this.setState({pushMsg: message});
+        });
+        JPushModule.addReceiveNotificationListener((message) => {
 
+            Config.IECEIVESOCKET=1;
 
+            console.log("receive notification: " + message.toString());
+        });
 
-
-
-        // JPushModule.notifyJSDidLoad((resultCode) => {
-        //         if (resultCode === 0) {}
-        //       });
-        // JPushModule.addReceiveCustomMsgListener((message) => {
-        //    // this.setState({pushMsg: message});
-        // });
-        // JPushModule.addReceiveNotificationListener((message) => {
-        //
-        //     Config.IECEIVESOCKET=1;
-        //
-        //     console.log("receive notification: " + message.toString());
-        // });
-        //
-        // JPushModule.addReceiveOpenNotificationListener((map) => {
-        //     // alert(JSON.parse(map))
-        //     console.log('map.................................',map);
-        //     if(Platform.OS=='ios'){
-        //         this._getActiveIos(map);
-        //     }else{
-        //         this._getActiveAndroid(map);
-        //     }
-        // })
+        JPushModule.addReceiveOpenNotificationListener((map) => {
+            // alert(JSON.parse(map))
+            console.log('map.................................',map);
+            if(Platform.OS=='ios'){
+                this._getActiveIos(map);
+            }else{
+                this._getActiveAndroid(map);
+            }
+        })
     };
     _getActiveAndroid=(map)=>{
         console.log(map);

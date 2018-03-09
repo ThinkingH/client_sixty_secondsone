@@ -80,13 +80,14 @@ export default class GetInfo extends Component {
             }).then((responseJson)=>{
             this.setState({
                 isvisiable:false,
-            })
+            });
+            console.log('responseJsontouxiang',responseJson);
+            Actions.pop();
 
-                 Toast.show(responseJson.msg)
         }) .catch((error) => {
             this.setState({
                 isvisiable:false,
-            })
+            });
             Toast.show(error.toString());
         })
     }
@@ -141,7 +142,7 @@ export default class GetInfo extends Component {
             this._saveInfo();
             Config.createJiGuangId();
             DeviceEventEmitter.emit("getinfo","刷新个人信息")
-            Actions.pop();
+
         },1000);
 
 

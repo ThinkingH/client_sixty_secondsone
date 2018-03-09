@@ -390,7 +390,7 @@ export default class TipDetails extends Component {
                    {this.state.isshow?(
                            <View style={{flex:1}}>
                                <View style={{width:width,height:44,marginTop:Config.STATUSBARHEIGHT,flexDirection:'row',alignItems:'center',paddingLeft:20,paddingRight:20}}>
-                                   <TouchableOpacity activeOpacity={0.9} onPress={()=>Actions.pop()}>
+                                   <TouchableOpacity style={{width:40,height:40,alignItems:'center',justifyContent:'center'}} activeOpacity={0.9} onPress={()=>Actions.pop()}>
                                    <Image style={{width:20,height:20}} source={require('../img/icon_tipclose.png')}/>
                                    </TouchableOpacity>
                                    <View style={{flex:1}}></View>
