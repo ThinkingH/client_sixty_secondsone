@@ -44,7 +44,7 @@ export default class Config{
      // static STATUSBARHEIGHT=Platform.OS == 'ios' ? 20 : StatusBar.currentHeight;
      static STATUSBARHEIGHT = isiPhoneX ? 44 : 20;
      static BaseURL = "http://api.60video.net/";
-     static isDebug = "0";//初始值为0，2为隐藏（屏蔽），其余为显示
+     static isDebug = "2";//初始值为2，2为隐藏（屏蔽），其余为显示
      static initJpush=()=>{
          // JPushModule.initPush();
          // JPushModule.debug=false;
