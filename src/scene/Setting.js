@@ -121,7 +121,7 @@ export default class Setting extends Component {
             <Container style={{backgroundColor:'#fff'}}>
                 <StatusBar backgroundColor={Config.StatusBarColor}
                            barStyle="dark-content"
-                           translucent={true}
+                           translucent={false}
                            hidden={false}/>
                 <Content>
                     <List>

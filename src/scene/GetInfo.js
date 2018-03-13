@@ -126,7 +126,6 @@ export default class GetInfo extends Component {
             Toast.show("请输入名称");
             return
         }
-
            this.setState({
                isvisiable:true,
            });

@@ -23,6 +23,7 @@ const styles = StyleSheet.create({
         color:'#999'
     }
 });
+
 let _value='';
 export default class Comment extends Component {
     constructor(props) {
@@ -203,11 +204,12 @@ export default class Comment extends Component {
 
                 ):(
 
-                    <Footer style={{backgroundColor:'#eee',justifyContent:'center',alignItems:'center',height:50,}}>
+                    <Footer style={{backgroundColor:'#eee',justifyContent:'center',alignItems:'center',height:50}}>
                         <TextInput ref='input'  multiline={true}
                                 style={{backgroundColor:'#fff',width:width-100,height:30,borderRadius:4,borderWidth:1,borderColor:'#666',fontSize:12,padding:0,marginLeft:15,marginRight:15,lineHeight:14}}
                                 value={this.state.value}
                                 placeholder={this.state.placeholder}
+                                underlineColorAndroid="transparent"
                                 onChangeText={(value)=>this._getValue(value)}
                         />
 

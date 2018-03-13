@@ -202,6 +202,7 @@ export default class Login2 extends Component {
                         Storage.saveWithKeyValue("userkey",userkey);
                         Storage.saveWithKeyValue("usertype","1");
                         DeviceEventEmitter.emit("getinfo","刷新个人信息")
+                        Config.createJiGuangId();
                         Actions.pop();
                     }else {
                        // Actions.pop();
