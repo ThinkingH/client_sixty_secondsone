@@ -227,7 +227,7 @@ export default class AccountInfo extends Component {
             <Container  style={{backgroundColor:'#ccc'}}>
                 <StatusBar backgroundColor="transparent"
                            barStyle="dark-content"
-                           translucent={true}
+                           translucent={false}
                            hidden={false}/>
                 <Content showsVerticalScrollIndicator={false}    keyboardShouldPersistTaps="handled" >
                     <View style={{marginLeft:20,width:width-40,height:height,backgroundColor:'#ccc',marginTop:10}}>

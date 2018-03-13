@@ -164,7 +164,7 @@ export default class MainScene extends Component {
 
         InteractionManager.runAfterInteractions(() => {
           //  this._onRefresh();
-
+            this._getMainVideo();
            // this._getData(_pageNo);
         });
     }

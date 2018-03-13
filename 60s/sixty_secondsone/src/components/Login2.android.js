@@ -34,12 +34,13 @@ export default class Login2 extends Component {
             timerCount:60,
             timerTitle:'获取验证码',
             isvisiable:false,
+            unclick:false
         };
 
         _this=this;
     };
     componentWillMount() {
-      num=this.props.num
+      num=this.props.num?this.props.num:Math.ceil(Math.random()*4)-1
     }
 
     componentDidMount(){
@@ -60,16 +61,20 @@ export default class Login2 extends Component {
 
     _coundDown=()=>{
         this.setState({
+            unclick:true,
             btn_vcode:true,
             timerCount:60,
             timerTitle:60,
+
         });
         this.interval=setInterval(() =>{
             var timer=this.state.timerCount-1;
             if(timer===0){
+
                 this.interval&&clearInterval(this.interval);
                 this.setState({
                     timerCount:60,
+                    unclick:false,
                     timerTitle:'重新获取',
                     btn_vcode:false,
                 });
@@ -192,6 +197,7 @@ export default class Login2 extends Component {
                         Storage.saveWithKeyValue("userkey",userkey);
                         Storage.saveWithKeyValue("usertype","1");
                         DeviceEventEmitter.emit("getinfo","刷新个人信息")
+                        Config.createJiGuangId();
                         Actions.pop();
                     }else {
                         Actions.getinfo({type:ActionConst.RESET,userid:userid,userkey:userkey});
@@ -239,6 +245,7 @@ export default class Login2 extends Component {
                             style={{height:40,width:width-60,backgroundColor:'#f5c61e',marginTop:20}} >
                         <Text style={{textAlign:'center'}}>登录</Text>
                     </Button>
+
                     <Row style={{justifyContent:'center',marginTop:30}}>
                         <View style={{height:1,flex:1,backgroundColor:'#ccc',marginTop:10}}>
 
@@ -248,7 +255,7 @@ export default class Login2 extends Component {
 
                         </View>
                     </Row>
-                    <Row style={{padding:15,marginTop:20}}>
+                    <Row style={{padding:15,marginTop:20,marginBottom:20}}>
                         <Left>
                             <TouchableNativeFeedback
                                 onPress={()=>{this._checklogin(2)}}
@@ -300,21 +307,20 @@ export default class Login2 extends Component {
                            barStyle="light-content"
                            translucent={true}
                            hidden={false}/>
-                     <Content keyboardShouldPersistTaps="handled"  >
+                     <Content style={{height:height,width:width}} keyboardShouldPersistTaps="handled"  >
                     <Body style={{flex:1,alignItems:'center'}}>
-                    <ImageBackground   style={{width:width,height:width,justifyContent:'flex-end',alignItems:'center'}}
-                                       source={imgarr[num]} >
+                    <ImageBackground  style={{width:width,height:width,justifyContent:'flex-end',alignItems:'center'}}
+                                      source={imgarr[num]} >
                         {/*<Button rounded block onPress={()=>Actions.login2()}  style={{backgroundColor:'#c5b361',width:width-60,height:40,marginLeft:30}}>*/}
                             {/*<Text style={{fontSize:16,color:'#fff'}} >用  户  登  录</Text>*/}
                         {/*</Button>*/}
                         <Item rounded style={{width:width-60,backgroundColor:'#fff',elevation:1,alignItems:'center'}} >
-
                                 <Input onChangeText={(phone)=>this.setState({phone})}
                                        placeholderTextColor="#999"
                                        style={{height:40,padding:0,fontSize:14}}
                                        maxLength={11}
                                        placeholder='  请输入手机账号'/>
-                                <Button style={{height:40}}  transparent={true}
+                                <Button disabled={this.state.unclick} style={{height:40}}  transparent={true}
                                         rounded
                                         onPress={()=>this._getData()}><Text style={{color:'#999'}}>{this.state.timerTitle}</Text>
                                 </Button>
@@ -327,71 +333,46 @@ export default class Login2 extends Component {
                                style={{height:40,padding:0,fontSize:14,}}
                                maxLength={6}
                                placeholder='  请输入验证码'/>
-
                     </Item>
-
-
-
-
-
                     <TouchableOpacity activeOpacity={0.9}
                         onPress={()=>{this._login()}}
                     >
-
                             <Thumbnail    style={{width:width/6,height:width/6,marginTop:15}} source={require('../img/icon_loginbtn.png')} />
-
                     </TouchableOpacity>
-
-
-
-                    <Text  style={{marginTop:15,color:'#8c8c8c',fontSize:12,}}>用其他方式登录60SEC</Text>
-                    <Row style={{padding:15,justifyContent:'center'}}>
-
-                            <TouchableNativeFeedback
-                                onPress={()=>{this._checklogin(2)}}
-                                background={TouchableNativeFeedback.Ripple("#ccc", true)}>
-                                <View style={{marginRight:width/8}}>
-                                    <Thumbnail    style={{width:width/10,height:width/10}} source={require('../img/icon_wx.png')} />
-                                </View>
-                            </TouchableNativeFeedback>
-
-
-                        {/*<Body>*/}
-                        {/*<TouchableNativeFeedback*/}
-                        {/*onPress={()=>{this._checklogin(1)}}*/}
-                        {/*background={TouchableNativeFeedback.Ripple("#ccc", true)}>*/}
-                        {/*<View >*/}
-                        {/*<Thumbnail   square style={{width:width/8,height:width/8,marginRight:20}} source={require('../img/icon_wb.png')} />*/}
-                        {/*</View>*/}
-                        {/*</TouchableNativeFeedback>*/}
-                        {/*</Body>*/}
-
-                            <TouchableNativeFeedback
-                                onPress={()=>{this._checklogin(0)}}
-                                background={TouchableNativeFeedback.Ripple("#ccc", true)}>
-                                <View  style={{marginLeft:width/8}}>
-                                    <Thumbnail   square style={{width:width/10,height:width/10}} source={require('../img/icon_qq.png')} />
-                                </View>
-                            </TouchableNativeFeedback>
-
-
-
-
-
-
-
-
-
-
-
-                    </Row>
-
                     </Body>
+                         <View style={{width:width,alignItems:'center'}}>
+                             <Text  style={{marginTop:10,color:'#8c8c8c',fontSize:12,}}>用其他方式登录60SEC</Text>
+                         </View>
+
+                             <Row style={{padding:15,justifyContent:'center'}}>
+                                 <TouchableNativeFeedback
+                                     onPress={()=>{this._checklogin(2)}}
+                                     background={TouchableNativeFeedback.Ripple("#ccc", true)}>
+                                     <View style={{marginRight:width/8}}>
+                                         <Thumbnail    style={{width:width/10,height:width/10}} source={require('../img/icon_wx.png')} />
+                                     </View>
+                                 </TouchableNativeFeedback>
+                                 {/*<Body>*/}
+                                 {/*<TouchableNativeFeedback*/}
+                                 {/*onPress={()=>{this._checklogin(1)}}*/}
+                                 {/*background={TouchableNativeFeedback.Ripple("#ccc", true)}>*/}
+                                 {/*<View >*/}
+                                 {/*<Thumbnail   square style={{width:width/8,height:width/8,marginRight:20}} source={require('../img/icon_wb.png')} />*/}
+                                 {/*</View>*/}
+                                 {/*</TouchableNativeFeedback>*/}
+                                 {/*</Body>*/}
+                                 <TouchableNativeFeedback
+                                     onPress={()=>{this._checklogin(0)}}
+                                     background={TouchableNativeFeedback.Ripple("#ccc", true)}>
+                                     <View  style={{marginLeft:width/8}}>
+                                         <Thumbnail   square style={{width:width/10,height:width/10}} source={require('../img/icon_qq.png')} />
+                                     </View>
+                                 </TouchableNativeFeedback>
+                             </Row>
 
                      </Content>
                 <TouchableOpacity activeOpacity={0.9} onPress={()=>{Actions.pop()}} style={{width:20,height:20,position:'absolute',top:Config.STATUSBARHEIGHT+20,left:20}}>
                     <Image style={{width:20,height:20,}} source={require('../img/icon_close.png')}/>
-
                 </TouchableOpacity>
 
                 <Spinnera loadvalue="第三方登陆中..." modalVisible={this.state.isvisiable} />

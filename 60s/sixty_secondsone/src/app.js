@@ -191,7 +191,6 @@ export default class apps extends Component {
                 Config.ISJPUSH=2;
                 JPushModule.stopPush();
             }
-
         });
         this.isshare = DeviceEventEmitter.addListener("isshare",this._isshare);
         this.changeTab = DeviceEventEmitter.addListener("changeTab",this._changeTab);

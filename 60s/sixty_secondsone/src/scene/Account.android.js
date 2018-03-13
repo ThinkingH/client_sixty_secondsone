@@ -479,15 +479,6 @@ export default class Account extends Component {
                                 </View>):(null) }
                     </View>
                 </View>
-
-
-                        <Button  transparent style={{position:'absolute',top:Config.STATUSBARHEIGHT,marginLeft:10,height:50,width:80}}    onPress={()=>{this.setState({isshowVip:true})} }>
-                            <Text style={{color:'#fff'}}>订购</Text>
-                        </Button>
-
-
-
-                {this.state.isshowVip?(this.showVIP()):(null)}
             </Container>
         );
     }

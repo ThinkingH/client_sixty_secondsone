@@ -172,6 +172,9 @@ export default class TipDetails extends Component {
 
     _replay=()=>{
         this.videos.setVideoPath(videoarr[num-1].videourl,videoarr[num-1].showimg);
+        this.setState({
+            isshowreplay:false
+        })
         this._autoHide();
         this.setState({
             isshowreplay:false
@@ -361,6 +364,7 @@ export default class TipDetails extends Component {
                                 });
                              console.log("JS duration"+duration);
                             }}
+
                            onCompletion={()=>{
                              console.log("JS onCompletion");
 
@@ -401,7 +405,6 @@ export default class TipDetails extends Component {
                                <View style={{width:width,height:width,alignItems:'center',justifyContent:'center'}}>
                                    <TouchableOpacity
                                        activeOpacity={0.9}
-
                                        onPress={()=>this._isPlay()}>
                                        <Image style={{width:width/7,height:width/7}} source={this.state.isplay?require('../img/icon_tipplay.png'):require('../img/icon_tipstop.png')}/>
                                    </TouchableOpacity>
