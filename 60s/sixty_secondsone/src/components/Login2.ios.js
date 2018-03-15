@@ -205,10 +205,7 @@ export default class Login2 extends Component {
                         Config.createJiGuangId();
                         Actions.pop();
                     }else {
-                       // Actions.pop();
-
-                        Actions.getinfo({type:ActionConst.RESET,userid:userid,userkey:userkey});
-
+                        Actions.getinfo({userid:userid,userkey:userkey});
                     }
                 }else{
                     Toast.show('验证码错误')

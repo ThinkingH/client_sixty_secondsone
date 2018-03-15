@@ -35,7 +35,7 @@ export default function request(thetype,param = "") {
                     },body: encodeURI(params),
                 })
                     .then((response) => {
-                        console.log("response11111111111111",response);
+
                         return response.json();
                     })
                     .then((jsonData) => {

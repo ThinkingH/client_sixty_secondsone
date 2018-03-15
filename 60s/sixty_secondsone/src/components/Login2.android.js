@@ -113,7 +113,7 @@ export default class Login2 extends Component {
             if (code == 0){
                 this.setState({
                     isvisiable:false,
-                })
+                });
                    this._loginWay(platform,result);
                 console.log(result);
             }else{
@@ -128,7 +128,7 @@ export default class Login2 extends Component {
     _loginWay=(platform,result)=>{
         this.setState({
             isvisiable:true,
-        })
+        });
         let parpam=null;
           if(platform==0){  //QQ
               parpam="thetype=1026"+'&qqid='+result.openid+'&nickname='+result.name+'&headimgurl='+result.iconurl;
@@ -138,7 +138,6 @@ export default class Login2 extends Component {
               parpam="thetype=1026"+'&qqid='+result.uid+'&nickname='+result.screen_name+'&headimgurl='+result.iconurl;
           }
 
-
         Request('1026',parpam)
             .then((responseJson) => {
                 let userid=responseJson.data.userid;
@@ -146,7 +145,7 @@ export default class Login2 extends Component {
                 if(responseJson.sucerr=='100'){
                     this.setState({
                         isvisiable:false,
-                    })
+                    });
                     Actions.pop();
                     Config.userid=userid;
                     Config.userkey=userkey;
@@ -166,7 +165,7 @@ export default class Login2 extends Component {
             .catch((error) => {
                 this.setState({
                     isvisiable:false,
-                })
+                });
                 Toast.show(error.toString());
             });
     };
@@ -200,7 +199,8 @@ export default class Login2 extends Component {
                         Config.createJiGuangId();
                         Actions.pop();
                     }else {
-                        Actions.getinfo({type:ActionConst.RESET,userid:userid,userkey:userkey});
+
+                        Actions.getinfo({userid:userid,userkey:userkey});
                     }
                 }else{
                     Toast.show('验证码错误')
