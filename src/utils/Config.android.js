@@ -29,7 +29,9 @@ export default class Config{
      static StatusBarColor='#f5c61e';
      static IECEIVESOCKET=2;
      static ISCOLLECT=1;
+    static ISSHOWL=1;
      static ISJPUSH=true;
+    static ISPLAYLL='';//是否为流量状态
      static STATUSBARHEIGHT=Platform.OS == 'ios' ? 20 : StatusBar.currentHeight;
      static BaseURL = "http://api.60video.net/";
 

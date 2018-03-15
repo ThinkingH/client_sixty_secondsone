@@ -3,7 +3,7 @@
  */
 import React, { Component } from 'react';
 import { ListView,Dimensions, Image ,TouchableNativeFeedback,DeviceEventEmitter,StatusBar,Platform,TouchableOpacity} from 'react-native';
-import {Actions} from "react-native-router-flux";
+import {Actions,ActionConst} from "react-native-router-flux";
 import { Container, Header,View, Content, Button,
     Icon,Form,Item,Label,Input, List, ListItem,
     Text,Left,Right,Body ,Thumbnail,Row} from 'native-base';
@@ -82,7 +82,7 @@ export default class GetInfo extends Component {
                 isvisiable:false,
             });
             console.log('responseJsontouxiang',responseJson);
-            Actions.pop();
+            Actions.popTo('account');
 
         }) .catch((error) => {
             this.setState({
