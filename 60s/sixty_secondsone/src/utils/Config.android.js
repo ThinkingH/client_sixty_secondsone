@@ -15,8 +15,8 @@ const styles = StyleSheet.create({
 });
 
 export default class Config{
-     static versionName="V1.1.4";
-     static version=114;
+     static versionName="V1.1.5";
+     static version=115;
      static ISHIDE=false;
      static loadingTxtStyle={color:"#757575",fontSize:14,};
      static loadingTxt="正在加载中...";
@@ -33,7 +33,7 @@ export default class Config{
      static ISJPUSH=true;
     static ISPLAYLL='';//是否为流量状态
      static STATUSBARHEIGHT=Platform.OS == 'ios' ? 20 : StatusBar.currentHeight;
-     static BaseURL = "http://api.60video.net/";
+     static BaseURL = "http://120.27.34.239:8050/";//"http://114.215.222.75:8005/";
 
      static initJpush=()=>{
         JPushModule.initPush();

@@ -399,7 +399,8 @@ export default class MainScene extends Component {
                 <LineDotsLoader color={'#F5C61E'} />
             )
     }
-        onFetch = async(_pageNo, startFetch, abortFetch) => {
+
+         onFetch = async(_pageNo, startFetch, abortFetch) => {
             if(Config.ISSHOWL==1){
                 if(Config.ISPLAYLL=='wifi'){
                     this._getMainVideo();

@@ -149,7 +149,6 @@ export default class SearchVideo extends React.Component {
         this._getHistory();
         //需要刷新搜索首页的历史记录
         DeviceEventEmitter.emit("getHistory","刷新历史记录");
-
     };
 
     _renderHeader=()=>{
@@ -159,7 +158,7 @@ export default class SearchVideo extends React.Component {
                     <Input onChangeText={(value)=>this.setState({value})}
                            placeholderTextColor="#999"
                            style={{height:40,padding:0,fontSize:14,textAlignVertical:'center',marginBottom:5}}
-                           maxLength={6}
+                           maxLength={50}
                            value={this.state.value}
                            onSubmitEditing={()=>{this._getData(_pageNo);this.saveHistory()}}
                            returnKeyLabel="搜索"

@@ -109,6 +109,7 @@ export default class VideoDetails extends Component {
     componentWillMount () {
         NetWorkTool.addEventListener(NetWorkTool.TAG_NETWORK_CHANGE,this.handleMethod);
 
+
     }
 
     componentWillUnmount () {
@@ -117,6 +118,7 @@ export default class VideoDetails extends Component {
         DeviceEventEmitter.emit('replay');
         //  this.onCompletion.remove();
         this.stopvideo.remove();
+
         NetWorkTool.removeEventListener(NetWorkTool.TAG_NETWORK_CHANGE,this.handleMethod);
     }
 
@@ -292,7 +294,7 @@ export default class VideoDetails extends Component {
         this.setState({
             time:Math.floor(value/60*this.state.totalTime)
         });
-        this.videos.seekTo(value/60);
+        this.videos.seekTo(newpoint);
     }
 
     _timeToStr=(time)=> {

@@ -202,7 +202,7 @@ export default class apps extends Component {
         this.changeTab.remove();
         this.isshare.remove();
         this.unInitPush();
-        this.subscription.remove();
+
     }
     //获取一些配置信息，如iOS上线时隐藏第三方登录、分享功能等
     _getConfigInfo=()=>{

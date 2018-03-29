@@ -66,7 +66,7 @@ export default class Account extends Component {
         this.setState({
             name:this.props.aaname,
         });
-        if(Config.usertype==1){
+        if(Config.usertype=='1'){
             this._onFresh();
         }
     };
@@ -78,6 +78,8 @@ export default class Account extends Component {
 
     componentWillReceiveProps(nextProps){
         if(nextProps.isaccountinfo==true){
+            this._getInfo();
+        }else{
             this._getInfo();
         }
     }
@@ -121,6 +123,10 @@ export default class Account extends Component {
                 Toast.show(error.toString());
             });
     };
+
+    callBackRefresh=()=>{
+        this._getInfo();
+    }
 
     _getInf=()=>{
         let parpam="thetype=1031";
@@ -401,7 +407,7 @@ export default class Account extends Component {
 
                     </View>
                     <TouchableOpacity activeOpacity={0.9} style={{position:'absolute',right:0,top:Config.STATUSBARHEIGHT+50+width/10}}
-                                      onPress={() => {Actions.accountinfo({image:this.state.imageheader,namea:this.state.name,desc:this.state.desc,address:this.state.address,sex:this.state.sex})}} >
+                                      onPress={() => {Actions.accountinfo({callBackRefresh:this.callBackRefresh,image:this.state.imageheader,namea:this.state.name,desc:this.state.desc,address:this.state.address,sex:this.state.sex})}} >
                         <View style={{height:40,borderBottomLeftRadius:20,borderTopLeftRadius:20,backgroundColor:'#f5c61e',flexDirection:'row',alignItems:'center',marginTop:10,right:0}}>
                             <Text style={{marginLeft:15,marginRight:10,color:'#fff',fontSize:12}}>修改个人资料</Text>
                         </View>
