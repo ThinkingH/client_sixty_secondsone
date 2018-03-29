@@ -136,4 +136,5 @@ PLVideoView.propTypes = {
 var RCPLVideoView = requireNativeComponent('PLVideoTextureView',PLVideoView,{
     nativeOnly: {onChange: true}
 });
+
 module.exports = PLVideoView;

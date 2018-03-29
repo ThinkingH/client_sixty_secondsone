@@ -83,6 +83,9 @@ export default class AccountInfo extends Component {
             }
         }
     }
+    componentWillUnmount(){
+       this.props.callBackRefresh();
+    }
 
     _saveInfo=()=>{
         let sex='';
@@ -98,8 +101,8 @@ export default class AccountInfo extends Component {
                 console.log(responseJson);
                 this.setState({
                     isvisiable:false,
-                })
-                Actions.pop({ refresh: { isaccountinfo: true }});
+                });
+                Actions.pop();
                 imagedate='';
                 imgdata='';
             })

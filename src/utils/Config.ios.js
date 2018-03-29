@@ -34,6 +34,12 @@ export default class Config{
      static icons_s=[require('./../img/nav_home_s.png'),require('./../img/nav_seach_s.png'),require('./../img/nav_fav_s.png'),require('./../img/nav_account_s.png')];
      static navs_txt=["首页","搜索","收藏","我的"]
      static pageCount=10;
+
+     static PAGE_SIZE_CFG = {
+         HOME_SIZE : 10,
+         list_size : 10
+     }
+
      static tabBarHight=0;
      static StatusBarColor='#f5c61e';
      static IECEIVESOCKET=2;
