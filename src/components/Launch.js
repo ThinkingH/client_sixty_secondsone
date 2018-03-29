@@ -80,12 +80,22 @@ class Launch extends React.Component {
 
         Storage.getValueForKey("uptime").then((value) => {
             console.log("uptime :", value);
-            if(value!=null){
-                Config.uptime = value;
-                this._getInterval();
+
+            if(Platform.OS=='android'){
+                if(value!=null){
+                    Config.uptime = value;
+                    this._getInterval();
+                }else{
+                    this.checkUpdate();
+                }
             }else{
-                this.checkUpdate();
+                if(isfirst=='1'){
+                    Actions.tabbar({type: ActionConst.RESET});
+                }else{
+                    Actions.intro({type: ActionConst.RESET});
+                }
             }
+
         });
 
         Storage.getValueForKey("usertype").then((value) => {

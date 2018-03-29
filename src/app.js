@@ -287,6 +287,7 @@ export default class apps extends Component {
 
     _getActiveIos=(map)=>{
         console.log(map);
+        Config.AAAAAA='232434324242'
         let data='';
         if(map.action=="shouye"){
             //shouye 代表推送到首页列表   classify 代表推送到哪个分类  对应0 1 2 3....等索引
