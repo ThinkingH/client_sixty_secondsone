@@ -24,8 +24,8 @@ const styles = StyleSheet.create({
 });
 
 export default class Config{
-     static versionName="V1.1.4";
-     static version=114;
+     static versionName="V1.1.6";
+     static version=116;
      static ISHIDE=false;
      static loadingTxtStyle={color:"#757575",fontSize:14,};
      static loadingTxt="正在加载中...";
@@ -67,6 +67,7 @@ export default class Config{
                 Toast.show(error.toString());
             });
     };
+    static AAAAAA='1';
 }
 
 

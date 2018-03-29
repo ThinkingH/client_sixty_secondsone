@@ -66,7 +66,7 @@ export default class Account extends Component {
         this.setState({
             name:this.props.aaname,
         });
-        if(Config.usertype==1){
+        if(Config.usertype=='1'){
             this._getInfo();
         }
     };
@@ -389,7 +389,7 @@ export default class Account extends Component {
 
                             </View>
                             <View style={{alignItems:'center',height:50,justifyContent:'center'}}>
-                                <Text style={{fontSize:12}}>{this.state.desc}</Text>
+                                <Text style={{fontSize:12}}>{this.state.desc}{Config.AAAAAA}</Text>
                             </View>
 
                         </View>

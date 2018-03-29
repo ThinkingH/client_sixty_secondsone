@@ -180,7 +180,7 @@ export default class SearchVideo extends React.Component {
                     <Input onChangeText={(value)=>this.setState({value})}
                            placeholderTextColor="#999"
                            style={{height:40,padding:0,width:width-80,fontSize:14,marginBottom:5,textAlignVertical:'center'}}
-                           maxLength={6}
+                           maxLength={50}
                            value={this.state.value}
                            onSubmitEditing={()=>{this._getData(_pageNo);this.saveHistory()}}
                            returnKeyLabel="搜索"
