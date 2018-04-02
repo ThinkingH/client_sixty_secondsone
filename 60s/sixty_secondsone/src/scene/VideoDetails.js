@@ -4,7 +4,7 @@
 import React, { Component } from 'react';
 import {
     ScrollView, StyleSheet, FlatList, View, Text, Dimensions, InteractionManager, Image, TouchableOpacity, Slider,
-    Alert, DeviceEventEmitter, Platform,StatusBar,ART
+    Alert, DeviceEventEmitter, Platform,StatusBar,ART,AppState
 } from 'react-native';
 import {Actions} from "react-native-router-flux";
 import PLVideoView from "../widget/PLVideoView";
@@ -77,8 +77,6 @@ export default class VideoDetails extends Component {
             tipsarr:[],
             fromWhere:this.props.fromWhere,//记录是从哪一页跳转进详情页
         };
-
-
     }
 
     handleMethod=(isConnected)=>{
@@ -108,7 +106,7 @@ export default class VideoDetails extends Component {
 
     componentWillMount () {
         NetWorkTool.addEventListener(NetWorkTool.TAG_NETWORK_CHANGE,this.handleMethod);
-
+       // AppState.addEventListener('change', this._handleAppStateChange);
 
     }
 
@@ -118,8 +116,19 @@ export default class VideoDetails extends Component {
         DeviceEventEmitter.emit('replay');
         //  this.onCompletion.remove();
         this.stopvideo.remove();
-
+       // AppState.removeEventListener('change', this._handleAppStateChange);
         NetWorkTool.removeEventListener(NetWorkTool.TAG_NETWORK_CHANGE,this.handleMethod);
+    }
+    _handleAppStateChange(appState) {
+        if (appState==='background'){
+            console.log('pausepausepausepausepausepausepausepausepause')
+            this.videos.pause();
+
+        }else{
+            console.log('startstartstartstartstartstartstartstartstart')
+            this.videos.start();
+            }
+
     }
 
     componentDidMount () {

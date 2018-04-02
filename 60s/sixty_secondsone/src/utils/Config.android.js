@@ -33,7 +33,7 @@ export default class Config{
      static ISJPUSH=true;
     static ISPLAYLL='';//是否为流量状态
      static STATUSBARHEIGHT=Platform.OS == 'ios' ? 20 : StatusBar.currentHeight;
-     static BaseURL = "http://120.27.34.239:8050/";//"http://114.215.222.75:8005/";
+     static BaseURL = "http://114.215.222.75:8005/";//"http://120.27.34.239:8050/";//"http://114.215.222.75:8005/";
 
      static initJpush=()=>{
         JPushModule.initPush();

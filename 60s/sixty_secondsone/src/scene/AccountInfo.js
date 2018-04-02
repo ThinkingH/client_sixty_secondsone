@@ -129,7 +129,7 @@ export default class AccountInfo extends Component {
                 { name : 'version', data : '100'},
                 { name : 'thetype', data : '1010'},
                 { name : 'sysversion', data : '100'},
-                { name : 'system', data : 'ANDROID'},
+                { name : 'system', data : system+''},
                 { name : 'houzhui', data : 'png'},
                 { name : 'nowtime', data : timestamp+""},
                 { name : 'md5key', data : md5},
